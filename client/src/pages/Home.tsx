@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { toast } from 'sonner';
 import Papa from 'papaparse';
 
@@ -27,17 +27,7 @@ export default function Home() {
   const [selectedId, setSelectedId] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
 
-  // Load agreements from localStorage on mount
-  useEffect(() => {
-    const stored = localStorage.getItem('agreements');
-    if (stored) {
-      try {
-        setAgreements(JSON.parse(stored));
-      } catch (error) {
-        console.error('Failed to load agreements from storage:', error);
-      }
-    }
-  }, []);
+  // Agreements are kept in-memory (loaded fresh via CSV upload each session)
 
   const handleCSVUpload = (file: File) => {
     setIsLoading(true);
@@ -67,7 +57,6 @@ export default function Home() {
           }
 
           setAgreements(parsed);
-          localStorage.setItem('agreements', JSON.stringify(parsed));
           toast.success(`${parsed.length} anlaşma başarıyla yüklendi.`);
         } catch (error) {
           console.error('Error parsing CSV:', error);
