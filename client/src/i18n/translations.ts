@@ -46,6 +46,14 @@ const translations = {
   'toast.csvError': { tr: 'CSV dosyası işlenirken hata oluştu.', en: 'Error processing CSV file.' },
   'toast.csvReadError': { tr: 'CSV dosyası okunamadı.', en: 'Could not read CSV file.' },
 
+  // Smart search
+  'search.smart': { tr: 'AI Arama', en: 'AI Search' },
+  'search.smartPlaceholder': { tr: 'Örn: Nil havzasında 1960 sonrası anlaşmalar...', en: 'E.g.: Nile basin agreements after 1960...' },
+  'search.resultCount': { tr: '{count} sonuç bulundu', en: '{count} results found' },
+  'search.understood': { tr: 'Anlaşılan:', en: 'Understood:' },
+  'search.mode.simple': { tr: 'Basit', en: 'Simple' },
+  'search.mode.ai': { tr: 'AI', en: 'AI' },
+
   // NotFound
   'notFound.title': { tr: 'Sayfa Bulunamadı', en: 'Page Not Found' },
   'notFound.description': { tr: 'Aradığınız sayfa mevcut değil. Taşınmış veya silinmiş olabilir.', en: "Sorry, the page you are looking for doesn't exist. It may have been moved or deleted." },

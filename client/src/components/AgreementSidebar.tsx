@@ -1,8 +1,9 @@
 import { useState, useMemo } from 'react';
-import { Search, Upload, Loader2, FileDown } from 'lucide-react';
+import { Search, Upload, Loader2, FileDown, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useLanguage } from '@/i18n/LanguageContext';
+import { smartSearch, describeQuery, isSmartQuery } from '@/lib/smartSearch';
 
 interface Agreement {
   id: string;
@@ -31,11 +32,17 @@ export default function AgreementSidebar({
   onUploadFile,
   isLoading = false,
 }: AgreementSidebarProps) {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState('');
+  const [aiMode, setAiMode] = useState(false);
 
   const filteredAgreements = useMemo(() => {
     if (!searchTerm) return agreements;
+
+    if (aiMode || isSmartQuery(searchTerm)) {
+      return smartSearch(searchTerm, agreements);
+    }
+
     const lower = searchTerm.toLowerCase();
     return agreements.filter(
       a =>
@@ -44,7 +51,12 @@ export default function AgreementSidebar({
         a.basin.toLowerCase().includes(lower) ||
         a.id.toLowerCase().includes(lower)
     );
-  }, [agreements, searchTerm]);
+  }, [agreements, searchTerm, aiMode]);
+
+  const queryDescription = useMemo(() => {
+    if (!searchTerm || (!aiMode && !isSmartQuery(searchTerm))) return '';
+    return describeQuery(searchTerm, lang);
+  }, [searchTerm, aiMode, lang]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -57,17 +69,60 @@ export default function AgreementSidebar({
   return (
     <aside className="sidebar-panel w-80 h-[calc(100vh-64px)] flex flex-col border-r border-slate-200">
       {/* Search Header */}
-      <div className="p-4 border-b border-slate-100 bg-slate-50">
+      <div className="p-3 border-b border-slate-100 bg-slate-50 space-y-2">
+        {/* Mode Toggle */}
+        <div className="flex items-center gap-1 bg-slate-200/60 rounded-lg p-0.5">
+          <button
+            onClick={() => setAiMode(false)}
+            className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${
+              !aiMode
+                ? 'bg-white text-slate-800 shadow-sm'
+                : 'text-slate-500 hover:text-slate-700'
+            }`}
+          >
+            <Search className="h-3 w-3" />
+            {t('search.mode.simple')}
+          </button>
+          <button
+            onClick={() => setAiMode(true)}
+            className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${
+              aiMode
+                ? 'bg-gradient-to-r from-violet-500 to-blue-500 text-white shadow-sm'
+                : 'text-slate-500 hover:text-slate-700'
+            }`}
+          >
+            <Sparkles className="h-3 w-3" />
+            {t('search.mode.ai')}
+          </button>
+        </div>
+
+        {/* Search Input */}
         <div className="relative">
-          <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
+          {aiMode
+            ? <Sparkles className="absolute left-3 top-2.5 h-4 w-4 text-violet-400" />
+            : <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
+          }
           <Input
             type="text"
-            placeholder={t('search.placeholder')}
+            placeholder={aiMode ? t('search.smartPlaceholder') : t('search.placeholder')}
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            className="pl-10 text-sm"
+            className={`pl-10 text-sm ${aiMode ? 'border-violet-200 focus:border-violet-400' : ''}`}
           />
         </div>
+
+        {/* AI Query Understanding */}
+        {searchTerm && queryDescription && (
+          <div className="bg-violet-50 border border-violet-100 rounded-md px-3 py-2 text-[11px] text-violet-700">
+            <span className="font-semibold">{t('search.understood')}</span>{' '}
+            {queryDescription}
+            {filteredAgreements.length > 0 && (
+              <span className="block mt-1 text-violet-500 font-medium">
+                {t('search.resultCount', { count: filteredAgreements.length })}
+              </span>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Agreements List */}
