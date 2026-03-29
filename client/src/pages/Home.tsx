@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { toast } from 'sonner';
 import Papa from 'papaparse';
 import { basinCoords } from '@/data/basinCoords';
@@ -27,7 +27,7 @@ interface Agreement {
 export default function Home() {
   const [agreements, setAgreements] = useState<Agreement[]>([]);
   const [selectedId, setSelectedId] = useState<string>();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // start true for initial load
 
   // Look up basin coordinates with fuzzy matching
   const findBasinCoords = (basinName: string): [number, number] | null => {
@@ -96,38 +96,62 @@ export default function Home() {
       .filter((a: Agreement) => a.latitude !== 0 && a.longitude !== 0);
   };
 
+  // Shared JSON text parser
+  const processJSONText = useCallback((text: string, showToast = true): Agreement[] => {
+    // Clean control characters that break JSON.parse
+    const cleaned = text.replace(/[\x00-\x1f\x7f]/g, (c) => {
+      if (c === '\n' || c === '\r' || c === '\t') return c;
+      return '';
+    });
+    const raw = JSON.parse(cleaned);
+
+    // Find the array: direct array, or common wrapper keys
+    let data: any[];
+    if (Array.isArray(raw)) {
+      data = raw;
+    } else if (typeof raw === 'object' && raw !== null) {
+      data = raw.agreements ?? raw.data ?? raw.features ?? raw.records
+        ?? raw.items ?? raw.results ?? raw.treaties
+        ?? Object.values(raw).find((v: any) => Array.isArray(v))
+        ?? [];
+    } else {
+      data = [];
+    }
+
+    if (!Array.isArray(data)) data = [];
+    return parseRows(data);
+  }, []);
+
+  // Auto-load bundled MASTER.json on mount
+  useEffect(() => {
+    const loadDefaultData = async () => {
+      try {
+        const baseUrl = import.meta.env.BASE_URL;
+        const res = await fetch(`${baseUrl}data/MASTER.json`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const text = await res.text();
+        const parsed = processJSONText(text, false);
+        if (parsed.length > 0) {
+          setAgreements(parsed);
+        }
+      } catch (error) {
+        console.warn('Varsayılan veri yüklenemedi:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadDefaultData();
+  }, [processJSONText]);
+
   const handleJSONUpload = (file: File) => {
     setIsLoading(true);
     const reader = new FileReader();
     reader.onload = (e) => {
       try {
-        // Clean control characters that break JSON.parse
-        const text = (e.target?.result as string).replace(/[\x00-\x1f\x7f]/g, (c) => {
-          if (c === '\n' || c === '\r' || c === '\t') return c;
-          return '';
-        });
-        const raw = JSON.parse(text);
-
-        // Find the array: direct array, or common wrapper keys
-        let data: any[];
-        if (Array.isArray(raw)) {
-          data = raw;
-        } else if (typeof raw === 'object' && raw !== null) {
-          // Try common keys, or find the first array value
-          data = raw.agreements ?? raw.data ?? raw.features ?? raw.records
-            ?? raw.items ?? raw.results ?? raw.treaties
-            ?? Object.values(raw).find((v: any) => Array.isArray(v))
-            ?? [];
-        } else {
-          data = [];
-        }
-
-        if (!Array.isArray(data)) data = [];
-
-        const parsed = parseRows(data);
+        const parsed = processJSONText(e.target?.result as string);
 
         if (parsed.length === 0) {
-          toast.error('JSON dosyasında geçerli veri bulunamadı. Alan adları (latitude/lat, longitude/lng, name, country, basin) kontrol edin.');
+          toast.error('JSON dosyasında geçerli veri bulunamadı.');
           setIsLoading(false);
           return;
         }
@@ -136,7 +160,7 @@ export default function Home() {
         toast.success(`${parsed.length} anlaşma başarıyla yüklendi.`);
       } catch (error) {
         console.error('JSON parse error:', error);
-        toast.error('JSON dosyası geçersiz veya okunamıyor. Lütfen geçerli bir JSON dosyası seçin.');
+        toast.error('JSON dosyası geçersiz veya okunamıyor.');
       } finally {
         setIsLoading(false);
       }
