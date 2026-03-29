@@ -3,6 +3,7 @@ import { toast } from 'sonner';
 import Papa from 'papaparse';
 import { basinCoords } from '@/data/basinCoords';
 import { findTreatyLink } from '@/data/treatyLinks';
+import { useLanguage } from '@/i18n/LanguageContext';
 
 declare global {
   interface Window {
@@ -25,6 +26,7 @@ interface Agreement {
 }
 
 export default function Home() {
+  const { lang, setLang, t } = useLanguage();
   const [agreements, setAgreements] = useState<Agreement[]>([]);
   const [selectedId, setSelectedId] = useState<string>();
   const [isLoading, setIsLoading] = useState(true); // start true for initial load
@@ -151,22 +153,22 @@ export default function Home() {
         const parsed = processJSONText(e.target?.result as string);
 
         if (parsed.length === 0) {
-          toast.error('JSON dosyasında geçerli veri bulunamadı.');
+          toast.error(t('toast.jsonEmpty'));
           setIsLoading(false);
           return;
         }
 
         setAgreements(parsed);
-        toast.success(`${parsed.length} anlaşma başarıyla yüklendi.`);
+        toast.success(t('toast.loaded', { count: parsed.length }));
       } catch (error) {
         console.error('JSON parse error:', error);
-        toast.error('JSON dosyası geçersiz veya okunamıyor.');
+        toast.error(t('toast.jsonError'));
       } finally {
         setIsLoading(false);
       }
     };
     reader.onerror = () => {
-      toast.error('JSON dosyası okunamadı.');
+      toast.error(t('toast.jsonReadError'));
       setIsLoading(false);
     };
     reader.readAsText(file);
@@ -182,23 +184,23 @@ export default function Home() {
           const parsed = parseRows(results.data);
 
           if (parsed.length === 0) {
-            toast.error('CSV dosyasında geçerli veri bulunamadı.');
+            toast.error(t('toast.csvEmpty'));
             setIsLoading(false);
             return;
           }
 
           setAgreements(parsed);
-          toast.success(`${parsed.length} anlaşma başarıyla yüklendi.`);
+          toast.success(t('toast.loaded', { count: parsed.length }));
         } catch (error) {
           console.error('Error parsing CSV:', error);
-          toast.error('CSV dosyası işlenirken hata oluştu.');
+          toast.error(t('toast.csvError'));
         } finally {
           setIsLoading(false);
         }
       },
       error: (error: any) => {
         console.error('CSV parse error:', error);
-        toast.error('CSV dosyası okunamadı.');
+        toast.error(t('toast.csvReadError'));
         setIsLoading(false);
       },
     });
@@ -234,12 +236,21 @@ export default function Home() {
             </svg>
           </div>
           <h1 className="font-bold text-lg md:text-xl tracking-tight text-slate-800 uppercase leading-none">
-            Global Su Anlaşmaları Portalı
+            {t('app.title')}
           </h1>
         </div>
         <div className="ml-auto hidden lg:flex items-center gap-4">
+          {/* Language Toggle */}
+          <button
+            onClick={() => setLang(lang === 'tr' ? 'en' : 'tr')}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-slate-200 bg-white text-xs font-semibold text-slate-600 hover:bg-slate-50 transition-colors shadow-sm"
+          >
+            <span className={lang === 'tr' ? 'opacity-100' : 'opacity-40'}>TR</span>
+            <span className="text-slate-300">/</span>
+            <span className={lang === 'en' ? 'opacity-100' : 'opacity-40'}>EN</span>
+          </button>
           <span className="bg-emerald-50 text-emerald-700 px-4 py-1.5 rounded-full border border-emerald-100 text-xs font-bold tracking-wide uppercase shadow-sm">
-            <strong>{agreements.length}</strong> Kayıt Haritalandı
+            <strong>{agreements.length}</strong> {t('app.recordsMapped')}
           </span>
         </div>
       </header>
@@ -261,6 +272,7 @@ export default function Home() {
             agreements={agreements}
             selectedId={selectedId}
             onMarkerClick={setSelectedId}
+            lang={lang}
           />
         </div>
       </div>

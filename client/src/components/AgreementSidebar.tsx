@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { Search, Upload, Loader2, FileDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useLanguage } from '@/i18n/LanguageContext';
 
 interface Agreement {
   id: string;
@@ -30,6 +31,7 @@ export default function AgreementSidebar({
   onUploadFile,
   isLoading = false,
 }: AgreementSidebarProps) {
+  const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredAgreements = useMemo(() => {
@@ -60,7 +62,7 @@ export default function AgreementSidebar({
           <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
           <Input
             type="text"
-            placeholder="Havza, Ülke veya ID Ara..."
+            placeholder={t('search.placeholder')}
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
             className="pl-10 text-sm"
@@ -73,16 +75,16 @@ export default function AgreementSidebar({
         {isLoading ? (
           <div className="flex flex-col items-center justify-center h-full text-slate-400 gap-3">
             <Loader2 className="h-8 w-8 text-primary animate-spin" />
-            <span className="text-xs font-bold uppercase tracking-widest">Veriler Yükleniyor...</span>
+            <span className="text-xs font-bold uppercase tracking-widest">{t('sidebar.loading')}</span>
           </div>
         ) : filteredAgreements.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-slate-400 gap-3 text-center px-4">
             <div className="text-3xl">📭</div>
-            <span className="text-xs font-bold uppercase tracking-widest">Sonuç Bulunamadı</span>
+            <span className="text-xs font-bold uppercase tracking-widest">{t('sidebar.noResults')}</span>
             <p className="text-[11px] text-slate-500">
               {agreements.length === 0
-                ? 'Henüz veri yüklenmedi. CSV veya JSON dosyası yükleyin.'
-                : 'Arama kriterlerinizi değiştirmeyi deneyin.'}
+                ? t('sidebar.noData')
+                : t('sidebar.tryAgain')}
             </p>
           </div>
         ) : (
@@ -102,7 +104,7 @@ export default function AgreementSidebar({
                   </p>
                   <p className="text-xs text-slate-500 mt-2 line-clamp-2">{agreement.purpose}</p>
                   <div className="flex items-center justify-between mt-1">
-                    <p className="text-xs text-slate-400">Yıl: {agreement.year}</p>
+                    <p className="text-xs text-slate-400">{t('card.year')}: {agreement.year}</p>
                     {agreement.pdfUrl && (
                       <a
                         href={agreement.pdfUrl}
@@ -112,7 +114,7 @@ export default function AgreementSidebar({
                         className="inline-flex items-center gap-1 text-[10px] font-semibold text-primary hover:underline"
                       >
                         <FileDown className="h-3 w-3" />
-                        İndir
+                        {t('card.download')}
                       </a>
                     )}
                   </div>
@@ -129,7 +131,7 @@ export default function AgreementSidebar({
           <Button className="w-full gap-2" variant="default" asChild>
             <span>
               <Upload className="h-4 w-4" />
-              CSV / JSON Yükle
+              {t('upload.button')}
             </span>
           </Button>
         </label>
@@ -147,23 +149,23 @@ export default function AgreementSidebar({
         <div className="flex items-center gap-2 mb-2 justify-center">
           <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           <span className="font-bold opacity-80 uppercase tracking-widest text-emerald-400">
-            BAĞLANDI
+            {t('footer.connected')}
           </span>
         </div>
         <p className="opacity-50 italic text-[9px]">
-          {agreements.length} anlaşma haritalandı
+          {agreements.length} {t('footer.mapped')}
         </p>
         <p className="opacity-40 text-[8px] mt-2 leading-snug">
-          Veriler,{' '}
+          {t('footer.attribution').split('{link}')[0]}
           <a
             href="https://transboundarywaters.ceoas.oregonstate.edu/international-freshwater-treaties-database"
             target="_blank"
             rel="noopener noreferrer"
             className="underline hover:opacity-80"
           >
-            Oregon State University – College of Earth, Ocean, and Atmospheric Sciences
-          </a>{' '}
-          International Freshwater Treaties Database kaynağından sağlanmıştır.
+            {t('footer.osu')}
+          </a>
+          {t('footer.attribution').split('{link}')[1]}
         </p>
       </div>
     </aside>

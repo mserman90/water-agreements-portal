@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet.markercluster';
+import { t } from '@/i18n/translations';
+import type { Lang } from '@/i18n/translations';
 
 interface Agreement {
   id: string;
@@ -18,11 +20,12 @@ interface MapViewerProps {
   agreements: Agreement[];
   selectedId?: string;
   onMarkerClick?: (id: string) => void;
+  lang?: Lang;
 }
 
 type MarkerType = L.CircleMarker | L.Marker;
 
-export default function MapViewer({ agreements, selectedId, onMarkerClick }: MapViewerProps) {
+export default function MapViewer({ agreements, selectedId, onMarkerClick, lang = 'tr' }: MapViewerProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
   const markerCluster = useRef<L.MarkerClusterGroup | null>(null);
@@ -62,7 +65,7 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick }: Map
       });
 
       const pdfLink = agreement.pdfUrl
-        ? `<a href="${agreement.pdfUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:4px;margin-top:8px;padding:4px 10px;background:#0369A1;color:#fff;border-radius:6px;font-size:11px;font-weight:600;text-decoration:none;">&#128196; Belgeyi İndir</a>`
+        ? `<a href="${agreement.pdfUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:4px;margin-top:8px;padding:4px 10px;background:#0369A1;color:#fff;border-radius:6px;font-size:11px;font-weight:600;text-decoration:none;">&#128196; ${t('popup.download', lang)}</a>`
         : '';
 
       circleMarker.bindPopup(`
@@ -70,7 +73,7 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick }: Map
           <h3 class="font-bold text-sm text-slate-900">${agreement.name}</h3>
           <p class="text-xs text-slate-600 mt-1">${agreement.country} • ${agreement.basin}</p>
           <p class="text-xs text-slate-500 mt-2">${agreement.purpose}</p>
-          <p class="text-xs text-slate-400 mt-1">Yıl: ${agreement.year}</p>
+          <p class="text-xs text-slate-400 mt-1">${t('popup.year', lang)}: ${agreement.year}</p>
           ${pdfLink}
         </div>
       `);
@@ -89,7 +92,7 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick }: Map
       const group = new L.FeatureGroup(Array.from(markers.current.values()));
       map.current.fitBounds(group.getBounds(), { padding: [50, 50] });
     }
-  }, [agreements, selectedId, onMarkerClick]);
+  }, [agreements, selectedId, onMarkerClick, lang]);
 
   // Highlight selected marker and open its popup
   useEffect(() => {
