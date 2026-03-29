@@ -153,6 +153,18 @@ export default function AgreementSidebar({
         <p className="opacity-50 italic text-[9px]">
           {agreements.length} anlaşma haritalandı
         </p>
+        <p className="opacity-40 text-[8px] mt-2 leading-snug">
+          Veriler,{' '}
+          <a
+            href="https://transboundarywaters.ceoas.oregonstate.edu/international-freshwater-treaties-database"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:opacity-80"
+          >
+            Oregon State University – College of Earth, Ocean, and Atmospheric Sciences
+          </a>{' '}
+          International Freshwater Treaties Database kaynağından sağlanmıştır.
+        </p>
       </div>
     </aside>
   );
