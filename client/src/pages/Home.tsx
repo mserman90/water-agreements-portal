@@ -29,17 +29,24 @@ export default function Home() {
 
   const parseRows = (rows: any[]): Agreement[] => {
     return rows
-      .map((row: any, index: number) => ({
-        id: row.id || `agreement-${index}`,
-        name: row.name || 'Unnamed',
-        country: row.country || 'Unknown',
-        basin: row.basin || 'Unknown',
-        latitude: parseFloat(row.latitude) || 0,
-        longitude: parseFloat(row.longitude) || 0,
-        purpose: row.purpose || '',
-        year: parseInt(row.year) || new Date().getFullYear(),
-        pdfUrl: row.pdfUrl || undefined,
-      }))
+      .map((row: any, index: number) => {
+        // Support common alternative field names
+        const lat = Number(row.latitude ?? row.lat ?? row.Latitude ?? row.LAT ?? 0);
+        const lng = Number(row.longitude ?? row.lng ?? row.lon ?? row.Longitude ?? row.LON ?? 0);
+        const yr = Number(row.year ?? row.Year ?? row.date ?? new Date().getFullYear());
+
+        return {
+          id: String(row.id ?? row.ID ?? row.Id ?? `agreement-${index}`),
+          name: String(row.name ?? row.Name ?? row.title ?? row.Title ?? 'Unnamed'),
+          country: String(row.country ?? row.Country ?? row.countries ?? row.Countries ?? 'Unknown'),
+          basin: String(row.basin ?? row.Basin ?? row.river ?? row.River ?? row.watershed ?? 'Unknown'),
+          latitude: lat,
+          longitude: lng,
+          purpose: String(row.purpose ?? row.Purpose ?? row.description ?? row.Description ?? row.summary ?? ''),
+          year: isNaN(yr) ? new Date().getFullYear() : yr,
+          pdfUrl: row.pdfUrl ?? row.pdf_url ?? row.link ?? undefined,
+        };
+      })
       .filter((a: Agreement) => a.latitude !== 0 && a.longitude !== 0);
   };
 
@@ -49,11 +56,27 @@ export default function Home() {
     reader.onload = (e) => {
       try {
         const raw = JSON.parse(e.target?.result as string);
-        const data = Array.isArray(raw) ? raw : raw.agreements || raw.data || raw.features || [];
+
+        // Find the array: direct array, or common wrapper keys
+        let data: any[];
+        if (Array.isArray(raw)) {
+          data = raw;
+        } else if (typeof raw === 'object' && raw !== null) {
+          // Try common keys, or find the first array value
+          data = raw.agreements ?? raw.data ?? raw.features ?? raw.records
+            ?? raw.items ?? raw.results ?? raw.treaties
+            ?? Object.values(raw).find((v: any) => Array.isArray(v))
+            ?? [];
+        } else {
+          data = [];
+        }
+
+        if (!Array.isArray(data)) data = [];
+
         const parsed = parseRows(data);
 
         if (parsed.length === 0) {
-          toast.error('JSON dosyasında geçerli veri bulunamadı.');
+          toast.error('JSON dosyasında geçerli veri bulunamadı. Alan adları (latitude/lat, longitude/lng, name, country, basin) kontrol edin.');
           setIsLoading(false);
           return;
         }
@@ -62,7 +85,7 @@ export default function Home() {
         toast.success(`${parsed.length} anlaşma başarıyla yüklendi.`);
       } catch (error) {
         console.error('JSON parse error:', error);
-        toast.error('JSON dosyası işlenirken hata oluştu.');
+        toast.error('JSON dosyası geçersiz veya okunamıyor. Lütfen geçerli bir JSON dosyası seçin.');
       } finally {
         setIsLoading(false);
       }
