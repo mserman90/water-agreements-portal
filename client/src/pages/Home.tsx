@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { toast } from 'sonner';
 import Papa from 'papaparse';
+import { basinCoords } from '@/data/basinCoords';
 
 declare global {
   interface Window {
@@ -27,23 +28,65 @@ export default function Home() {
   const [selectedId, setSelectedId] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
 
+  // Look up basin coordinates with fuzzy matching
+  const findBasinCoords = (basinName: string): [number, number] | null => {
+    if (!basinName) return null;
+    // Exact match
+    if (basinCoords[basinName]) return basinCoords[basinName];
+    // Try first basin in comma-separated list
+    const primary = basinName.split(',')[0].trim();
+    if (basinCoords[primary]) return basinCoords[primary];
+    // Case-insensitive search
+    const lower = basinName.toLowerCase();
+    for (const [key, val] of Object.entries(basinCoords)) {
+      if (key.toLowerCase() === lower) return val;
+    }
+    return null;
+  };
+
+  // Extract year from various date formats
+  const extractYear = (val: any): number => {
+    if (!val) return 0;
+    const s = String(val);
+    // "3/28/1820" or "1820-03-28" or just "1820"
+    const match = s.match(/(\d{4})/);
+    return match ? Number(match[1]) : 0;
+  };
+
   const parseRows = (rows: any[]): Agreement[] => {
     return rows
       .map((row: any, index: number) => {
-        // Support common alternative field names
-        const lat = Number(row.latitude ?? row.lat ?? row.Latitude ?? row.LAT ?? 0);
-        const lng = Number(row.longitude ?? row.lng ?? row.lon ?? row.Longitude ?? row.LON ?? 0);
-        const yr = Number(row.year ?? row.Year ?? row.date ?? new Date().getFullYear());
+        // Support TFDD fields + common alternatives
+        let lat = Number(row.latitude ?? row.lat ?? row.Latitude ?? row.LAT ?? 0);
+        let lng = Number(row.longitude ?? row.lng ?? row.lon ?? row.Longitude ?? row.LON ?? 0);
+
+        // If no coordinates, try to derive from basin name
+        const basinRaw = row.basin ?? row.Basin ?? row.Basin_Name ?? row['Basin Name']
+          ?? row['TFDD Basin(s)'] ?? row['Treaty Basin(s)']
+          ?? row.river ?? row.River ?? row.watershed ?? '';
+        const basin = String(basinRaw);
+
+        if ((!lat || !lng) && basin) {
+          const coords = findBasinCoords(basin);
+          if (coords) {
+            // Add slight random offset to avoid stacking markers on same basin
+            lat = coords[0] + (Math.random() - 0.5) * 2;
+            lng = coords[1] + (Math.random() - 0.5) * 2;
+          }
+        }
+
+        // Year: support DateSigned ("3/28/1820"), year, Year
+        const yr = extractYear(row.year ?? row.Year ?? row.DateSigned ?? row.date ?? row.Date);
 
         return {
-          id: String(row.id ?? row.ID ?? row.Id ?? `agreement-${index}`),
-          name: String(row.name ?? row.Name ?? row.title ?? row.Title ?? 'Unnamed'),
-          country: String(row.country ?? row.Country ?? row.countries ?? row.Countries ?? 'Unknown'),
-          basin: String(row.basin ?? row.Basin ?? row.river ?? row.River ?? row.watershed ?? 'Unknown'),
+          id: String(row.id ?? row.ID ?? row.Id ?? row['Entry ID'] ?? row['Unified Primary 2016 Treaty ID'] ?? `agreement-${index}`),
+          name: String(row.name ?? row.Name ?? row.title ?? row.Title ?? row.DocumentName ?? 'Unnamed'),
+          country: String(row.country ?? row.Country ?? row.countries ?? row.Countries ?? row.Country_Name ?? row.Signatories ?? 'Unknown'),
+          basin,
           latitude: lat,
           longitude: lng,
-          purpose: String(row.purpose ?? row.Purpose ?? row.description ?? row.Description ?? row.summary ?? ''),
-          year: isNaN(yr) ? new Date().getFullYear() : yr,
+          purpose: String(row.purpose ?? row.Purpose ?? row.description ?? row.Description ?? row.summary ?? row['Issue Area'] ?? ''),
+          year: yr || new Date().getFullYear(),
           pdfUrl: row.pdfUrl ?? row.pdf_url ?? row.link ?? undefined,
         };
       })
@@ -55,7 +98,12 @@ export default function Home() {
     const reader = new FileReader();
     reader.onload = (e) => {
       try {
-        const raw = JSON.parse(e.target?.result as string);
+        // Clean control characters that break JSON.parse
+        const text = (e.target?.result as string).replace(/[\x00-\x1f\x7f]/g, (c) => {
+          if (c === '\n' || c === '\r' || c === '\t') return c;
+          return '';
+        });
+        const raw = JSON.parse(text);
 
         // Find the array: direct array, or common wrapper keys
         let data: any[];
