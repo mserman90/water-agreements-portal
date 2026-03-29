@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { Settings, X, Upload, BookOpen, Heart, ChevronDown, ChevronUp } from 'lucide-react';
+import { Settings, X, Upload, BookOpen, Heart, ChevronDown, ChevronUp, LogIn, LogOut, ShieldCheck, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { useLanguage } from '@/i18n/LanguageContext';
+import { useAuth } from '@/contexts/AuthContext';
 
 interface SettingsPanelProps {
   onUploadFile: (file: File) => void;
@@ -9,8 +11,9 @@ interface SettingsPanelProps {
 
 export default function SettingsPanel({ onUploadFile }: SettingsPanelProps) {
   const { lang, t } = useLanguage();
+  const { isAdmin } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<'upload' | 'guide' | 'about'>('guide');
+  const [activeTab, setActiveTab] = useState<'guide' | 'upload' | 'about' | 'login'>('guide');
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -23,8 +26,10 @@ export default function SettingsPanel({ onUploadFile }: SettingsPanelProps) {
 
   const tabs = [
     { id: 'guide' as const, icon: BookOpen, label: lang === 'tr' ? 'Kullanım Kılavuzu' : 'User Guide' },
-    { id: 'upload' as const, icon: Upload, label: lang === 'tr' ? 'Veri Yükle' : 'Upload Data' },
+    // Only show Upload tab if admin
+    ...(isAdmin ? [{ id: 'upload' as const, icon: Upload, label: lang === 'tr' ? 'Veri Yükle' : 'Upload Data' }] : []),
     { id: 'about' as const, icon: Heart, label: lang === 'tr' ? 'Hakkında & Teşekkür' : 'About & Credits' },
+    { id: 'login' as const, icon: isAdmin ? ShieldCheck : LogIn, label: isAdmin ? (lang === 'tr' ? 'Hesap' : 'Account') : (lang === 'tr' ? 'Giriş' : 'Login') },
   ];
 
   return (
@@ -88,14 +93,15 @@ export default function SettingsPanel({ onUploadFile }: SettingsPanelProps) {
 
             {/* Tab Content */}
             <div className="flex-1 overflow-y-auto">
-              {activeTab === 'upload' && (
+              {activeTab === 'upload' && isAdmin && (
                 <UploadTab
                   lang={lang}
                   onFileChange={handleFileChange}
                 />
               )}
-              {activeTab === 'guide' && <GuideTab lang={lang} />}
+              {activeTab === 'guide' && <GuideTab lang={lang} isAdmin={isAdmin} />}
               {activeTab === 'about' && <AboutTab lang={lang} />}
+              {activeTab === 'login' && <LoginTab lang={lang} />}
             </div>
           </div>
         </div>
@@ -154,8 +160,104 @@ function UploadTab({ lang, onFileChange }: { lang: string; onFileChange: (e: Rea
   );
 }
 
+// ── Login Tab ──
+function LoginTab({ lang }: { lang: string }) {
+  const { isAdmin, username, isLoading, login, logout } = useAuth();
+  const { t } = useLanguage();
+  const [token, setToken] = useState('');
+  const [error, setError] = useState('');
+
+  const handleLogin = async () => {
+    setError('');
+    const success = await login(token);
+    if (!success) {
+      setError(t('auth.failed'));
+    }
+    setToken('');
+  };
+
+  if (isAdmin) {
+    return (
+      <div className="p-5 space-y-4">
+        <div className="bg-emerald-50 border border-emerald-100 rounded-lg p-4 flex items-center gap-3">
+          <ShieldCheck className="h-5 w-5 text-emerald-600 shrink-0" />
+          <div>
+            <p className="text-sm font-semibold text-emerald-800">
+              {t('auth.loggedAs')} <span className="font-mono">@{username}</span>
+            </p>
+          </div>
+        </div>
+        <Button
+          onClick={logout}
+          variant="outline"
+          className="w-full gap-2 text-red-600 border-red-200 hover:bg-red-50"
+        >
+          <LogOut className="h-4 w-4" />
+          {t('auth.logoutButton')}
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="p-5 space-y-4">
+      <div className="text-center space-y-2">
+        <LogIn className="h-8 w-8 text-slate-400 mx-auto" />
+        <h3 className="font-bold text-sm text-slate-800">{t('auth.loginTitle')}</h3>
+        <p className="text-xs text-slate-500 leading-relaxed">
+          {t('auth.loginDesc')}
+        </p>
+      </div>
+
+      <div className="space-y-3">
+        <Input
+          type="password"
+          placeholder={t('auth.tokenPlaceholder')}
+          value={token}
+          onChange={e => { setToken(e.target.value); setError(''); }}
+          onKeyDown={e => e.key === 'Enter' && handleLogin()}
+          className="text-sm"
+        />
+
+        {error && (
+          <p className="text-xs text-red-500 text-center">{error}</p>
+        )}
+
+        <Button
+          onClick={handleLogin}
+          disabled={!token || isLoading}
+          className="w-full gap-2"
+        >
+          {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <LogIn className="h-4 w-4" />}
+          {t('auth.loginButton')}
+        </Button>
+      </div>
+
+      <div className="bg-slate-50 rounded-lg p-3 text-[11px] text-slate-500 leading-relaxed space-y-2">
+        <p className="font-semibold text-slate-600">
+          {lang === 'tr' ? 'Token nas\u0131l al\u0131n\u0131r?' : 'How to get a token?'}
+        </p>
+        <ol className="list-decimal pl-4 space-y-1">
+          <li>
+            {lang === 'tr' ? 'GitHub\'a giri\u015f yap\u0131n' : 'Sign in to GitHub'}
+          </li>
+          <li>
+            <a href="https://github.com/settings/tokens/new" target="_blank" rel="noopener noreferrer" className="text-primary underline">
+              {lang === 'tr' ? 'Yeni token olu\u015fturun' : 'Create a new token'}
+            </a>
+            {lang === 'tr' ? ' (scope gerekmez)' : ' (no scopes needed)'}
+          </li>
+          <li>
+            {lang === 'tr' ? 'Olu\u015fturulan token\'\u0131 yukar\u0131daki alana yap\u0131\u015ft\u0131r\u0131n' : 'Paste the generated token above'}
+          </li>
+        </ol>
+      </div>
+    </div>
+  );
+}
+
 // ── Guide Tab ──
-function GuideTab({ lang }: { lang: string }) {
+function GuideTab({ lang, isAdmin }: { lang: string; isAdmin: boolean }) {
   const [openSection, setOpenSection] = useState<number | null>(0);
 
   const sections = lang === 'tr' ? [
@@ -179,10 +281,10 @@ function GuideTab({ lang }: { lang: string }) {
       title: 'Sidebar Etkileşimi',
       content: 'Sol paneldeki anlaşma kartlarına tıkladığınızda harita o noktaya odaklanır ve detay popup\'ı açılır. Belge bağlantısı olan anlaşmalarda "İndir" butonu bulunur — bu buton Oregon Digital arşivine yönlendirir.'
     },
-    {
+    ...(isAdmin ? [{
       title: 'Veri Yükleme',
       content: 'Ayarlar menüsündeki "Veri Yükle" sekmesinden kendi CSV veya JSON dosyanızı yükleyerek mevcut verileri değiştirebilirsiniz. Uygulama TFDD formatını ve yaygın alternatif alan adlarını otomatik tanır. Koordinat bilgisi olmayan verilerde havza adından otomatik konum türetilir.'
-    },
+    }] : []),
     {
       title: 'Dil Desteği',
       content: 'Sağ üst köşedeki TR/EN butonuyla Türkçe ve İngilizce arasında geçiş yapabilirsiniz. AI arama motoru her iki dilde de sorgu anlayabilir.'
@@ -208,10 +310,10 @@ function GuideTab({ lang }: { lang: string }) {
       title: 'Sidebar Interaction',
       content: 'Click agreement cards in the sidebar to focus the map and open the detail popup. Agreements with available documents show a "Download" button linking to the Oregon Digital archive.'
     },
-    {
+    ...(isAdmin ? [{
       title: 'Data Upload',
       content: 'Upload your own CSV or JSON file from the "Upload Data" tab in Settings to replace the current dataset. The application auto-recognizes TFDD format and common alternative field names. For data without coordinates, locations are automatically derived from basin names.'
-    },
+    }] : []),
     {
       title: 'Language Support',
       content: 'Toggle between Turkish and English using the TR/EN button in the top-right corner. The AI search engine understands queries in both languages.'

@@ -5,6 +5,7 @@ import { Route, Switch, Router as WouterRouter } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./i18n/LanguageContext";
+import { AuthProvider } from "./contexts/AuthContext";
 import Home from "./pages/Home";
 
 const BASE_PATH = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -33,12 +34,14 @@ function App() {
         // switchable
       >
         <LanguageProvider>
-          <TooltipProvider>
-            <Toaster />
-            <WouterRouter base={BASE_PATH}>
-              <Routes />
-            </WouterRouter>
-          </TooltipProvider>
+          <AuthProvider>
+            <TooltipProvider>
+              <Toaster />
+              <WouterRouter base={BASE_PATH}>
+                <Routes />
+              </WouterRouter>
+            </TooltipProvider>
+          </AuthProvider>
         </LanguageProvider>
       </ThemeProvider>
     </ErrorBoundary>

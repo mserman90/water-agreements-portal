@@ -54,6 +54,15 @@ const translations = {
   'search.mode.simple': { tr: 'Basit', en: 'Simple' },
   'search.mode.ai': { tr: 'AI', en: 'AI' },
 
+  // Auth
+  'auth.loginTitle': { tr: 'Yönetici Girişi', en: 'Admin Login' },
+  'auth.tokenPlaceholder': { tr: 'GitHub Personal Access Token', en: 'GitHub Personal Access Token' },
+  'auth.loginButton': { tr: 'Giriş Yap', en: 'Sign In' },
+  'auth.logoutButton': { tr: 'Çıkış Yap', en: 'Sign Out' },
+  'auth.loginDesc': { tr: 'Veri yüklemek için GitHub hesabınızla giriş yapın.', en: 'Sign in with your GitHub account to upload data.' },
+  'auth.failed': { tr: 'Giriş başarısız. Yalnızca yetkili kullanıcı giriş yapabilir.', en: 'Login failed. Only the authorized user can sign in.' },
+  'auth.loggedAs': { tr: 'Giriş yapıldı:', en: 'Logged in as:' },
+
   // NotFound
   'notFound.title': { tr: 'Sayfa Bulunamadı', en: 'Page Not Found' },
   'notFound.description': { tr: 'Aradığınız sayfa mevcut değil. Taşınmış veya silinmiş olabilir.', en: "Sorry, the page you are looking for doesn't exist. It may have been moved or deleted." },
