@@ -19,7 +19,7 @@ interface AgreementSidebarProps {
   agreements: Agreement[];
   selectedId?: string;
   onSelectAgreement: (id: string) => void;
-  onUploadCSV: (file: File) => void;
+  onUploadFile: (file: File) => void;
   isLoading?: boolean;
 }
 
@@ -27,7 +27,7 @@ export default function AgreementSidebar({
   agreements,
   selectedId,
   onSelectAgreement,
-  onUploadCSV,
+  onUploadFile,
   isLoading = false,
 }: AgreementSidebarProps) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -44,10 +44,11 @@ export default function AgreementSidebar({
     );
   }, [agreements, searchTerm]);
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      onUploadCSV(file);
+      onUploadFile(file);
+      e.target.value = '';
     }
   };
 
@@ -80,7 +81,7 @@ export default function AgreementSidebar({
             <span className="text-xs font-bold uppercase tracking-widest">Sonuç Bulunamadı</span>
             <p className="text-[11px] text-slate-500">
               {agreements.length === 0
-                ? 'Henüz veri yüklenmedi. Ayarlardan CSV dosyası yükleyin.'
+                ? 'Henüz veri yüklenmedi. CSV veya JSON dosyası yükleyin.'
                 : 'Arama kriterlerinizi değiştirmeyi deneyin.'}
             </p>
           </div>
@@ -110,19 +111,19 @@ export default function AgreementSidebar({
 
       {/* Upload Button */}
       <div className="p-4 border-t border-slate-100 bg-slate-50">
-        <label htmlFor="csv-upload" className="block">
+        <label htmlFor="file-upload" className="block">
           <Button className="w-full gap-2" variant="default" asChild>
             <span>
               <Upload className="h-4 w-4" />
-              CSV Yükle
+              CSV / JSON Yükle
             </span>
           </Button>
         </label>
         <input
-          id="csv-upload"
+          id="file-upload"
           type="file"
-          accept=".csv"
-          onChange={handleFileUpload}
+          accept=".csv,.json"
+          onChange={handleFileChange}
           className="hidden"
         />
       </div>

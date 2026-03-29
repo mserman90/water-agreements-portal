@@ -27,7 +27,52 @@ export default function Home() {
   const [selectedId, setSelectedId] = useState<string>();
   const [isLoading, setIsLoading] = useState(false);
 
-  // Agreements are kept in-memory (loaded fresh via CSV upload each session)
+  const parseRows = (rows: any[]): Agreement[] => {
+    return rows
+      .map((row: any, index: number) => ({
+        id: row.id || `agreement-${index}`,
+        name: row.name || 'Unnamed',
+        country: row.country || 'Unknown',
+        basin: row.basin || 'Unknown',
+        latitude: parseFloat(row.latitude) || 0,
+        longitude: parseFloat(row.longitude) || 0,
+        purpose: row.purpose || '',
+        year: parseInt(row.year) || new Date().getFullYear(),
+        pdfUrl: row.pdfUrl || undefined,
+      }))
+      .filter((a: Agreement) => a.latitude !== 0 && a.longitude !== 0);
+  };
+
+  const handleJSONUpload = (file: File) => {
+    setIsLoading(true);
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const raw = JSON.parse(e.target?.result as string);
+        const data = Array.isArray(raw) ? raw : raw.agreements || raw.data || raw.features || [];
+        const parsed = parseRows(data);
+
+        if (parsed.length === 0) {
+          toast.error('JSON dosyasında geçerli veri bulunamadı.');
+          setIsLoading(false);
+          return;
+        }
+
+        setAgreements(parsed);
+        toast.success(`${parsed.length} anlaşma başarıyla yüklendi.`);
+      } catch (error) {
+        console.error('JSON parse error:', error);
+        toast.error('JSON dosyası işlenirken hata oluştu.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    reader.onerror = () => {
+      toast.error('JSON dosyası okunamadı.');
+      setIsLoading(false);
+    };
+    reader.readAsText(file);
+  };
 
   const handleCSVUpload = (file: File) => {
     setIsLoading(true);
@@ -36,19 +81,7 @@ export default function Home() {
       skipEmptyLines: true,
       complete: (results: any) => {
         try {
-          const parsed: Agreement[] = results.data
-            .map((row: any, index: number) => ({
-              id: row.id || `agreement-${index}`,
-              name: row.name || 'Unnamed',
-              country: row.country || 'Unknown',
-              basin: row.basin || 'Unknown',
-              latitude: parseFloat(row.latitude) || 0,
-              longitude: parseFloat(row.longitude) || 0,
-              purpose: row.purpose || '',
-              year: parseInt(row.year) || new Date().getFullYear(),
-              pdfUrl: row.pdfUrl || undefined,
-            }))
-            .filter((a: Agreement) => a.latitude !== 0 && a.longitude !== 0);
+          const parsed = parseRows(results.data);
 
           if (parsed.length === 0) {
             toast.error('CSV dosyasında geçerli veri bulunamadı.');
@@ -71,6 +104,14 @@ export default function Home() {
         setIsLoading(false);
       },
     });
+  };
+
+  const handleFileUpload = (file: File) => {
+    if (file.name.endsWith('.json')) {
+      handleJSONUpload(file);
+    } else {
+      handleCSVUpload(file);
+    }
   };
 
   return (
@@ -112,7 +153,7 @@ export default function Home() {
           agreements={agreements}
           selectedId={selectedId}
           onSelectAgreement={setSelectedId}
-          onUploadCSV={handleCSVUpload}
+          onUploadFile={handleFileUpload}
           isLoading={isLoading}
         />
 
