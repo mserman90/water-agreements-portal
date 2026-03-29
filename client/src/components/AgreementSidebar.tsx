@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Search, Upload, Loader2 } from 'lucide-react';
+import { Search, Upload, Loader2, FileDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -101,7 +101,21 @@ export default function AgreementSidebar({
                     {agreement.country} • {agreement.basin}
                   </p>
                   <p className="text-xs text-slate-500 mt-2 line-clamp-2">{agreement.purpose}</p>
-                  <p className="text-xs text-slate-400 mt-1">Yıl: {agreement.year}</p>
+                  <div className="flex items-center justify-between mt-1">
+                    <p className="text-xs text-slate-400">Yıl: {agreement.year}</p>
+                    {agreement.pdfUrl && (
+                      <a
+                        href={agreement.pdfUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1 text-[10px] font-semibold text-primary hover:underline"
+                      >
+                        <FileDown className="h-3 w-3" />
+                        İndir
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             </button>

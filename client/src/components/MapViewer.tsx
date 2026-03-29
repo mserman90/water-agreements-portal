@@ -61,12 +61,17 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick }: Map
         fillOpacity: 0.8,
       });
 
+      const pdfLink = agreement.pdfUrl
+        ? `<a href="${agreement.pdfUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:4px;margin-top:8px;padding:4px 10px;background:#0369A1;color:#fff;border-radius:6px;font-size:11px;font-weight:600;text-decoration:none;">&#128196; Belgeyi İndir</a>`
+        : '';
+
       circleMarker.bindPopup(`
         <div class="p-3 w-64">
           <h3 class="font-bold text-sm text-slate-900">${agreement.name}</h3>
           <p class="text-xs text-slate-600 mt-1">${agreement.country} • ${agreement.basin}</p>
           <p class="text-xs text-slate-500 mt-2">${agreement.purpose}</p>
           <p class="text-xs text-slate-400 mt-1">Yıl: ${agreement.year}</p>
+          ${pdfLink}
         </div>
       `);
 

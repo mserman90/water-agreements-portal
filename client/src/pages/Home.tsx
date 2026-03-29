@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 import Papa from 'papaparse';
 import { basinCoords } from '@/data/basinCoords';
+import { findTreatyLink } from '@/data/treatyLinks';
 
 declare global {
   interface Window {
@@ -87,7 +88,9 @@ export default function Home() {
           longitude: lng,
           purpose: String(row.purpose ?? row.Purpose ?? row.description ?? row.Description ?? row.summary ?? row['Issue Area'] ?? ''),
           year: yr || new Date().getFullYear(),
-          pdfUrl: row.pdfUrl ?? row.pdf_url ?? row.link ?? undefined,
+          pdfUrl: row.pdfUrl ?? row.pdf_url ?? row.link
+            ?? findTreatyLink(row.DocumentName ?? row.name ?? row.Name ?? row.title ?? '')?.download
+            ?? undefined,
         };
       })
       .filter((a: Agreement) => a.latitude !== 0 && a.longitude !== 0);
