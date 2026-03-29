@@ -1,9 +1,9 @@
 import { useState, useMemo } from 'react';
-import { Search, Upload, Loader2, FileDown, Sparkles } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Search, Loader2, FileDown, Sparkles } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { smartSearch, describeQuery, isSmartQuery } from '@/lib/smartSearch';
+import SettingsPanel from './SettingsPanel';
 
 interface Agreement {
   id: string;
@@ -58,13 +58,7 @@ export default function AgreementSidebar({
     return describeQuery(searchTerm, lang);
   }, [searchTerm, aiMode, lang]);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      onUploadFile(file);
-      e.target.value = '';
-    }
-  };
+
 
   return (
     <aside className="sidebar-panel w-80 h-[calc(100vh-64px)] flex flex-col border-r border-slate-200">
@@ -180,24 +174,8 @@ export default function AgreementSidebar({
         )}
       </div>
 
-      {/* Upload Button */}
-      <div className="p-4 border-t border-slate-100 bg-slate-50">
-        <label htmlFor="file-upload" className="block">
-          <Button className="w-full gap-2" variant="default" asChild>
-            <span>
-              <Upload className="h-4 w-4" />
-              {t('upload.button')}
-            </span>
-          </Button>
-        </label>
-        <input
-          id="file-upload"
-          type="file"
-          accept=".csv,.json"
-          onChange={handleFileChange}
-          className="hidden"
-        />
-      </div>
+      {/* Settings Button */}
+      <SettingsPanel onUploadFile={onUploadFile} />
 
       {/* Status Footer */}
       <div className="p-3 bg-slate-900 text-white text-[10px] leading-relaxed border-t border-slate-800 text-center">
