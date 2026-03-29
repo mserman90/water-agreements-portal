@@ -91,15 +91,22 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick }: Map
     }
   }, [agreements, selectedId, onMarkerClick]);
 
-  // Highlight selected marker
+  // Highlight selected marker and open its popup
   useEffect(() => {
-    if (selectedId && map.current) {
+    if (selectedId && map.current && markerCluster.current) {
       const marker = markers.current.get(selectedId);
       if (marker && 'setStyle' in marker) {
-        (marker as L.CircleMarker).setStyle({ fillColor: '#0369A1' });
-        map.current.setView((marker as any).getLatLng(), Math.max(map.current.getZoom(), 10), {
-          animate: true,
-          duration: 0.5,
+        const cm = marker as L.CircleMarker;
+        cm.setStyle({ fillColor: '#0369A1' });
+        const latlng = cm.getLatLng();
+
+        // Zoom to marker, then spiderfy cluster and open popup
+        markerCluster.current.zoomToShowLayer(cm, () => {
+          map.current?.setView(latlng, Math.max(map.current.getZoom(), 10), {
+            animate: true,
+            duration: 0.5,
+          });
+          setTimeout(() => cm.openPopup(), 300);
         });
       }
     }
