@@ -15,6 +15,7 @@ interface Agreement {
   year: number;
   pdfUrl?: string;
   faolexUrl?: string;
+  githubDocUrl?: string;
 }
 
 interface MapViewerProps {
@@ -137,6 +138,9 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick, lang 
       const faolexLink = agreement.faolexUrl
         ? `<a href="${agreement.faolexUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:4px;margin-top:4px;padding:4px 10px;background:#059669;color:#fff;border-radius:6px;font-size:11px;font-weight:600;text-decoration:none;">FAOLEX</a>`
         : '';
+      const ghDocLink = agreement.githubDocUrl
+        ? `<a href="${agreement.githubDocUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:4px;margin-top:4px;padding:4px 10px;background:#6D28D9;color:#fff;border-radius:6px;font-size:11px;font-weight:600;text-decoration:none;">PDF</a>`
+        : '';
 
       circleMarker.bindPopup(`
         <div class="p-3 w-64">
@@ -144,7 +148,7 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick, lang 
           <p class="text-xs text-slate-600 mt-1">${agreement.country} • ${agreement.basin}</p>
           <p class="text-xs text-slate-500 mt-2">${agreement.purpose}</p>
           <p class="text-xs text-slate-400 mt-1">${t('popup.year', lang)}: ${agreement.year}</p>
-          <div style="display:flex;gap:6px;flex-wrap:wrap">${pdfLink}${faolexLink}</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">${pdfLink}${faolexLink}${ghDocLink}</div>
         </div>
       `);
 

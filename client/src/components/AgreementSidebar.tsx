@@ -16,6 +16,7 @@ interface Agreement {
   year: number;
   pdfUrl?: string;
   faolexUrl?: string;
+  githubDocUrl?: string;
 }
 
 interface AgreementSidebarProps {
@@ -177,6 +178,17 @@ export default function AgreementSidebar({
                           className="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-600 hover:underline"
                         >
                           FAOLEX
+                        </a>
+                      )}
+                      {agreement.githubDocUrl && (
+                        <a
+                          href={agreement.githubDocUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-1 text-[10px] font-semibold text-violet-600 hover:underline"
+                        >
+                          PDF
                         </a>
                       )}
                     </div>

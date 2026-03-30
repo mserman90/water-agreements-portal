@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { toast } from 'sonner';
 import Papa from 'papaparse';
 import { basinCoords } from '@/data/basinCoords';
-import { findTreatyLink } from '@/data/treatyLinks';
+import { findTreatyLink, findGithubDoc } from '@/data/treatyLinks';
 import { useLanguage } from '@/i18n/LanguageContext';
 
 declare global {
@@ -24,6 +24,7 @@ interface Agreement {
   year: number;
   pdfUrl?: string;
   faolexUrl?: string;
+  githubDocUrl?: string;
 }
 
 export default function Home() {
@@ -97,6 +98,12 @@ export default function Home() {
             ?? undefined,
           faolexUrl: findTreatyLink(row.DocumentName ?? row.name ?? row.Name ?? row.title ?? '')?.faolex
             ?? undefined,
+          githubDocUrl: (() => {
+            const docName = row.DocumentName ?? row.name ?? row.Name ?? row.title ?? '';
+            const link = findTreatyLink(docName);
+            const ghDoc = findGithubDoc(link?.faolex, docName);
+            return ghDoc ? `${import.meta.env.BASE_URL}docs/${ghDoc}` : undefined;
+          })(),
         };
       })
       .filter((a: Agreement) => a.latitude !== 0 && a.longitude !== 0);

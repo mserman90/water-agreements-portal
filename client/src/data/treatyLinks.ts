@@ -697,6 +697,55 @@ export const faolexLinks: [string, string][] = [
   ["accord pertaining to long term economic, technical, industrial, and scientific cooperation between the government of the republic of turkey", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC231052"],
 ];
 
+// GitHub-hosted PDF documents (third download source)
+// Maps FAOLEX numeric ID or document key -> PDF filename in /docs/
+export const githubDocs: Record<string, string> = {
+  '230240': 'bi-230240.pdf',   // Azerbaijan/Turkey water management 2024
+  '231133': 'bi-231133.pdf',   // Turkey/Iraq water framework 2024
+  '222910': 'bi-222910.pdf',   // Turkey/Palestine water 2022
+  '222911': 'bi-222911.pdf',   // Turkey/Tajikistan agriculture 2021
+  '165275': 'bi-165275.pdf',   // Turkey/Romania water 2016
+  '165273': 'bi-165273.pdf',   // Turkey/Senegal food 2016
+  '165278': 'bi-165278.pdf',   // Turkey/Mauritania agriculture 2016
+  '174839': 'bi-174839.pdf',   // China/Turkey water 2008
+  '172292': 'bi-172292.pdf',   // Turkey/Niger agriculture 2013
+  '172293': 'bi-172293.pdf',   // Turkey/Niger (Resmi Gazete)
+  '103269': 'bi-103269.pdf',   // Turkey/Iraq water 2009
+  '103283': 'bi-103283.pdf',   // Turkey/Syria water 2009
+  '103198': 'bi-103198.pdf',   // Turkey/Iran water quality 2011
+  '106715': 'bi-106715E.pdf',  // Turkey/Mongolia agriculture 2008
+  '151210': 'bi-151210.pdf',   // Turkey/Thailand agriculture 2013
+  '152106': 'bi-152106.pdf',   // Turkey/Albania agriculture 2014
+  '176815': 'bi-176815.pdf',   // Turkey/Ethiopia 2013
+  '177063': 'bi-177063.pdf',   // Turkey/Ghana 2013
+  '177067': 'bi-177067.pdf',   // Turkey/North Macedonia 2017
+  '187865': 'bi-187865.pdf',   // Turkey/Morocco cooperation 2018
+  '187866': 'bi-187866.pdf',   // Turkey/Morocco MoU 2018
+  '231052': 'bi-231052.pdf',   // Bulgaria/Turkey agriculture 1968
+  '32263':  'bi-32263.pdf',    // USSR/Turkey maritime boundary Black Sea
+  '43481':  'bi-43481.pdf',    // Russia/Turkey natural gas 1997
+  '43482':  'bi-43482.pdf',    // Protocol Russia/Turkey gas 1997
+  'irq15920': 'irq15920.pdf',  // Iraq Euphrates water division law
+};
+
+// Find GitHub-hosted PDF for a FAOLEX URL or document name
+export function findGithubDoc(faolexUrl?: string, docName?: string): string | null {
+  if (faolexUrl) {
+    // Extract numeric ID from FAOLEX URL: LEX-FAOC230240 -> 230240
+    const match = faolexUrl.match(/(\d{4,})/);
+    if (match && githubDocs[match[1]]) {
+      return githubDocs[match[1]];
+    }
+  }
+  // Try matching by document name keywords
+  if (docName) {
+    const lower = docName.toLowerCase();
+    if (lower.includes('euphrates') && lower.includes('provisional')) return githubDocs['irq15920'] || null;
+    if (lower.includes('maritime boundary') && lower.includes('black')) return githubDocs['32263'] || null;
+  }
+  return null;
+}
+
 // Normalize quotes/apostrophes for consistent matching
 function normalize(s: string): string {
   return s.toLowerCase().trim()
