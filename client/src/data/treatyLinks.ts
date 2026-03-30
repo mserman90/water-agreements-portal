@@ -663,6 +663,40 @@ export const treatyLinks: [string, string, string][] = [
   ["protocol attached to the convention on water use from transboundary rivers, small rivers and brooks of the union of soviet socialist republics and the republic of turkey", "https://oregondigital.org/downloads/f0gb19fr55w", "https://oregondigital.org/concern/documents/gb19fr55w"],
 ];
 
+// FAOLEX alternative links for Turkey water agreements
+// Each entry: [titlePrefix (lowercase, without trailing dot), faolex detail URL]
+export const faolexLinks: [string, string][] = [
+  ["agreement between the government of the republic of azerbaijan and the government of the republic of t\u00fcrkiye on cooperation in the field of water management", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC230240"],
+  ["framework agreement concerning the cooperation in the field of water between the government of the republic of t\u00fcrkiye and the government of the republic of iraq", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC231133"],
+  ["memorandum of understanding between the republic of t\u00fcrkiye and the state of palestine on cooperation in the field of water", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC222910"],
+  ["agreement between the republic of turkey and romania on cooperation in the field of water", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC165275"],
+  ["memorandum of understanding between the republic of turkey and the kingdom of netherlands on collaboration in water management", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC165320"],
+  ["memorandum of understanding between the republic of turkey and the hashemite kingdom of jordan in the field of water", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC165314"],
+  ["agreement on cooperation between the government of the republic of turkey and the government of the republic of iraq in water resources", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC151208"],
+  ["memorandum of understanding between turkey and iraq on cooperation in water resources", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC103269"],
+  ["memorandum of understanding between turkey and the syrian arab republic on cooperation in water", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC103283"],
+  ["memorandum of understanding in the field of remediation of water quality between turkey and iran", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC103198"],
+  ["memorandum of understanding between ministry of water resources of the people's republic of china and the state hydraulic works of the republic of turkey", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC174839"],
+  ["agreement between romania and turkey regarding the cooperation on the protection and sustainable use of waters", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC217079"],
+  ["agreement between turkey and bulgaria on determination of the boundary waters", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC017355"],
+  ["protocol between the government of the union of soviet republics and the government of the republic of turkey on the delimitation of borders in frontier rivers and lakes", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC032263"],
+  ["agreement between the people's republic of bulgaria and the republic of t\u00fcrkiye concerning co-operation in agriculture", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC231052"],
+  ["treaty between iraq and turkey of friendship and neighbourly relations", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC215679"],
+  ["agreement between turkey and the government of the union of soviet socialist republics on cooperation in fisheries", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC032264"],
+  ["exchange of notes constituting an agreement on the delimitation of the economic zone of the union of soviet socialist republics and turkey", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC032270"],
+  ["convention no. 479/dp between bulgaria, georgia, romania, the russian federation, turkey and ukraine on the protection of the black sea", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC062010"],
+  ["strategic action plan 2009 for the environmental protection and rehabilitation of the black sea", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC241564"],
+  ["cooperation agreement between the republic of turkey and the republic of the niger in the field of agriculture", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC172292"],
+  ["memorandum of understanding between the government of the republic of turkey and the government of niger", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC172993"],
+  ["accord of the cooperation between the government of the republic of turkey and the government of the republic of niger about the water sector", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC172993"],
+  ["cooperation agreement in the field of environment protection between turkey and iran", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC103257"],
+  ["agreement on cooperation in the field of environmental protection between hungary and turkey", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC007174"],
+  ["cooperation agreement between the government of the republic of turkey and the government of the republic of sudan", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC187822"],
+  ["agreement between the government of the russian federation and the government of the republic of turkey on cooperation in the field of fisheries", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC174068"],
+  ["agreement between the government of the russian federation and the government of the republic of turkey on cooperation in the field of agriculture", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC173274"],
+  ["accord pertaining to long term economic, technical, industrial, and scientific cooperation between the government of the republic of turkey", "https://www.fao.org/faolex/results/details/en/c/LEX-FAOC231052"],
+];
+
 // Normalize quotes/apostrophes for consistent matching
 function normalize(s: string): string {
   return s.toLowerCase().trim()
@@ -670,15 +704,46 @@ function normalize(s: string): string {
     .replace(/[\u201C\u201D\u201E\u201F]/g, '"');              // curly double quotes -> straight
 }
 
-// Find download link for a document name
-export function findTreatyLink(docName: string): { download: string; detail: string } | null {
+// Find FAOLEX alternative link for a document name
+export function findFaolexLink(docName: string): string | null {
   if (!docName) return null;
   const lower = normalize(docName);
+  // Also normalize Türkiye -> turkey for matching
+  const lowerNorm = lower.replace(/t\u00fcrkiye/g, 'turkey');
+  for (const [prefix, url] of faolexLinks) {
+    const np = normalize(prefix).replace(/t\u00fcrkiye/g, 'turkey');
+    if (lowerNorm === np || lowerNorm.startsWith(np) || np.startsWith(lowerNorm.slice(0, 40))) {
+      return url;
+    }
+  }
+  return null;
+}
+
+// Find download link for a document name (Oregon Digital primary, FAOLEX fallback)
+export function findTreatyLink(docName: string): { download: string; detail: string; faolex?: string } | null {
+  if (!docName) return null;
+  const lower = normalize(docName);
+  let result: { download: string; detail: string; faolex?: string } | null = null;
+
   for (const [prefix, download, detail] of treatyLinks) {
     const np = normalize(prefix);
     if (lower === np || lower.startsWith(np) || np.startsWith(lower.slice(0, 40))) {
-      return { download, detail };
+      result = { download, detail };
+      break;
     }
   }
+
+  const faolex = findFaolexLink(docName);
+
+  if (result) {
+    result.faolex = faolex || undefined;
+    return result;
+  }
+
+  // If no Oregon Digital link, use FAOLEX as primary
+  if (faolex) {
+    return { download: faolex, detail: faolex, faolex };
+  }
+
   return null;
 }

@@ -23,6 +23,7 @@ interface Agreement {
   purpose: string;
   year: number;
   pdfUrl?: string;
+  faolexUrl?: string;
 }
 
 export default function Home() {
@@ -93,6 +94,8 @@ export default function Home() {
           year: yr || new Date().getFullYear(),
           pdfUrl: row.pdfUrl ?? row.pdf_url ?? row.link
             ?? findTreatyLink(row.DocumentName ?? row.name ?? row.Name ?? row.title ?? '')?.download
+            ?? undefined,
+          faolexUrl: findTreatyLink(row.DocumentName ?? row.name ?? row.Name ?? row.title ?? '')?.faolex
             ?? undefined,
         };
       })

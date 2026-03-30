@@ -15,6 +15,7 @@ interface Agreement {
   purpose: string;
   year: number;
   pdfUrl?: string;
+  faolexUrl?: string;
 }
 
 interface AgreementSidebarProps {
@@ -154,18 +155,31 @@ export default function AgreementSidebar({
                   <p className="text-xs text-slate-500 mt-2 line-clamp-2">{agreement.purpose}</p>
                   <div className="flex items-center justify-between mt-1">
                     <p className="text-xs text-slate-400">{t('card.year')}: {agreement.year}</p>
-                    {agreement.pdfUrl && (
-                      <a
-                        href={agreement.pdfUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1 text-[10px] font-semibold text-primary hover:underline"
-                      >
-                        <FileDown className="h-3 w-3" />
-                        {t('card.download')}
-                      </a>
-                    )}
+                    <div className="flex items-center gap-2">
+                      {agreement.pdfUrl && (
+                        <a
+                          href={agreement.pdfUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-1 text-[10px] font-semibold text-primary hover:underline"
+                        >
+                          <FileDown className="h-3 w-3" />
+                          {t('card.download')}
+                        </a>
+                      )}
+                      {agreement.faolexUrl && (
+                        <a
+                          href={agreement.faolexUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-600 hover:underline"
+                        >
+                          FAOLEX
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
