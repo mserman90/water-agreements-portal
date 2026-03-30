@@ -237,7 +237,7 @@ export default function Home() {
   return (
     <div className="flex h-screen bg-background">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 h-14 md:h-16 bg-white border-b border-slate-200 shadow-sm z-50 flex items-center px-3 md:px-6">
+      <header className="fixed top-0 left-0 right-0 h-14 md:h-16 bg-white border-b border-slate-200 shadow-sm z-[9999] flex items-center px-3 md:px-6">
         {/* Sidebar toggle (all screen sizes) */}
         <button
           onClick={() => setSidebarOpen(prev => !prev)}
@@ -293,21 +293,21 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="flex w-full pt-14 md:pt-16">
-        {/* Sidebar backdrop (visible when sidebar open on small screens) */}
+        {/* Sidebar backdrop */}
         {sidebarOpen && (
           <div
-            className="fixed inset-0 bg-black/30 z-30 lg:hidden"
+            className="fixed inset-0 bg-black/20 z-[9990]"
             onClick={() => setSidebarOpen(false)}
           />
         )}
 
         {/* Sidebar — drawer mode, toggleable on all screen sizes */}
-        <div className={`
-          fixed inset-y-0 left-0 z-40
-          transform transition-transform duration-300 ease-in-out
-          pt-14 md:pt-16
-          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-        `}>
+        <div
+          className={`fixed top-14 md:top-16 bottom-0 left-0 z-[9995] shadow-2xl
+            transition-transform duration-300 ease-in-out
+            ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+          `}
+        >
           <AgreementSidebar
             agreements={agreements}
             selectedId={selectedId}
