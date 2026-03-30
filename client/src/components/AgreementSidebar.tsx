@@ -61,7 +61,7 @@ export default function AgreementSidebar({
 
 
   return (
-    <aside className="sidebar-panel w-80 h-[calc(100vh-64px)] flex flex-col border-r border-slate-200">
+    <aside className="sidebar-panel w-[85vw] sm:w-80 h-[calc(100vh-56px)] md:h-[calc(100vh-64px)] flex flex-col border-r border-slate-200">
       {/* Search Header */}
       <div className="p-3 border-b border-slate-100 bg-slate-50 space-y-2">
         {/* Mode Toggle */}

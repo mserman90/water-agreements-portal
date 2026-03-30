@@ -29,7 +29,8 @@ export default function Home() {
   const { lang, setLang, t } = useLanguage();
   const [agreements, setAgreements] = useState<Agreement[]>([]);
   const [selectedId, setSelectedId] = useState<string>();
-  const [isLoading, setIsLoading] = useState(true); // start true for initial load
+  const [isLoading, setIsLoading] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Look up basin coordinates with fuzzy matching
   const findBasinCoords = (basinName: string): [number, number] | null => {
@@ -214,15 +215,38 @@ export default function Home() {
     }
   };
 
+  // Close sidebar when a marker is selected on mobile
+  const handleSelectAgreement = (id: string) => {
+    setSelectedId(id);
+    // On mobile, close sidebar after selection
+    if (window.innerWidth < 1024) {
+      setSidebarOpen(false);
+    }
+  };
+
   return (
     <div className="flex h-screen bg-background">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 h-16 bg-white border-b border-slate-200 shadow-sm z-50 flex items-center px-6">
-        <div className="flex items-center gap-3">
-          <div className="p-2 bg-primary rounded-lg text-white shadow-md">
+      <header className="fixed top-0 left-0 right-0 h-14 md:h-16 bg-white border-b border-slate-200 shadow-sm z-50 flex items-center px-3 md:px-6">
+        {/* Mobile: hamburger */}
+        <button
+          onClick={() => setSidebarOpen(prev => !prev)}
+          className="lg:hidden p-2 -ml-1 mr-2 rounded-md hover:bg-slate-100 transition-colors"
+          aria-label="Toggle sidebar"
+        >
+          <svg className="h-5 w-5 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            {sidebarOpen
+              ? <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              : <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            }
+          </svg>
+        </button>
+
+        <div className="flex items-center gap-2 md:gap-3 min-w-0">
+          <div className="p-1.5 md:p-2 bg-primary rounded-lg text-white shadow-md shrink-0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
+              className="h-5 w-5 md:h-6 md:w-6"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -235,36 +259,53 @@ export default function Home() {
               />
             </svg>
           </div>
-          <h1 className="font-bold text-lg md:text-xl tracking-tight text-slate-800 uppercase leading-none">
+          <h1 className="font-bold text-sm md:text-lg lg:text-xl tracking-tight text-slate-800 uppercase leading-none truncate">
             {t('app.title')}
           </h1>
         </div>
-        <div className="ml-auto hidden lg:flex items-center gap-4">
-          {/* Language Toggle */}
+
+        <div className="ml-auto flex items-center gap-2 md:gap-4">
+          {/* Language Toggle — always visible */}
           <button
             onClick={() => setLang(lang === 'tr' ? 'en' : 'tr')}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-slate-200 bg-white text-xs font-semibold text-slate-600 hover:bg-slate-50 transition-colors shadow-sm"
+            className="flex items-center gap-1 md:gap-1.5 px-2 md:px-3 py-1 md:py-1.5 rounded-full border border-slate-200 bg-white text-[10px] md:text-xs font-semibold text-slate-600 hover:bg-slate-50 transition-colors shadow-sm"
           >
             <span className={lang === 'tr' ? 'opacity-100' : 'opacity-40'}>TR</span>
             <span className="text-slate-300">/</span>
             <span className={lang === 'en' ? 'opacity-100' : 'opacity-40'}>EN</span>
           </button>
-          <span className="bg-emerald-50 text-emerald-700 px-4 py-1.5 rounded-full border border-emerald-100 text-xs font-bold tracking-wide uppercase shadow-sm">
-            <strong>{agreements.length}</strong> {t('app.recordsMapped')}
+          {/* Record count — hidden on small mobile */}
+          <span className="hidden sm:inline-flex bg-emerald-50 text-emerald-700 px-3 md:px-4 py-1 md:py-1.5 rounded-full border border-emerald-100 text-[10px] md:text-xs font-bold tracking-wide uppercase shadow-sm">
+            <strong>{agreements.length}</strong>&nbsp;{t('app.recordsMapped')}
           </span>
         </div>
       </header>
 
       {/* Main Content */}
-      <div className="flex w-full pt-16">
-        {/* Sidebar */}
-        <AgreementSidebar
-          agreements={agreements}
-          selectedId={selectedId}
-          onSelectAgreement={setSelectedId}
-          onUploadFile={handleFileUpload}
-          isLoading={isLoading}
-        />
+      <div className="flex w-full pt-14 md:pt-16">
+        {/* Mobile sidebar backdrop */}
+        {sidebarOpen && (
+          <div
+            className="fixed inset-0 bg-black/30 z-30 lg:hidden"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
+
+        {/* Sidebar — drawer on mobile, static on desktop */}
+        <div className={`
+          fixed lg:static inset-y-0 left-0 z-40
+          transform transition-transform duration-300 ease-in-out
+          pt-14 md:pt-16 lg:pt-0
+          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        `}>
+          <AgreementSidebar
+            agreements={agreements}
+            selectedId={selectedId}
+            onSelectAgreement={handleSelectAgreement}
+            onUploadFile={handleFileUpload}
+            isLoading={isLoading}
+          />
+        </div>
 
         {/* Map */}
         <div className="flex-1 relative">
@@ -274,6 +315,13 @@ export default function Home() {
             onMarkerClick={setSelectedId}
             lang={lang}
           />
+
+          {/* Mobile: floating record count */}
+          <div className="sm:hidden absolute top-2 left-2 z-[500] bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 border border-slate-200 shadow-sm">
+            <span className="text-[10px] font-bold text-emerald-700 uppercase">
+              {agreements.length} {t('app.recordsMapped')}
+            </span>
+          </div>
         </div>
       </div>
     </div>

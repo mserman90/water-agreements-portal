@@ -288,7 +288,7 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick, lang 
   }, [waterEnabled, lang]);
 
   return (
-    <div className="relative" style={{ height: 'calc(100vh - 64px)', width: '100%' }}>
+    <div className="relative h-[calc(100vh-56px)] md:h-[calc(100vh-64px)] w-full">
       <div
         ref={mapContainer}
         className="map-container"
