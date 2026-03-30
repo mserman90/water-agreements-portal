@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Settings, X, Upload, BookOpen, Heart, ChevronDown, ChevronUp, LogIn, LogOut, ShieldCheck, Loader2 } from 'lucide-react';
+import { Info, X, Upload, BookOpen, Heart, ChevronDown, ChevronUp, LogIn, LogOut, ShieldCheck, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useLanguage } from '@/i18n/LanguageContext';
@@ -41,8 +41,8 @@ export default function SettingsPanel({ onUploadFile }: SettingsPanelProps) {
           className="w-full gap-2"
           variant="outline"
         >
-          <Settings className="h-4 w-4" />
-          {lang === 'tr' ? 'Ayarlar' : 'Settings'}
+          <Info className="h-4 w-4" />
+          {lang === 'tr' ? 'Bilgi' : 'Info'}
         </Button>
       </div>
 
@@ -60,9 +60,9 @@ export default function SettingsPanel({ onUploadFile }: SettingsPanelProps) {
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-slate-200 bg-slate-50">
               <div className="flex items-center gap-2">
-                <Settings className="h-5 w-5 text-slate-600" />
+                <Info className="h-5 w-5 text-slate-600" />
                 <h2 className="font-bold text-sm text-slate-800">
-                  {lang === 'tr' ? 'Ayarlar' : 'Settings'}
+                  {lang === 'tr' ? 'Bilgi' : 'Info'}
                 </h2>
               </div>
               <button
@@ -270,6 +270,10 @@ function GuideTab({ lang, isAdmin }: { lang: string; isAdmin: boolean }) {
       content: 'Harita üzerindeki dairesel işaretçiler anlaşmaların konumlarını gösterir. Kümelenmiş (cluster) işaretçilere tıklayarak yakınlaştırabilirsiniz. Tekil bir işaretçiye tıkladığınızda anlaşma detayları ve varsa belge indirme bağlantısı görüntülenir. Haritayı sürükleyerek kaydırabilir, fare tekerleği veya +/- butonlarıyla yakınlaştırabilirsiniz.'
     },
     {
+      title: 'Su Altyapıları Katmanı',
+      content: 'Haritada sağ üstteki "Su Altyapıları" butonuna tıklayarak OpenStreetMap Overpass katmanını aktif edebilirsiniz. Zoom 10 ve üzeri seviyede görünür alandaki barajlar, savıklar, su kuleleri, su kuyuları, su arıtma tesisleri, baraj gölleri, kanallar ve nehirler otomatik yüklenir. Her altyapı türü farklı renkte gösterilir.'
+    },
+    {
       title: 'Basit Arama',
       content: 'Sol paneldeki arama çubuğuna havza adı, ülke adı veya anlaşma ID\'si yazarak hızlı filtreleme yapabilirsiniz. Arama sonuçları anlık olarak güncellenir.'
     },
@@ -278,12 +282,16 @@ function GuideTab({ lang, isAdmin }: { lang: string; isAdmin: boolean }) {
       content: 'AI moduna geçerek doğal dilde sorgular yapabilirsiniz. Motor, sorgunuzdaki ülke, havza, bölge, konu ve yıl bilgilerini otomatik olarak çıkarır. Türkçe ve İngilizce desteklenir.\n\nÖrnek sorgular:\n• "Nil havzasında 1960 sonrası anlaşmalar"\n• "Türkiye su anlaşmaları"\n• "hydropower treaties in Asia"\n• "navigation agreements 1900-1950"\n• "belgesi olan Fırat anlaşmaları"'
     },
     {
-      title: 'Sidebar Etkileşimi',
-      content: 'Sol paneldeki anlaşma kartlarına tıkladığınızda harita o noktaya odaklanır ve detay popup\'ı açılır. Belge bağlantısı olan anlaşmalarda "İndir" butonu bulunur — bu buton Oregon Digital arşivine yönlendirir.'
+      title: 'Belge İndirme (3 Kaynak)',
+      content: 'Anlaşma belgelerine üç farklı kaynaktan erişilebilir:\n\n• Mavi "İndir" — Oregon Digital (TFDD arşivi)\n• Yeşil "FAOLEX" — FAO FAOLEX veritabanı\n• Mor "PDF" — GitHub üzerinde depolanan orijinal belgeler\n\nHer kaynak farklı anlaşmalar için mevcut olabilir. Butonlar hem sidebar kartlarında hem harita popup\'larında görünür.'
+    },
+    {
+      title: 'Sol Panel',
+      content: 'Sol panel, masaüstünde hamburger menü (☰) ile açılıp kapatılabilir. Mobilde otomatik olarak drawer modunda çalışır. Paneldeki anlaşma kartlarına tıkladığınızda harita o noktaya odaklanır ve detay popup\'ı açılır.'
     },
     ...(isAdmin ? [{
       title: 'Veri Yükleme',
-      content: 'Ayarlar menüsündeki "Veri Yükle" sekmesinden kendi CSV veya JSON dosyanızı yükleyerek mevcut verileri değiştirebilirsiniz. Uygulama TFDD formatını ve yaygın alternatif alan adlarını otomatik tanır. Koordinat bilgisi olmayan verilerde havza adından otomatik konum türetilir.'
+      content: 'Bilgi menüsündeki "Veri Yükle" sekmesinden kendi CSV veya JSON dosyanızı yükleyerek mevcut verileri değiştirebilirsiniz. Uygulama TFDD formatını ve yaygın alternatif alan adlarını otomatik tanır. Koordinat bilgisi olmayan verilerde havza adından otomatik konum türetilir.'
     }] : []),
     {
       title: 'Dil Desteği',
@@ -299,6 +307,10 @@ function GuideTab({ lang, isAdmin }: { lang: string; isAdmin: boolean }) {
       content: 'Circular markers on the map represent agreement locations. Click clustered markers to zoom in. Click individual markers to view agreement details and download links (where available). Drag to pan, scroll or use +/- to zoom.'
     },
     {
+      title: 'Water Infrastructure Layer',
+      content: 'Click the "Water Infrastructure" button on the top-right of the map to enable the OpenStreetMap Overpass layer. At zoom level 10 and above, dams, weirs, water towers, wells, waterworks, reservoirs, canals, and rivers in the visible area are automatically loaded. Each infrastructure type is shown in a different color.'
+    },
+    {
       title: 'Simple Search',
       content: 'Type a basin name, country name, or agreement ID in the search bar for quick filtering. Results update instantly.'
     },
@@ -307,12 +319,16 @@ function GuideTab({ lang, isAdmin }: { lang: string; isAdmin: boolean }) {
       content: 'Switch to AI mode for natural language queries. The engine automatically extracts country, basin, region, topic, and year information from your query. Supports both Turkish and English.\n\nExample queries:\n• "Nile basin agreements after 1960"\n• "Turkey water treaties"\n• "hydropower treaties in Asia"\n• "navigation agreements 1900-1950"\n• "agreements with downloadable documents"'
     },
     {
-      title: 'Sidebar Interaction',
-      content: 'Click agreement cards in the sidebar to focus the map and open the detail popup. Agreements with available documents show a "Download" button linking to the Oregon Digital archive.'
+      title: 'Document Downloads (3 Sources)',
+      content: 'Treaty documents can be accessed from three different sources:\n\n• Blue "Download" — Oregon Digital (TFDD archive)\n• Green "FAOLEX" — FAO FAOLEX database\n• Purple "PDF" — Original documents hosted on GitHub\n\nEach source may be available for different agreements. Buttons appear in both sidebar cards and map popups.'
+    },
+    {
+      title: 'Sidebar',
+      content: 'The sidebar can be toggled open/closed on desktop using the hamburger menu (☰). On mobile it works as a drawer overlay. Click agreement cards in the sidebar to focus the map and open the detail popup.'
     },
     ...(isAdmin ? [{
       title: 'Data Upload',
-      content: 'Upload your own CSV or JSON file from the "Upload Data" tab in Settings to replace the current dataset. The application auto-recognizes TFDD format and common alternative field names. For data without coordinates, locations are automatically derived from basin names.'
+      content: 'Upload your own CSV or JSON file from the "Upload Data" tab in Info to replace the current dataset. The application auto-recognizes TFDD format and common alternative field names. For data without coordinates, locations are automatically derived from basin names.'
     }] : []),
     {
       title: 'Language Support',

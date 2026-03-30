@@ -238,10 +238,10 @@ export default function Home() {
     <div className="flex h-screen bg-background">
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 h-14 md:h-16 bg-white border-b border-slate-200 shadow-sm z-50 flex items-center px-3 md:px-6">
-        {/* Mobile: hamburger */}
+        {/* Sidebar toggle (all screen sizes) */}
         <button
           onClick={() => setSidebarOpen(prev => !prev)}
-          className="lg:hidden p-2 -ml-1 mr-2 rounded-md hover:bg-slate-100 transition-colors"
+          className="p-2 -ml-1 mr-2 rounded-md hover:bg-slate-100 transition-colors"
           aria-label="Toggle sidebar"
         >
           <svg className="h-5 w-5 text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -293,7 +293,7 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="flex w-full pt-14 md:pt-16">
-        {/* Mobile sidebar backdrop */}
+        {/* Sidebar backdrop (visible when sidebar open on small screens) */}
         {sidebarOpen && (
           <div
             className="fixed inset-0 bg-black/30 z-30 lg:hidden"
@@ -301,12 +301,12 @@ export default function Home() {
           />
         )}
 
-        {/* Sidebar — drawer on mobile, static on desktop */}
+        {/* Sidebar — drawer mode, toggleable on all screen sizes */}
         <div className={`
-          fixed lg:static inset-y-0 left-0 z-40
+          fixed inset-y-0 left-0 z-40
           transform transition-transform duration-300 ease-in-out
-          pt-14 md:pt-16 lg:pt-0
-          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+          pt-14 md:pt-16
+          ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
         `}>
           <AgreementSidebar
             agreements={agreements}
