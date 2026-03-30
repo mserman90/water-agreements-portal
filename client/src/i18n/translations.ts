@@ -74,6 +74,11 @@ const translations = {
   'layer.precipResults': { tr: '{count} noktada yağış verisi', en: '{count} precipitation points' },
   'layer.floodResults': { tr: '{count} noktada debi verisi', en: '{count} discharge points' },
   'layer.dataSource': { tr: 'Kaynak: Open-Meteo (GloFAS)', en: 'Source: Open-Meteo (GloFAS)' },
+  'layer.conflicts': { tr: 'Çatışma / İşbirliği', en: 'Conflict / Cooperation' },
+  'layer.conflictsLoading': { tr: 'Su çatışma verileri yükleniyor...', en: 'Loading water conflict data...' },
+  'layer.conflictsResults': { tr: '{count} tarihi olay', en: '{count} historical events' },
+  'layer.barScale': { tr: 'BAR Skalası', en: 'BAR Scale' },
+  'layer.conflictSrc': { tr: 'Kaynak: Pacific Institute, TFDD', en: 'Source: Pacific Institute, TFDD' },
 
   // Auth
   'auth.loginTitle': { tr: 'Yönetici Girişi', en: 'Admin Login' },

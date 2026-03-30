@@ -113,6 +113,12 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick, lang 
   const precipAbort = useRef<AbortController | null>(null);
   const floodAbort = useRef<AbortController | null>(null);
 
+  // Conflict/cooperation layer
+  const conflictLayer = useRef<L.LayerGroup | null>(null);
+  const [conflictEnabled, setConflictEnabled] = useState(false);
+  const [conflictLoading, setConflictLoading] = useState(false);
+  const [conflictCount, setConflictCount] = useState(0);
+
   // Historical precipitation query
   const [histPoint, setHistPoint] = useState<{ lat: number; lng: number } | null>(null);
 
@@ -385,6 +391,105 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick, lang 
     return () => { m.off('moveend', load); };
   }, [floodEnabled, lang]);
 
+  // ── Conflict/cooperation layer ──
+  useEffect(() => {
+    if (!map.current) return;
+    const m = map.current;
+    if (!conflictLayer.current) conflictLayer.current = L.layerGroup();
+
+    if (conflictEnabled) {
+      conflictLayer.current.addTo(m);
+    } else {
+      conflictLayer.current.remove();
+      setConflictCount(0);
+      return;
+    }
+
+    const loadConflicts = async () => {
+      setConflictLoading(true);
+      try {
+        const baseUrl = import.meta.env.BASE_URL;
+        const res = await fetch(`${baseUrl}data/water_conflicts.json`);
+        if (!res.ok) throw new Error('Failed to load conflict data');
+        const events = await res.json();
+
+        conflictLayer.current?.clearLayers();
+
+        const barColor = (intensity: number): string => {
+          if (intensity <= -5) return '#7F1D1D'; // dark red
+          if (intensity <= -3) return '#DC2626'; // red
+          if (intensity <= -1) return '#F97316'; // orange
+          if (intensity === 0) return '#94A3B8'; // gray
+          if (intensity <= 2) return '#60A5FA';  // light blue
+          if (intensity <= 4) return '#22C55E';  // green
+          return '#059669';                       // dark green
+        };
+
+        const barLabel = (intensity: number): string => {
+          if (lang === 'tr') {
+            if (intensity <= -5) return 'Sava\u015f Eylemi';
+            if (intensity <= -3) return 'Askeri/Diplomatik D\u00fc\u015fmanl\u0131k';
+            if (intensity <= -1) return 'S\u00f6zl\u00fc D\u00fc\u015fmanl\u0131k';
+            if (intensity === 0) return 'N\u00f6tr';
+            if (intensity <= 2) return 'S\u00f6zl\u00fc Destek';
+            if (intensity <= 4) return 'Anla\u015fma/\u0130\u015fbirli\u011fi';
+            return 'Stratejik \u0130ttifak';
+          }
+          if (intensity <= -5) return 'War Act';
+          if (intensity <= -3) return 'Military/Diplomatic Hostility';
+          if (intensity <= -1) return 'Verbal Hostility';
+          if (intensity === 0) return 'Neutral';
+          if (intensity <= 2) return 'Verbal Support';
+          if (intensity <= 4) return 'Agreement/Cooperation';
+          return 'Strategic Alliance';
+        };
+
+        for (const event of events) {
+          const color = barColor(event.intensity);
+          const radius = Math.max(6, Math.min(12, Math.abs(event.intensity) * 1.5 + 4));
+
+          const marker = L.circleMarker([event.latitude, event.longitude], {
+            radius,
+            fillColor: color,
+            color: event.intensity < -3 ? '#450A0A' : event.intensity > 3 ? '#064E3B' : '#fff',
+            weight: event.intensity < -3 || event.intensity > 3 ? 2 : 1,
+            opacity: 0.9,
+            fillOpacity: 0.75,
+          });
+
+          const typeIcon = event.type === 'conflict' ? '\u2694\uFE0F' : event.type === 'cooperation' ? '\uD83E\uDD1D' : '\u26A0\uFE0F';
+          const intensityBar = `<div style="display:inline-block;width:${Math.abs(event.intensity)*12}px;height:6px;background:${color};border-radius:3px;margin:0 4px"></div>`;
+
+          marker.bindPopup(`
+            <div style="min-width:220px;max-width:280px">
+              <div style="font-size:11px;font-weight:700;color:${color};text-transform:uppercase;letter-spacing:0.5px">
+                ${typeIcon} ${barLabel(event.intensity)}
+              </div>
+              <div style="font-size:14px;font-weight:700;color:#1e293b;margin:4px 0">${event.title}</div>
+              <div style="font-size:11px;color:#475569;line-height:1.4">${event.description}</div>
+              <div style="margin-top:6px;font-size:10px;color:#64748b">
+                <div>\uD83D\uDCC5 ${event.year} &nbsp; \uD83C\uDF0D ${event.countries}</div>
+                <div>\uD83C\uDF0A ${event.basin}</div>
+                <div style="margin-top:4px">BAR: <strong>${event.intensity > 0 ? '+' : ''}${event.intensity}</strong> ${intensityBar}</div>
+              </div>
+              <div style="font-size:9px;color:#94a3b8;margin-top:4px;font-style:italic">${event.source}</div>
+            </div>
+          `);
+
+          conflictLayer.current?.addLayer(marker);
+        }
+
+        setConflictCount(events.length);
+      } catch (err) {
+        console.warn('Conflict data error:', err);
+      } finally {
+        setConflictLoading(false);
+      }
+    };
+
+    loadConflicts();
+  }, [conflictEnabled, lang]);
+
   return (
     <div className="relative h-[calc(100vh-56px)] md:h-[calc(100vh-64px)] w-full">
       <div
@@ -508,6 +613,56 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick, lang 
             )}
           </div>
         )}
+        {/* Conflict/Cooperation Toggle */}
+        <button
+          onClick={() => setConflictEnabled(prev => !prev)}
+          className={`flex items-center gap-2 px-3 py-2 rounded-lg shadow-lg text-xs font-semibold transition-all border ${
+            conflictEnabled
+              ? 'bg-red-700 text-white border-red-800 hover:bg-red-800'
+              : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
+          }`}
+        >
+          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 2L4 7v6c0 5.55 3.84 10.74 8 12 4.16-1.26 8-6.45 8-12V7l-8-5z" />
+            <path d="M9 12l2 2 4-4" />
+          </svg>
+          {t('layer.conflicts', lang)}
+        </button>
+
+        {conflictEnabled && (
+          <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-slate-200 px-3 py-2 text-[10px] text-slate-600">
+            {conflictLoading ? (
+              <div className="flex items-center gap-1.5">
+                <div className="h-3 w-3 border-2 border-red-500 border-t-transparent rounded-full animate-spin" />
+                {t('layer.conflictsLoading', lang)}
+              </div>
+            ) : conflictCount > 0 ? (
+              <div className="space-y-1">
+                <span className="font-semibold text-red-700">{t('layer.conflictsResults', lang, { count: conflictCount })}</span>
+                <div className="flex flex-wrap gap-x-2 gap-y-0.5">
+                  {[
+                    { color: '#7F1D1D', label: lang === 'tr' ? 'Savaş (-6/-5)' : 'War (-6/-5)' },
+                    { color: '#DC2626', label: lang === 'tr' ? 'Düşmanlık (-4/-3)' : 'Hostility (-4/-3)' },
+                    { color: '#F97316', label: lang === 'tr' ? 'Sözel (-2/-1)' : 'Verbal (-2/-1)' },
+                    { color: '#94A3B8', label: lang === 'tr' ? 'Nötr (0)' : 'Neutral (0)' },
+                    { color: '#60A5FA', label: lang === 'tr' ? 'Destek (+1/+2)' : 'Support (+1/+2)' },
+                    { color: '#22C55E', label: lang === 'tr' ? 'İşbirliği (+3/+4)' : 'Cooperation (+3/+4)' },
+                    { color: '#059669', label: lang === 'tr' ? 'İttifak (+5/+6)' : 'Alliance (+5/+6)' },
+                  ].map(item => (
+                    <span key={item.color} className="inline-flex items-center gap-1">
+                      <span style={{ display: 'inline-block', width: 10, height: 10, borderRadius: '50%', background: item.color }} />
+                      <span className="text-[9px]">{item.label}</span>
+                    </span>
+                  ))}
+                </div>
+                <span className="text-[9px] text-slate-400 block mt-1">{t('layer.conflictSrc', lang)}</span>
+              </div>
+            ) : (
+              <span className="text-slate-400">{t('layer.conflictsResults', lang, { count: 0 })}</span>
+            )}
+          </div>
+        )}
+
         {/* Historical precipitation hint */}
         <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow border border-slate-200 px-2.5 py-1.5 text-[9px] text-slate-500 text-center leading-snug">
           {lang === 'tr'

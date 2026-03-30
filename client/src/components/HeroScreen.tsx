@@ -42,6 +42,7 @@ export default function HeroScreen({ onEnter }: HeroScreenProps) {
   const documents = useCounter(659, 1900, animStart);
   const years = useCounter(206, 1700, animStart);
   const pdfs = useCounter(26, 1400, animStart);
+  const conflicts = useCounter(121, 1500, animStart);
 
   const handleEnter = () => {
     setVisible(false);
@@ -87,6 +88,12 @@ export default function HeroScreen({ onEnter }: HeroScreenProps) {
       sub: tr ? 'GitHub Deposu' : 'GitHub Repository',
       color: '#DC2626',
     },
+    {
+      value: conflicts.toString(),
+      label: tr ? 'Çatışma/İşbirliği' : 'Conflict/Cooperation',
+      sub: tr ? 'Tarihi Olay' : 'Historical Events',
+      color: '#B91C1C',
+    },
   ];
 
   const features = tr ? [
@@ -96,6 +103,7 @@ export default function HeroScreen({ onEnter }: HeroScreenProps) {
     { icon: '🌧️', title: 'Yağış & Taşkın', desc: 'Open-Meteo ile güncel ve tarihi hava verileri' },
     { icon: '📊', title: 'Tarihi Yağış', desc: '1940\'tan bugüne ERA5 yağış sorgusu ve grafik' },
     { icon: '📥', title: '3 Kaynak İndirme', desc: 'Oregon Digital, FAOLEX ve GitHub PDF' },
+    { icon: '⚔️', title: 'Çatışma/İşbirliği', desc: 'Su kaynaklı 121 tarihi olay, BAR ölçeği' },
   ] : [
     { icon: '🗺️', title: 'Interactive Map', desc: 'Leaflet + clustering for 3000+ agreements' },
     { icon: '🤖', title: 'AI Search', desc: 'Natural language queries in Turkish/English' },
@@ -103,6 +111,7 @@ export default function HeroScreen({ onEnter }: HeroScreenProps) {
     { icon: '🌧️', title: 'Precipitation & Flood', desc: 'Open-Meteo current and forecast weather data' },
     { icon: '📊', title: 'Historical Precip.', desc: 'ERA5 precipitation query from 1940 to present' },
     { icon: '📥', title: '3-Source Downloads', desc: 'Oregon Digital, FAOLEX, and GitHub PDFs' },
+    { icon: '⚔️', title: 'Conflict/Cooperation', desc: '121 water events with BAR intensity scale' },
   ];
 
   return (
@@ -136,7 +145,7 @@ export default function HeroScreen({ onEnter }: HeroScreenProps) {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4 max-w-5xl w-full mb-8 animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 max-w-5xl w-full mb-8 animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
           {stats.map((stat, i) => (
             <div
               key={i}
@@ -152,7 +161,7 @@ export default function HeroScreen({ onEnter }: HeroScreenProps) {
         </div>
 
         {/* Features */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 max-w-3xl w-full mb-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-400">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-3 max-w-4xl w-full mb-8 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-400">
           {features.map((feat, i) => (
             <div
               key={i}
@@ -185,8 +194,8 @@ export default function HeroScreen({ onEnter }: HeroScreenProps) {
         {/* Attribution */}
         <p className="mt-6 text-[10px] text-slate-600 text-center max-w-md animate-in fade-in duration-700 delay-700">
           {tr
-            ? 'Veriler: Oregon State University – TFDD | Open-Meteo | OpenStreetMap | FAOLEX'
-            : 'Data: Oregon State University – TFDD | Open-Meteo | OpenStreetMap | FAOLEX'}
+            ? 'Veriler: Oregon State University – TFDD | Open-Meteo | OpenStreetMap | FAOLEX | Pacific Institute'
+            : 'Data: Oregon State University – TFDD | Open-Meteo | OpenStreetMap | FAOLEX | Pacific Institute'}
         </p>
       </div>
     </div>

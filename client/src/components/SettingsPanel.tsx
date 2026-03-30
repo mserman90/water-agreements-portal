@@ -274,6 +274,14 @@ function GuideTab({ lang, isAdmin }: { lang: string; isAdmin: boolean }) {
       content: 'Haritada sağ üstteki "Su Altyapıları" butonuna tıklayarak OpenStreetMap Overpass katmanını aktif edebilirsiniz. Zoom 10 ve üzeri seviyede görünür alandaki barajlar, savıklar, su kuleleri, su kuyuları, su arıtma tesisleri, baraj gölleri, kanallar ve nehirler otomatik yüklenir. Her altyapı türü farklı renkte gösterilir.'
     },
     {
+      title: 'Yağış ve Taşkın Katmanları',
+      content: 'Haritada "Yağış" ve "Taşkın" butonlarıyla Open-Meteo güncel hava verilerini görüntüleyebilirsiniz. Yağış katmanı saatlik yağış tahminlerini, taşkın katmanı ise nehir debi verilerini renkli noktalarla gösterir.\n\nAyrıca haritada herhangi bir noktaya sağ tıklayarak 1940\'tan bugüne kadar tarihi yağış verilerini (ERA5) sorgulayabilir ve grafik olarak inceleyebilirsiniz.'
+    },
+    {
+      title: 'Çatışma/İşbirliği Katmanı',
+      content: 'Haritada "Çatışma / İşbirliği" butonuyla su kaynaklı tarihi çatışma ve işbirliği olaylarını görüntüleyebilirsiniz. Toplam 121 olay, BAR (Basins at Risk) yoğunluk ölçeğiyle (-6 ile +6 arası) renklendirilir:\n\n• Kırmızı tonları (-6 ile -1): Çatışma (savaş eylemi, askeri düşmanlık, sözlü düşmanlık)\n• Gri (0): Nötr\n• Mavi-Yeşil tonları (+1 ile +6): İşbirliği (sözel destek, anlaşma, stratejik ittifak)\n\nKaynak: Pacific Institute, TFDD'
+    },
+    {
       title: 'Basit Arama',
       content: 'Sol paneldeki arama çubuğuna havza adı, ülke adı veya anlaşma ID\'si yazarak hızlı filtreleme yapabilirsiniz. Arama sonuçları anlık olarak güncellenir.'
     },
@@ -309,6 +317,14 @@ function GuideTab({ lang, isAdmin }: { lang: string; isAdmin: boolean }) {
     {
       title: 'Water Infrastructure Layer',
       content: 'Click the "Water Infrastructure" button on the top-right of the map to enable the OpenStreetMap Overpass layer. At zoom level 10 and above, dams, weirs, water towers, wells, waterworks, reservoirs, canals, and rivers in the visible area are automatically loaded. Each infrastructure type is shown in a different color.'
+    },
+    {
+      title: 'Precipitation & Flood Layers',
+      content: 'Use the "Precipitation" and "Flood" buttons on the map to display current Open-Meteo weather data. The precipitation layer shows hourly rainfall forecasts, while the flood layer shows river discharge data with colored markers.\n\nYou can also right-click anywhere on the map to query historical precipitation data (ERA5) from 1940 to present and view it as a chart.'
+    },
+    {
+      title: 'Conflict/Cooperation Layer',
+      content: 'Click the "Conflict / Cooperation" button on the map to display historical water-related conflict and cooperation events. A total of 121 events are color-coded using the BAR (Basins at Risk) intensity scale (-6 to +6):\n\n• Red shades (-6 to -1): Conflict (war act, military hostility, verbal hostility)\n• Gray (0): Neutral\n• Blue-Green shades (+1 to +6): Cooperation (verbal support, agreement, strategic alliance)\n\nSource: Pacific Institute, TFDD'
     },
     {
       title: 'Simple Search',
