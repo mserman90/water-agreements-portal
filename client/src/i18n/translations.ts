@@ -54,6 +54,20 @@ const translations = {
   'search.mode.simple': { tr: 'Basit', en: 'Simple' },
   'search.mode.ai': { tr: 'AI', en: 'AI' },
 
+  // Overpass water infrastructure layer
+  'layer.waterInfra': { tr: 'Su Altyapıları', en: 'Water Infrastructure' },
+  'layer.loading': { tr: 'Su altyapıları yükleniyor...', en: 'Loading water infrastructure...' },
+  'layer.zoomIn': { tr: 'Su altyapılarını görmek için yakınlaştırın (zoom ≥10)', en: 'Zoom in to see water infrastructure (zoom ≥10)' },
+  'layer.dam': { tr: 'Baraj', en: 'Dam' },
+  'layer.weir': { tr: 'Savık', en: 'Weir' },
+  'layer.waterTower': { tr: 'Su Kulesi', en: 'Water Tower' },
+  'layer.waterWell': { tr: 'Su Kuyusu', en: 'Water Well' },
+  'layer.waterworks': { tr: 'Su Arıtma Tesisi', en: 'Waterworks' },
+  'layer.reservoir': { tr: 'Baraj Gölü / Rezervuar', en: 'Reservoir' },
+  'layer.canal': { tr: 'Kanal', en: 'Canal' },
+  'layer.waterway': { tr: 'Su Yolu', en: 'Waterway' },
+  'layer.results': { tr: '{count} su altyapısı bulundu', en: '{count} water features found' },
+
   // Auth
   'auth.loginTitle': { tr: 'Yönetici Girişi', en: 'Admin Login' },
   'auth.tokenPlaceholder': { tr: 'GitHub Personal Access Token', en: 'GitHub Personal Access Token' },
