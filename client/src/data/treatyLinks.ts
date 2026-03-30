@@ -657,14 +657,26 @@ export const treatyLinks: [string, string, string][] = [
   ["convention on cooperation for the protection and sustainable use of", "https://oregondigital.org/concern/documents/v692t6324/download", "https://oregondigital.org/concern/documents/v692t6324"],
   ["preliminary convention between bolivia and peru for the exploitation of", "https://oregondigital.org/concern/documents/gb19fm35k/download", "https://oregondigital.org/concern/documents/gb19fm35k"],
   ["franco-italian convention concerning the supply of water to the town", "https://oregondigital.org/concern/documents/gb19fn647/download", "https://oregondigital.org/concern/documents/gb19fn647"],
+  // Manually added Turkey treaties found via Oregon Digital search
+  ["agreement between the people's republic of bulgaria and the republic of turkey concerning cooperation in the use of the waters", "https://oregondigital.org/downloads/f0gb19fn70c", "https://oregondigital.org/concern/documents/gb19fn70c"],
+  ["convention between the union of soviet socialist republics and the republic of turkey on the use of waters of border rivers", "https://oregondigital.org/downloads/f0gb19fr55w", "https://oregondigital.org/concern/documents/gb19fr55w"],
+  ["protocol attached to the convention on water use from transboundary rivers, small rivers and brooks of the union of soviet socialist republics and the republic of turkey", "https://oregondigital.org/downloads/f0gb19fr55w", "https://oregondigital.org/concern/documents/gb19fr55w"],
 ];
+
+// Normalize quotes/apostrophes for consistent matching
+function normalize(s: string): string {
+  return s.toLowerCase().trim()
+    .replace(/[\u2018\u2019\u201A\u201B\u0060\u00B4]/g, "'")  // curly quotes -> straight
+    .replace(/[\u201C\u201D\u201E\u201F]/g, '"');              // curly double quotes -> straight
+}
 
 // Find download link for a document name
 export function findTreatyLink(docName: string): { download: string; detail: string } | null {
   if (!docName) return null;
-  const lower = docName.toLowerCase().trim();
+  const lower = normalize(docName);
   for (const [prefix, download, detail] of treatyLinks) {
-    if (lower === prefix || lower.startsWith(prefix) || prefix.startsWith(lower.slice(0, 40))) {
+    const np = normalize(prefix);
+    if (lower === np || lower.startsWith(np) || np.startsWith(lower.slice(0, 40))) {
       return { download, detail };
     }
   }
