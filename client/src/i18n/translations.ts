@@ -67,6 +67,13 @@ const translations = {
   'layer.canal': { tr: 'Kanal', en: 'Canal' },
   'layer.waterway': { tr: 'Su Yolu', en: 'Waterway' },
   'layer.results': { tr: '{count} su altyapısı bulundu', en: '{count} water features found' },
+  'layer.precipitation': { tr: 'Yağış', en: 'Precipitation' },
+  'layer.flood': { tr: 'Taşkın / Debi', en: 'Flood / Discharge' },
+  'layer.precipLoading': { tr: 'Yağış verileri yükleniyor...', en: 'Loading precipitation data...' },
+  'layer.floodLoading': { tr: 'Taşkın verileri yükleniyor...', en: 'Loading flood data...' },
+  'layer.precipResults': { tr: '{count} noktada yağış verisi', en: '{count} precipitation points' },
+  'layer.floodResults': { tr: '{count} noktada debi verisi', en: '{count} discharge points' },
+  'layer.dataSource': { tr: 'Kaynak: Open-Meteo (GloFAS)', en: 'Source: Open-Meteo (GloFAS)' },
 
   // Auth
   'auth.loginTitle': { tr: 'Yönetici Girişi', en: 'Admin Login' },

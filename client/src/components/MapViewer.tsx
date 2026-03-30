@@ -3,6 +3,7 @@ import L from 'leaflet';
 import 'leaflet.markercluster';
 import { t } from '@/i18n/translations';
 import type { Lang } from '@/i18n/translations';
+import { loadPrecipitation, loadFloodData, precipLegend, floodLegend } from '@/lib/weatherLayer';
 
 interface Agreement {
   id: string;
@@ -98,6 +99,18 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick, lang 
   const [waterCount, setWaterCount] = useState(0);
   const abortRef = useRef<AbortController | null>(null);
   const lastBoundsRef = useRef<string>('');
+
+  // Precipitation & Flood layers
+  const precipLayer = useRef<L.LayerGroup | null>(null);
+  const floodLayer = useRef<L.LayerGroup | null>(null);
+  const [precipEnabled, setPrecipEnabled] = useState(false);
+  const [floodEnabled, setFloodEnabled] = useState(false);
+  const [precipLoading, setPrecipLoading] = useState(false);
+  const [floodLoading, setFloodLoading] = useState(false);
+  const [precipCount, setPrecipCount] = useState(0);
+  const [floodCount, setFloodCount] = useState(0);
+  const precipAbort = useRef<AbortController | null>(null);
+  const floodAbort = useRef<AbortController | null>(null);
 
   useEffect(() => {
     if (!mapContainer.current) return;
@@ -295,6 +308,74 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick, lang 
     };
   }, [waterEnabled, lang]);
 
+  // ── Precipitation layer ──
+  useEffect(() => {
+    if (!map.current) return;
+    const m = map.current;
+    if (!precipLayer.current) precipLayer.current = L.layerGroup();
+
+    if (precipEnabled) {
+      precipLayer.current.addTo(m);
+    } else {
+      precipLayer.current.remove();
+      setPrecipCount(0);
+      return;
+    }
+
+    const load = async () => {
+      precipAbort.current?.abort();
+      const ctrl = new AbortController();
+      precipAbort.current = ctrl;
+      setPrecipLoading(true);
+      try {
+        const count = await loadPrecipitation(m, precipLayer.current!, lang, ctrl.signal);
+        setPrecipCount(count);
+      } catch (e: any) {
+        if (e.name !== 'AbortError') console.warn('Precip error:', e);
+      } finally {
+        setPrecipLoading(false);
+      }
+    };
+
+    load();
+    m.on('moveend', load);
+    return () => { m.off('moveend', load); };
+  }, [precipEnabled, lang]);
+
+  // ── Flood layer ──
+  useEffect(() => {
+    if (!map.current) return;
+    const m = map.current;
+    if (!floodLayer.current) floodLayer.current = L.layerGroup();
+
+    if (floodEnabled) {
+      floodLayer.current.addTo(m);
+    } else {
+      floodLayer.current.remove();
+      setFloodCount(0);
+      return;
+    }
+
+    const load = async () => {
+      floodAbort.current?.abort();
+      const ctrl = new AbortController();
+      floodAbort.current = ctrl;
+      setFloodLoading(true);
+      try {
+        const count = await loadFloodData(m, floodLayer.current!, lang, ctrl.signal);
+        setFloodCount(count);
+      } catch (e: any) {
+        if (e.name !== 'AbortError') console.warn('Flood error:', e);
+      } finally {
+        setFloodLoading(false);
+      }
+    };
+
+    load();
+    m.on('moveend', load);
+    return () => { m.off('moveend', load); };
+  }, [floodEnabled, lang]);
+
   return (
     <div className="relative h-[calc(100vh-56px)] md:h-[calc(100vh-64px)] w-full">
       <div
@@ -303,8 +384,8 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick, lang 
         style={{ height: '100%', width: '100%' }}
       />
 
-      {/* Water Infrastructure Toggle */}
-      <div className="absolute top-20 right-3 z-[1000] flex flex-col gap-2">
+      {/* Layer Controls */}
+      <div className="absolute top-20 right-3 z-[1000] flex flex-col gap-2 max-w-[200px]">
         <button
           onClick={() => setWaterEnabled(prev => !prev)}
           className={`flex items-center gap-2 px-3 py-2 rounded-lg shadow-lg text-xs font-semibold transition-all border ${
@@ -346,6 +427,75 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick, lang 
               </div>
             ) : (
               <span>{t('layer.results', lang, { count: 0 })}</span>
+            )}
+          </div>
+        )}
+
+        {/* Precipitation Toggle */}
+        <button
+          onClick={() => setPrecipEnabled(prev => !prev)}
+          className={`flex items-center gap-2 px-3 py-2 rounded-lg shadow-lg text-xs font-semibold transition-all border ${
+            precipEnabled
+              ? 'bg-blue-600 text-white border-blue-700 hover:bg-blue-700'
+              : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
+          }`}
+        >
+          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M20 16.2A4.5 4.5 0 0017.5 8h-1.8A7 7 0 104 14.9" />
+            <path d="M9 20l3 3 3-3" />
+          </svg>
+          {t('layer.precipitation', lang)}
+        </button>
+
+        {precipEnabled && (
+          <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-slate-200 px-3 py-2 text-[10px] text-slate-600">
+            {precipLoading ? (
+              <div className="flex items-center gap-1.5">
+                <div className="h-3 w-3 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+                {t('layer.precipLoading', lang)}
+              </div>
+            ) : precipCount > 0 ? (
+              <div className="space-y-1">
+                <span className="font-semibold text-blue-700">{t('layer.precipResults', lang, { count: precipCount })}</span>
+                <div className="flex flex-wrap gap-x-2 gap-y-0.5" dangerouslySetInnerHTML={{ __html: precipLegend(lang) }} />
+              </div>
+            ) : (
+              <span className="text-slate-400">{t('layer.precipResults', lang, { count: 0 })}</span>
+            )}
+          </div>
+        )}
+
+        {/* Flood Toggle */}
+        <button
+          onClick={() => setFloodEnabled(prev => !prev)}
+          className={`flex items-center gap-2 px-3 py-2 rounded-lg shadow-lg text-xs font-semibold transition-all border ${
+            floodEnabled
+              ? 'bg-amber-600 text-white border-amber-700 hover:bg-amber-700'
+              : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
+          }`}
+        >
+          <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M2 15c6.667-6 13.333 0 20-6" />
+            <path d="M2 19c6.667-6 13.333 0 20-6" />
+          </svg>
+          {t('layer.flood', lang)}
+        </button>
+
+        {floodEnabled && (
+          <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg border border-slate-200 px-3 py-2 text-[10px] text-slate-600">
+            {floodLoading ? (
+              <div className="flex items-center gap-1.5">
+                <div className="h-3 w-3 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+                {t('layer.floodLoading', lang)}
+              </div>
+            ) : floodCount > 0 ? (
+              <div className="space-y-1">
+                <span className="font-semibold text-amber-700">{t('layer.floodResults', lang, { count: floodCount })}</span>
+                <div className="flex flex-wrap gap-x-2 gap-y-0.5" dangerouslySetInnerHTML={{ __html: floodLegend(lang) }} />
+                <span className="text-[9px] text-slate-400 block mt-1">{t('layer.dataSource', lang)}</span>
+              </div>
+            ) : (
+              <span className="text-slate-400">{t('layer.floodResults', lang, { count: 0 })}</span>
             )}
           </div>
         )}
