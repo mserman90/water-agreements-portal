@@ -287,7 +287,7 @@ function GuideTab({ lang, isAdmin }: { lang: string; isAdmin: boolean }) {
     },
     {
       title: 'AI Destekli Arama',
-      content: 'AI moduna geçerek doğal dilde sorgular yapabilirsiniz. Motor, sorgunuzdaki ülke, havza, bölge, konu ve yıl bilgilerini otomatik olarak çıkarır. Türkçe ve İngilizce desteklenir.\n\nÖrnek sorgular:\n• "Nil havzasında 1960 sonrası anlaşmalar"\n• "Türkiye su anlaşmaları"\n• "hydropower treaties in Asia"\n• "navigation agreements 1900-1950"\n• "belgesi olan Fırat anlaşmaları"'
+      content: 'AI moduna geçerek doğal dilde sorgular yapabilirsiniz. Motor, Türkçe ek çözümleme (stemming), 200+ ülke, 50+ havza, 19 konu kategorisi ve 27 bölge/alt bölge tanır. Türkçe karakter hatalarına (ı/i, ö/o, ü/u, ş/s, ç/c) toleranslıdır.\n\nÖrnek sorgular:\n• "Türkiye\'nin Fırat anlaşmaları"\n• "Kafkasya bölgesindeki sınır anlaşmaları"\n• "Afrika\'da sel yönetimi 2000 sonrası"\n• "Orta Asya su paylaşımı"\n• "20. yüzyıl hidroelektrik anlaşmaları"\n• "belgesi olan Mısır Nil anlaşmaları"\n• "en eski Avrupa anlaşmaları"'
     },
     {
       title: 'Belge İndirme (3 Kaynak)',
@@ -332,7 +332,7 @@ function GuideTab({ lang, isAdmin }: { lang: string; isAdmin: boolean }) {
     },
     {
       title: 'AI-Powered Search',
-      content: 'Switch to AI mode for natural language queries. The engine automatically extracts country, basin, region, topic, and year information from your query. Supports both Turkish and English.\n\nExample queries:\n• "Nile basin agreements after 1960"\n• "Turkey water treaties"\n• "hydropower treaties in Asia"\n• "navigation agreements 1900-1950"\n• "agreements with downloadable documents"'
+      content: 'Switch to AI mode for natural language queries. The engine features Turkish stemming, 200+ country aliases, 50+ basin names, 19 topic categories, and 27 region/subregion mappings. Tolerant of Turkish character typos (ı/i, ö/o, ü/u, ş/s, ç/c).\n\nExample queries:\n• "Turkey Euphrates agreements"\n• "Caucasus region border treaties"\n• "African flood management after 2000"\n• "Central Asia water allocation"\n• "20th century hydropower treaties"\n• "Nile agreements with documents"\n• "oldest European agreements"'
     },
     {
       title: 'Document Downloads (3 Sources)',

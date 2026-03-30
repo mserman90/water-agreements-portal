@@ -48,7 +48,7 @@ const translations = {
 
   // Smart search
   'search.smart': { tr: 'AI Arama', en: 'AI Search' },
-  'search.smartPlaceholder': { tr: 'Örn: Nil havzasında 1960 sonrası anlaşmalar...', en: 'E.g.: Nile basin agreements after 1960...' },
+  'search.smartPlaceholder': { tr: 'Örn: Türkiye\'nin Fırat anlaşmaları, Afrika sel yönetimi, 20. yüzyıl...', en: 'E.g.: Turkey Euphrates treaties, African flood mgmt, 20th century...' },
   'search.resultCount': { tr: '{count} sonuç bulundu', en: '{count} results found' },
   'search.understood': { tr: 'Anlaşılan:', en: 'Understood:' },
   'search.mode.simple': { tr: 'Basit', en: 'Simple' },
