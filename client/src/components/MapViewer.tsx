@@ -4,6 +4,7 @@ import 'leaflet.markercluster';
 import { t } from '@/i18n/translations';
 import type { Lang } from '@/i18n/translations';
 import { loadPrecipitation, loadFloodData, precipLegend, floodLegend } from '@/lib/weatherLayer';
+import HistoricalPrecipPanel from './HistoricalPrecipPanel';
 
 interface Agreement {
   id: string;
@@ -112,6 +113,9 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick, lang 
   const precipAbort = useRef<AbortController | null>(null);
   const floodAbort = useRef<AbortController | null>(null);
 
+  // Historical precipitation query
+  const [histPoint, setHistPoint] = useState<{ lat: number; lng: number } | null>(null);
+
   useEffect(() => {
     if (!mapContainer.current) return;
 
@@ -126,6 +130,11 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick, lang 
 
       markerCluster.current = L.markerClusterGroup();
       map.current.addLayer(markerCluster.current);
+
+      // Right-click / long-press: open historical precip query
+      map.current.on('contextmenu', (e: L.LeafletMouseEvent) => {
+        setHistPoint({ lat: e.latlng.lat, lng: e.latlng.lng });
+      });
     }
 
     // Clear existing markers
@@ -499,7 +508,22 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick, lang 
             )}
           </div>
         )}
+        {/* Historical precipitation hint */}
+        <div className="bg-white/90 backdrop-blur-sm rounded-lg shadow border border-slate-200 px-2.5 py-1.5 text-[9px] text-slate-500 text-center leading-snug">
+          {lang === 'tr'
+            ? '📊 Sağ tık → Tarihi yağış sorgusu'
+            : '📊 Right-click → Historical precipitation'}
+        </div>
       </div>
+
+      {/* Historical Precipitation Panel */}
+      {histPoint && (
+        <HistoricalPrecipPanel
+          lat={histPoint.lat}
+          lng={histPoint.lng}
+          onClose={() => setHistPoint(null)}
+        />
+      )}
     </div>
   );
 }
