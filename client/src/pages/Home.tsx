@@ -12,6 +12,7 @@ declare global {
 }
 import MapViewer from '@/components/MapViewer';
 import AgreementSidebar from '@/components/AgreementSidebar';
+import HeroScreen from '@/components/HeroScreen';
 
 interface Agreement {
   id: string;
@@ -33,6 +34,7 @@ export default function Home() {
   const [selectedId, setSelectedId] = useState<string>();
   const [isLoading, setIsLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showHero, setShowHero] = useState(true);
 
   // Look up basin coordinates with fuzzy matching
   const findBasinCoords = (basinName: string): [number, number] | null => {
@@ -334,6 +336,9 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* Hero / Splash Screen */}
+      {showHero && <HeroScreen onEnter={() => setShowHero(false)} />}
     </div>
   );
 }
