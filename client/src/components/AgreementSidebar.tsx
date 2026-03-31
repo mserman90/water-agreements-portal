@@ -41,21 +41,29 @@ export default function AgreementSidebar({
         borderRight: '1px solid #e2e8f0',
         display: 'flex',
         flexDirection: 'column',
-        zIndex: 10,
+        fontFamily: 'Inter, system-ui, sans-serif',
+        overflow: 'hidden',
       }}
     >
       {/* Header */}
-      <div style={{ padding: '16px', borderBottom: '1px solid #e2e8f0' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
-          <span style={{ fontSize: 18 }}>\uD83D\uDCA7</span>
+      <div
+        style={{
+          padding: '14px 16px 10px',
+          borderBottom: '1px solid #e2e8f0',
+          background: '#f8fafc',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
+          <span style={{ fontSize: 22 }}>💧</span>
           <span style={{ fontWeight: 700, fontSize: 15, color: '#0369a1' }}>
-            Su Anla\u015fmalar\u0131 Portal\u0131
+            Su Anlaşmaları Portalı
           </span>
         </div>
+
         {/* Search */}
         <input
           type="text"
-          placeholder="Ara: isim, \u00fclke, havza..."
+          placeholder="Ara: isim, ülke, havza..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           style={{
@@ -66,18 +74,19 @@ export default function AgreementSidebar({
             fontSize: 13,
             outline: 'none',
             background: '#f8fafc',
+            boxSizing: 'border-box',
           }}
         />
-        <div style={{ marginTop: 8, fontSize: 11, color: '#64748b' }}>
-          {isLoading ? 'Y\u00fckleniyor...' : `${filtered.length} / ${agreements.length} anla\u015fma`}
+        <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 6 }}>
+          {isLoading ? 'Yükleniyor...' : `${filtered.length} / ${agreements.length} anlaşma`}
         </div>
       </div>
 
       {/* List */}
       <div style={{ flex: 1, overflowY: 'auto' }}>
         {filtered.length === 0 && !isLoading && (
-          <div style={{ padding: 20, color: '#94a3b8', fontSize: 13, textAlign: 'center' }}>
-            Sonu\u00e7 bulunamad\u0131.
+          <div style={{ padding: 24, textAlign: 'center', color: '#94a3b8', fontSize: 13 }}>
+            Sonuç bulunamadı.
           </div>
         )}
         {filtered.map((a) => (
@@ -97,11 +106,10 @@ export default function AgreementSidebar({
               {a.name}
             </div>
             <div style={{ fontSize: 11, color: '#64748b' }}>
-              {a.country} \u00b7 {a.basin} \u00b7 {a.year > 0 ? a.year : '?'}
+              {a.country} · {a.basin} · {a.year > 0 ? a.year : '?'}
             </div>
             {a.purpose && (
-              <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 2, 
-                overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 2 }}>
                 {a.purpose}
               </div>
             )}
@@ -110,7 +118,7 @@ export default function AgreementSidebar({
       </div>
 
       {/* Footer: upload */}
-      <div style={{ padding: '12px 16px', borderTop: '1px solid #e2e8f0' }}>
+      <div style={{ padding: '10px 16px', borderTop: '1px solid #e2e8f0' }}>
         <input
           ref={fileRef}
           type="file"
@@ -135,7 +143,7 @@ export default function AgreementSidebar({
             cursor: 'pointer',
           }}
         >
-          + CSV / JSON Y\u00fckle
+          + CSV / JSON Yükle
         </button>
       </div>
     </aside>
