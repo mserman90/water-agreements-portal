@@ -9,6 +9,57 @@ interface Props {
   isLoading?: boolean;
 }
 
+function AgreementLinks({ a }: { a: Agreement }) {
+  const q = encodeURIComponent(a.name.slice(0, 80));
+  const faolexSearch = `https://www.fao.org/faolex/results/en/?query=${q}`;
+  return (
+    <div style={{ marginTop: 4, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+      {a.pdfUrl && (
+        <a
+          href={a.pdfUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          style={{ fontSize: 11, color: '#0369a1', textDecoration: 'none' }}
+        >
+          &#128196; PDF &#x2193;
+        </a>
+      )}
+      {a.githubDocUrl && (
+        <a
+          href={a.githubDocUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          style={{ fontSize: 11, color: '#0369a1', textDecoration: 'none' }}
+        >
+          &#128229; PDF
+        </a>
+      )}
+      {a.faolexUrl && (
+        <a
+          href={a.faolexUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
+          style={{ fontSize: 11, color: '#0369a1', textDecoration: 'none' }}
+        >
+          FAOLEX
+        </a>
+      )}
+      <a
+        href={faolexSearch}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => e.stopPropagation()}
+        style={{ fontSize: 11, color: '#94a3b8', textDecoration: 'none' }}
+      >
+        FAOLEX Ara
+      </a>
+    </div>
+  );
+}
+
 export default function AgreementSidebar({
   agreements,
   selectedId,
@@ -41,26 +92,29 @@ export default function AgreementSidebar({
         borderRight: '1px solid #e2e8f0',
         display: 'flex',
         flexDirection: 'column',
-        fontFamily: 'Inter, system-ui, sans-serif',
-        overflow: 'hidden',
+        zIndex: 10,
+        position: 'relative',
       }}
     >
       {/* Header */}
       <div
         style={{
-          padding: '14px 16px 10px',
+          padding: '14px 16px 8px',
           borderBottom: '1px solid #e2e8f0',
-          background: '#f8fafc',
+          fontWeight: 700,
+          fontSize: 16,
+          color: '#0369a1',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 8,
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
-          <span style={{ fontSize: 22 }}>💧</span>
-          <span style={{ fontWeight: 700, fontSize: 15, color: '#0369a1' }}>
-            Su Anlaşmaları Portalı
-          </span>
-        </div>
+        <span>&#128167;</span>
+        <span>Su Anla&#351;malar&#305; Portal&#305;</span>
+      </div>
 
-        {/* Search */}
+      {/* Search */}
+      <div style={{ padding: '8px 12px' }}>
         <input
           type="text"
           placeholder="Ara: isim, ülke, havza..."
@@ -77,17 +131,16 @@ export default function AgreementSidebar({
             boxSizing: 'border-box',
           }}
         />
-        <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 6 }}>
-          {isLoading ? 'Yükleniyor...' : `${filtered.length} / ${agreements.length} anlaşma`}
-        </div>
+      </div>
+
+      <div style={{ fontSize: 11, color: '#94a3b8', padding: '0 16px 6px' }}>
+        {isLoading ? 'Yükleniyor...' : `${filtered.length} / ${agreements.length} anlaşma`}
       </div>
 
       {/* List */}
       <div style={{ flex: 1, overflowY: 'auto' }}>
         {filtered.length === 0 && !isLoading && (
-          <div style={{ padding: 24, textAlign: 'center', color: '#94a3b8', fontSize: 13 }}>
-            Sonuç bulunamadı.
-          </div>
+          <div style={{ padding: 16, color: '#94a3b8', fontSize: 13 }}>Sonuç bulunamadı.</div>
         )}
         {filtered.map((a) => (
           <div
@@ -102,23 +155,22 @@ export default function AgreementSidebar({
               transition: 'background 0.15s',
             }}
           >
-            <div style={{ fontWeight: 600, fontSize: 13, color: '#1e293b', marginBottom: 2 }}>
+            <div style={{ fontWeight: 600, fontSize: 13, color: '#1e293b', lineHeight: 1.3 }}>
               {a.name}
             </div>
-            <div style={{ fontSize: 11, color: '#64748b' }}>
-              {a.country} · {a.basin} · {a.year > 0 ? a.year : '?'}
+            <div style={{ fontSize: 11, color: '#64748b', marginTop: 2 }}>
+              {a.country} &middot; {a.basin} &middot; {a.year > 0 ? a.year : '?'}
             </div>
             {a.purpose && (
-              <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 2 }}>
-                {a.purpose}
-              </div>
+              <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 2 }}>{a.purpose}</div>
             )}
+            <AgreementLinks a={a} />
           </div>
         ))}
       </div>
 
       {/* Footer: upload */}
-      <div style={{ padding: '10px 16px', borderTop: '1px solid #e2e8f0' }}>
+      <div style={{ padding: '8px 12px', borderTop: '1px solid #e2e8f0' }}>
         <input
           ref={fileRef}
           type="file"
@@ -143,7 +195,7 @@ export default function AgreementSidebar({
             cursor: 'pointer',
           }}
         >
-          + CSV / JSON Yükle
+          + CSV / JSON Yüкle
         </button>
       </div>
     </aside>
