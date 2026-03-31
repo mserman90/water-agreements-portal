@@ -74,9 +74,9 @@ export default function Home() {
       data = raw;
     } else if (raw && typeof raw === 'object') {
       data =
-        (raw as Record<string, unknown[]>).agreements ??
-        (raw as Record<string, unknown[]>).data ??
-        (raw as Record<string, unknown[]>).treaties ??
+        (raw as Record<string, unknown>).agreements ??
+        (raw as Record<string, unknown>).data ??
+        (raw as Record<string, unknown>).treaties ??
         Object.values(raw as object).find((v) => Array.isArray(v)) ??
         [];
     } else {
@@ -107,7 +107,7 @@ export default function Home() {
           setAgreements(parsed);
         } catch (err) {
           console.error(err);
-          alert('JSON dosyasi okunamadi.');
+          alert('JSON dosyası okunamadı.');
         } finally {
           setIsLoading(false);
         }
@@ -123,7 +123,7 @@ export default function Home() {
           setIsLoading(false);
         },
         error: () => {
-          alert('CSV dosyasi okunamadi.');
+          alert('CSV dosyası okunamadı.');
           setIsLoading(false);
         },
       });
@@ -131,7 +131,7 @@ export default function Home() {
   };
 
   return (
-    <div style={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
+    <div style={{ display: 'flex', height: '100vh', position: 'relative', overflow: 'hidden' }}>
       {/* Sidebar toggle button (mobile friendly) */}
       <button
         onClick={() => setSidebarOpen((v) => !v)}
@@ -151,9 +151,9 @@ export default function Home() {
           transition: 'left 0.25s',
           boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
         }}
-        title={sidebarOpen ? 'Kapat' : 'Ac'}
+        title={sidebarOpen ? 'Kapat' : 'Aç'}
       >
-        {sidebarOpen ? '\u2190' : '\u2630'}
+        {sidebarOpen ? '←' : '☰'}
       </button>
 
       {/* Sidebar */}
@@ -169,28 +169,29 @@ export default function Home() {
 
       {/* Map fills rest */}
       <div style={{ flex: 1, position: 'relative' }}>
-        {isLoading && (
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              background: 'rgba(255,255,255,0.7)',
-              zIndex: 999,
-              fontSize: 14,
-              color: '#0369a1',
-            }}
-          >
-            Veriler yukleniyor...
-          </div>
-        )}
         <MapViewer
           agreements={agreements}
           selectedId={selectedId}
           onMarkerClick={setSelectedId}
         />
+        {isLoading && (
+          <div
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              background: 'rgba(255,255,255,0.9)',
+              padding: '12px 20px',
+              borderRadius: 8,
+              fontSize: 14,
+              color: '#0369a1',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+            }}
+          >
+            Veriler yükleniyor...
+          </div>
+        )}
       </div>
     </div>
   );
