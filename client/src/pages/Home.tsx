@@ -137,7 +137,7 @@ export default function Home() {
         onClick={() => setSidebarOpen((v) => !v)}
         style={{
           position: 'absolute',
-          top: 12,
+          top: 90,
           left: sidebarOpen ? 328 : 8,
           zIndex: 1000,
           background: '#0369a1',
