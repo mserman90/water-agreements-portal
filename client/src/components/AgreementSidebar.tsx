@@ -1,25 +1,7 @@
-import { useState, useMemo } from 'react';
-import { Search, Loader2, FileDown, Sparkles } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import { useLanguage } from '@/i18n/LanguageContext';
-import { smartSearch, describeQuery, isSmartQuery } from '@/lib/smartSearch';
-import SettingsPanel from './SettingsPanel';
+import { useState, useMemo, useRef } from 'react';
+import type { Agreement } from './MapViewer';
 
-interface Agreement {
-  id: string;
-  name: string;
-  country: string;
-  basin: string;
-  latitude: number;
-  longitude: number;
-  purpose: string;
-  year: number;
-  pdfUrl?: string;
-  faolexUrl?: string;
-  githubDocUrl?: string;
-}
-
-interface AgreementSidebarProps {
+interface Props {
   agreements: Agreement[];
   selectedId?: string;
   onSelectAgreement: (id: string) => void;
@@ -33,199 +15,128 @@ export default function AgreementSidebar({
   onSelectAgreement,
   onUploadFile,
   isLoading = false,
-}: AgreementSidebarProps) {
-  const { lang, t } = useLanguage();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [aiMode, setAiMode] = useState(false);
+}: Props) {
+  const [query, setQuery] = useState('');
+  const fileRef = useRef<HTMLInputElement>(null);
 
-  const filteredAgreements = useMemo(() => {
-    if (!searchTerm) return agreements;
-
-    if (aiMode || isSmartQuery(searchTerm)) {
-      return smartSearch(searchTerm, agreements);
-    }
-
-    const lower = searchTerm.toLowerCase();
+  const filtered = useMemo(() => {
+    if (!query.trim()) return agreements;
+    const q = query.toLowerCase();
     return agreements.filter(
-      a =>
-        a.name.toLowerCase().includes(lower) ||
-        a.country.toLowerCase().includes(lower) ||
-        a.basin.toLowerCase().includes(lower) ||
-        a.id.toLowerCase().includes(lower)
+      (a) =>
+        a.name.toLowerCase().includes(q) ||
+        a.country.toLowerCase().includes(q) ||
+        a.basin.toLowerCase().includes(q) ||
+        String(a.year).includes(q)
     );
-  }, [agreements, searchTerm, aiMode]);
-
-  const queryDescription = useMemo(() => {
-    if (!searchTerm || (!aiMode && !isSmartQuery(searchTerm))) return '';
-    return describeQuery(searchTerm, lang);
-  }, [searchTerm, aiMode, lang]);
-
-
+  }, [agreements, query]);
 
   return (
-    <aside className="sidebar-panel w-[85vw] sm:w-80 lg:w-96 h-full flex flex-col border-r border-slate-200 bg-white">
-      {/* Search Header */}
-      <div className="p-3 border-b border-slate-100 bg-slate-50 space-y-2">
-        {/* Mode Toggle */}
-        <div className="flex items-center gap-1 bg-slate-200/60 rounded-lg p-0.5">
-          <button
-            onClick={() => setAiMode(false)}
-            className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${
-              !aiMode
-                ? 'bg-white text-slate-800 shadow-sm'
-                : 'text-slate-500 hover:text-slate-700'
-            }`}
-          >
-            <Search className="h-3 w-3" />
-            {t('search.mode.simple')}
-          </button>
-          <button
-            onClick={() => setAiMode(true)}
-            className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all ${
-              aiMode
-                ? 'bg-gradient-to-r from-violet-500 to-blue-500 text-white shadow-sm'
-                : 'text-slate-500 hover:text-slate-700'
-            }`}
-          >
-            <Sparkles className="h-3 w-3" />
-            {t('search.mode.ai')}
-          </button>
-        </div>
-
-        {/* Search Input */}
-        <div className="relative">
-          {aiMode
-            ? <Sparkles className="absolute left-3 top-2.5 h-4 w-4 text-violet-400" />
-            : <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-400" />
-          }
-          <Input
-            type="text"
-            placeholder={aiMode ? t('search.smartPlaceholder') : t('search.placeholder')}
-            value={searchTerm}
-            onChange={e => setSearchTerm(e.target.value)}
-            className={`pl-10 text-sm ${aiMode ? 'border-violet-200 focus:border-violet-400' : ''}`}
-          />
-        </div>
-
-        {/* AI Query Understanding */}
-        {searchTerm && queryDescription && (
-          <div className="bg-violet-50 border border-violet-100 rounded-md px-3 py-2 text-[11px] text-violet-700">
-            <span className="font-semibold">{t('search.understood')}</span>{' '}
-            {queryDescription}
-            {filteredAgreements.length > 0 && (
-              <span className="block mt-1 text-violet-500 font-medium">
-                {t('search.resultCount', { count: filteredAgreements.length })}
-              </span>
-            )}
-          </div>
-        )}
-      </div>
-
-      {/* Agreements List */}
-      <div className="flex-1 overflow-y-auto p-3 space-y-2">
-        {isLoading ? (
-          <div className="flex flex-col items-center justify-center h-full text-slate-400 gap-3">
-            <Loader2 className="h-8 w-8 text-primary animate-spin" />
-            <span className="text-xs font-bold uppercase tracking-widest">{t('sidebar.loading')}</span>
-          </div>
-        ) : filteredAgreements.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-full text-slate-400 gap-3 text-center px-4">
-            <div className="text-3xl">📭</div>
-            <span className="text-xs font-bold uppercase tracking-widest">{t('sidebar.noResults')}</span>
-            <p className="text-[11px] text-slate-500">
-              {agreements.length === 0
-                ? t('sidebar.noData')
-                : t('sidebar.tryAgain')}
-            </p>
-          </div>
-        ) : (
-          filteredAgreements.map(agreement => (
-            <button
-              key={agreement.id}
-              onClick={() => onSelectAgreement(agreement.id)}
-              className={`agreement-card w-full text-left transition-all ${
-                selectedId === agreement.id ? 'active' : ''
-              }`}
-            >
-              <div className="flex items-start justify-between gap-2">
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-sm text-slate-900 truncate">{agreement.name}</h3>
-                  <p className="text-xs text-slate-600 mt-1">
-                    {agreement.country} • {agreement.basin}
-                  </p>
-                  <p className="text-xs text-slate-500 mt-2 line-clamp-2">{agreement.purpose}</p>
-                  <div className="flex items-center justify-between mt-1">
-                    <p className="text-xs text-slate-400">{t('card.year')}: {agreement.year}</p>
-                    <div className="flex items-center gap-2">
-                      {agreement.pdfUrl && (
-                        <a
-                          href={agreement.pdfUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-1 text-[10px] font-semibold text-primary hover:underline"
-                        >
-                          <FileDown className="h-3 w-3" />
-                          {t('card.download')}
-                        </a>
-                      )}
-                      {agreement.faolexUrl && (
-                        <a
-                          href={agreement.faolexUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-600 hover:underline"
-                        >
-                          FAOLEX
-                        </a>
-                      )}
-                      {agreement.githubDocUrl && (
-                        <a
-                          href={agreement.githubDocUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-1 text-[10px] font-semibold text-violet-600 hover:underline"
-                        >
-                          PDF
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </button>
-          ))
-        )}
-      </div>
-
-      {/* Settings Button */}
-      <SettingsPanel onUploadFile={onUploadFile} />
-
-      {/* Status Footer */}
-      <div className="p-3 bg-slate-900 text-white text-[10px] leading-relaxed border-t border-slate-800 text-center">
-        <div className="flex items-center gap-2 mb-2 justify-center">
-          <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="font-bold opacity-80 uppercase tracking-widest text-emerald-400">
-            {t('footer.connected')}
+    <aside
+      style={{
+        width: 320,
+        minWidth: 260,
+        height: '100%',
+        background: '#fff',
+        borderRight: '1px solid #e2e8f0',
+        display: 'flex',
+        flexDirection: 'column',
+        zIndex: 10,
+      }}
+    >
+      {/* Header */}
+      <div style={{ padding: '16px', borderBottom: '1px solid #e2e8f0' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+          <span style={{ fontSize: 18 }}>\uD83D\uDCA7</span>
+          <span style={{ fontWeight: 700, fontSize: 15, color: '#0369a1' }}>
+            Su Anla\u015fmalar\u0131 Portal\u0131
           </span>
         </div>
-        <p className="opacity-50 italic text-[9px]">
-          {agreements.length} {t('footer.mapped')}
-        </p>
-        <p className="opacity-40 text-[8px] mt-2 leading-snug">
-          {t('footer.attribution').split('{link}')[0]}
-          <a
-            href="https://transboundarywaters.ceoas.oregonstate.edu/international-freshwater-treaties-database"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline hover:opacity-80"
+        {/* Search */}
+        <input
+          type="text"
+          placeholder="Ara: isim, \u00fclke, havza..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          style={{
+            width: '100%',
+            padding: '7px 10px',
+            borderRadius: 6,
+            border: '1px solid #e2e8f0',
+            fontSize: 13,
+            outline: 'none',
+            background: '#f8fafc',
+          }}
+        />
+        <div style={{ marginTop: 8, fontSize: 11, color: '#64748b' }}>
+          {isLoading ? 'Y\u00fckleniyor...' : `${filtered.length} / ${agreements.length} anla\u015fma`}
+        </div>
+      </div>
+
+      {/* List */}
+      <div style={{ flex: 1, overflowY: 'auto' }}>
+        {filtered.length === 0 && !isLoading && (
+          <div style={{ padding: 20, color: '#94a3b8', fontSize: 13, textAlign: 'center' }}>
+            Sonu\u00e7 bulunamad\u0131.
+          </div>
+        )}
+        {filtered.map((a) => (
+          <div
+            key={a.id}
+            onClick={() => onSelectAgreement(a.id)}
+            style={{
+              padding: '10px 16px',
+              borderBottom: '1px solid #f1f5f9',
+              cursor: 'pointer',
+              background: a.id === selectedId ? '#eff6ff' : 'transparent',
+              borderLeft: a.id === selectedId ? '3px solid #0369a1' : '3px solid transparent',
+              transition: 'background 0.15s',
+            }}
           >
-            {t('footer.osu')}
-          </a>
-          {t('footer.attribution').split('{link}')[1]}
-        </p>
+            <div style={{ fontWeight: 600, fontSize: 13, color: '#1e293b', marginBottom: 2 }}>
+              {a.name}
+            </div>
+            <div style={{ fontSize: 11, color: '#64748b' }}>
+              {a.country} \u00b7 {a.basin} \u00b7 {a.year > 0 ? a.year : '?'}
+            </div>
+            {a.purpose && (
+              <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 2, 
+                overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {a.purpose}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Footer: upload */}
+      <div style={{ padding: '12px 16px', borderTop: '1px solid #e2e8f0' }}>
+        <input
+          ref={fileRef}
+          type="file"
+          accept=".csv,.json"
+          style={{ display: 'none' }}
+          onChange={(e) => {
+            const f = e.target.files?.[0];
+            if (f) onUploadFile(f);
+            e.target.value = '';
+          }}
+        />
+        <button
+          onClick={() => fileRef.current?.click()}
+          style={{
+            width: '100%',
+            padding: '8px',
+            borderRadius: 6,
+            border: '1px dashed #94a3b8',
+            background: 'transparent',
+            color: '#64748b',
+            fontSize: 12,
+            cursor: 'pointer',
+          }}
+        >
+          + CSV / JSON Y\u00fckle
+        </button>
       </div>
     </aside>
   );
