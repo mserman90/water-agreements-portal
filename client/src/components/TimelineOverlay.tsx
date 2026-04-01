@@ -241,6 +241,8 @@ export default function TimelineOverlay({
           metric={activeMetric}
           currentYear={currentYear}
           agreementYear={agreementMeteoYear}
+              lat={selectedAgreement?.latitude}
+              lng={selectedAgreement?.longitude}
           width={typeof window !== 'undefined' ? window.innerWidth - 24 : 860}
           height={72}
         />
