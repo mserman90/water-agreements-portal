@@ -67,6 +67,15 @@ function parseRows(rows: Record<string, unknown>[]): Agreement[] {
     .filter((a) => a.latitude !== 0 && a.longitude !== 0);
 }
 
+function deriveType(purpose: string): 'cooperation' | 'conflict' | 'mixed' {
+  const p = purpose.toLowerCase();
+  const isConflict = p.includes('conflict') || p.includes('dispute') || p.includes('war') || p.includes('protest');
+  const isCoop = p.includes('cooper') || p.includes('alloc') || p.includes('joint') || p.includes('agreement') || p.includes('treaty');
+  if (isConflict && isCoop) return 'mixed';
+  if (isConflict) return 'conflict';
+  return 'cooperation';
+}
+
 export default function Home() {
   const [agreements, setAgreements] = useState<Agreement[]>([]);
   const [selectedId, setSelectedId] = useState<string | undefined>();
@@ -111,6 +120,17 @@ export default function Home() {
     const ds = Math.floor(currentYear / 10) * 10;
     return agreements.filter((a) => a.year >= ds && a.year <= ds + 9);
   }, [agreements, currentYear, timelineMode]);
+
+  const { totalCount, coopCount, conflictCount, mixedCount } = useMemo(() => {
+    let coop = 0, conflict = 0, mixed = 0;
+    filteredAgreements.forEach((a) => {
+      const t = deriveType(a.purpose);
+      if (t === 'cooperation') coop++;
+      else if (t === 'conflict') conflict++;
+      else mixed++;
+    });
+    return { totalCount: filteredAgreements.length, coopCount: coop, conflictCount: conflict, mixedCount: mixed };
+  }, [filteredAgreements]);
 
   const selectedAgreement = useMemo(
     () => agreements.find((a) => a.id === selectedId),
@@ -202,16 +222,18 @@ export default function Home() {
 
       <TimelineOverlay
         currentYear={currentYear}
-        minYear={MIN_YEAR}
-        maxYear={MAX_YEAR}
+        setCurrentYear={setCurrentYear}
         mode={timelineMode}
+        setMode={setTimelineMode}
         isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
         bins={bins}
         agreements={filteredAgreements}
+        totalCount={totalCount}
+        coopCount={coopCount}
+        conflictCount={conflictCount}
+        mixedCount={mixedCount}
         selectedAgreement={selectedAgreement}
-        onYearChange={setCurrentYear}
-        onModeChange={setTimelineMode}
-        onPlayToggle={() => setIsPlaying((v) => !v)}
       />
 
       {isLoading && (
