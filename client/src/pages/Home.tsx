@@ -234,7 +234,7 @@ export default function Home() {
 
       {/* Map - filtered by timeline */}
       <MapViewer
-        agreements={filteredAgreements}
+        agreements={filteredAgreements}           currentYear={currentYear}
         selectedId={selectedId}
         onMarkerClick={setSelectedId}
       />
