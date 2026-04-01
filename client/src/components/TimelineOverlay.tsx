@@ -1,10 +1,9 @@
 import { useMemo, useState } from 'react';
 import type { Agreement } from './MapViewer';
 import MeteoTimelineChart from './MeteoTimelineChart';
+import type { MeteoLayerType } from '@/hooks/useMeteoLayer';
 
 export type TimelineMode = 'cumulative' | 'decade';
-
-type MetricKey = 'temperature_2m_mean' | 'precipitation_sum' | 'et0_fao_evapotranspiration';
 
 interface Bin {
   start: number;
@@ -24,16 +23,15 @@ interface TimelineOverlayProps {
   coopCount: number;
   conflictCount: number;
   mixedCount: number;
-  activeMeteoLayers?: string[];
 }
 
 const MIN_YEAR = 1820;
 const MAX_YEAR = 2024;
 
-const METRIC_OPTIONS: { key: MetricKey; label: string; shortLabel: string }[] = [
-  { key: 'temperature_2m_mean', label: 'Sicaklik Anomalisi', shortLabel: 'TEMP' },
-  { key: 'precipitation_sum', label: 'Yagis Anomalisi', shortLabel: 'YAGIS' },
-  { key: 'et0_fao_evapotranspiration', label: 'Kuraklik Endeksi (ET0)', shortLabel: 'ET0' },
+const METRIC_OPTIONS: { key: MeteoLayerType; labelTr: string; unit: string; color: string }[] = [
+  { key: 'temperature', labelTr: 'Sicaklik', unit: '\u00b0C', color: '#f97316' },
+  { key: 'precipitation', labelTr: 'Yagis', unit: 'mm', color: '#38bdf8' },
+  { key: 'drought', labelTr: 'Kuraklik', unit: '%', color: '#f59e0b' },
 ];
 
 export default function TimelineOverlay({
@@ -49,10 +47,9 @@ export default function TimelineOverlay({
   coopCount,
   conflictCount,
   mixedCount,
-  activeMeteoLayers = [],
 }: TimelineOverlayProps) {
-  const [activeMetric, setActiveMetric] = useState<MetricKey>('temperature_2m_mean');
-  const [showMeteoChart, setShowMeteoChart] = useState(true);
+  const [activeMetric, setActiveMetric] = useState<MeteoLayerType>('temperature');
+  const [chartVisible, setChartVisible] = useState(true);
 
   const binStats = useMemo(
     () =>
@@ -69,7 +66,7 @@ export default function TimelineOverlay({
     (b) => currentYear >= b.start && currentYear <= b.end,
   );
   const decadeStart = Math.floor(currentYear / 10) * 10;
-  const hasMeteoLayers = activeMeteoLayers.length > 0;
+  const activeColor = METRIC_OPTIONS.find((m) => m.key === activeMetric)?.color ?? '#38bdf8';
 
   return (
     <div className="tl-overlay">
@@ -97,17 +94,11 @@ export default function TimelineOverlay({
                 <div
                   key={b.start}
                   className={`tl-bar${isActive ? ' tl-bar--active' : ''}`}
-                  title={`${b.start}-${b.end}: ${b.count} anlasma`}
+                  title={`${b.start}\u2013${b.end}: ${b.count} anlasma`}
                   onClick={() => setCurrentYear(b.end)}
                 >
-                  <div
-                    className="tl-bar-fill"
-                    style={{ height: `${pct}%` }}
-                  >
-                    <div
-                      className="tl-bar-coop"
-                      style={{ height: `${coopPct}%` }}
-                    />
+                  <div className="tl-bar-fill" style={{ height: `${pct}%` }}>
+                    <div className="tl-bar-coop" style={{ height: `${coopPct}%` }} />
                   </div>
                 </div>
               );
@@ -125,110 +116,96 @@ export default function TimelineOverlay({
               <button
                 className={`tl-mode-btn${mode === 'cumulative' ? ' tl-mode-btn--active' : ''}`}
                 onClick={() => setMode('cumulative')}
-                title="1820'den bugune kumulatif"
               >
-                1820–{currentYear}
+                1820\u2013{currentYear}
               </button>
               <button
                 className={`tl-mode-btn${mode === 'decade' ? ' tl-mode-btn--active' : ''}`}
                 onClick={() => setMode('decade')}
-                title="Sadece bu on yil"
               >
                 {decadeStart}'lar
               </button>
             </div>
             <div className="tl-counter">
               <span className="tl-counter-total">{totalCount} anlasma</span>
-              <span className="tl-counter-coop">✔ {coopCount}</span>
-              <span className="tl-counter-conflict">✘ {conflictCount}</span>
-              <span className="tl-counter-mixed">∼ {mixedCount}</span>
+              <span className="tl-counter-coop">\u2714 {coopCount}</span>
+              <span className="tl-counter-conflict">\u2718 {conflictCount}</span>
+              <span className="tl-counter-mixed">\u223c {mixedCount}</span>
             </div>
           </div>
         </div>
 
-        {/* Meteo timeline chart section */}
-        {(hasMeteoLayers || showMeteoChart) && (
-          <div
-            style={{
-              marginTop: 6,
-              borderTop: '1px solid rgba(255,255,255,0.1)',
-              paddingTop: 6,
-            }}
-          >
-            {/* Chart header with metric selector and toggle */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 6,
-                marginBottom: 4,
-              }}
-            >
-              <span
-                style={{
-                  fontSize: 10,
-                  color: '#94a3b8',
-                  fontWeight: 600,
-                  letterSpacing: 0.5,
-                  textTransform: 'uppercase',
-                }}
-              >
-                Meteoroloji Grafigi
-              </span>
-              <div style={{ display: 'flex', gap: 3, marginLeft: 4 }}>
-                {METRIC_OPTIONS.map((m) => (
+        {/* Meteo chart section */}
+        <div style={{ marginTop: 6, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 5 }}>
+          {/* Chart header */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 3 }}>
+            {/* Metric tabs */}
+            <div style={{ display: 'flex', gap: 3 }}>
+              {METRIC_OPTIONS.map((opt) => {
+                const isActive = opt.key === activeMetric;
+                return (
                   <button
-                    key={m.key}
-                    onClick={() => setActiveMetric(m.key)}
-                    title={m.label}
+                    key={opt.key}
+                    onClick={() => setActiveMetric(opt.key)}
                     style={{
-                      fontSize: 9,
-                      padding: '1px 5px',
-                      borderRadius: 3,
-                      border: '1px solid',
+                      fontSize: 10,
+                      padding: '2px 8px',
+                      borderRadius: 10,
+                      border: `1px solid ${isActive ? opt.color : 'rgba(255,255,255,0.15)'}`,
+                      background: isActive ? `${opt.color}22` : 'transparent',
+                      color: isActive ? opt.color : '#64748b',
+                      fontWeight: isActive ? 700 : 400,
                       cursor: 'pointer',
-                      borderColor: activeMetric === m.key ? '#3b82f6' : 'rgba(255,255,255,0.2)',
-                      background: activeMetric === m.key ? 'rgba(59,130,246,0.25)' : 'transparent',
-                      color: activeMetric === m.key ? '#60a5fa' : '#94a3b8',
-                      fontWeight: activeMetric === m.key ? 700 : 400,
+                      transition: 'all 0.15s',
                     }}
                   >
-                    {m.shortLabel}
+                    {opt.labelTr}
+                    <span style={{ opacity: 0.65, marginLeft: 3, fontSize: 9 }}>{opt.unit}</span>
                   </button>
-                ))}
-              </div>
-              <button
-                onClick={() => setShowMeteoChart((v) => !v)}
-                title={showMeteoChart ? 'Grafigi gizle' : 'Grafigi goster'}
-                style={{
-                  marginLeft: 'auto',
-                  fontSize: 9,
-                  padding: '1px 5px',
-                  borderRadius: 3,
-                  border: '1px solid rgba(255,255,255,0.2)',
-                  background: 'transparent',
-                  color: '#94a3b8',
-                  cursor: 'pointer',
-                }}
-              >
-                {showMeteoChart ? '\u25B4 Gizle' : '\u25BE Goster'}
-              </button>
+                );
+              })}
             </div>
+            {/* ERA5 badge */}
+            <span style={{ fontSize: 9, color: '#334155', marginLeft: 4 }}>
+              ERA5 · 1940\u2013{new Date().getFullYear() - 1}
+            </span>
+            {/* Toggle */}
+            <button
+              onClick={() => setChartVisible((v) => !v)}
+              style={{
+                marginLeft: 'auto',
+                fontSize: 9,
+                padding: '1px 6px',
+                borderRadius: 4,
+                border: '1px solid rgba(255,255,255,0.1)',
+                background: 'transparent',
+                color: '#475569',
+                cursor: 'pointer',
+              }}
+            >
+              {chartVisible ? '\u25B4 gizle' : '\u25BE goster'}
+            </button>
+          </div>
 
-            {/* The actual SVG sparkline chart */}
-            {showMeteoChart && (
+          {/* SVG chart */}
+          {chartVisible && (
+            <div
+              style={{
+                borderLeft: `2px solid ${activeColor}`,
+                paddingLeft: 4,
+              }}
+            >
               <MeteoTimelineChart
                 metric={activeMetric}
                 currentYear={currentYear}
-                width={860}
-                height={60}
+                height={68}
               />
-            )}
-          </div>
-        )}
+            </div>
+          )}
+        </div>
 
-        {/* Bottom row: slider */}
-        <div className="tl-bottom">
+        {/* Slider row */}
+        <div className="tl-bottom" style={{ marginTop: 6 }}>
           <span className="tl-year-label">{MIN_YEAR}</span>
           <input
             type="range"
