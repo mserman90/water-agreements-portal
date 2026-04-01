@@ -3,17 +3,17 @@ import Papa from 'papaparse';
 import { basinCoords } from '@/data/basinCoords';
 import { findTreatyLink, findGithubDoc } from '@/data/treatyLinks';
 import MapViewer from '@/components/MapViewer';
-import AgreementSidebar from '@/components/AgreementSidebar';
+import LeftPanel from '@/components/LeftPanel';
 import TimelineOverlay from '@/components/TimelineOverlay';
 import { useAuth } from '@/contexts/AuthContext';
 import type { Agreement } from '@/components/MapViewer';
 import type { TimelineMode } from '@/components/TimelineOverlay';
+import { LayerConfig } from '@/components/LayerControl';
 
 const MIN_YEAR = 1820;
 const MAX_YEAR = 2024;
 const YEAR_STEP_MS = 120;
 
-// Map basin name to lat/lng
 function findBasinCoords(basinName: string): [number, number] | null {
   if (!basinName) return null;
   if (basinCoords[basinName]) return basinCoords[basinName];
@@ -26,7 +26,6 @@ function findBasinCoords(basinName: string): [number, number] | null {
   return null;
 }
 
-// Extract 4-digit year from any date string
 function extractYear(val: unknown): number {
   const m = String(val ?? '').match(/(\d{4})/);
   return m ? Number(m[1]) : 0;
@@ -68,24 +67,20 @@ function parseRows(rows: Record<string, unknown>[]): Agreement[] {
     .filter((a) => a.latitude !== 0 && a.longitude !== 0);
 }
 
-// Derive agreement type from purpose field for color coding
-function deriveType(purpose: string): 'cooperation' | 'conflict' | 'mixed' {
-  const p = purpose.toLowerCase();
-  const isConflict = p.includes('conflict') || p.includes('dispute') || p.includes('war') || p.includes('protest');
-  const isCoop = p.includes('cooper') || p.includes('alloc') || p.includes('joint') || p.includes('agreement') || p.includes('treaty');
-  if (isConflict && isCoop) return 'mixed';
-  if (isConflict) return 'conflict';
-  return 'cooperation';
-}
-
 export default function Home() {
   const [agreements, setAgreements] = useState<Agreement[]>([]);
   const [selectedId, setSelectedId] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(true);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
   const { isAdmin } = useAuth();
 
-  // --- Timeline state ---
+  const [layers, setLayers] = useState<LayerConfig[]>([
+    { id: 'agreements', label: { tr: 'Anlasmalar', en: 'Agreements' }, icon: '📄', enabled: true, color: '#3b82f6' },
+  ]);
+
+  const handleLayerToggle = (id: string) => {
+    setLayers((prev) => prev.map((l) => (l.id === id ? { ...l, enabled: !l.enabled } : l)));
+  };
+
   const [currentYear, setCurrentYear] = useState(MAX_YEAR);
   const [timelineMode, setTimelineMode] = useState<TimelineMode>('cumulative');
   const [isPlaying, setIsPlaying] = useState(false);
@@ -99,43 +94,24 @@ export default function Home() {
     [],
   );
 
-  // Auto-play animation
   useEffect(() => {
     if (!isPlaying) return;
     const id = window.setInterval(() => {
       setCurrentYear((prev) => {
-        if (prev >= MAX_YEAR) {
-          return MIN_YEAR;
-        }
+        if (prev >= MAX_YEAR) return MIN_YEAR;
         return prev + 1;
       });
     }, YEAR_STEP_MS);
     return () => window.clearInterval(id);
   }, [isPlaying]);
 
-  // Filter agreements by year / mode
   const filteredAgreements = useMemo(() => {
     if (!agreements.length) return [];
-    if (timelineMode === 'cumulative') {
-      return agreements.filter((a) => a.year <= currentYear);
-    }
+    if (timelineMode === 'cumulative') return agreements.filter((a) => a.year <= currentYear);
     const ds = Math.floor(currentYear / 10) * 10;
     return agreements.filter((a) => a.year >= ds && a.year <= ds + 9);
   }, [agreements, currentYear, timelineMode]);
 
-  // Counts for live counter
-  const { totalCount, coopCount, conflictCount, mixedCount } = useMemo(() => {
-    let coop = 0, conflict = 0, mixed = 0;
-    filteredAgreements.forEach((a) => {
-      const t = deriveType(a.purpose);
-      if (t === 'cooperation') coop++;
-      else if (t === 'conflict') conflict++;
-      else mixed++;
-    });
-    return { totalCount: filteredAgreements.length, coopCount: coop, conflictCount: conflict, mixedCount: mixed };
-  }, [filteredAgreements]);
-
-  // Seçili anlaşma
   const selectedAgreement = useMemo(
     () => agreements.find((a) => a.id === selectedId),
     [agreements, selectedId],
@@ -147,7 +123,8 @@ export default function Home() {
     if (Array.isArray(raw)) {
       data = raw;
     } else if (raw && typeof raw === 'object') {
-      data = (raw as Record<string, unknown>).agreements as unknown[] ??
+      data =
+        (raw as Record<string, unknown>).agreements as unknown[] ??
         (raw as Record<string, unknown>).data as unknown[] ??
         (raw as Record<string, unknown>).treaties as unknown[] ??
         Object.values(raw as object).find((v) => Array.isArray(v)) ??
@@ -158,7 +135,6 @@ export default function Home() {
     return parseRows(data as Record<string, unknown>[]);
   }, []);
 
-  // Load bundled MASTER.json on mount
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}data/MASTER.json`)
       .then((r) => r.text())
@@ -181,7 +157,7 @@ export default function Home() {
           setAgreements(parsed);
         } catch (err) {
           console.error(err);
-          alert('JSON dosyası okunamadı.');
+          alert('JSON dosyasi okunamadi.');
         } finally {
           setIsLoading(false);
         }
@@ -197,7 +173,7 @@ export default function Home() {
           setIsLoading(false);
         },
         error: () => {
-          alert('CSV dosyası okunamadı.');
+          alert('CSV dosyasi okunamadi.');
           setIsLoading(false);
         },
       });
@@ -206,65 +182,54 @@ export default function Home() {
 
   return (
     <>
-      {/* Sidebar toggle button */}
-      <button
-        onClick={() => setSidebarOpen((v) => !v)}
-        style={{
-          position: 'absolute', top: 90, left: sidebarOpen ? 328 : 8,
-          zIndex: 1000, background: '#0369a1', color: '#fff',
-          border: 'none', borderRadius: 4, padding: '4px 8px',
-          cursor: 'pointer', fontSize: 16, lineHeight: 1,
-          transition: 'left 0.25s', boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
-        }}
-        title={sidebarOpen ? 'Kapat' : 'Aç'}
-      >
-        {sidebarOpen ? '<-' : '='}
-      </button>
-
-      {/* Sidebar - filtered by timeline */}
-      {sidebarOpen && (
-        <AgreementSidebar
-          agreements={filteredAgreements}
-          selectedId={selectedId}
-          onSelect={setSelectedId}
-          onFileUpload={handleFileUpload}
-          isAdmin={isAdmin}
-        />
-      )}
-
-      {/* Map - filtered by timeline */}
-      <MapViewer
+      <LeftPanel
+        layers={layers}
+        onLayerToggle={handleLayerToggle}
         agreements={filteredAgreements}
-        selectedId={selectedId}
-        onMarkerClick={setSelectedId}
-        currentYear={currentYear}
+        selectedAgreement={selectedAgreement}
+        onUploadFile={handleFileUpload}
       />
 
-      {/* Timeline overlay */}
+      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>
+        <MapViewer
+          agreements={filteredAgreements}
+          selectedId={selectedId}
+          onMarkerClick={setSelectedId}
+          currentYear={currentYear}
+          layers={layers}
+        />
+      </div>
+
       <TimelineOverlay
         currentYear={currentYear}
-        setCurrentYear={setCurrentYear}
+        minYear={MIN_YEAR}
+        maxYear={MAX_YEAR}
         mode={timelineMode}
-        setMode={setTimelineMode}
         isPlaying={isPlaying}
-        setIsPlaying={setIsPlaying}
         bins={bins}
         agreements={filteredAgreements}
-        totalCount={totalCount}
-        coopCount={coopCount}
-        conflictCount={conflictCount}
-        mixedCount={mixedCount}
         selectedAgreement={selectedAgreement}
+        onYearChange={setCurrentYear}
+        onModeChange={setTimelineMode}
+        onPlayToggle={() => setIsPlaying((v) => !v)}
       />
 
       {isLoading && (
-        <div style={{
-          position: 'absolute', top: '50%', left: '50%',
-          transform: 'translate(-50%,-50%)',
-          color: '#fff', fontSize: 14, background: 'rgba(0,0,0,0.6)',
-          padding: '8px 16px', borderRadius: 8,
-        }}>
-          Veriler yükleniyor...
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%,-50%)',
+            background: 'rgba(255,255,255,0.9)',
+            padding: '12px 24px',
+            borderRadius: 8,
+            boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+            fontSize: 14,
+            zIndex: 2000,
+          }}
+        >
+          Veriler yukleniyor...
         </div>
       )}
     </>
