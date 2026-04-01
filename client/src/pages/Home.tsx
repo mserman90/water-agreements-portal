@@ -86,7 +86,7 @@ export default function Home() {
   const { isAdmin } = useAuth();
 
   // --- Timeline state ---
-  const [currentYear, setCurrentYear] = useState<number>(MAX_YEAR);
+  const [currentYear, setCurrentYear] = useState(MAX_YEAR);
   const [timelineMode, setTimelineMode] = useState<TimelineMode>('cumulative');
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -104,7 +104,9 @@ export default function Home() {
     if (!isPlaying) return;
     const id = window.setInterval(() => {
       setCurrentYear((prev) => {
-        if (prev >= MAX_YEAR) { return MIN_YEAR; }
+        if (prev >= MAX_YEAR) {
+          return MIN_YEAR;
+        }
         return prev + 1;
       });
     }, YEAR_STEP_MS);
@@ -132,6 +134,12 @@ export default function Home() {
     });
     return { totalCount: filteredAgreements.length, coopCount: coop, conflictCount: conflict, mixedCount: mixed };
   }, [filteredAgreements]);
+
+  // Seçili anlaşma
+  const selectedAgreement = useMemo(
+    () => agreements.find((a) => a.id === selectedId),
+    [agreements, selectedId],
+  );
 
   const processJSON = useCallback((text: string): Agreement[] => {
     const raw = JSON.parse(text.replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g, ''));
@@ -173,7 +181,7 @@ export default function Home() {
           setAgreements(parsed);
         } catch (err) {
           console.error(err);
-          alert('JSON dosyasi okunamadi.');
+          alert('JSON dosyası okunamadı.');
         } finally {
           setIsLoading(false);
         }
@@ -189,7 +197,7 @@ export default function Home() {
           setIsLoading(false);
         },
         error: () => {
-          alert('CSV dosyasi okunamadi.');
+          alert('CSV dosyası okunamadı.');
           setIsLoading(false);
         },
       });
@@ -202,22 +210,13 @@ export default function Home() {
       <button
         onClick={() => setSidebarOpen((v) => !v)}
         style={{
-          position: 'absolute',
-          top: 90,
-          left: sidebarOpen ? 328 : 8,
-          zIndex: 1000,
-          background: '#0369a1',
-          color: '#fff',
-          border: 'none',
-          borderRadius: 4,
-          padding: '4px 8px',
-          cursor: 'pointer',
-          fontSize: 16,
-          lineHeight: 1,
-          transition: 'left 0.25s',
-          boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+          position: 'absolute', top: 90, left: sidebarOpen ? 328 : 8,
+          zIndex: 1000, background: '#0369a1', color: '#fff',
+          border: 'none', borderRadius: 4, padding: '4px 8px',
+          cursor: 'pointer', fontSize: 16, lineHeight: 1,
+          transition: 'left 0.25s', boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
         }}
-        title={sidebarOpen ? 'Kapat' : 'Ac'}
+        title={sidebarOpen ? 'Kapat' : 'Aç'}
       >
         {sidebarOpen ? '<-' : '='}
       </button>
@@ -228,15 +227,17 @@ export default function Home() {
           agreements={filteredAgreements}
           selectedId={selectedId}
           onSelect={setSelectedId}
-          onUploadFile={handleFileUpload}
+          onFileUpload={handleFileUpload}
+          isAdmin={isAdmin}
         />
       )}
 
       {/* Map - filtered by timeline */}
       <MapViewer
-        agreements={filteredAgreements}           currentYear={currentYear}
+        agreements={filteredAgreements}
         selectedId={selectedId}
         onMarkerClick={setSelectedId}
+        currentYear={currentYear}
       />
 
       {/* Timeline overlay */}
@@ -248,28 +249,22 @@ export default function Home() {
         isPlaying={isPlaying}
         setIsPlaying={setIsPlaying}
         bins={bins}
-        agreements={agreements}
+        agreements={filteredAgreements}
         totalCount={totalCount}
         coopCount={coopCount}
         conflictCount={conflictCount}
         mixedCount={mixedCount}
+        selectedAgreement={selectedAgreement}
       />
 
       {isLoading && (
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%,-50%)',
-            background: 'rgba(255,255,255,0.9)',
-            padding: '16px 24px',
-            borderRadius: 8,
-            zIndex: 2000,
-            fontWeight: 600,
-          }}
-        >
-          Veriler yukleniyor...
+        <div style={{
+          position: 'absolute', top: '50%', left: '50%',
+          transform: 'translate(-50%,-50%)',
+          color: '#fff', fontSize: 14, background: 'rgba(0,0,0,0.6)',
+          padding: '8px 16px', borderRadius: 8,
+        }}>
+          Veriler yükleniyor...
         </div>
       )}
     </>
