@@ -83,15 +83,20 @@ export default function TimelineOverlay({
                   : 0;
               return (
                 <div
-                  key={`${b.start}-${b.end}`}
-                  className={`tl-bar ${isActive ? 'tl-bar--active' : ''}`}
-                  style={{ height: `${pct}%` }}
-                  title={`${b.start}\u2013${b.end}: ${b.count} anla\u015fma`}
+                  key={b.start}
+                  className={`tl-bar${isActive ? ' tl-bar--active' : ''}`}
+                  title={`${b.start}-${b.end}: ${b.count} anlaşma`}
+                  onClick={() => setCurrentYear(b.end)}
                 >
                   <div
-                    className="tl-bar-coop"
-                    style={{ height: `${coopPct}%` }}
-                  />
+                    className="tl-bar-fill"
+                    style={{ height: `${pct}%` }}
+                  >
+                    <div
+                      className="tl-bar-coop"
+                      style={{ height: `${coopPct}%` }}
+                    />
+                  </div>
                 </div>
               );
             })}
@@ -99,38 +104,35 @@ export default function TimelineOverlay({
 
           <div className="tl-controls">
             <button
-              type="button"
               className="tl-play-btn"
               onClick={() => setIsPlaying(!isPlaying)}
               title={isPlaying ? 'Durdur' : 'Oynat'}
             >
-              {isPlaying ? '\u23F8' : '\u25B6'}
+              {isPlaying ? '⏸' : '▶'}
             </button>
 
-            <div className="tl-mode">
+            <div className="tl-mode-btns">
               <button
-                type="button"
-                className={mode === 'cumulative' ? 'tl-mode-btn tl-mode-btn--on' : 'tl-mode-btn'}
+                className={`tl-mode-btn${mode === 'cumulative' ? ' tl-mode-btn--active' : ''}`}
                 onClick={() => setMode('cumulative')}
-                title="1820'den bug\u00fcne kumulatif"
+                title="1820'den bugüne kümülatif"
               >
-                1820\u2013{currentYear}
+                1820–{currentYear}
               </button>
               <button
-                type="button"
-                className={mode === 'decade' ? 'tl-mode-btn tl-mode-btn--on' : 'tl-mode-btn'}
+                className={`tl-mode-btn${mode === 'decade' ? ' tl-mode-btn--active' : ''}`}
                 onClick={() => setMode('decade')}
-                title="Sadece bu on y\u0131l"
+                title="Sadece bu on yıl"
               >
                 {decadeStart}'lar
               </button>
             </div>
 
             <div className="tl-counter">
-              <span className="tl-counter-total">{totalCount} anla\u015fma</span>
-              <span className="tl-counter-coop">\u2714 {coopCount}</span>
-              <span className="tl-counter-conflict">\u2718 {conflictCount}</span>
-              <span className="tl-counter-mixed">\u223C {mixedCount}</span>
+              <span className="tl-counter-total">{totalCount} anlaşma</span>
+              <span className="tl-counter-coop">✔ {coopCount}</span>
+              <span className="tl-counter-conflict">✘ {conflictCount}</span>
+              <span className="tl-counter-mixed">∼ {mixedCount}</span>
             </div>
           </div>
         </div>
