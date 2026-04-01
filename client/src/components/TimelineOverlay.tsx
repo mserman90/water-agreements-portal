@@ -27,9 +27,10 @@ interface TimelineOverlayProps {
 
 const MIN_YEAR = 1820;
 const MAX_YEAR = 2024;
+const ERA5_END = new Date().getFullYear() - 1;
 
 const METRIC_OPTIONS: { key: MeteoLayerType; labelTr: string; unit: string; color: string }[] = [
-  { key: 'temperature', labelTr: 'Sicaklik', unit: '\u00b0C', color: '#f97316' },
+  { key: 'temperature', labelTr: 'Sicaklik', unit: '°C', color: '#f97316' },
   { key: 'precipitation', labelTr: 'Yagis', unit: 'mm', color: '#38bdf8' },
   { key: 'drought', labelTr: 'Kuraklik', unit: '%', color: '#f59e0b' },
 ];
@@ -71,7 +72,7 @@ export default function TimelineOverlay({
   return (
     <div className="tl-overlay">
       <div className="tl-inner">
-        {/* Top row: histogram + controls */}
+        {/* Histogram + controls */}
         <div className="tl-top">
           <div className="tl-histogram">
             {binStats.map((b, idx) => {
@@ -94,7 +95,7 @@ export default function TimelineOverlay({
                 <div
                   key={b.start}
                   className={`tl-bar${isActive ? ' tl-bar--active' : ''}`}
-                  title={`${b.start}\u2013${b.end}: ${b.count} anlasma`}
+                  title={`${b.start}-${b.end}: ${b.count} anlasma`}
                   onClick={() => setCurrentYear(b.end)}
                 >
                   <div className="tl-bar-fill" style={{ height: `${pct}%` }}>
@@ -110,14 +111,14 @@ export default function TimelineOverlay({
               onClick={() => setIsPlaying(!isPlaying)}
               title={isPlaying ? 'Durdur' : 'Oynat'}
             >
-              {isPlaying ? '\u23F8' : '\u25B6'}
+              {isPlaying ? '⏸' : '▶'}
             </button>
             <div className="tl-mode-btns">
               <button
                 className={`tl-mode-btn${mode === 'cumulative' ? ' tl-mode-btn--active' : ''}`}
                 onClick={() => setMode('cumulative')}
               >
-                1820\u2013{currentYear}
+                1820–{currentYear}
               </button>
               <button
                 className={`tl-mode-btn${mode === 'decade' ? ' tl-mode-btn--active' : ''}`}
@@ -128,21 +129,19 @@ export default function TimelineOverlay({
             </div>
             <div className="tl-counter">
               <span className="tl-counter-total">{totalCount} anlasma</span>
-              <span className="tl-counter-coop">\u2714 {coopCount}</span>
-              <span className="tl-counter-conflict">\u2718 {conflictCount}</span>
-              <span className="tl-counter-mixed">\u223c {mixedCount}</span>
+              <span className="tl-counter-coop">✔ {coopCount}</span>
+              <span className="tl-counter-conflict">✘ {conflictCount}</span>
+              <span className="tl-counter-mixed">∼ {mixedCount}</span>
             </div>
           </div>
         </div>
 
         {/* Meteo chart section */}
         <div style={{ marginTop: 6, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 5 }}>
-          {/* Chart header */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 3 }}>
-            {/* Metric tabs */}
             <div style={{ display: 'flex', gap: 3 }}>
               {METRIC_OPTIONS.map((opt) => {
-                const isActive = opt.key === activeMetric;
+                const isAct = opt.key === activeMetric;
                 return (
                   <button
                     key={opt.key}
@@ -151,25 +150,22 @@ export default function TimelineOverlay({
                       fontSize: 10,
                       padding: '2px 8px',
                       borderRadius: 10,
-                      border: `1px solid ${isActive ? opt.color : 'rgba(255,255,255,0.15)'}`,
-                      background: isActive ? `${opt.color}22` : 'transparent',
-                      color: isActive ? opt.color : '#64748b',
-                      fontWeight: isActive ? 700 : 400,
+                      border: `1px solid ${isAct ? opt.color : 'rgba(255,255,255,0.15)'}`,
+                      background: isAct ? `${opt.color}22` : 'transparent',
+                      color: isAct ? opt.color : '#64748b',
+                      fontWeight: isAct ? 700 : 400,
                       cursor: 'pointer',
-                      transition: 'all 0.15s',
                     }}
                   >
                     {opt.labelTr}
-                    <span style={{ opacity: 0.65, marginLeft: 3, fontSize: 9 }}>{opt.unit}</span>
+                    <span style={{ opacity: 0.6, marginLeft: 3, fontSize: 9 }}>{opt.unit}</span>
                   </button>
                 );
               })}
             </div>
-            {/* ERA5 badge */}
-            <span style={{ fontSize: 9, color: '#334155', marginLeft: 4 }}>
-              ERA5 · 1940\u2013{new Date().getFullYear() - 1}
+            <span style={{ fontSize: 9, color: '#475569', marginLeft: 4 }}>
+              ERA5 · 1940–{ERA5_END}
             </span>
-            {/* Toggle */}
             <button
               onClick={() => setChartVisible((v) => !v)}
               style={{
@@ -183,18 +179,12 @@ export default function TimelineOverlay({
                 cursor: 'pointer',
               }}
             >
-              {chartVisible ? '\u25B4 gizle' : '\u25BE goster'}
+              {chartVisible ? '▴ gizle' : '▾ goster'}
             </button>
           </div>
 
-          {/* SVG chart */}
           {chartVisible && (
-            <div
-              style={{
-                borderLeft: `2px solid ${activeColor}`,
-                paddingLeft: 4,
-              }}
-            >
+            <div style={{ borderLeft: `2px solid ${activeColor}`, paddingLeft: 4 }}>
               <MeteoTimelineChart
                 metric={activeMetric}
                 currentYear={currentYear}
@@ -204,7 +194,7 @@ export default function TimelineOverlay({
           )}
         </div>
 
-        {/* Slider row */}
+        {/* Slider */}
         <div className="tl-bottom" style={{ marginTop: 6 }}>
           <span className="tl-year-label">{MIN_YEAR}</span>
           <input
