@@ -27,7 +27,7 @@ export default function LeftPanel({
 
   const tabs: { id: Tab; label: string; icon: React.ReactNode }[] = [
     { id: 'layers', label: 'Katmanlar', icon: <Layers size={16} /> },
-    { id: 'search', label: 'Ara / Filtrele', icon: <Settings size={16} /> },
+    { id: 'search', label: 'Ayarlar', icon: <Settings size={16} /> },
     { id: 'ai', label: 'AI Sorgu', icon: <MessageSquare size={16} /> },
   ];
 
@@ -48,7 +48,6 @@ export default function LeftPanel({
         overflow: 'hidden',
       }}
     >
-      {/* Collapse toggle */}
       <button
         onClick={() => setCollapsed(!collapsed)}
         style={{
@@ -74,7 +73,6 @@ export default function LeftPanel({
 
       {!collapsed && (
         <>
-          {/* Tab bar */}
           <div
             style={{
               display: 'flex',
@@ -110,16 +108,12 @@ export default function LeftPanel({
             ))}
           </div>
 
-          {/* Tab content */}
           <div style={{ flex: 1, overflow: 'auto' }}>
             {activeTab === 'layers' && (
-              <LayerControl layers={layers} onToggle={onLayerToggle} />
+              <LayerControl layers={layers} onLayerToggle={onLayerToggle} />
             )}
             {activeTab === 'search' && (
-              <SettingsPanel
-                agreements={agreements}
-                onUploadFile={onUploadFile}
-              />
+              <SettingsPanel onUploadFile={onUploadFile} />
             )}
             {activeTab === 'ai' && (
               <AiChat
