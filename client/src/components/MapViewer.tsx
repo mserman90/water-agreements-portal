@@ -1,4 +1,6 @@
 import { useEffect, useRef } from 'react';
+import { useState } from 'react';
+import LayerControl, { LayerConfig } from './LayerControl';
 import L from 'leaflet';
 import 'leaflet.markercluster';
 
@@ -66,6 +68,25 @@ function buildPopupLinks(a: Agreement): string {
 
 export default function MapViewer({ agreements, selectedId, onMarkerClick }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Layer management
+  const [layers, setLayers] = useState<LayerConfig[]>([
+    {
+      id: 'agreements',
+      label: { tr: 'Anlaşmalar', en: 'Agreements' },
+      icon: '📄',
+      enabled: true,
+      color: '#3b82f6',
+    },
+  ]);
+
+  const handleLayerToggle = (id: string) => {
+    setLayers(prev =>
+      prev.map(layer =>
+        layer.id === id ? { ...layer, enabled: !layer.enabled } : layer
+      )
+    );
+  };
   const mapRef = useRef<L.Map | null>(null);
   const clusterRef = useRef<L.MarkerClusterGroup | null>(null);
   const markersRef = useRef<Map<string, L.Marker>>(new Map());
@@ -78,6 +99,20 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick }: Pro
       zoom: 2,
       zoomControl: true,
     });
+
+      // Toggle agreements layer
+  useEffect(() => {
+    const map = mapRef.current;
+    const cluster = clusterRef.current;
+    if (!map || !cluster) return;
+
+    const agreementsLayer = layers.find(l => l.id === 'agreements');
+    if (agreementsLayer?.enabled) {
+      if (!map.hasLayer(cluster)) map.addLayer(cluster);
+    } else {
+      if (map.hasLayer(cluster)) map.removeLayer(cluster);
+    }
+  }, [layers]);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '\u00a9 OpenStreetMap contributors',
       maxZoom: 18,
@@ -134,4 +169,5 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick }: Pro
   }, [selectedId]);
 
   return <div ref={containerRef} style={{ width: '100%', height: '100%' }} />;
+      <LayerControl layers={layers} onLayerToggle={handleLayerToggle} />
 }
