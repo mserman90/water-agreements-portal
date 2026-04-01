@@ -3,17 +3,17 @@ import Papa from 'papaparse';
 import { basinCoords } from '@/data/basinCoords';
 import { findTreatyLink, findGithubDoc } from '@/data/treatyLinks';
 import MapViewer from '@/components/MapViewer';
-import LeftPanel from '@/components/LeftPanel';
+import AgreementSidebar from '@/components/AgreementSidebar';
 import TimelineOverlay from '@/components/TimelineOverlay';
 import { useAuth } from '@/contexts/AuthContext';
 import type { Agreement } from '@/components/MapViewer';
 import type { TimelineMode } from '@/components/TimelineOverlay';
-import { LayerConfig } from '@/components/LayerControl';
 
 const MIN_YEAR = 1820;
 const MAX_YEAR = 2024;
 const YEAR_STEP_MS = 120;
 
+// Map basin name to lat/lng
 function findBasinCoords(basinName: string): [number, number] | null {
   if (!basinName) return null;
   if (basinCoords[basinName]) return basinCoords[basinName];
@@ -26,6 +26,7 @@ function findBasinCoords(basinName: string): [number, number] | null {
   return null;
 }
 
+// Extract 4-digit year from any date string
 function extractYear(val: unknown): number {
   const m = String(val ?? '').match(/(\d{4})/);
   return m ? Number(m[1]) : 0;
@@ -67,10 +68,20 @@ function parseRows(rows: Record<string, unknown>[]): Agreement[] {
     .filter((a) => a.latitude !== 0 && a.longitude !== 0);
 }
 
+// Derive agreement type from purpose field for color coding
 function deriveType(purpose: string): 'cooperation' | 'conflict' | 'mixed' {
   const p = purpose.toLowerCase();
-  const isConflict = p.includes('conflict') || p.includes('dispute') || p.includes('war') || p.includes('protest');
-  const isCoop = p.includes('cooper') || p.includes('alloc') || p.includes('joint') || p.includes('agreement') || p.includes('treaty');
+  const isConflict =
+    p.includes('conflict') ||
+    p.includes('dispute') ||
+    p.includes('war') ||
+    p.includes('protest');
+  const isCoop =
+    p.includes('cooper') ||
+    p.includes('alloc') ||
+    p.includes('joint') ||
+    p.includes('agreement') ||
+    p.includes('treaty');
   if (isConflict && isCoop) return 'mixed';
   if (isConflict) return 'conflict';
   return 'cooperation';
@@ -80,16 +91,10 @@ export default function Home() {
   const [agreements, setAgreements] = useState<Agreement[]>([]);
   const [selectedId, setSelectedId] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const { isAdmin } = useAuth();
 
-  const [layers, setLayers] = useState<LayerConfig[]>([
-    { id: 'agreements', label: { tr: 'Anlasmalar', en: 'Agreements' }, icon: '📄', enabled: true, color: '#3b82f6' },
-  ]);
-
-  const handleLayerToggle = (id: string) => {
-    setLayers((prev) => prev.map((l) => (l.id === id ? { ...l, enabled: !l.enabled } : l)));
-  };
-
+  // --- Timeline state ---
   const [currentYear, setCurrentYear] = useState(MAX_YEAR);
   const [timelineMode, setTimelineMode] = useState<TimelineMode>('cumulative');
   const [isPlaying, setIsPlaying] = useState(false);
@@ -103,26 +108,35 @@ export default function Home() {
     [],
   );
 
+  // Auto-play animation
   useEffect(() => {
     if (!isPlaying) return;
     const id = window.setInterval(() => {
       setCurrentYear((prev) => {
-        if (prev >= MAX_YEAR) return MIN_YEAR;
+        if (prev >= MAX_YEAR) {
+          return MIN_YEAR;
+        }
         return prev + 1;
       });
     }, YEAR_STEP_MS);
     return () => window.clearInterval(id);
   }, [isPlaying]);
 
+  // Filter agreements by year / mode
   const filteredAgreements = useMemo(() => {
     if (!agreements.length) return [];
-    if (timelineMode === 'cumulative') return agreements.filter((a) => a.year <= currentYear);
+    if (timelineMode === 'cumulative') {
+      return agreements.filter((a) => a.year <= currentYear);
+    }
     const ds = Math.floor(currentYear / 10) * 10;
     return agreements.filter((a) => a.year >= ds && a.year <= ds + 9);
   }, [agreements, currentYear, timelineMode]);
 
+  // Counts for live counter
   const { totalCount, coopCount, conflictCount, mixedCount } = useMemo(() => {
-    let coop = 0, conflict = 0, mixed = 0;
+    let coop = 0,
+      conflict = 0,
+      mixed = 0;
     filteredAgreements.forEach((a) => {
       const t = deriveType(a.purpose);
       if (t === 'cooperation') coop++;
@@ -132,6 +146,7 @@ export default function Home() {
     return { totalCount: filteredAgreements.length, coopCount: coop, conflictCount: conflict, mixedCount: mixed };
   }, [filteredAgreements]);
 
+  // Secili anlasma
   const selectedAgreement = useMemo(
     () => agreements.find((a) => a.id === selectedId),
     [agreements, selectedId],
@@ -155,6 +170,7 @@ export default function Home() {
     return parseRows(data as Record<string, unknown>[]);
   }, []);
 
+  // Load bundled MASTER.json on mount
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}data/MASTER.json`)
       .then((r) => r.text())
@@ -202,24 +218,49 @@ export default function Home() {
 
   return (
     <>
-      <LeftPanel
-        layers={layers}
-        onLayerToggle={handleLayerToggle}
-        agreements={filteredAgreements}
-        selectedAgreement={selectedAgreement}
-        onUploadFile={handleFileUpload}
-      />
+      {/* Sidebar toggle button */}
+      <button
+        onClick={() => setSidebarOpen((v) => !v)}
+        style={{
+          position: 'absolute',
+          top: 90,
+          left: sidebarOpen ? 328 : 8,
+          zIndex: 1000,
+          background: '#0369a1',
+          color: '#fff',
+          border: 'none',
+          borderRadius: 4,
+          padding: '4px 8px',
+          cursor: 'pointer',
+          fontSize: 16,
+          lineHeight: 1,
+          transition: 'left 0.25s',
+          boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+        }}
+        title={sidebarOpen ? 'Kapat' : 'Ac'}
+      >
+        {sidebarOpen ? '<-' : '='}
+      </button>
 
-      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}>
-        <MapViewer
+      {/* Sidebar - filtered by timeline */}
+      {sidebarOpen && (
+        <AgreementSidebar
           agreements={filteredAgreements}
           selectedId={selectedId}
-          onMarkerClick={setSelectedId}
-          currentYear={currentYear}
-          layers={layers}
+          onSelect={setSelectedId}
+          onUploadFile={handleFileUpload}
         />
-      </div>
+      )}
 
+      {/* Map - filtered by timeline */}
+      <MapViewer
+        agreements={filteredAgreements}
+        selectedId={selectedId}
+        onMarkerClick={setSelectedId}
+        currentYear={currentYear}
+      />
+
+      {/* Timeline overlay */}
       <TimelineOverlay
         currentYear={currentYear}
         setCurrentYear={setCurrentYear}
@@ -243,12 +284,10 @@ export default function Home() {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%,-50%)',
-            background: 'rgba(255,255,255,0.9)',
-            padding: '12px 24px',
+            background: 'white',
+            padding: 16,
             borderRadius: 8,
-            boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-            fontSize: 14,
-            zIndex: 2000,
+            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
           }}
         >
           Veriler yukleniyor...
