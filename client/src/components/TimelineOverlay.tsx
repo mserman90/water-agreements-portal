@@ -23,6 +23,7 @@ interface TimelineOverlayProps {
   coopCount: number;
   conflictCount: number;
   mixedCount: number;
+  selectedAgreement?: Agreement; // seçili anlaşma — meteo grafiğinde yılını vurgular
 }
 
 const MIN_YEAR = 1820;
@@ -30,9 +31,9 @@ const MAX_YEAR = 2024;
 const ERA5_END = new Date().getFullYear() - 1;
 
 const METRIC_OPTIONS: { key: MeteoLayerType; labelTr: string; unit: string; color: string }[] = [
-  { key: 'temperature', labelTr: 'Sicaklik', unit: '°C', color: '#f97316' },
-  { key: 'precipitation', labelTr: 'Yagis', unit: 'mm', color: '#38bdf8' },
-  { key: 'drought', labelTr: 'Kuraklik', unit: '%', color: '#f59e0b' },
+  { key: 'temperature', labelTr: 'Sıcaklık', unit: '°C', color: '#f97316' },
+  { key: 'precipitation', labelTr: 'Yağış', unit: 'mm', color: '#38bdf8' },
+  { key: 'drought', labelTr: 'Kuraklık', unit: '%', color: '#f59e0b' },
 ];
 
 export default function TimelineOverlay({
@@ -48,6 +49,7 @@ export default function TimelineOverlay({
   coopCount,
   conflictCount,
   mixedCount,
+  selectedAgreement,
 }: TimelineOverlayProps) {
   const [activeMetric, setActiveMetric] = useState<MeteoLayerType>('temperature');
   const [chartVisible, setChartVisible] = useState(true);
@@ -62,6 +64,7 @@ export default function TimelineOverlay({
       }),
     [bins, agreements],
   );
+
   const maxCount = binStats.reduce((m, x) => (x.count > m ? x.count : m), 0) || 1;
   const activeBinIndex = binStats.findIndex(
     (b) => currentYear >= b.start && currentYear <= b.end,
@@ -69,145 +72,196 @@ export default function TimelineOverlay({
   const decadeStart = Math.floor(currentYear / 10) * 10;
   const activeColor = METRIC_OPTIONS.find((m) => m.key === activeMetric)?.color ?? '#38bdf8';
 
-  return (
-    <div className="tl-overlay">
-      <div className="tl-inner">
-        {/* Histogram + controls */}
-        <div className="tl-top">
-          <div className="tl-histogram">
-            {binStats.map((b, idx) => {
-              const pct = (b.count / maxCount) * 100;
-              const isActive = idx === activeBinIndex;
-              const coopPct =
-                b.count > 0
-                  ? (agreements.filter(
-                      (a) =>
-                        a.year >= b.start &&
-                        a.year <= b.end &&
-                        (a.purpose?.toLowerCase().includes('cooper') ||
-                          a.purpose?.toLowerCase().includes('alloc') ||
-                          a.purpose?.toLowerCase().includes('joint')),
-                    ).length /
-                      b.count) *
-                    100
-                  : 0;
-              return (
-                <div
-                  key={b.start}
-                  className={`tl-bar${isActive ? ' tl-bar--active' : ''}`}
-                  title={`${b.start}-${b.end}: ${b.count} anlasma`}
-                  onClick={() => setCurrentYear(b.end)}
-                >
-                  <div className="tl-bar-fill" style={{ height: `${pct}%` }}>
-                    <div className="tl-bar-coop" style={{ height: `${coopPct}%` }} />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          <div className="tl-controls">
-            <button
-              className="tl-play-btn"
-              onClick={() => setIsPlaying(!isPlaying)}
-              title={isPlaying ? 'Durdur' : 'Oynat'}
-            >
-              {isPlaying ? '⏸' : '▶'}
-            </button>
-            <div className="tl-mode-btns">
-              <button
-                className={`tl-mode-btn${mode === 'cumulative' ? ' tl-mode-btn--active' : ''}`}
-                onClick={() => setMode('cumulative')}
-              >
-                1820–{currentYear}
-              </button>
-              <button
-                className={`tl-mode-btn${mode === 'decade' ? ' tl-mode-btn--active' : ''}`}
-                onClick={() => setMode('decade')}
-              >
-                {decadeStart}'lar
-              </button>
-            </div>
-            <div className="tl-counter">
-              <span className="tl-counter-total">{totalCount} anlasma</span>
-              <span className="tl-counter-coop">✔ {coopCount}</span>
-              <span className="tl-counter-conflict">✘ {conflictCount}</span>
-              <span className="tl-counter-mixed">∼ {mixedCount}</span>
-            </div>
-          </div>
-        </div>
+  // Seçili anlaşmanın meteo grafiğinde gösterilecek yılı (ERA5 aralığında ise)
+  const agreementMeteoYear =
+    selectedAgreement && selectedAgreement.year >= 1940 && selectedAgreement.year <= ERA5_END
+      ? selectedAgreement.year
+      : undefined;
 
-        {/* Meteo chart section */}
-        <div style={{ marginTop: 6, borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 5 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 3 }}>
-            <div style={{ display: 'flex', gap: 3 }}>
-              {METRIC_OPTIONS.map((opt) => {
-                const isAct = opt.key === activeMetric;
-                return (
-                  <button
-                    key={opt.key}
-                    onClick={() => setActiveMetric(opt.key)}
-                    style={{
-                      fontSize: 10,
-                      padding: '2px 8px',
-                      borderRadius: 10,
-                      border: `1px solid ${isAct ? opt.color : 'rgba(255,255,255,0.15)'}`,
-                      background: isAct ? `${opt.color}22` : 'transparent',
-                      color: isAct ? opt.color : '#64748b',
-                      fontWeight: isAct ? 700 : 400,
-                      cursor: 'pointer',
-                    }}
-                  >
-                    {opt.labelTr}
-                    <span style={{ opacity: 0.6, marginLeft: 3, fontSize: 9 }}>{opt.unit}</span>
-                  </button>
-                );
-              })}
-            </div>
-            <span style={{ fontSize: 9, color: '#475569', marginLeft: 4 }}>
-              ERA5 · 1940–{ERA5_END}
-            </span>
-            <button
-              onClick={() => setChartVisible((v) => !v)}
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        zIndex: 900,
+        background: 'rgba(10,20,40,0.88)',
+        backdropFilter: 'blur(4px)',
+        borderTop: '1px solid rgba(255,255,255,0.07)',
+        padding: '6px 12px 4px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 4,
+      }}
+    >
+      {/* Histogram + controls */}
+      <div style={{ display: 'flex', alignItems: 'flex-end', gap: 1, height: 36 }}>
+        {binStats.map((b, idx) => {
+          const pct = (b.count / maxCount) * 100;
+          const isActive = idx === activeBinIndex;
+          const coopPct =
+            b.count > 0
+              ? (agreements.filter(
+                  (a) =>
+                    a.year >= b.start &&
+                    a.year <= b.end &&
+                    (a.purpose?.toLowerCase().includes('cooper') ||
+                      a.purpose?.toLowerCase().includes('alloc') ||
+                      a.purpose?.toLowerCase().includes('joint')),
+                ).length /
+                  b.count) *
+                100
+              : 0;
+          return (
+            <div
+              key={b.start}
+              title={`${b.start}–${b.end}: ${b.count} anlaşma`}
+              onClick={() => setCurrentYear(b.end)}
               style={{
-                marginLeft: 'auto',
-                fontSize: 9,
-                padding: '1px 6px',
-                borderRadius: 4,
-                border: '1px solid rgba(255,255,255,0.1)',
-                background: 'transparent',
-                color: '#475569',
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                height: '100%',
+                cursor: 'pointer',
+                opacity: isActive ? 1 : 0.6,
+              }}
+            >
+              <div
+                style={{
+                  width: '80%',
+                  height: `${pct}%`,
+                  minHeight: b.count > 0 ? 2 : 0,
+                  background: `linear-gradient(to top, #22c55e ${coopPct}%, #ef4444 ${coopPct}%)`,
+                  borderRadius: '1px 1px 0 0',
+                  boxShadow: isActive ? '0 0 0 1px #facc15' : 'none',
+                }}
+              />
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Controls row */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 11 }}>
+        <button
+          onClick={() => setIsPlaying(!isPlaying)}
+          title={isPlaying ? 'Durdur' : 'Oynat'}
+          style={{
+            fontSize: 13, padding: '2px 8px', borderRadius: 4,
+            border: '1px solid rgba(255,255,255,0.2)',
+            background: isPlaying ? 'rgba(239,68,68,0.15)' : 'rgba(34,197,94,0.15)',
+            color: isPlaying ? '#ef4444' : '#22c55e',
+            cursor: 'pointer',
+          }}
+        >
+          {isPlaying ? '⏸' : '▶'}
+        </button>
+
+        <button
+          onClick={() => setMode('cumulative')}
+          style={{
+            fontSize: 10, padding: '2px 8px', borderRadius: 4,
+            border: `1px solid ${mode === 'cumulative' ? '#38bdf8' : 'rgba(255,255,255,0.1)'}`,
+            background: mode === 'cumulative' ? 'rgba(56,189,248,0.12)' : 'transparent',
+            color: mode === 'cumulative' ? '#38bdf8' : '#64748b',
+            cursor: 'pointer',
+          }}
+        >
+          1820–{currentYear}
+        </button>
+        <button
+          onClick={() => setMode('decade')}
+          style={{
+            fontSize: 10, padding: '2px 8px', borderRadius: 4,
+            border: `1px solid ${mode === 'decade' ? '#38bdf8' : 'rgba(255,255,255,0.1)'}`,
+            background: mode === 'decade' ? 'rgba(56,189,248,0.12)' : 'transparent',
+            color: mode === 'decade' ? '#38bdf8' : '#64748b',
+            cursor: 'pointer',
+          }}
+        >
+          {decadeStart}'lar
+        </button>
+
+        <span style={{ color: '#94a3b8', marginLeft: 4 }}>
+          {totalCount} anlaşma &nbsp;
+          <span style={{ color: '#22c55e' }}>✔ {coopCount}</span>&nbsp;
+          <span style={{ color: '#ef4444' }}>✘ {conflictCount}</span>&nbsp;
+          <span style={{ color: '#eab308' }}>∼ {mixedCount}</span>
+        </span>
+
+        {/* Seçili anlaşma bilgisi */}
+        {selectedAgreement && (
+          <span style={{ marginLeft: 'auto', fontSize: 10, color: '#f97316', fontWeight: 600, maxWidth: 200, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            📍 {selectedAgreement.year > 0 ? selectedAgreement.year : '?'} · {selectedAgreement.name}
+          </span>
+        )}
+      </div>
+
+      {/* Meteo chart section */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 2 }}>
+        {METRIC_OPTIONS.map((opt) => {
+          const isAct = opt.key === activeMetric;
+          return (
+            <button
+              key={opt.key}
+              onClick={() => setActiveMetric(opt.key)}
+              style={{
+                fontSize: 10, padding: '2px 8px', borderRadius: 10,
+                border: `1px solid ${isAct ? opt.color : 'rgba(255,255,255,0.15)'}`,
+                background: isAct ? `${opt.color}22` : 'transparent',
+                color: isAct ? opt.color : '#64748b',
+                fontWeight: isAct ? 700 : 400,
                 cursor: 'pointer',
               }}
             >
-              {chartVisible ? '▴ gizle' : '▾ goster'}
+              {opt.labelTr} &nbsp;{opt.unit}
             </button>
-          </div>
+          );
+        })}
+        <span style={{ fontSize: 9, color: '#334155', marginLeft: 4 }}>
+          ERA5 · 1940–{ERA5_END}
+        </span>
+        <button
+          onClick={() => setChartVisible((v) => !v)}
+          style={{
+            marginLeft: 'auto', fontSize: 9, padding: '1px 6px', borderRadius: 4,
+            border: '1px solid rgba(255,255,255,0.1)',
+            background: 'transparent', color: '#475569', cursor: 'pointer',
+          }}
+        >
+          {chartVisible ? '▴ gizle' : '▾ göster'}
+        </button>
+      </div>
 
-          {chartVisible && (
-            <div style={{ borderLeft: `2px solid ${activeColor}`, paddingLeft: 4 }}>
-              <MeteoTimelineChart
-                metric={activeMetric}
-                currentYear={currentYear}
-                height={68}
-              />
-            </div>
-          )}
-        </div>
+      {chartVisible && (
+        <MeteoTimelineChart
+          metric={activeMetric}
+          currentYear={currentYear}
+          agreementYear={agreementMeteoYear}
+          width={typeof window !== 'undefined' ? window.innerWidth - 24 : 860}
+          height={72}
+        />
+      )}
 
-        {/* Slider */}
-        <div className="tl-bottom" style={{ marginTop: 6 }}>
-          <span className="tl-year-label">{MIN_YEAR}</span>
-          <input
-            type="range"
-            className="tl-slider"
-            min={MIN_YEAR}
-            max={MAX_YEAR}
-            value={currentYear}
-            onChange={(e) => setCurrentYear(Number(e.target.value))}
-          />
-          <span className="tl-year-label">{MAX_YEAR}</span>
-          <span className="tl-year-current">{currentYear}</span>
-        </div>
+      {/* Slider */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 10, color: '#64748b' }}>
+        <span>{MIN_YEAR}</span>
+        <input
+          type="range"
+          className="tl-slider"
+          min={MIN_YEAR}
+          max={MAX_YEAR}
+          value={currentYear}
+          onChange={(e) => setCurrentYear(Number(e.target.value))}
+          style={{ flex: 1 }}
+        />
+        <span>{MAX_YEAR}</span>
+        <span style={{ minWidth: 36, textAlign: 'center', color: '#e2e8f0', fontWeight: 700 }}>
+          {currentYear}
+        </span>
       </div>
     </div>
   );
