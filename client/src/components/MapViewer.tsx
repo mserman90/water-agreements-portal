@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import { LayerConfig } from './LayerControl';
+import { useEffect, useRef, useState } from 'react';
+import LayerControl, { LayerConfig } from './LayerControl';
 import L from 'leaflet';
 import 'leaflet.markercluster';
 import { useLanguage } from '@/i18n/LanguageContext';
@@ -23,7 +23,6 @@ interface Props {
   selectedId?: string;
   onMarkerClick?: (id: string) => void;
   currentYear?: number;
-  layers?: LayerConfig[];
 }
 
 // Fix default Leaflet icon paths
@@ -36,8 +35,17 @@ L.Icon.Default.mergeOptions({
 
 function deriveAgreementColor(purpose: string, isSelected: boolean): string {
   const p = purpose.toLowerCase();
-  const isConflict = p.includes('conflict') || p.includes('dispute') || p.includes('war') || p.includes('protest');
-  const isCoop = p.includes('cooper') || p.includes('alloc') || p.includes('joint') || p.includes('agreement') || p.includes('treaty');
+  const isConflict =
+    p.includes('conflict') ||
+    p.includes('dispute') ||
+    p.includes('war') ||
+    p.includes('protest');
+  const isCoop =
+    p.includes('cooper') ||
+    p.includes('alloc') ||
+    p.includes('joint') ||
+    p.includes('agreement') ||
+    p.includes('treaty');
   if (isSelected) return '#facc15';
   if (isConflict && isCoop) return '#eab308';
   if (isConflict) return '#ef4444';
@@ -47,7 +55,9 @@ function deriveAgreementColor(purpose: string, isSelected: boolean): string {
 function buildMarkerIcon(color: string, isSelected: boolean): L.DivIcon {
   const size = isSelected ? 14 : 10;
   const border = isSelected ? '2px solid #fff' : '1.5px solid rgba(255,255,255,0.7)';
-  const shadow = isSelected ? '0 0 6px 2px rgba(250,204,21,0.8)' : '0 1px 3px rgba(0,0,0,0.4)';
+  const shadow = isSelected
+    ? '0 0 6px 2px rgba(250,204,21,0.8)'
+    : '0 1px 3px rgba(0,0,0,0.4)';
   return L.divIcon({
     className: '',
     html: `<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};border:${border};box-shadow:${shadow};"></div>`,
@@ -58,20 +68,42 @@ function buildMarkerIcon(color: string, isSelected: boolean): L.DivIcon {
 
 function buildPopupLinks(a: Agreement): string {
   const links: string[] = [];
-  if (a.pdfUrl) links.push(`<a href="${a.pdfUrl}" target="_blank">📄 PDF</a>`);
-  if (a.githubDocUrl) links.push(`<a href="${a.githubDocUrl}" target="_blank">📥 PDF</a>`);
-  if (a.faolexUrl) links.push(`<a href="${a.faolexUrl}" target="_blank">FAOLEX</a>`);
+  if (a.pdfUrl) {
+    links.push(`<a href="${a.pdfUrl}" target="_blank">📄 PDF ↓</a>`);
+  }
+  if (a.githubDocUrl) {
+    links.push(`<a href="${a.githubDocUrl}" target="_blank">📥 PDF</a>`);
+  }
+  if (a.faolexUrl) {
+    links.push(`<a href="${a.faolexUrl}" target="_blank">FAOLEX</a>`);
+  }
   const q = encodeURIComponent(a.name.slice(0, 80));
   links.push(`<a href="https://www.fao.org/faolex/results/en/?query=${q}" target="_blank">FAOLEX Ara</a>`);
   return links.join(' | ');
 }
 
-export default function MapViewer({ agreements, selectedId, onMarkerClick, layers }: Props) {
+export default function MapViewer({ agreements, selectedId, onMarkerClick }: Props) {
   const { lang } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
   const clusterRef = useRef<L.MarkerClusterGroup | null>(null);
   const markersRef = useRef<Map<string, L.Marker>>(new Map());
+
+  const [layers, setLayers] = useState<LayerConfig[]>([
+    {
+      id: 'agreements',
+      label: { tr: 'Anlasmalar', en: 'Agreements' },
+      icon: '📄',
+      enabled: true,
+      color: '#3b82f6',
+    },
+  ]);
+
+  const handleLayerToggle = (id: string) => {
+    setLayers((prev) =>
+      prev.map((layer) => (layer.id === id ? { ...layer, enabled: !layer.enabled } : layer)),
+    );
+  };
 
   // Map init
   useEffect(() => {
@@ -92,14 +124,13 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick, layer
     };
   }, []);
 
-  // Toggle agreements cluster layer based on external layers prop
+  // Toggle agreements cluster layer
   useEffect(() => {
     const map = mapRef.current;
     const cluster = clusterRef.current;
     if (!map || !cluster) return;
-    const agreementsLayer = layers?.find((l) => l.id === 'agreements');
-    const enabled = agreementsLayer ? agreementsLayer.enabled : true;
-    if (enabled) {
+    const agreementsLayer = layers.find((l) => l.id === 'agreements');
+    if (agreementsLayer?.enabled) {
       if (!map.hasLayer(cluster)) map.addLayer(cluster);
     } else {
       if (map.hasLayer(cluster)) map.removeLayer(cluster);
@@ -121,8 +152,9 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick, layer
       const icon = buildMarkerIcon(color, isSelected);
       const marker = L.marker([a.latitude, a.longitude], { icon, title: a.name });
       const linkHtml = buildPopupLinks(a);
+      const typeDot = `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${color};margin-right:4px;"></span>`;
       marker.bindPopup(
-        `<b>${a.name}</b><br/>${a.country} · ${a.basin}<br/>${a.year > 0 ? a.year : '?'} — ${a.purpose || ''}<br/>${linkHtml}`,
+        `<b>${a.name}</b><br/>${a.country} · ${a.basin}<br/>${typeDot}${a.year > 0 ? a.year : '?'} — ${a.purpose || 'No description'}<br/>${linkHtml}`,
       );
       marker.on('click', () => onMarkerClick?.(a.id));
       cluster.addLayer(marker);
@@ -145,9 +177,9 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick, layer
   }, [selectedId]);
 
   return (
-    <div
-      ref={containerRef}
-      style={{ width: '100%', height: '100%' }}
-    />
+    <div style={{ position: 'absolute', inset: 0 }}>
+      <LayerControl layers={layers} onLayerToggle={handleLayerToggle} />
+      <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
+    </div>
   );
 }
