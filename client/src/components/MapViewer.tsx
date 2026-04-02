@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import LayerControl, { LayerConfig } from './LayerControl';
 import L from 'leaflet';
 import 'leaflet.markercluster';
 import { useLanguage } from '@/i18n/LanguageContext';
@@ -89,22 +88,6 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick }: Pro
   const clusterRef = useRef<L.MarkerClusterGroup | null>(null);
   const markersRef = useRef<Map<string, L.Marker>>(new Map());
 
-  const [layers, setLayers] = useState<LayerConfig[]>([
-    {
-      id: 'agreements',
-      label: { tr: 'Anlasmalar', en: 'Agreements' },
-      icon: '📄',
-      enabled: true,
-      color: '#3b82f6',
-    },
-  ]);
-
-  const handleLayerToggle = (id: string) => {
-    setLayers((prev) =>
-      prev.map((layer) => (layer.id === id ? { ...layer, enabled: !layer.enabled } : layer)),
-    );
-  };
-
   // Map init
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
@@ -123,19 +106,6 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick }: Pro
       mapRef.current = null;
     };
   }, []);
-
-  // Toggle agreements cluster layer
-  useEffect(() => {
-    const map = mapRef.current;
-    const cluster = clusterRef.current;
-    if (!map || !cluster) return;
-    const agreementsLayer = layers.find((l) => l.id === 'agreements');
-    if (agreementsLayer?.enabled) {
-      if (!map.hasLayer(cluster)) map.addLayer(cluster);
-    } else {
-      if (map.hasLayer(cluster)) map.removeLayer(cluster);
-    }
-  }, [layers]);
 
   // Update markers when agreements change
   useEffect(() => {
@@ -178,7 +148,6 @@ export default function MapViewer({ agreements, selectedId, onMarkerClick }: Pro
 
   return (
     <div style={{ position: 'absolute', inset: 0 }}>
-      <LayerControl layers={layers} onLayerToggle={handleLayerToggle} />
       <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
     </div>
   );
