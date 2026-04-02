@@ -52,7 +52,7 @@ function parseRows(rows: Record<string, unknown>[]): Agreement[] {
       const link = findTreatyLink(docName);
       const ghDoc = link ? findGithubDoc(link.faolex, docName) : undefined;
       return {
-        id: String(row.id ?? row.ID ?? row['Entry ID'] ?? `agreement-${index}`);
+        id: String(row.id ?? row.ID ?? row['Entry ID'] ?? `agreement-${index}`),
         name: String(row.name ?? row.Name ?? row.title ?? row.DocumentName ?? 'Unnamed'),
         country: String(row.country ?? row.Country ?? row.Signatories ?? 'Unknown'),
         basin,
