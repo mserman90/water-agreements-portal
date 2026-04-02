@@ -132,11 +132,7 @@ export default function HeroScreen({ onEnter }: HeroScreenProps) {
             </svg>
           </div>
           <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight">
-            {tr ? 'Global Su Anlaşmaları' : 'Global Water Agreements'}
-            <span className="block text-lg md:text-2xl lg:text-3xl font-semibold text-blue-300 mt-1">
-              {tr ? 'Portalı' : 'Portal'}
-            </span>
-          </h1>
+            {tr ? 'Su Anlaşmaları Portalı' : 'Water Agreements Portal'}</h1>
           <p className="mt-3 text-sm md:text-base text-slate-400 max-w-lg mx-auto leading-relaxed">
             {tr
               ? '1820\'den günümüze uluslararası tatlı su anlaşmalarını interaktif harita üzerinde keşfedin.'
