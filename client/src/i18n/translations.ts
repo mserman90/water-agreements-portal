@@ -2,7 +2,7 @@ export type Lang = 'tr' | 'en';
 
 const translations = {
   // Header
-  'app.title': { tr: 'Global Su Anlaşmaları Portalı', en: 'Global Water Agreements Portal' },
+  'app.title': { tr: 'Su Anlaşmaları Portalı', en: 'Water Agreements Portal' },
   'app.recordsMapped': { tr: 'Kayıt Haritalandı', en: 'Records Mapped' },
 
   // Sidebar search
@@ -20,6 +20,13 @@ const translations = {
 
   // Upload
   'upload.button': { tr: 'CSV / JSON Yükle', en: 'Upload CSV / JSON' },
+  'upload.title': { tr: 'Dosya Yükle', en: 'Upload File' },
+  'upload.description': { tr: 'Haritaya görselleştirmek için kendi anlaşma verilerinizi yükleyin', en: 'Upload your own agreement data to visualize on the map' },
+  'upload.formats': { tr: 'Desteklenen formatlar: GeoJSON, JSON', en: 'Supported formats: GeoJSON, JSON' },
+  'upload.requirements.title': { tr: 'Gereksinimler:', en: 'Requirements:' },
+  'upload.requirements.geometry': { tr: 'Geçerli GeoJSON geometrisi', en: 'Valid GeoJSON geometry' },
+  'upload.requirements.properties': { tr: 'title ve year özellikleri', en: 'title and year properties' },
+  'upload.requirements.encoding': { tr: 'UTF-8 kodlaması', en: 'UTF-8 encoding' },
 
   // Status footer
   'footer.connected': { tr: 'BAĞLANDI', en: 'CONNECTED' },
@@ -33,116 +40,73 @@ const translations = {
     en: 'Oregon State University – College of Earth, Ocean, and Atmospheric Sciences',
   },
 
+  // Settings Panel
+  'settings.title': { tr: 'Bilgi', en: 'Information' },
+  'tabs.guide': { tr: 'Kullanım Kılavuzu', en: 'User Guide' },
+  'tabs.upload': { tr: 'Yükle', en: 'Upload' },
+  'tabs.about': { tr: 'Hakkında & Teşekkür', en: 'About & Thanks' },
+  'tabs.login': { tr: 'Giriş', en: 'Login' },
+
+  // Guide Section
+  'guide.overview.title': { tr: 'Genel Bakış', en: 'Overview' },
+  'guide.overview.content': { tr: 'Bu portal, 1820\'den günümüze kadar imzalanan 800\'den fazla uluslararası tatlı su anlaşmasının özetlerini ve/veya tam metinlerini içermektedir.', en: 'This portal contains summaries and/or full texts of over 800 international freshwater agreements signed from 1820 to present.' },
+
+  'guide.search.title': { tr: 'Arama Özellikleri', en: 'Search Features' },
+  'guide.search.content': { tr: 'Gelişmiş arama yetenekleri ile anlaşmaları kolayca bulun:', en: 'Find agreements easily with advanced search capabilities:' },
+  'guide.search.features.semantic': { tr: 'Anlamsal arama - kavramsal eşleşmeler', en: 'Semantic search - conceptual matching' },
+  'guide.search.features.multilingual': { tr: 'Çok dilli destek (Türkçe, İngilizce)', en: 'Multilingual support (Turkish, English)' },
+  'guide.search.features.fuzzy': { tr: 'Bulanık eşleştirme - yazım hatalarına tolerans', en: 'Fuzzy matching - typo tolerance' },
+  'guide.search.features.filters': { tr: 'Ülke, nehir, tür ve yıl filtreleri', en: 'Country, river, type, and year filters' },
+
+  'guide.map.title': { tr: 'Harita Kullanımı', en: 'Map Usage' },
+  'guide.map.content': { tr: 'İnteraktif harita üzerinde anlaşmaları keşfedin:', en: 'Explore agreements on the interactive map:' },
+  'guide.map.features.interactive': { tr: 'Yakınlaştırma, kaydırma ve gezinme', en: 'Zoom, pan, and navigate' },
+  'guide.map.features.visual': { tr: 'Anlaşma yoğunluğunun görsel gösterimi', en: 'Visual representation of agreement density' },
+  'guide.map.features.details': { tr: 'Detaylar için işaretçilere tıklayın', en: 'Click markers for details' },
+  'guide.map.features.zoom': { tr: 'Harita kontrolleri ile zoom', en: 'Zoom with map controls' },
+
+  'guide.filters.title': { tr: 'Filtreleme', en: 'Filtering' },
+  'guide.filters.content': { tr: 'Sonuçları daraltmak için filtreleri kullanın:', en: 'Use filters to narrow down results:' },
+  'guide.filters.features.country': { tr: 'Ülkeye göre filtrele', en: 'Filter by country' },
+  'guide.filters.features.river': { tr: 'Nehir havzasına göre', en: 'By river basin' },
+  'guide.filters.features.type': { tr: 'Anlaşma türüne göre', en: 'By agreement type' },
+  'guide.filters.features.year': { tr: 'Yıl aralığına göre', en: 'By year range' },
+
+  'guide.details.title': { tr: 'Anlaşma Detayları', en: 'Agreement Details' },
+  'guide.details.content': { tr: 'Her anlaşma için başlık, taraf ülkeler, yıl ve belge indirme bağlantılarını görüntüleyin.', en: 'View title, party countries, year, and document download links for each agreement.' },
+
+  'guide.tips.title': { tr: 'İpuçları', en: 'Tips' },
+  'guide.tips.items.combine': { tr: 'Daha iyi sonuçlar için arama ve filtreleri birleştirin', en: 'Combine search and filters for better results' },
+  'guide.tips.items.language': { tr: 'Dil değiştirmek için üst sağdaki düğmeyi kullanın', en: 'Use the top-right button to switch languages' },
+  'guide.tips.items.hover': { tr: 'Hızlı önizleme için kartların üzerine gelin', en: 'Hover over cards for quick preview' },
+  'guide.tips.items.reset': { tr: 'Tüm filtreleri temizlemek için yenile düğmesini kullanın', en: 'Use refresh button to clear all filters' },
+
+  // About Section
+  'about.title': { tr: 'Su Anlaşmaları Portalı Hakkında', en: 'About Water Agreements Portal' },
+  'about.description': { tr: 'Bu portal, sınır aşan su kaynaklarının yönetimi konusunda küresel bir bakış açısı sunmak amacıyla geliştirilmiştir.', en: 'This portal was developed to provide a global perspective on transboundary water resources management.' },
+  'about.madeWith': { tr: 'Sevgiyle yapıldı', en: 'Made with love' },
+
+  // Legal Section
+  'about.legal.title': { tr: 'Hukuki Beyanlar', en: 'Legal Disclaimers' },
+  'about.legal.disclaimer.title': { tr: 'Sorumluluk Reddi', en: 'Disclaimer' },
+  'about.legal.disclaimer.content': { tr: 'Bu portal yalnızca bilgilendirme amaçlıdır. Herhangi bir hukuki tavsiye veya resmi belge niteliği taşımaz.', en: 'This portal is for informational purposes only. It does not constitute legal advice or official documentation.' },
+  'about.legal.dataAccuracy.title': { tr: 'Veri Doğruluğu', en: 'Data Accuracy' },
+  'about.legal.dataAccuracy.content': { tr: 'Verilerin doğruluğunu sağlamak için çaba gösterilmiş olsa da, hata veya eksiklikler olabilir. Resmi kaynaklardan teyit edilmesi önerilir.', en: 'While efforts have been made to ensure data accuracy, there may be errors or omissions. Verification from official sources is recommended.' },
+  'about.legal.noLiability.title': { tr: 'Sorumluluk', en: 'Liability' },
+  'about.legal.noLiability.content': { tr: 'Bu portalın kullanımından kaynaklanan herhangi bir zarar veya kayıptan sorumluluk kabul edilmez.', en: 'No liability is accepted for any damage or loss resulting from the use of this portal.' },
+  'about.legal.privacy.title': { tr: 'Gizlilik', en: 'Privacy' },
+  'about.legal.privacy.content': { tr: 'Bu portal kullanıcı verilerini toplamaz veya saklamaz. Tüm işlemler tarayıcınızda yerel olarak gerçekleştirilir.', en: 'This portal does not collect or store user data. All operations are performed locally in your browser.' },
+  'about.legal.intellectual.title': { tr: 'Fikri Mülkiyet', en: 'Intellectual Property' },
+  'about.legal.intellectual.content': { tr: 'Anlaşma verileri Oregon State University TFDD kaynaklıdır. Kaynak gösterilerek kullanılabilir.', en: 'Agreement data is sourced from Oregon State University TFDD. May be used with attribution.' },
+  'about.legal.changes.title': { tr: 'Değişiklikler', en: 'Changes' },
+  'about.legal.changes.content': { tr: 'Bu beyanlar önceden haber verilmeksizin güncellenebilir. Düzenli olarak kontrol edilmesi önerilir.', en: 'These disclaimers may be updated without prior notice. Regular review is recommended.' },
+
   // Map popup
-  'popup.download': { tr: 'Belgeyi İndir', en: 'Download Document' },
+  'popup.viewDetails': { tr: 'Detayları Görüntüle', en: 'View Details' },
+  'popup.countries': { tr: 'Ülkeler', en: 'Countries' },
   'popup.year': { tr: 'Yıl', en: 'Year' },
-
-  // Toast messages
-  'toast.loaded': { tr: '{count} anlaşma başarıyla yüklendi.', en: '{count} agreements loaded successfully.' },
-  'toast.jsonEmpty': { tr: 'JSON dosyasında geçerli veri bulunamadı.', en: 'No valid data found in JSON file.' },
-  'toast.jsonError': { tr: 'JSON dosyası geçersiz veya okunamıyor.', en: 'JSON file is invalid or unreadable.' },
-  'toast.jsonReadError': { tr: 'JSON dosyası okunamadı.', en: 'Could not read JSON file.' },
-  'toast.csvEmpty': { tr: 'CSV dosyasında geçerli veri bulunamadı.', en: 'No valid data found in CSV file.' },
-  'toast.csvError': { tr: 'CSV dosyası işlenirken hata oluştu.', en: 'Error processing CSV file.' },
-  'toast.csvReadError': { tr: 'CSV dosyası okunamadı.', en: 'Could not read CSV file.' },
-
-  // Smart search
-  'search.smart': { tr: 'AI Arama', en: 'AI Search' },
-  'search.smartPlaceholder': { tr: "Örn: Türkiye'nin Fırat anlaşmaları, Afrika sel yönetimi, 20. yüzyıl...", en: 'E.g.: Turkey Euphrates treaties, African flood mgmt, 20th century...' },
-  'search.resultCount': { tr: '{count} sonuç bulundu', en: '{count} results found' },
-  'search.understood': { tr: 'Anlaşılan:', en: 'Understood:' },
-  'search.mode.simple': { tr: 'Basit', en: 'Simple' },
-  'search.mode.ai': { tr: 'AI', en: 'AI' },
-
-  // Overpass water infrastructure layer
-  'layer.waterInfra': { tr: 'Su Altyapıları', en: 'Water Infrastructure' },
-  'layer.loading': { tr: 'Su altyapıları yükleniyor...', en: 'Loading water infrastructure...' },
-  'layer.zoomIn': { tr: 'Su altyapılarını görmek için yakınlaştırın (zoom ≥7)', en: 'Zoom in to see water infrastructure (zoom ≥7)' },
-  'layer.dam': { tr: 'Baraj', en: 'Dam' },
-  'layer.weir': { tr: 'Savak', en: 'Weir' },
-  'layer.waterTower': { tr: 'Su Kulesi', en: 'Water Tower' },
-  'layer.waterWell': { tr: 'Su Kuyusu', en: 'Water Well' },
-  'layer.waterworks': { tr: 'Su Arıtma / İşletme', en: 'Waterworks' },
-  'layer.reservoir': { tr: 'Rezervuar / Baraj Gölü', en: 'Reservoir' },
-  'layer.canal': { tr: 'Kanal', en: 'Canal' },
-  'layer.waterway': { tr: 'Su Yolu', en: 'Waterway' },
-  'layer.pump': { tr: 'Pompa İstasyonu', en: 'Pump Station' },
-  'layer.pumpingStation': { tr: 'Pompa İstasyonu', en: 'Pumping Station' },
-  'layer.waterTreatment': { tr: 'Su Arıtma Tesisi', en: 'Water Treatment Plant' },
-  'layer.waterGate': { tr: 'Su Kapısı / Savak', en: 'Water Gate / Sluice' },
-  'layer.irrigationChannel': { tr: 'Sulama Kanalı', en: 'Irrigation Channel' },
-  'layer.spring': { tr: 'Kaynak / Pınar', en: 'Spring' },
-  'layer.wetland': { tr: 'Sulak Alan', en: 'Wetland' },
-  'layer.gauging': { tr: 'Akım Ölçüm İstasyonu', en: 'Gauging Station' },
-  'layer.waterfall': { tr: 'Şelale', en: 'Waterfall' },
-  'layer.lock': { tr: 'Gemi Kilidi', en: 'Lock (Navigation)' },
-  'layer.results': { tr: '{count} su altyapısı bulundu', en: '{count} water features found' },
-  'layer.filterTitle': { tr: 'Katman Filtreleri', en: 'Layer Filters' },
-  'layer.showAll': { tr: 'Tümünü Göster', en: 'Show All' },
-  'layer.hideAll': { tr: 'Tümünü Gizle', en: 'Hide All' },
-  'layer.exportGeoJSON': { tr: 'GeoJSON İndir', en: 'Export GeoJSON' },
-  'layer.exportCSV': { tr: 'CSV İndir', en: 'Export CSV' },
-  'layer.osmId': { tr: 'OSM ID', en: 'OSM ID' },
-  'layer.osmType': { tr: 'OSM Türü', en: 'OSM Type' },
-  'layer.viewOnOSM': { tr: 'OSM\'de Görüntüle', en: 'View on OSM' },
-  'layer.tags': { tr: 'Özellikler', en: 'Tags' },
-  'layer.name': { tr: 'Ad', en: 'Name' },
-  'layer.type': { tr: 'Tür', en: 'Type' },
-  'layer.noName': { tr: 'İsimsiz', en: 'Unnamed' },
-  'layer.featureInfo': { tr: 'Altyapı Bilgisi', en: 'Feature Info' },
-  'layer.operator': { tr: 'İşletmeci', en: 'Operator' },
-  'layer.capacity': { tr: 'Kapasite', en: 'Capacity' },
-  'layer.height': { tr: 'Yükseklik', en: 'Height' },
-  'layer.length': { tr: 'Uzunluk', en: 'Length' },
-  'layer.width': { tr: 'Genişlik', en: 'Width' },
-  'layer.depth': { tr: 'Derinlik', en: 'Depth' },
-  'layer.maxdepth': { tr: 'Maks. Derinlik', en: 'Max Depth' },
-  'layer.volume': { tr: 'Hacim', en: 'Volume' },
-  'layer.start_date': { tr: 'İnşaat Tarihi', en: 'Construction Date' },
-  'layer.wikipedia': { tr: 'Wikipedia', en: 'Wikipedia' },
-  'layer.website': { tr: 'Web Sitesi', en: 'Website' },
-  'layer.attribution': { tr: 'Kaynak: OpenStreetMap katkıcıları (ODbL)', en: 'Source: OpenStreetMap contributors (ODbL)' },
-
-  // Precipitation & Flood
-  'layer.precipitation': { tr: 'Yağış', en: 'Precipitation' },
-  'layer.flood': { tr: 'Taşkın / Debi', en: 'Flood / Discharge' },
-  'layer.precipLoading': { tr: 'Yağış verileri yükleniyor...', en: 'Loading precipitation data...' },
-  'layer.floodLoading': { tr: 'Taşkın verileri yükleniyor...', en: 'Loading flood data...' },
-  'layer.precipResults': { tr: '{count} noktada yağış verisi', en: '{count} precipitation points' },
-  'layer.floodResults': { tr: '{count} noktada debi verisi', en: '{count} discharge points' },
-  'layer.dataSource': { tr: 'Kaynak: Open-Meteo (GloFAS)', en: 'Source: Open-Meteo (GloFAS)' },
-  'layer.conflicts': { tr: 'Çatışma / İşbirliği', en: 'Conflict / Cooperation' },
-  'layer.conflictsLoading': { tr: 'Su çatışma verileri yükleniyor...', en: 'Loading water conflict data...' },
-  'layer.conflictsResults': { tr: '{count} tarihi olay', en: '{count} historical events' },
-  'layer.barScale': { tr: 'BAR Skalası', en: 'BAR Scale' },
-  'layer.conflictSrc': { tr: 'Kaynak: Pacific Institute, TFDD', en: 'Source: Pacific Institute, TFDD' },
-
-  // Auth
-  'auth.loginTitle': { tr: 'Yönetici Girişi', en: 'Admin Login' },
-  'auth.tokenPlaceholder': { tr: 'GitHub Personal Access Token', en: 'GitHub Personal Access Token' },
-  'auth.loginButton': { tr: 'Giriş Yap', en: 'Sign In' },
-  'auth.logoutButton': { tr: 'Çıkış Yap', en: 'Sign Out' },
-  'auth.loginDesc': { tr: 'Veri yüklemek için GitHub hesabınızla giriş yapın.', en: 'Sign in with your GitHub account to upload data.' },
-  'auth.failed': { tr: 'Giriş başarısız. Yalnızca yetkili kullanıcı giriş yapabilir.', en: 'Login failed. Only the authorized user can sign in.' },
-  'auth.loggedAs': { tr: 'Giriş yapıldı:', en: 'Logged in as:' },
-
-  // NotFound
-  'notFound.title': { tr: 'Sayfa Bulunamadı', en: 'Page Not Found' },
-  'notFound.description': { tr: 'Aradığınız sayfa mevcut değil. Taşınmış veya silinmiş olabilir.', en: "Sorry, the page you are looking for doesn't exist. It may have been moved or deleted." },
-  'notFound.goHome': { tr: 'Ana Sayfaya Dön', en: 'Go Home' },
-} as const;
-
-export type TranslationKey = keyof typeof translations;
-
-export function t(key: TranslationKey, lang: Lang, params?: Record<string, string | number>): string {
-  const entry = translations[key];
-  let text = entry?.[lang] ?? entry?.['tr'] ?? key;
-  if (params) {
-    for (const [k, v] of Object.entries(params)) {
-      text = text.replace(`{${k}}`, String(v));
-    }
-  }
-  return text;
-}
+  'popup.basin': { tr: 'Havza', en: 'Basin' },
+  'popup.type': { tr: 'Tür', en: 'Type' },
+};
 
 export default translations;
