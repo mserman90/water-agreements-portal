@@ -3,7 +3,6 @@ import Papa from 'papaparse';
 import { basinCoords } from '@/data/basinCoords';
 import { findTreatyLink, findGithubDoc } from '@/data/treatyLinks';
 import MapViewer from '@/components/MapViewer';
-import AgreementSidebar from '@/components/AgreementSidebar';
 import TimelineOverlay from '@/components/TimelineOverlay';
 import SettingsPanel from '@/components/SettingsPanel';
 import { useAuth } from '@/contexts/AuthContext';
@@ -29,7 +28,7 @@ function findBasinCoords(basinName: string): [number, number] | null {
 
 // Extract 4-digit year from any date string
 function extractYear(val: unknown): number {
-  const m = String(val ?? '').match(/(\d{4})/);
+  const m = String(val ?? '').match(/(\\d{4})/);
   return m ? Number(m[1]) : 0;
 }
 
@@ -53,7 +52,7 @@ function parseRows(rows: Record<string, unknown>[]): Agreement[] {
       const link = findTreatyLink(docName);
       const ghDoc = link ? findGithubDoc(link.faolex, docName) : undefined;
       return {
-        id: String(row.id ?? row.ID ?? row['Entry ID'] ?? `agreement-${index}`),
+        id: String(row.id ?? row.ID ?? row['Entry ID'] ?? `agreement-${index}`);
         name: String(row.name ?? row.Name ?? row.title ?? row.DocumentName ?? 'Unnamed'),
         country: String(row.country ?? row.Country ?? row.Signatories ?? 'Unknown'),
         basin,
@@ -92,7 +91,6 @@ export default function Home() {
   const [agreements, setAgreements] = useState<Agreement[]>([]);
   const [selectedId, setSelectedId] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(true);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
   const { isAdmin } = useAuth();
 
   // --- Timeline state ---
@@ -147,14 +145,14 @@ export default function Home() {
     return { totalCount: filteredAgreements.length, coopCount: coop, conflictCount: conflict, mixedCount: mixed };
   }, [filteredAgreements]);
 
-  // Secili anlasma
+  // Selected agreement
   const selectedAgreement = useMemo(
     () => agreements.find((a) => a.id === selectedId),
     [agreements, selectedId],
   );
 
   const processJSON = useCallback((text: string): Agreement[] => {
-    const raw = JSON.parse(text.replace(/[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]/g, ''));
+    const raw = JSON.parse(text.replace(/[\\x00-\\x08\\x0b\\x0c\\x0e-\\x1f\\x7f]/g, ''));
     let data: unknown[];
     if (Array.isArray(raw)) {
       data = raw;
@@ -219,50 +217,15 @@ export default function Home() {
 
   return (
     <>
-            <SettingsPanel onUploadFile={handleFileUpload} />
-      {/* Sidebar toggle button */}
-      <button
-        onClick={() => setSidebarOpen((v) => !v)}
-        style={{
-          position: 'absolute',
-          top: 90,
-          left: sidebarOpen ? 328 : 8,
-          zIndex: 1000,
-          background: '#0369a1',
-          color: '#fff',
-          border: 'none',
-          borderRadius: 4,
-          padding: '4px 8px',
-          cursor: 'pointer',
-          fontSize: 16,
-          lineHeight: 1,
-          transition: 'left 0.25s',
-          boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
-        }}
-        title={sidebarOpen ? 'Kapat' : 'Ac'}
-      >
-        {sidebarOpen ? '<-' : '='}
-      </button>
-
-      {/* Sidebar - filtered by timeline */}
-      {sidebarOpen && (
-        <AgreementSidebar
-          agreements={filteredAgreements}
-          selectedId={selectedId}
-          onSelect={setSelectedId}
-          onUploadFile={handleFileUpload}
-        />
-      )}
-
-      {/* Map - filtered by timeline */}
+      <SettingsPanel onUploadFile={handleFileUpload} />
+      {/* Map - full screen */}
       <MapViewer
         agreements={filteredAgreements}
         selectedId={selectedId}
         onMarkerClick={setSelectedId}
         currentYear={currentYear}
       />
-
-      {/* Timeline overlay */}
+      {/* Timeline overlay with glassmorphism */}
       <TimelineOverlay
         currentYear={currentYear}
         setCurrentYear={setCurrentYear}
@@ -278,7 +241,6 @@ export default function Home() {
         mixedCount={mixedCount}
         selectedAgreement={selectedAgreement}
       />
-
       {isLoading && (
         <div
           style={{
@@ -286,10 +248,16 @@ export default function Home() {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%,-50%)',
-            background: 'white',
-            padding: 16,
-            borderRadius: 8,
-            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(20px)',
+            WebkitBackdropFilter: 'blur(20px)',
+            padding: 24,
+            borderRadius: 16,
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+            color: '#fff',
+            fontSize: 18,
+            fontWeight: 600,
           }}
         >
           Veriler yukleniyor...
