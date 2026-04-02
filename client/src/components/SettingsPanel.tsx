@@ -14,431 +14,272 @@ export default function SettingsPanel({ onUploadFile }: SettingsPanelProps) {
   const { isAdmin } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'guide' | 'upload' | 'about' | 'login'>('guide');
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      onUploadFile(file);
-      e.target.value = '';
-      setIsOpen(false);
-    }
+  const toggleSection = (section: string) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
   };
 
-  const tabs = [
-    { id: 'guide' as const, icon: BookOpen, label: lang === 'tr' ? 'Kullanım Kılavuzu' : 'User Guide' },
-    // Only show Upload tab if admin
-    ...(isAdmin ? [{ id: 'upload' as const, icon: Upload, label: lang === 'tr' ? 'Veri Yükle' : 'Upload Data' }] : []),
-    { id: 'about' as const, icon: Heart, label: lang === 'tr' ? 'Hakkında & Teşekkür' : 'About & Credits' },
-    { id: 'login' as const, icon: isAdmin ? ShieldCheck : LogIn, label: isAdmin ? (lang === 'tr' ? 'Hesap' : 'Account') : (lang === 'tr' ? 'Giriş' : 'Login') },
-  ];
+  const AboutTab = () => (
+    <div className="space-y-4 text-sm">
+      <div>
+        <h3 className="font-semibold text-lg mb-2">
+          {t('about.title')}
+        </h3>
+        <p className="text-gray-600 dark:text-gray-300">
+          {t('about.description')}
+        </p>
+      </div>
+      
+      <div className="border-t pt-4">
+        <h4 className="font-semibold mb-2">{t('about.legal.title')}</h4>
+        <div className="space-y-3 text-xs text-gray-600 dark:text-gray-400">
+          <div>
+            <p className="font-semibold text-gray-700 dark:text-gray-300">{t('about.legal.disclaimer.title')}</p>
+            <p>{t('about.legal.disclaimer.content')}</p>
+          </div>
+          
+          <div>
+            <p className="font-semibold text-gray-700 dark:text-gray-300">{t('about.legal.dataAccuracy.title')}</p>
+            <p>{t('about.legal.dataAccuracy.content')}</p>
+          </div>
+          
+          <div>
+            <p className="font-semibold text-gray-700 dark:text-gray-300">{t('about.legal.noLiability.title')}</p>
+            <p>{t('about.legal.noLiability.content')}</p>
+          </div>
+          
+          <div>
+            <p className="font-semibold text-gray-700 dark:text-gray-300">{t('about.legal.privacy.title')}</p>
+            <p>{t('about.legal.privacy.content')}</p>
+          </div>
+          
+          <div>
+            <p className="font-semibold text-gray-700 dark:text-gray-300">{t('about.legal.intellectual.title')}</p>
+            <p>{t('about.legal.intellectual.content')}</p>
+          </div>
+          
+          <div>
+            <p className="font-semibold text-gray-700 dark:text-gray-300">{t('about.legal.changes.title')}</p>
+            <p>{t('about.legal.changes.content')}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-center pt-4 border-t">
+        <Heart className="w-4 h-4 mr-2 text-red-500" />
+        <span className="text-xs text-gray-500">
+          {t('about.madeWith')}
+        </span>
+      </div>
+    </div>
+  );
+
+  const GuideTab = () => {
+    const sections = [
+      {
+        id: 'overview',
+        title: t('guide.overview.title'),
+        content: t('guide.overview.content')
+      },
+      {
+        id: 'search',
+        title: t('guide.search.title'),
+        content: t('guide.search.content'),
+        features: [
+          t('guide.search.features.semantic'),
+          t('guide.search.features.multilingual'),
+          t('guide.search.features.fuzzy'),
+          t('guide.search.features.filters')
+        ]
+      },
+      {
+        id: 'map',
+        title: t('guide.map.title'),
+        content: t('guide.map.content'),
+        features: [
+          t('guide.map.features.interactive'),
+          t('guide.map.features.visual'),
+          t('guide.map.features.details'),
+          t('guide.map.features.zoom')
+        ]
+      },
+      {
+        id: 'filters',
+        title: t('guide.filters.title'),
+        content: t('guide.filters.content'),
+        features: [
+          t('guide.filters.features.country'),
+          t('guide.filters.features.river'),
+          t('guide.filters.features.type'),
+          t('guide.filters.features.year')
+        ]
+      },
+      {
+        id: 'details',
+        title: t('guide.details.title'),
+        content: t('guide.details.content')
+      },
+      {
+        id: 'tips',
+        title: t('guide.tips.title'),
+        items: [
+          t('guide.tips.items.combine'),
+          t('guide.tips.items.language'),
+          t('guide.tips.items.hover'),
+          t('guide.tips.items.reset')
+        ]
+      }
+    ];
+
+    return (
+      <div className="space-y-2">
+        {sections.map(section => (
+          <div key={section.id} className="border rounded-lg">
+            <button
+              onClick={() => toggleSection(section.id)}
+              className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            >
+              <span className="font-semibold text-left">{section.title}</span>
+              {expandedSections[section.id] ? (
+                <ChevronUp className="w-4 h-4" />
+              ) : (
+                <ChevronDown className="w-4 h-4" />
+              )}
+            </button>
+            
+            {expandedSections[section.id] && (
+              <div className="px-4 pb-4 space-y-2">
+                <p className="text-sm text-gray-600 dark:text-gray-300">
+                  {section.content}
+                </p>
+                {'features' in section && section.features && (
+                  <ul className="list-disc list-inside text-sm space-y-1 text-gray-600 dark:text-gray-400">
+                    {section.features.map((feature, idx) => (
+                      <li key={idx}>{feature}</li>
+                    ))}
+                  </ul>
+                )}
+                {'items' in section && section.items && (
+                  <ul className="list-disc list-inside text-sm space-y-1 text-gray-600 dark:text-gray-400">
+                    {section.items.map((item, idx) => (
+                      <li key={idx}>{item}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  const UploadTab = () => (
+    <div className="space-y-4">
+      <div>
+        <h3 className="font-semibold mb-2">{t('upload.title')}</h3>
+        <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+          {t('upload.description')}
+        </p>
+      </div>
+      
+      <div className="border-2 border-dashed rounded-lg p-6 text-center">
+        <Input
+          type="file"
+          accept=".geojson,.json"
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (file) onUploadFile(file);
+          }}
+          className="max-w-full"
+        />
+        <p className="text-xs text-gray-500 mt-2">
+          {t('upload.formats')}
+        </p>
+      </div>
+      
+      <div className="text-xs text-gray-500 space-y-1">
+        <p className="font-semibold">{t('upload.requirements.title')}</p>
+        <ul className="list-disc list-inside space-y-1">
+          <li>{t('upload.requirements.geometry')}</li>
+          <li>{t('upload.requirements.properties')}</li>
+          <li>{t('upload.requirements.encoding')}</li>
+        </ul>
+      </div>
+    </div>
+  );
 
   return (
     <>
-      {/* Settings Button */}
-      <div className="p-3 border-t border-slate-100 bg-slate-50">
-        <Button
-          onClick={() => setIsOpen(true)}
-          className="w-full gap-2"
-          variant="outline"
-        >
-          <Info className="h-4 w-4" />
-          {lang === 'tr' ? 'Bilgi' : 'Info'}
-        </Button>
-      </div>
+      <Button
+        variant="outline"
+        size="icon"
+        className="fixed top-4 left-4 z-50 bg-white dark:bg-gray-800 shadow-lg"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <Info className="h-4 w-4" />
+      </Button>
 
-      {/* Overlay */}
       {isOpen && (
-        <div className="fixed inset-0 z-[9999] flex">
-          {/* Backdrop */}
-          <div
-            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-            onClick={() => setIsOpen(false)}
-          />
+        <div className="fixed left-4 top-16 z-50 w-96 max-h-[calc(100vh-5rem)] bg-white dark:bg-gray-900 rounded-lg shadow-xl border dark:border-gray-700 flex flex-col">
+          <div className="flex items-center justify-between p-4 border-b dark:border-gray-700">
+            <h2 className="text-lg font-semibold">{t('settings.title')}</h2>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsOpen(false)}
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
 
-          {/* Panel */}
-          <div className="relative ml-0 w-[360px] max-w-[90vw] h-full bg-white shadow-2xl flex flex-col animate-in slide-in-from-left duration-300">
-            {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-slate-200 bg-slate-50">
-              <div className="flex items-center gap-2">
-                <Info className="h-5 w-5 text-slate-600" />
-                <h2 className="font-bold text-sm text-slate-800">
-                  {lang === 'tr' ? 'Bilgi' : 'Info'}
-                </h2>
-              </div>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="p-1.5 rounded-md hover:bg-slate-200 transition-colors"
-              >
-                <X className="h-4 w-4 text-slate-500" />
-              </button>
-            </div>
+          <div className="flex border-b dark:border-gray-700">
+            <button
+              onClick={() => setActiveTab('guide')}
+              className={`flex-1 px-4 py-2 text-sm font-medium transition-colors ${
+                activeTab === 'guide'
+                  ? 'border-b-2 border-blue-500 text-blue-600 dark:text-blue-400'
+                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+              }`}
+            >
+              <BookOpen className="w-4 h-4 inline mr-2" />
+              {t('tabs.guide')}
+            </button>
+            <button
+              onClick={() => setActiveTab('upload')}
+              className={`flex-1 px-4 py-2 text-sm font-medium transition-colors ${
+                activeTab === 'upload'
+                  ? 'border-b-2 border-blue-500 text-blue-600 dark:text-blue-400'
+                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+              }`}
+            >
+              <Upload className="w-4 h-4 inline mr-2" />
+              {t('tabs.upload')}
+            </button>
+            <button
+              onClick={() => setActiveTab('about')}
+              className={`flex-1 px-4 py-2 text-sm font-medium transition-colors ${
+                activeTab === 'about'
+                  ? 'border-b-2 border-blue-500 text-blue-600 dark:text-blue-400'
+                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+              }`}
+            >
+              <ShieldCheck className="w-4 h-4 inline mr-2" />
+              {t('tabs.about')}
+            </button>
+          </div>
 
-            {/* Tabs */}
-            <div className="flex border-b border-slate-200">
-              {tabs.map(tab => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex-1 flex items-center justify-center gap-1.5 px-2 py-3 text-[11px] font-semibold transition-all border-b-2 ${
-                    activeTab === tab.id
-                      ? 'border-primary text-primary bg-blue-50/50'
-                      : 'border-transparent text-slate-500 hover:text-slate-700'
-                  }`}
-                >
-                  <tab.icon className="h-3.5 w-3.5" />
-                  {tab.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Tab Content */}
-            <div className="flex-1 overflow-y-auto">
-              {activeTab === 'upload' && isAdmin && (
-                <UploadTab
-                  lang={lang}
-                  onFileChange={handleFileChange}
-                />
-              )}
-              {activeTab === 'guide' && <GuideTab lang={lang} isAdmin={isAdmin} />}
-              {activeTab === 'about' && <AboutTab lang={lang} />}
-              {activeTab === 'login' && <LoginTab lang={lang} />}
-            </div>
+          <div className="flex-1 overflow-y-auto p-4">
+            {activeTab === 'guide' && <GuideTab />}
+            {activeTab === 'upload' && <UploadTab />}
+            {activeTab === 'about' && <AboutTab />}
           </div>
         </div>
       )}
     </>
-  );
-}
-
-// ── Upload Tab ──
-function UploadTab({ lang, onFileChange }: { lang: string; onFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void }) {
-  return (
-    <div className="p-5 space-y-4">
-      <p className="text-sm text-slate-600 leading-relaxed">
-        {lang === 'tr'
-          ? 'Kendi veri setinizi yükleyerek mevcut verilerin üzerine yazabilirsiniz. CSV veya JSON formatları desteklenmektedir.'
-          : 'Upload your own dataset to replace the current data. CSV and JSON formats are supported.'}
-      </p>
-
-      <label htmlFor="settings-file-upload" className="block">
-        <Button className="w-full gap-2" variant="default" asChild>
-          <span>
-            <Upload className="h-4 w-4" />
-            {lang === 'tr' ? 'CSV / JSON Dosya Seç' : 'Select CSV / JSON File'}
-          </span>
-        </Button>
-      </label>
-      <input
-        id="settings-file-upload"
-        type="file"
-        accept=".csv,.json"
-        onChange={onFileChange}
-        className="hidden"
-      />
-
-      <div className="bg-slate-50 rounded-lg p-4 text-xs text-slate-600 space-y-2">
-        <p className="font-semibold text-slate-700">
-          {lang === 'tr' ? 'Desteklenen JSON yapıları:' : 'Supported JSON structures:'}
-        </p>
-        <ul className="list-disc pl-4 space-y-1">
-          <li>{lang === 'tr' ? 'Doğrudan dizi: [{...}, {...}]' : 'Direct array: [{...}, {...}]'}</li>
-          <li>{lang === 'tr' ? 'Sarmalı nesne: {"data": [...]} veya {"agreements": [...]}' : 'Wrapped object: {"data": [...]} or {"agreements": [...]}'}</li>
-          <li>{lang === 'tr' ? 'TFDD formatı: {"Full Treaty Database": [...]}' : 'TFDD format: {"Full Treaty Database": [...]}'}</li>
-        </ul>
-        <p className="font-semibold text-slate-700 mt-3">
-          {lang === 'tr' ? 'Tanınan alan adları:' : 'Recognized field names:'}
-        </p>
-        <ul className="list-disc pl-4 space-y-1">
-          <li><code className="bg-slate-200 px-1 rounded">latitude / lat</code>, <code className="bg-slate-200 px-1 rounded">longitude / lng / lon</code></li>
-          <li><code className="bg-slate-200 px-1 rounded">name / DocumentName / title</code></li>
-          <li><code className="bg-slate-200 px-1 rounded">country / Country_Name / Signatories</code></li>
-          <li><code className="bg-slate-200 px-1 rounded">basin / Basin_Name / TFDD Basin(s)</code></li>
-          <li><code className="bg-slate-200 px-1 rounded">year / DateSigned</code></li>
-        </ul>
-      </div>
-    </div>
-  );
-}
-
-// ── Login Tab ──
-function LoginTab({ lang }: { lang: string }) {
-  const { isAdmin, username, isLoading, login, logout } = useAuth();
-  const { t } = useLanguage();
-  const [token, setToken] = useState('');
-  const [error, setError] = useState('');
-
-  const handleLogin = async () => {
-    setError('');
-    const success = await login(token);
-    if (!success) {
-      setError(t('auth.failed'));
-    }
-    setToken('');
-  };
-
-  if (isAdmin) {
-    return (
-      <div className="p-5 space-y-4">
-        <div className="bg-emerald-50 border border-emerald-100 rounded-lg p-4 flex items-center gap-3">
-          <ShieldCheck className="h-5 w-5 text-emerald-600 shrink-0" />
-          <div>
-            <p className="text-sm font-semibold text-emerald-800">
-              {t('auth.loggedAs')} <span className="font-mono">@{username}</span>
-            </p>
-          </div>
-        </div>
-        <Button
-          onClick={logout}
-          variant="outline"
-          className="w-full gap-2 text-red-600 border-red-200 hover:bg-red-50"
-        >
-          <LogOut className="h-4 w-4" />
-          {t('auth.logoutButton')}
-        </Button>
-      </div>
-    );
-  }
-
-  return (
-    <div className="p-5 space-y-4">
-      <div className="text-center space-y-2">
-        <LogIn className="h-8 w-8 text-slate-400 mx-auto" />
-        <h3 className="font-bold text-sm text-slate-800">{t('auth.loginTitle')}</h3>
-        <p className="text-xs text-slate-500 leading-relaxed">
-          {t('auth.loginDesc')}
-        </p>
-      </div>
-
-      <div className="space-y-3">
-        <Input
-          type="password"
-          placeholder={t('auth.tokenPlaceholder')}
-          value={token}
-          onChange={e => { setToken(e.target.value); setError(''); }}
-          onKeyDown={e => e.key === 'Enter' && handleLogin()}
-          className="text-sm"
-        />
-
-        {error && (
-          <p className="text-xs text-red-500 text-center">{error}</p>
-        )}
-
-        <Button
-          onClick={handleLogin}
-          disabled={!token || isLoading}
-          className="w-full gap-2"
-        >
-          {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <LogIn className="h-4 w-4" />}
-          {t('auth.loginButton')}
-        </Button>
-      </div>
-
-      <div className="bg-slate-50 rounded-lg p-3 text-[11px] text-slate-500 leading-relaxed space-y-2">
-        <p className="font-semibold text-slate-600">
-          {lang === 'tr' ? 'Token nas\u0131l al\u0131n\u0131r?' : 'How to get a token?'}
-        </p>
-        <ol className="list-decimal pl-4 space-y-1">
-          <li>
-            {lang === 'tr' ? 'GitHub\'a giri\u015f yap\u0131n' : 'Sign in to GitHub'}
-          </li>
-          <li>
-            <a href="https://github.com/settings/tokens/new" target="_blank" rel="noopener noreferrer" className="text-primary underline">
-              {lang === 'tr' ? 'Yeni token olu\u015fturun' : 'Create a new token'}
-            </a>
-            {lang === 'tr' ? ' (scope gerekmez)' : ' (no scopes needed)'}
-          </li>
-          <li>
-            {lang === 'tr' ? 'Olu\u015fturulan token\'\u0131 yukar\u0131daki alana yap\u0131\u015ft\u0131r\u0131n' : 'Paste the generated token above'}
-          </li>
-        </ol>
-      </div>
-    </div>
-  );
-}
-
-// ── Guide Tab ──
-function GuideTab({ lang, isAdmin }: { lang: string; isAdmin: boolean }) {
-  const [openSection, setOpenSection] = useState<number | null>(0);
-
-  const sections = lang === 'tr' ? [
-    {
-      title: 'Genel Bakış',
-      content: 'Bu portal, 1820\'den günümüze kadar imzalanmış 800\'den fazla uluslararası tatlı su anlaşmasını interaktif bir harita üzerinde görselleştirir. Veriler, Oregon State Üniversitesi Transboundary Freshwater Dispute Database (TFDD) kaynağından sağlanmaktadır.'
-    },
-    {
-      title: 'Harita Kullanımı',
-      content: 'Harita üzerindeki dairesel işaretçiler anlaşmaların konumlarını gösterir. Kümelenmiş (cluster) işaretçilere tıklayarak yakınlaştırabilirsiniz. Tekil bir işaretçiye tıkladığınızda anlaşma detayları ve varsa belge indirme bağlantısı görüntülenir. Haritayı sürükleyerek kaydırabilir, fare tekerleği veya +/- butonlarıyla yakınlaştırabilirsiniz.'
-    },
-    {
-      title: 'Su Altyapıları Katmanı',
-      content: 'Haritada sağ üstteki "Su Altyapıları" butonuna tıklayarak OpenStreetMap Overpass katmanını aktif edebilirsiniz. Zoom 10 ve üzeri seviyede görünür alandaki barajlar, savıklar, su kuleleri, su kuyuları, su arıtma tesisleri, baraj gölleri, kanallar ve nehirler otomatik yüklenir. Her altyapı türü farklı renkte gösterilir.'
-    },
-    {
-      title: 'Yağış ve Taşkın Katmanları',
-      content: 'Haritada "Yağış" ve "Taşkın" butonlarıyla Open-Meteo güncel hava verilerini görüntüleyebilirsiniz. Yağış katmanı saatlik yağış tahminlerini, taşkın katmanı ise nehir debi verilerini renkli noktalarla gösterir.\n\nAyrıca haritada herhangi bir noktaya sağ tıklayarak 1940\'tan bugüne kadar tarihi yağış verilerini (ERA5) sorgulayabilir ve grafik olarak inceleyebilirsiniz.'
-    },
-    {
-      title: 'Çatışma/İşbirliği Katmanı',
-      content: 'Haritada "Çatışma / İşbirliği" butonuyla su kaynaklı tarihi çatışma ve işbirliği olaylarını görüntüleyebilirsiniz. Toplam 121 olay, BAR (Basins at Risk) yoğunluk ölçeğiyle (-6 ile +6 arası) renklendirilir:\n\n• Kırmızı tonları (-6 ile -1): Çatışma (savaş eylemi, askeri düşmanlık, sözlü düşmanlık)\n• Gri (0): Nötr\n• Mavi-Yeşil tonları (+1 ile +6): İşbirliği (sözel destek, anlaşma, stratejik ittifak)\n\nKaynak: Pacific Institute, TFDD'
-    },
-    {
-      title: 'Basit Arama',
-      content: 'Sol paneldeki arama çubuğuna havza adı, ülke adı veya anlaşma ID\'si yazarak hızlı filtreleme yapabilirsiniz. Arama sonuçları anlık olarak güncellenir.'
-    },
-    {
-      title: 'AI Destekli Arama',
-      content: 'AI moduna geçerek doğal dilde sorgular yapabilirsiniz. Motor, Türkçe ek çözümleme (stemming), 200+ ülke, 50+ havza, 19 konu kategorisi ve 27 bölge/alt bölge tanır. Türkçe karakter hatalarına (ı/i, ö/o, ü/u, ş/s, ç/c) toleranslıdır.\n\nÖrnek sorgular:\n• "Türkiye\'nin Fırat anlaşmaları"\n• "Kafkasya bölgesindeki sınır anlaşmaları"\n• "Afrika\'da sel yönetimi 2000 sonrası"\n• "Orta Asya su paylaşımı"\n• "20. yüzyıl hidroelektrik anlaşmaları"\n• "belgesi olan Mısır Nil anlaşmaları"\n• "en eski Avrupa anlaşmaları"'
-    },
-    {
-      title: 'Belge İndirme (3 Kaynak)',
-      content: 'Anlaşma belgelerine üç farklı kaynaktan erişilebilir:\n\n• Mavi "İndir" — Oregon Digital (TFDD arşivi)\n• Yeşil "FAOLEX" — FAO FAOLEX veritabanı\n• Mor "PDF" — GitHub üzerinde depolanan orijinal belgeler\n\nHer kaynak farklı anlaşmalar için mevcut olabilir. Butonlar hem sidebar kartlarında hem harita popup\'larında görünür.'
-    },
-    {
-      title: 'Sol Panel',
-      content: 'Sol panel, masaüstünde hamburger menü (☰) ile açılıp kapatılabilir. Mobilde otomatik olarak drawer modunda çalışır. Paneldeki anlaşma kartlarına tıkladığınızda harita o noktaya odaklanır ve detay popup\'ı açılır.'
-    },
-    ...(isAdmin ? [{
-      title: 'Veri Yükleme',
-      content: 'Bilgi menüsündeki "Veri Yükle" sekmesinden kendi CSV veya JSON dosyanızı yükleyerek mevcut verileri değiştirebilirsiniz. Uygulama TFDD formatını ve yaygın alternatif alan adlarını otomatik tanır. Koordinat bilgisi olmayan verilerde havza adından otomatik konum türetilir.'
-    }] : []),
-    {
-      title: 'Dil Desteği',
-      content: 'Sağ üst köşedeki TR/EN butonuyla Türkçe ve İngilizce arasında geçiş yapabilirsiniz. AI arama motoru her iki dilde de sorgu anlayabilir.'
-    },
-  ] : [
-    {
-      title: 'Overview',
-      content: 'This portal visualizes over 800 international freshwater agreements signed from 1820 to present on an interactive map. Data is sourced from the Oregon State University Transboundary Freshwater Dispute Database (TFDD).'
-    },
-    {
-      title: 'Map Navigation',
-      content: 'Circular markers on the map represent agreement locations. Click clustered markers to zoom in. Click individual markers to view agreement details and download links (where available). Drag to pan, scroll or use +/- to zoom.'
-    },
-    {
-      title: 'Water Infrastructure Layer',
-      content: 'Click the "Water Infrastructure" button on the top-right of the map to enable the OpenStreetMap Overpass layer. At zoom level 10 and above, dams, weirs, water towers, wells, waterworks, reservoirs, canals, and rivers in the visible area are automatically loaded. Each infrastructure type is shown in a different color.'
-    },
-    {
-      title: 'Precipitation & Flood Layers',
-      content: 'Use the "Precipitation" and "Flood" buttons on the map to display current Open-Meteo weather data. The precipitation layer shows hourly rainfall forecasts, while the flood layer shows river discharge data with colored markers.\n\nYou can also right-click anywhere on the map to query historical precipitation data (ERA5) from 1940 to present and view it as a chart.'
-    },
-    {
-      title: 'Conflict/Cooperation Layer',
-      content: 'Click the "Conflict / Cooperation" button on the map to display historical water-related conflict and cooperation events. A total of 121 events are color-coded using the BAR (Basins at Risk) intensity scale (-6 to +6):\n\n• Red shades (-6 to -1): Conflict (war act, military hostility, verbal hostility)\n• Gray (0): Neutral\n• Blue-Green shades (+1 to +6): Cooperation (verbal support, agreement, strategic alliance)\n\nSource: Pacific Institute, TFDD'
-    },
-    {
-      title: 'Simple Search',
-      content: 'Type a basin name, country name, or agreement ID in the search bar for quick filtering. Results update instantly.'
-    },
-    {
-      title: 'AI-Powered Search',
-      content: 'Switch to AI mode for natural language queries. The engine features Turkish stemming, 200+ country aliases, 50+ basin names, 19 topic categories, and 27 region/subregion mappings. Tolerant of Turkish character typos (ı/i, ö/o, ü/u, ş/s, ç/c).\n\nExample queries:\n• "Turkey Euphrates agreements"\n• "Caucasus region border treaties"\n• "African flood management after 2000"\n• "Central Asia water allocation"\n• "20th century hydropower treaties"\n• "Nile agreements with documents"\n• "oldest European agreements"'
-    },
-    {
-      title: 'Document Downloads (3 Sources)',
-      content: 'Treaty documents can be accessed from three different sources:\n\n• Blue "Download" — Oregon Digital (TFDD archive)\n• Green "FAOLEX" — FAO FAOLEX database\n• Purple "PDF" — Original documents hosted on GitHub\n\nEach source may be available for different agreements. Buttons appear in both sidebar cards and map popups.'
-    },
-    {
-      title: 'Sidebar',
-      content: 'The sidebar can be toggled open/closed on desktop using the hamburger menu (☰). On mobile it works as a drawer overlay. Click agreement cards in the sidebar to focus the map and open the detail popup.'
-    },
-    ...(isAdmin ? [{
-      title: 'Data Upload',
-      content: 'Upload your own CSV or JSON file from the "Upload Data" tab in Info to replace the current dataset. The application auto-recognizes TFDD format and common alternative field names. For data without coordinates, locations are automatically derived from basin names.'
-    }] : []),
-    {
-      title: 'Language Support',
-      content: 'Toggle between Turkish and English using the TR/EN button in the top-right corner. The AI search engine understands queries in both languages.'
-    },
-  ];
-
-  return (
-    <div className="divide-y divide-slate-100">
-      {sections.map((section, i) => (
-        <div key={i}>
-          <button
-            onClick={() => setOpenSection(openSection === i ? null : i)}
-            className="w-full flex items-center justify-between p-4 text-left hover:bg-slate-50 transition-colors"
-          >
-            <span className="text-sm font-semibold text-slate-800">{section.title}</span>
-            {openSection === i
-              ? <ChevronUp className="h-4 w-4 text-slate-400 shrink-0" />
-              : <ChevronDown className="h-4 w-4 text-slate-400 shrink-0" />
-            }
-          </button>
-          {openSection === i && (
-            <div className="px-4 pb-4 text-xs text-slate-600 leading-relaxed whitespace-pre-line">
-              {section.content}
-            </div>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-}
-
-// ── About Tab ──
-function AboutTab({ lang }: { lang: string }) {
-  return (
-    <div className="p-5 space-y-5 text-xs text-slate-600 leading-relaxed">
-      {/* Attribution Section */}
-      <div>
-        <h3 className="font-bold text-sm text-slate-800 mb-3 flex items-center gap-2">
-          <Heart className="h-4 w-4 text-red-400" />
-          {lang === 'tr' ? 'Teşekkür & Kaynak' : 'Acknowledgment & Source'}
-        </h3>
-
-        <div className="bg-gradient-to-br from-blue-50 to-slate-50 rounded-lg p-4 border border-blue-100 space-y-3">
-          <p>
-            {lang === 'tr'
-              ? 'Bu portal, Oregon State Üniversitesi College of Earth, Ocean, and Atmospheric Sciences bünyesindeki Program in Water Conflict Management and Transformation tarafından derlenen ve sürdürülen International Freshwater Treaties Database (Uluslararası Tatlı Su Anlaşmaları Veritabanı) verileri kullanılarak oluşturulmuştur.'
-              : 'This portal was built using data from the International Freshwater Treaties Database, compiled and maintained by the Program in Water Conflict Management and Transformation at Oregon State University\'s College of Earth, Ocean, and Atmospheric Sciences.'}
-          </p>
-
-          <p>
-            {lang === 'tr'
-              ? 'Veritabanı, 1820\'den günümüze kadar imzalanan 800\'den fazla uluslararası tatlı su anlaşmasının özetlerini ve/veya tam metinlerini içermektedir. Belgeler; ilgili havza ve ülkeler, imza tarihi, anlaşma konusu, tahsis önlemleri, uyuşmazlık çözüm mekanizmaları, su dışı bağlantılar ve daha birçok parametre ile kodlanmıştır.'
-              : 'The database is a searchable collection of summaries and/or full text of more than 800 international freshwater-related agreements, covering the years 1820 to 2021. Documents are coded by basin and countries involved, date signed, treaty topic, allocation measures, conflict resolution mechanisms, non-water linkages, and many more parameters.'}
-          </p>
-
-          <p>
-            {lang === 'tr'
-              ? 'Toplanan anlaşmalar; su hakları, su tahsisi, su kirliliği, su ihtiyaçlarının hakkaniyetli karşılanması ilkeleri, hidroelektrik/baraj/taşkın kontrolü geliştirme ve çevresel konular ile nehir ekosistemlerinin haklarına ilişkin belgeleri kapsamaktadır.'
-              : 'The agreements collected relate to water rights, water allocations, water pollution, principles for equitably addressing water needs, hydropower/reservoir/flood control development, and environmental issues and the rights of riverine ecological systems.'}
-          </p>
-
-          <a
-            href="https://transboundarywaters.ceoas.oregonstate.edu/international-freshwater-treaties-database"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-2 bg-white rounded-md border border-blue-200 text-primary font-semibold hover:bg-blue-50 transition-colors"
-          >
-            {lang === 'tr' ? 'TFDD Veritabanını Ziyaret Et →' : 'Visit the TFDD Database →'}
-          </a>
-        </div>
-      </div>
-
-      {/* Additional Credits */}
-      <div>
-        <h4 className="font-semibold text-slate-700 mb-2">
-          {lang === 'tr' ? 'Ek Katkıda Bulunanlar' : 'Additional Contributors'}
-        </h4>
-        <p className="text-[11px] text-slate-500 leading-relaxed">
-          {lang === 'tr'
-            ? 'Veritabanının güncellenmesi ve sürdürülmesi, araştırmacıların katkılarıyla mümkün olmaktadır. OSU Valley Library ortaklığıyla anlaşma belgelerinin PDF\'lerine Oregon Digital üzerinden erişim sağlanmaktadır.'
-            : 'The update and maintenance of this database is made possible through the contributions of fellow researchers. In partnership with the OSU Valley Library, PDFs of treaty documents are accessible through Oregon Digital.'}
-        </p>
-      </div>
-
-      {/* Disclaimer */}
-      <div className="bg-amber-50 border border-amber-100 rounded-lg p-3">
-        <p className="text-[10px] text-amber-700 leading-relaxed">
-          <span className="font-bold">{lang === 'tr' ? 'Sorumluluk Reddi: ' : 'Disclaimer: '}</span>
-          {lang === 'tr'
-            ? 'Veritabanında sunulan çeviriler yalnızca bilgilendirme ve akademik amaçlıdır. Resmi olmayan çevirilerdir ve resmi yasal kullanımlar için geçerli değildir.'
-            : 'Translations provided within the database are for informational and academic purposes only. They are unofficial translations and are not valid for official legal uses.'}
-        </p>
-      </div>
-    </div>
   );
 }
