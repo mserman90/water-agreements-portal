@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Layers, MessageSquare, Settings, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Layers, MessageSquare, ChevronLeft, ChevronRight } from 'lucide-react';
 import LayerControl, { LayerConfig } from './LayerControl';
-import SettingsPanel from './SettingsPanel';
 import AiChat from './AiChat';
 import type { Agreement } from './MapViewer';
 
@@ -13,21 +12,19 @@ interface Props {
   onUploadFile: (file: File) => void;
 }
 
-type Tab = 'layers' | 'search' | 'ai';
+type Tab = 'layers' | 'ai';
 
 export default function LeftPanel({
   layers,
   onLayerToggle,
   agreements,
   selectedAgreement,
-  onUploadFile,
 }: Props) {
   const [activeTab, setActiveTab] = useState<Tab>('layers');
   const [collapsed, setCollapsed] = useState(false);
 
   const tabs: { id: Tab; label: string; icon: React.ReactNode }[] = [
     { id: 'layers', label: 'Katmanlar', icon: <Layers size={16} /> },
-    { id: 'search', label: 'Ayarlar', icon: <Settings size={16} /> },
     { id: 'ai', label: 'AI Sorgu', icon: <MessageSquare size={16} /> },
   ];
 
@@ -73,14 +70,7 @@ export default function LeftPanel({
 
       {!collapsed && (
         <>
-          <div
-            style={{
-              display: 'flex',
-              borderBottom: '1px solid #e5e7eb',
-              backgroundColor: '#f9fafb',
-              flexShrink: 0,
-            }}
-          >
+          <div style={{ display: 'flex', borderBottom: '1px solid #e5e7eb' }}>
             {tabs.map((tab) => (
               <button
                 key={tab.id}
@@ -108,18 +98,12 @@ export default function LeftPanel({
             ))}
           </div>
 
-          <div style={{ flex: 1, overflow: 'auto' }}>
+          <div style={{ flex: 1, overflowY: 'auto' }}>
             {activeTab === 'layers' && (
-              <LayerControl layers={layers} onLayerToggle={onLayerToggle} />
-            )}
-            {activeTab === 'search' && (
-              <SettingsPanel onUploadFile={onUploadFile} />
+              <LayerControl layers={layers} onToggle={onLayerToggle} />
             )}
             {activeTab === 'ai' && (
-              <AiChat
-                agreements={agreements}
-                selectedAgreement={selectedAgreement}
-              />
+              <AiChat agreements={agreements} selectedAgreement={selectedAgreement} />
             )}
           </div>
         </>
