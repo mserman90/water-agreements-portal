@@ -5,6 +5,7 @@ import { findTreatyLink, findGithubDoc } from '@/data/treatyLinks';
 import MapViewer from '@/components/MapViewer';
 import AgreementSidebar from '@/components/AgreementSidebar';
 import TimelineOverlay from '@/components/TimelineOverlay';
+import SettingsPanel from '@/components/SettingsPanel';
 import { useAuth } from '@/contexts/AuthContext';
 import type { Agreement } from '@/components/MapViewer';
 import type { TimelineMode } from '@/components/TimelineOverlay';
@@ -218,6 +219,7 @@ export default function Home() {
 
   return (
     <>
+            <SettingsPanel onUploadFile={handleFileUpload} />
       {/* Sidebar toggle button */}
       <button
         onClick={() => setSidebarOpen((v) => !v)}
