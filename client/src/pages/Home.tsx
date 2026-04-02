@@ -5,7 +5,6 @@ import { findTreatyLink, findGithubDoc } from '@/data/treatyLinks';
 import MapViewer from '@/components/MapViewer';
 import AgreementSidebar from '@/components/AgreementSidebar';
 import TimelineOverlay from '@/components/TimelineOverlay';
-import { useAuth } from '@/contexts/AuthContext';
 import type { Agreement } from '@/components/MapViewer';
 import type { TimelineMode } from '@/components/TimelineOverlay';
 
@@ -13,7 +12,6 @@ const MIN_YEAR = 1820;
 const MAX_YEAR = 2024;
 const YEAR_STEP_MS = 120;
 
-// Map basin name to lat/lng
 function findBasinCoords(basinName: string): [number, number] | null {
   if (!basinName) return null;
   if (basinCoords[basinName]) return basinCoords[basinName];
@@ -26,7 +24,6 @@ function findBasinCoords(basinName: string): [number, number] | null {
   return null;
 }
 
-// Extract 4-digit year from any date string
 function extractYear(val: unknown): number {
   const m = String(val ?? '').match(/(\d{4})/);
   return m ? Number(m[1]) : 0;
@@ -68,20 +65,10 @@ function parseRows(rows: Record<string, unknown>[]): Agreement[] {
     .filter((a) => a.latitude !== 0 && a.longitude !== 0);
 }
 
-// Derive agreement type from purpose field for color coding
 function deriveType(purpose: string): 'cooperation' | 'conflict' | 'mixed' {
   const p = purpose.toLowerCase();
-  const isConflict =
-    p.includes('conflict') ||
-    p.includes('dispute') ||
-    p.includes('war') ||
-    p.includes('protest');
-  const isCoop =
-    p.includes('cooper') ||
-    p.includes('alloc') ||
-    p.includes('joint') ||
-    p.includes('agreement') ||
-    p.includes('treaty');
+  const isConflict = p.includes('conflict') || p.includes('dispute') || p.includes('war') || p.includes('protest');
+  const isCoop = p.includes('cooper') || p.includes('alloc') || p.includes('joint') || p.includes('agreement') || p.includes('treaty');
   if (isConflict && isCoop) return 'mixed';
   if (isConflict) return 'conflict';
   return 'cooperation';
@@ -92,9 +79,7 @@ export default function Home() {
   const [selectedId, setSelectedId] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const { isAdmin } = useAuth();
 
-  // --- Timeline state ---
   const [currentYear, setCurrentYear] = useState(MAX_YEAR);
   const [timelineMode, setTimelineMode] = useState<TimelineMode>('cumulative');
   const [isPlaying, setIsPlaying] = useState(false);
@@ -108,21 +93,17 @@ export default function Home() {
     [],
   );
 
-  // Auto-play animation
   useEffect(() => {
     if (!isPlaying) return;
     const id = window.setInterval(() => {
       setCurrentYear((prev) => {
-        if (prev >= MAX_YEAR) {
-          return MIN_YEAR;
-        }
+        if (prev >= MAX_YEAR) return MIN_YEAR;
         return prev + 1;
       });
     }, YEAR_STEP_MS);
     return () => window.clearInterval(id);
   }, [isPlaying]);
 
-  // Filter agreements by year / mode
   const filteredAgreements = useMemo(() => {
     if (!agreements.length) return [];
     if (timelineMode === 'cumulative') {
@@ -132,11 +113,8 @@ export default function Home() {
     return agreements.filter((a) => a.year >= ds && a.year <= ds + 9);
   }, [agreements, currentYear, timelineMode]);
 
-  // Counts for live counter
   const { totalCount, coopCount, conflictCount, mixedCount } = useMemo(() => {
-    let coop = 0,
-      conflict = 0,
-      mixed = 0;
+    let coop = 0, conflict = 0, mixed = 0;
     filteredAgreements.forEach((a) => {
       const t = deriveType(a.purpose);
       if (t === 'cooperation') coop++;
@@ -146,7 +124,6 @@ export default function Home() {
     return { totalCount: filteredAgreements.length, coopCount: coop, conflictCount: conflict, mixedCount: mixed };
   }, [filteredAgreements]);
 
-  // Secili anlasma
   const selectedAgreement = useMemo(
     () => agreements.find((a) => a.id === selectedId),
     [agreements, selectedId],
@@ -170,7 +147,6 @@ export default function Home() {
     return parseRows(data as Record<string, unknown>[]);
   }, []);
 
-  // Load bundled MASTER.json on mount
   useEffect(() => {
     fetch(`${import.meta.env.BASE_URL}data/MASTER.json`)
       .then((r) => r.text())
@@ -183,7 +159,6 @@ export default function Home() {
   }, [processJSON]);
 
   const handleFileUpload = (file: File) => {
-    if (!isAdmin) return;
     setIsLoading(true);
     if (file.name.endsWith('.json')) {
       const reader = new FileReader();
@@ -218,9 +193,6 @@ export default function Home() {
 
   return (
     <>
-      <SettingsPanel onUploadFile={handleFileUpload} />
-
-      {/* Sidebar toggle button */}
       <button
         onClick={() => setSidebarOpen((v) => !v)}
         style={{
@@ -244,7 +216,6 @@ export default function Home() {
         {sidebarOpen ? '<-' : '='}
       </button>
 
-      {/* Sidebar - filtered by timeline */}
       {sidebarOpen && (
         <AgreementSidebar
           agreements={filteredAgreements}
@@ -254,7 +225,6 @@ export default function Home() {
         />
       )}
 
-      {/* Map - filtered by timeline */}
       <MapViewer
         agreements={filteredAgreements}
         selectedId={selectedId}
@@ -262,7 +232,6 @@ export default function Home() {
         currentYear={currentYear}
       />
 
-      {/* Timeline overlay */}
       <TimelineOverlay
         currentYear={currentYear}
         setCurrentYear={setCurrentYear}
@@ -271,7 +240,7 @@ export default function Home() {
         isPlaying={isPlaying}
         setIsPlaying={setIsPlaying}
         bins={bins}
-        agreements={filteredAgreements}
+        agreements={agreements}
         totalCount={totalCount}
         coopCount={coopCount}
         conflictCount={conflictCount}
@@ -280,18 +249,18 @@ export default function Home() {
       />
 
       {isLoading && (
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%,-50%)',
-            background: 'white',
-            padding: 16,
-            borderRadius: 8,
-            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
-          }}
-        >
+        <div style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          background: 'rgba(0,0,0,0.7)',
+          color: '#fff',
+          padding: '16px 24px',
+          borderRadius: 8,
+          zIndex: 2000,
+          fontSize: 14,
+        }}>
           Veriler yukleniyor...
         </div>
       )}
