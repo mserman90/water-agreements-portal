@@ -109,4 +109,9 @@ const translations = {
   'popup.type': { tr: 'Tür', en: 'Type' },
 };
 
-export default translations;
+
+export type TranslationKey = keyof typeof translations;
+
+export function t(key: TranslationKey, lang: Lang): string {
+  return translations[key][lang];
+}
