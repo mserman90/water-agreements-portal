@@ -121,22 +121,97 @@ function buildConflictIcon(conflict: WaterConflict, isSelected: boolean): L.DivI
 
 function buildPopupLinks(a: Agreement, lang: 'tr' | 'en' = 'tr'): string {
   const links: string[] = [];
-  const repoDocText = lang === 'tr' ? '📥 Depo Belgesi (PDF)' : '📥 Repo Document (PDF)';
-  const pdfDownloadText = lang === 'tr' ? '📄 Orijinal Kaynak' : '📄 Source Link';
-  const searchFaolexText = lang === 'tr' ? 'FAOLEX Ara ↗' : 'Search FAOLEX ↗';
+  const repoDocText = lang === 'tr' ? '📥 Depo PDF' : '📥 Archive PDF';
+  const pdfDownloadText = lang === 'tr' ? '📄 Resmi Belge' : '📄 Source Link';
+  const faolexRecordText = lang === 'tr' ? '🌐 FAOLEX' : '🌐 FAOLEX';
+  const searchFaolexText = lang === 'tr' ? '🔍 FAOLEX Ara ↗' : '🔍 Search FAOLEX ↗';
 
   if (a.githubDocUrl) {
-    links.push(`<a href="${a.githubDocUrl}" target="_blank" style="color:#0369a1;font-weight:700;">${repoDocText}</a>`);
+    links.push(`<a href="${a.githubDocUrl}" target="_blank" style="color:#0369a1;font-weight:700;text-decoration:none;">${repoDocText}</a>`);
   }
   if (a.pdfUrl && a.pdfUrl !== a.githubDocUrl) {
-    links.push(`<a href="${a.pdfUrl}" target="_blank" style="color:#0284c7;font-weight:600;">${pdfDownloadText}</a>`);
+    links.push(`<a href="${a.pdfUrl}" target="_blank" style="color:#0284c7;font-weight:600;text-decoration:none;">${pdfDownloadText}</a>`);
   }
   if (a.faolexUrl) {
-    links.push(`<a href="${a.faolexUrl}" target="_blank" style="color:#64748b;">FAOLEX</a>`);
+    links.push(`<a href="${a.faolexUrl}" target="_blank" style="color:#475569;font-weight:600;text-decoration:none;">${faolexRecordText}</a>`);
   }
   const q = encodeURIComponent(a.name.slice(0, 80));
-  links.push(`<a href="https://www.fao.org/faolex/results/en/?query=${q}" target="_blank" style="color:#94a3b8;">${searchFaolexText}</a>`);
+  links.push(`<a href="https://www.fao.org/faolex/results/en/?query=${q}" target="_blank" style="color:#64748b;text-decoration:none;">${searchFaolexText}</a>`);
   return links.join(' &nbsp;|&nbsp; ');
+}
+
+function buildAgreementPopup(a: Agreement, lang: 'tr' | 'en' = 'tr'): string {
+  const nameTr = translateTreatyTitle(a.name, lang);
+  const countryTr = translateCountry(a.country, lang);
+  const basinTr = translateBasin(a.basin, lang);
+  const purposeTr = translatePurpose(a.purpose, lang);
+  const dateLabel = a.year > 0 ? a.year : (lang === 'tr' ? 'Tarih Belirsiz' : 'Date Unknown');
+  const linkHtml = buildPopupLinks(a, lang);
+
+  const pLower = (a.purpose || '').toLowerCase();
+  const isConflict = pLower.includes('conflict') || pLower.includes('dispute') || pLower.includes('war');
+  const isCoop = pLower.includes('cooper') || pLower.includes('alloc') || pLower.includes('joint');
+
+  let typeBadgeBg = '#0284c7';
+  let typeLabel = lang === 'tr' ? 'ULUSLARARASI ANLAŞMA' : 'INTERNATIONAL TREATY';
+  if (isConflict && !isCoop) {
+    typeBadgeBg = '#dc2626';
+    typeLabel = lang === 'tr' ? 'UYUŞMAZLIK / KRİZ ÇÖZÜMÜ' : 'DISPUTE / CRISIS RESOLUTION';
+  } else if (isCoop && !isConflict) {
+    typeBadgeBg = '#16a34a';
+    typeLabel = lang === 'tr' ? 'İŞBİRLİĞİ & TAHSİS ANLAŞMASI' : 'COOPERATION & ALLOCATION';
+  } else if (isCoop && isConflict) {
+    typeBadgeBg = '#ca8a04';
+    typeLabel = lang === 'tr' ? 'MÜZAKERE & ORTAK YÖNETİM' : 'NEGOTIATION & JOINT REGIME';
+  }
+
+  const countriesLabel = lang === 'tr' ? 'İmza Sahibi Ülkeler' : 'Signatory States';
+  const basinLabel = lang === 'tr' ? 'Nehir / Göl Havzası' : 'River / Lake Basin';
+  const focusLabel = lang === 'tr' ? 'Düzenleme Konusu' : 'Primary Scope';
+  const inspectBtnText = lang === 'tr' ? '🔍 Sol Panelde Detayları İncele' : '🔍 View Full Details in Sidebar';
+
+  return `
+    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:12px;line-height:1.45;max-width:280px;color:#1e293b;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;gap:6px;">
+        <span style="background:${typeBadgeBg};color:#ffffff;padding:2px 7px;border-radius:4px;font-size:9.5px;font-weight:700;letter-spacing:0.3px;">
+          ${typeLabel}
+        </span>
+        <span style="font-size:11px;font-weight:700;color:#0369a1;background:#f0f9ff;padding:1px 6px;border-radius:4px;border:1px solid #bae6fd;white-space:nowrap;">
+          📅 ${dateLabel}
+        </span>
+      </div>
+
+      <div style="font-weight:700;font-size:13px;color:#0f172a;margin-bottom:6px;line-height:1.35;">
+        ${nameTr}
+      </div>
+
+      <div style="background:#f8fafc;padding:6px 8px;border-radius:6px;border:1px solid #e2e8f0;display:flex;flex-direction:column;gap:3px;font-size:11.5px;margin-bottom:6px;">
+        <div>
+          <span style="color:#64748b;font-weight:600;">📍 ${countriesLabel}:</span>
+          <span style="color:#1e293b;font-weight:600;margin-left:4px;">${countryTr}</span>
+        </div>
+        <div>
+          <span style="color:#64748b;font-weight:600;">🌊 ${basinLabel}:</span>
+          <span style="color:#0284c7;font-weight:600;margin-left:4px;">${basinTr}</span>
+        </div>
+        <div>
+          <span style="color:#64748b;font-weight:600;">📋 ${focusLabel}:</span>
+          <span style="color:#475569;margin-left:4px;">${purposeTr}</span>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid #e2e8f0;padding-top:6px;font-size:11px;">
+        ${linkHtml}
+      </div>
+
+      <button
+        onclick="window.selectAgreement && window.selectAgreement('${a.id}')"
+        style="margin-top:6px;width:100%;padding:5px 8px;background:#f0f9ff;border:1px solid #0284c7;color:#0369a1;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;"
+      >
+        ${inspectBtnText}
+      </button>
+    </div>
+  `;
 }
 
 function buildConflictPopup(c: WaterConflict, lang: 'tr' | 'en' = 'tr'): string {
@@ -144,45 +219,78 @@ function buildConflictPopup(c: WaterConflict, lang: 'tr' | 'en' = 'tr'): string 
   const intensityColor = c.intensity < 0 ? '#dc2626' : c.intensity > 0 ? '#16a34a' : '#ea580c';
   const intensityLabel =
     c.intensity <= -4
-      ? lang === 'tr' ? 'Ağır Uyuşmazlık / Kriz' : 'Severe Dispute / Crisis'
+      ? lang === 'tr' ? 'Ağır Uyuşmazlık / Su Krizi' : 'Severe Water Dispute / Crisis'
       : c.intensity < 0
       ? lang === 'tr' ? 'Diplomatik / Bölgesel Gerginlik' : 'Diplomatic / Regional Tension'
       : c.intensity > 3
-      ? lang === 'tr' ? 'Büyük İşbirliği / Kurum Kuruluşu' : 'Major Cooperation / Institution'
+      ? lang === 'tr' ? 'Büyük İşbirliği / Kurum Kuruluşu' : 'Major Cooperation / Treaty'
       : lang === 'tr' ? 'Müzakere / Ortak Girişim' : 'Negotiation / Joint Action';
+
+  const badgeCategory = lang === 'tr' ? '⚡ TARİHİ SU OLAYI (BAR)' : '⚡ HISTORIC WATER EVENT (BAR)';
+  const countriesLabel = lang === 'tr' ? 'Taraf Ülkeler' : 'Riparian States';
+  const basinLabel = lang === 'tr' ? 'Havza' : 'Basin';
+  const inspectBtnText = lang === 'tr' ? '🔍 Sol Panelde Detayları İncele' : '🔍 View Full Details in Sidebar';
 
   let sourceHtml = '';
   if (c.source) {
     const urlMatch = c.source.match(/https?:\/\/[^\s)]+/);
-    const sourceLabel = lang === 'tr' ? 'Kaynak' : 'Source';
+    const sourceLabel = lang === 'tr' ? 'Akademik Kaynak' : 'Academic Source';
     const litLabel = lang === 'tr' ? 'Literatür Bağlantısı ↗' : 'Literature Link ↗';
     if (urlMatch) {
-      sourceHtml = `<div style="margin-top:6px;font-size:11px;color:#64748b;border-top:1px dashed #e2e8f0;padding-top:4px;">
-        ${sourceLabel}: <a href="${urlMatch[0]}" target="_blank" style="color:#0284c7;text-decoration:underline;">${litLabel}</a>
+      sourceHtml = `<div style="margin-top:6px;font-size:10.5px;color:#64748b;border-top:1px dashed #e2e8f0;padding-top:4px;">
+        <strong>${sourceLabel}:</strong> <a href="${urlMatch[0]}" target="_blank" style="color:#0284c7;text-decoration:underline;">${litLabel}</a>
       </div>`;
     } else {
-      sourceHtml = `<div style="margin-top:6px;font-size:11px;color:#64748b;border-top:1px dashed #e2e8f0;padding-top:4px;">${sourceLabel}: ${c.source}</div>`;
+      sourceHtml = `<div style="margin-top:6px;font-size:10.5px;color:#64748b;border-top:1px dashed #e2e8f0;padding-top:4px;"><strong>${sourceLabel}:</strong> ${c.source}</div>`;
     }
   }
 
   return `
-    <div style="font-family:sans-serif;font-size:12px;line-height:1.45;max-width:280px;">
-      <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
-        <span style="background:${intensityColor};color:#fff;padding:1px 6px;border-radius:4px;font-weight:700;font-size:10.5px;">
+    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:12px;line-height:1.45;max-width:280px;color:#1e293b;">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:6px;">
+        <span style="background:${intensityColor};color:#fff;padding:2px 7px;border-radius:4px;font-weight:700;font-size:9.5px;letter-spacing:0.3px;">
+          ${badgeCategory}
+        </span>
+        <span style="background:${intensityColor}20;color:${intensityColor};border:1px solid ${intensityColor}50;padding:1px 6px;border-radius:4px;font-weight:700;font-size:10.5px;">
           BAR: ${c.intensity > 0 ? '+' + c.intensity : c.intensity}
         </span>
-        <span style="font-weight:700;font-size:11px;color:${intensityColor};">${intensityLabel}</span>
       </div>
-      <div style="font-weight:700;font-size:13.5px;color:#0f172a;margin-bottom:4px;line-height:1.25;">
+
+      <div style="font-weight:700;font-size:13px;color:#0f172a;margin-bottom:4px;line-height:1.3;">
         ${cTr.title}
       </div>
-      <div style="color:#475569;margin-bottom:6px;font-size:11.5px;">
-        📅 <strong>${c.year}</strong> &nbsp;·&nbsp; 📍 ${cTr.countries} &nbsp;·&nbsp; 🌊 ${cTr.basin}
+
+      <div style="font-weight:700;font-size:11px;color:${intensityColor};margin-bottom:6px;">
+        ● ${intensityLabel}
       </div>
-      <div style="color:#1e293b;background:#f8fafc;padding:8px 10px;border-radius:6px;border:1px solid #e2e8f0;font-size:12px;line-height:1.45;">
+
+      <div style="background:#f8fafc;padding:6px 8px;border-radius:6px;border:1px solid #e2e8f0;display:flex;flex-direction:column;gap:3px;font-size:11.5px;margin-bottom:6px;">
+        <div>
+          <span style="color:#64748b;font-weight:600;">📅 ${lang === 'tr' ? 'Yıl' : 'Year'}:</span>
+          <span style="color:#0f172a;font-weight:700;margin-left:4px;">${c.year}</span>
+        </div>
+        <div>
+          <span style="color:#64748b;font-weight:600;">📍 ${countriesLabel}:</span>
+          <span style="color:#1e293b;font-weight:600;margin-left:4px;">${cTr.countries}</span>
+        </div>
+        <div>
+          <span style="color:#64748b;font-weight:600;">🌊 ${basinLabel}:</span>
+          <span style="color:#0284c7;font-weight:600;margin-left:4px;">${cTr.basin}</span>
+        </div>
+      </div>
+
+      <div style="color:#1e293b;background:#ffffff;padding:8px;border-radius:6px;border:1px solid #e2e8f0;font-size:11.5px;line-height:1.45;margin-bottom:4px;">
         ${cTr.description}
       </div>
+
       ${sourceHtml}
+
+      <button
+        onclick="window.selectAgreement && window.selectAgreement('${c.id}')"
+        style="margin-top:6px;width:100%;padding:5px 8px;background:#fef2f2;border:1px solid #ef4444;color:#dc2626;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;"
+      >
+        ${inspectBtnText}
+      </button>
     </div>
   `;
 }
@@ -194,6 +302,16 @@ export default function MapViewer({ agreements, conflicts = [], selectedId, onMa
   const agreementClusterRef = useRef<L.MarkerClusterGroup | null>(null);
   const conflictClusterRef = useRef<L.MarkerClusterGroup | null>(null);
   const markersRef = useRef<Map<string, L.Marker>>(new Map());
+
+  // Global bridge for Leaflet popup click actions
+  useEffect(() => {
+    (window as any).selectAgreement = (id: string) => {
+      onMarkerClick?.(id);
+    };
+    return () => {
+      delete (window as any).selectAgreement;
+    };
+  }, [onMarkerClick]);
 
   // Map init
   useEffect(() => {
@@ -234,21 +352,7 @@ export default function MapViewer({ agreements, conflicts = [], selectedId, onMa
       const color = deriveAgreementColor(a.purpose, isSelected);
       const icon = buildMarkerIcon(color, isSelected);
       const marker = L.marker([a.latitude, a.longitude], { icon, title: a.name });
-      const linkHtml = buildPopupLinks(a, lang);
-      const nameTr = translateTreatyTitle(a.name, lang);
-      const countryTr = translateCountry(a.country, lang);
-      const basinTr = translateBasin(a.basin, lang);
-      const purposeTr = translatePurpose(a.purpose, lang);
-      const dateLabel = a.year > 0 ? a.year : (lang === 'tr' ? 'Tarih Belirsiz' : 'Date Unknown');
-      const typeDot = `<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${color};margin-right:6px;"></span>`;
-      marker.bindPopup(
-        `<div style="font-family:sans-serif;font-size:12px;line-height:1.4;max-width:260px;">
-          <div style="font-weight:700;font-size:13px;color:#0f172a;margin-bottom:4px;">${nameTr}</div>
-          <div style="color:#475569;margin-bottom:4px;">📍 ${countryTr} &nbsp;·&nbsp; 🌊 ${basinTr}</div>
-          <div style="margin-bottom:6px;display:flex;align-items:center;">${typeDot}<strong>${dateLabel}</strong> &nbsp;—&nbsp; <span style="color:#64748b;">${purposeTr}</span></div>
-          <div style="border-top:1px solid #e2e8f0;padding-top:6px;margin-top:6px;">${linkHtml}</div>
-        </div>`,
-      );
+      marker.bindPopup(buildAgreementPopup(a, lang));
       marker.on('click', () => onMarkerClick?.(a.id));
       cluster.addLayer(marker);
       markersRef.current.set(a.id, marker);

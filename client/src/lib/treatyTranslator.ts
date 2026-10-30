@@ -11,55 +11,83 @@ import type { Agreement, WaterConflict } from '@/components/MapViewer';
 // ══════════════════════════════════════════════════════════════
 
 const purposeMapTr: Record<string, string> = {
-  'territorial and border issues': 'Toprak ve Sınır Meseleleri',
-  'territorial': 'Toprak ve Sınır',
-  'border issues': 'Sınır Meseleleri',
-  'border': 'Sınır Düzenlemeleri',
-  'navigation': 'Seyrüsefer ve Ulaşım',
-  'fishing': 'Balıkçılık ve Su Ürünleri',
-  'fisheries': 'Balıkçılık ve Su Ürünleri',
-  'infrastructure': 'Altyapı ve Tesisler',
-  'infrastructure/development': 'Altyapı ve Kalkınma',
-  'funding and financing': 'Finansman ve Fonlama',
-  'funding': 'Finansman ve Fonlama',
-  'financial': 'Mali İşbirliği',
+
+  // Modern & Specific Topics
   'water quantity': 'Su Miktarı ve Tahsisi',
+  'water allocation': 'Su Tahsisi',
   'water quantity/allocation': 'Su Miktarı ve Tahsisi',
   'water quality': 'Su Kalitesi ve Arıtma',
   'pollution': 'Kirlilik Kontrolü',
-  'agriculture': 'Tarım ve Sulama',
+  'border and territorial issues': 'Sınır ve Toprak Düzenlemeleri',
+  'territorial and border issues': 'Toprak ve Sınır Meseleleri',
+  'border delimitation': 'Sınırın Belirlenmesi',
   'irrigation': 'Tarımsal Sulama',
-  'environment': 'Çevre ve Ekoloji',
-  'environmental': 'Çevre ve Doğa Koruma',
-  'environmental protection': 'Çevre Koruma',
-  'ecology': 'Ekoloji ve Biyoçeşitlilik',
-  'socioeconomic development': 'Sosyoekonomik Kalkınma',
-  'economic development': 'Ekonomik Kalkınma',
-  'domestic/municipal water': 'İçme ve Kullanma Suyu',
-  'domestic/municipal use': 'İçme ve Kullanma Suyu',
-  'domestic water': 'İçme Suyu',
+  'irrigation modernization': 'Modern Basınçlı Sulama',
+  'agriculture': 'Tarım ve Sulama',
   'hydropower': 'Hidroelektrik Enerji',
   'hydroelectric': 'Hidroelektrik Enerji',
-  'flood management': 'Taşkın ve Sel Yönetimi',
+  'joint hydropower construction': 'Ortak Hidroelektrik Baraj İnşası',
   'flood control': 'Sel ve Taşkın Kontrolü',
-  'flood': 'Taşkın Yönetimi',
+  'flood management': 'Taşkın ve Sel Yönetimi',
+  'flood risk management': 'Taşkın Riski Yönetimi',
+  'flood managements': 'Taşkın ve Sel Yönetimi',
   'drought management': 'Kuraklık Yönetimi',
-  'drought': 'Kuraklık Yönetimi',
+  'drought contingency': 'Kuraklık Acil Durum Planı',
+  'drought resilience': 'Kuraklığa Karşı Dayanıklılık',
+  'environment': 'Çevre ve Doğa Koruma',
+  'environmental': 'Çevre Koruma ve Ekoloji',
+  'envrionmental': 'Çevre ve Doğa Koruma',
+  'environmental protection': 'Çevre Koruma',
+  'ecology': 'Ekoloji ve Biyoçeşitlilik',
+  'ecosystem function': 'Ekosistem Fonksiyonları ve Ekolojik Akış',
+  'fisheries': 'Balıkçılık ve Su Ürünleri',
+  'fishing': 'Balıkçılık ve Su Ürünleri',
+  'navigation': 'Seyrüsefer ve Ulaşım',
+  'infrastructure': 'Altyapı ve Tesisler',
+  'infrastructure safety': 'Baraj ve Altyapı Güvenliği',
+  'infrastrucutre': 'Altyapı ve Tesisler',
+  'infrastructure development': 'Altyapı Geliştirme',
+  'funding and financing': 'Finansman ve Fonlama',
+  'funding anf financing': 'Finansman ve Fonlama',
+  'financial': 'Mali İşbirliği ve Fonlama',
+  'domestic': 'İçme ve Kullanma Suyu',
+  'domestic/municipal water': 'İçme ve Kullanma Suyu',
+  'domestic water': 'İçme Suyu',
   'forestry and timber': 'Ormancılık ve Kereste',
   'timber': 'Kereste ve Ormancılık',
-  'climate change': 'İklim Değişikliği',
-  'climate': 'İklim Eylemi',
-  'joint management': 'Ortak Yönetim',
-  'joint commission': 'Ortak Komisyon',
-  'monitoring': 'İzleme ve Veri Paylaşımı',
-  'data exchange': 'Veri ve Bilgi Paylaşımı',
-  'dispute resolution': 'Uyuşmazlık Çözümü',
-  'conflict resolution': 'Uyuşmazlık Çözümü',
   'groundwater': 'Yeraltı Suları',
   'aquifer': 'Akifer Yönetimi',
+  'dispute resolution': 'Uyuşmazlık Çözümü',
+  'conflict resolution': 'Uyuşmazlık Çözümü',
+  'data exchange': 'Veri ve Bilgi Paylaşımı',
+  'monitoring': 'Hidrolojik İzleme ve Ölçüm',
+  'online telemetry': 'Çevrimiçi Telemetri ve Ölçüm',
+  'joint management': 'Ortak Havza Yönetimi',
+  'comprehensive basin governance': 'Kapsamlı Havza Yönetimi',
+  'equitable and reasonable utilization': 'Hakça ve Makul Kullanım',
+  'shortage sharing': 'Kıtlık ve Kuraklık Paylaşımı',
+  'water conservation': 'Su Tasarrufu ve Verimlilik',
+  'binding seasonal water quotas': 'Bağlayıcı Mevsimsel Su Kotaları',
+  'sediment management': 'Sediment ve Tortu Yönetimi',
+  'climate change': 'İklim Değişikliği',
+  'climate resilience': 'İklim Dayanıklılığı',
+  'multilateral treaty accession': 'Çok Taraflı Sözleşmeye Katılım',
+  'global water convention accession': 'Küresel Su Sözleşmesi Katılımı',
+
+  'territorial': 'Toprak ve Sınır',
+  'border issues': 'Sınır Meseleleri',
+  'border': 'Sınır Düzenlemeleri',
+  'infrastructure/development': 'Altyapı ve Kalkınma',
+  'funding': 'Finansman ve Fonlama',
+  'socioeconomic development': 'Sosyoekonomik Kalkınma',
+  'economic development': 'Ekonomik Kalkınma',
+  'domestic/municipal use': 'İçme ve Kullanma Suyu',
+  'flood': 'Taşkın Yönetimi',
+  'drought': 'Kuraklık Yönetimi',
+  'climate': 'İklim Eylemi',
+  'joint commission': 'Ortak Komisyon',
   'general': 'Genel Su Yönetimi',
 };
-
 export function translatePurpose(purpose: string | undefined, lang: 'tr' | 'en'): string {
   if (!purpose || !purpose.trim()) {
     return lang === 'tr' ? 'Kapsam Belirtilmemiş' : 'Purpose Not Specified';
@@ -90,81 +118,121 @@ export function translatePurpose(purpose: string | undefined, lang: 'tr' | 'en')
 // ══════════════════════════════════════════════════════════════
 
 const basinMapTr: Record<string, string> = {
+
+  // Additional Global Basins
+  'amur': 'Amur',
+  'alakol': 'Alakol Gölü',
+  'alsek': 'Alsek',
+  'amazon': 'Amazon',
+  'artibonite': 'Artibonite',
+  'astara chay': 'Astara Çayı',
+  'atrak': 'Atrek',
+  'aviles': 'Aviles',
+  'aysen': 'Aysen',
+  'baker': 'Baker',
+  'beilun': 'Beilun',
+  'bidasoa': 'Bidasoa',
+  'buzi': 'Buzi',
+  'candelaria': 'Candelaria',
+  'chira': 'Chira',
+  'chuy': 'Çu (Şu)',
+  'shu/chu': 'Çu (Şu)',
+  'talas': 'Talas',
+  'colorado': 'Kolorado',
+  'columbia': 'Kolombiya',
+  'congo': 'Kongo',
+  'congo/zaire': 'Kongo (Zaire)',
+  'connecticut': 'Connecticut',
+  'copper': 'Copper',
+  'coruh': 'Çoruh',
+  'danube': 'Tuna',
+  'daugava': 'Daugava (Batı Dvina)',
+  'dnieper': 'Dinyeper',
+  'dniester': 'Dinyester',
+  'don': 'Don',
+  'douro': 'Douro (Duero)',
+  'douro/duero': 'Douro (Duero)',
+  'drin': 'Drin',
+  'elbe': 'Elbe',
+  'elbe/labe': 'Elbe (Labe)',
+  'ganges-brahmaputra-meghna': 'Ganj-Brahmaputra-Meghna',
+  'helmand': 'Hilmend',
+  'indus': 'İndus',
+  'jordan': 'Şeria (Ürdün)',
+  'kura-araks': 'Kura-Aras',
+  'lake chad': 'Çad Gölü',
+  'lake titicaca-poopo system': 'Titikaka-Poopo Gölü Sistemi',
+  'lake titicaca': 'Titikaka Gölü',
+  'limpopo': 'Limpopo',
+  'mekong': 'Mekong',
+  'meuse': 'Meuse (Maas)',
+  'rhine-meuse': 'Ren-Meuse',
+  'mississippi': 'Misisipi',
+  'niger': 'Nijer',
+  'nile': 'Nil',
+  'oder': 'Oder',
+  'oder/odra': 'Oder (Odra)',
+  'okavango': 'Okavango',
+  'orange': 'Oranj',
+  'pungwe': 'Pungwe',
+  'rhine': 'Ren',
+  'rio grande': 'Rio Grande',
+  'sabi': 'Save (Sabi)',
+  'save': 'Save',
+  'sava': 'Sava',
+  'senegal': 'Senegal',
+  'syr darya': 'Siriderya (Seyhun)',
+  'amu darya': 'Amuderya (Ceyhun)',
+  'aral sea': 'Aral Denizi',
+  'tigris-euphrates/shatt al arab': 'Dicle-Fırat / Şattülarap',
+  'tisza': 'Tisza (Tisa)',
+  'tumen': 'Tumen (Tuman)',
+  'uruguay': 'Uruguay',
+  'volta': 'Volta',
+  'vuoksa': 'Vuoksi',
+  'zambezi': 'Zambezi',
+  'zhu jiang/hsi': 'İnci Nehri (Zhu Jiang / Xi)',
+  'groundwater': 'Yeraltı Suları / Akifer',
+
   // Turkish / Regional
   'tigris-euphrates': 'Fırat-Dicle',
-  'tigris-euphrates/shatt al arab': 'Fırat-Dicle / Şattülarap',
   'asi/orontes': 'Asi Nehri',
   'orontes': 'Asi Nehri',
   'asi': 'Asi Nehri',
-  'coruh': 'Çoruh',
-  'kura-araks': 'Kura-Aras',
   'maritsa': 'Meriç',
   'meric': 'Meriç',
 
   // Major Global Basins
-  'danube': 'Tuna',
-  'rhine': 'Ren',
-  'nile': 'Nil',
-  'indus': 'İndus',
   'ganges': 'Ganj',
   'ganges-brahmaputra': 'Ganj-Brahmaputra',
-  'ganges-brahmaputra-meghna': 'Ganj-Brahmaputra-Meghna',
   'brahmaputra': 'Brahmaputra',
-  'mekong': 'Mekong',
-  'amazon': 'Amazon',
-  'congo': 'Kongo',
-  'niger': 'Nijer',
-  'zambezi': 'Zambezi',
-  'colorado': 'Kolorado',
-  'columbia': 'Kolombiya',
-  'jordan': 'Şeria (Ürdün)',
   'la plata': 'La Plata',
-  'volta': 'Volta',
-  'senegal': 'Senegal',
-  'orange': 'Oranj',
-  'okavango': 'Okavango',
-  'limpopo': 'Limpopo',
   'incomati': 'İnkomati',
   'maputo': 'Maputo',
-  'lake chad': 'Çad Gölü',
   'chad': 'Çad Gölü',
   'aral': 'Aral Denizi',
-  'aral sea': 'Aral Denizi',
-  'helmand': 'Hilmend',
   'salween': 'Salven',
   'irrawaddy': 'İravadi',
-  'mississippi': 'Misisipi',
   'rhone': 'Ron',
-  'elbe': 'Elbe',
-  'oder': 'Oder',
   'vistula': 'Vistül',
-  'dnieper': 'Dinyeper',
-  'dniester': 'Dinyester',
-  'don': 'Don',
   'volga': 'Volga',
   'ob': 'Ob',
   'yenisey': 'Yenisey',
-  'amur': 'Amur',
-  'lake titicaca': 'Titikaka Gölü',
   'titicaca': 'Titikaka Gölü',
   'lake turkana': 'Turkana Gölü',
   'lake prespa': 'Prespa Gölü',
   'lake victoria': 'Viktorya Gölü',
   'lake geneva': 'Cenevre Gölü',
   'lake constance': 'Konstanz Gölü',
-  'rio grande': 'Rio Grande',
   'st. lawrence': 'St. Lawrence',
-  'douro': 'Douro (Duero)',
   'tagus': 'Tejo (Tagus)',
   'guadiana': 'Guadiana',
   'ebro': 'Ebro',
   'po': 'Po',
   'vardar': 'Vardar',
-  'drin': 'Drin',
   'struma': 'Usturma (Struma)',
   'nestos': 'Mesta (Nestos)',
   'scheldt': 'Scheldt (Escaut)',
-  'meuse': 'Meuse (Maas)',
   'tarim': 'Tarım Havzası',
   'amudarya': 'Amuderya (Ceyhun)',
   'syrdarya': 'Siriderya (Seyhun)',
@@ -173,7 +241,6 @@ const basinMapTr: Record<string, string> = {
   'narmada': 'Narmada',
   'godavari': 'Godavari',
 };
-
 export function translateBasin(basin: string | undefined, lang: 'tr' | 'en'): string {
   if (!basin || !basin.trim()) {
     return lang === 'tr' ? 'Havza Belirtilmemiş' : 'Basin Not Specified';
@@ -202,6 +269,43 @@ export function translateBasin(basin: string | undefined, lang: 'tr' | 'en'): st
 // ══════════════════════════════════════════════════════════════
 
 const countryMapTr: Record<string, string> = {
+
+  // Extended & Historical Entities
+  'mauritania': 'Moritanya',
+  'dahomey': 'Benin (Dahomey)',
+  'southern rhodesia': 'Zimbabve (Güney Rodezya)',
+  'yuoslavia': 'Yugoslavya',
+  'francence': 'Fransa',
+  'union of south africa': 'Güney Afrika Birliği',
+  'grand duchy of baden': 'Baden Büyük Dükalığı',
+  'grand duchy of hessen': 'Hessen Büyük Dükalığı',
+  'cote d’ivoire': 'Fildişi Sahili',
+  'kyrghiz republic': 'Kırgızistan',
+  'eswatini': 'Esvatini',
+  'swaziland': 'Esvatini',
+  'lesotho': 'Lesotho',
+  'upper volta': 'Burkina Faso (Yukarı Volta)',
+  'united nations': 'Birleşmiş Milletler (BM)',
+  'european union': 'Avrupa Birliği (AB)',
+  'european economic community': 'Avrupa Ekonomik Topluluğu',
+  'austria-hungary': 'Avusturya-Macaristan',
+  'czechoslovakia': 'Çekoslovakya',
+  'czechoslovakian socialist republic': 'Çekoslovakya',
+  'romanian socialist republic': 'Romanya',
+  'soviet union': 'Sovyetler Birliği (SSCB)',
+  'union of soviet socialist republics': 'Sovyetler Birliği (SSCB)',
+  'ussr': 'SSCB',
+  'dprk': 'Kuzey Kore',
+  'rok': 'Güney Kore',
+  'lao pdr': 'Laos',
+  'viet nam': 'Vietnam',
+  'syrian arab republic': 'Suriye',
+  'flemish region': 'Flaman Bölgesi (Belçika)',
+  'brussels-capital region': 'Brüksel Bölgesi (Belçika)',
+  'walloon region': 'Valon Bölgesi (Belçika)',
+  'the gambia': 'Gambiya',
+  'gambia': 'Gambiya',
+
   'turkey': 'Türkiye',
   'turkiye': 'Türkiye',
   'syria': 'Suriye',
@@ -280,8 +384,6 @@ const countryMapTr: Record<string, string> = {
 
   'russia': 'Rusya',
   'russian federation': 'Rusya Federasyonu',
-  'ussr': 'SSCB',
-  'soviet union': 'Sovyetler Birliği',
   'ukraine': 'Ukrayna',
   'belarus': 'Belarus',
   'poland': 'Polonya',
@@ -375,24 +477,44 @@ const countryMapTr: Record<string, string> = {
   'new zealand': 'Yeni Zelanda',
   'yugoslavia': 'Yugoslavya',
 };
-
 export function translateCountry(country: string | undefined, lang: 'tr' | 'en'): string {
   if (!country || !country.trim()) {
     return lang === 'tr' ? 'Ülke Belirtilmemiş' : 'Country Not Specified';
   }
   if (lang === 'en') return country;
 
-  // Split multi-country strings by comma, semicolon, or slash
-  const parts = country.split(/[,;\/]+/).map((s) => s.trim()).filter(Boolean);
-  if (parts.length === 0) return country;
+  // Split multi-country strings by comma, semicolon, slash, or ' and '
+  const rawParts = country.split(/[,;\/]+|\s+and\s+|\s+ile\s+/i).map((s) => s.trim()).filter(Boolean);
+  if (rawParts.length === 0) return country;
 
-  const translated = parts.map((c) => {
-    const key = c.toLowerCase().trim();
-    if (countryMapTr[key]) return countryMapTr[key];
+  const translated = rawParts.map((c) => {
+    const rawLower = c.toLowerCase().trim();
+    if (!rawLower || ['n.a.', 'n/a', 'unknown', 'none', 'n.a'].includes(rawLower)) {
+      return 'Belirtilmemiş';
+    }
+    if (countryMapTr[rawLower]) return countryMapTr[rawLower];
+
+    // Strip common leading diplomatic qualifiers
+    const stripped = rawLower
+      .replace(/^(the\s+|government\s+of\s+(the\s+)?|cabinet\s+of\s+ministers\s+of\s+|executive\s+council\s+of\s+(the\s+)?|republic\s+(of|fo)\s+(the\s+)?|republi\s+of\s+|people'?s\s+republic\s+of\s+(the\s+)?|kingdom\s+of\s+(the\s+)?|hashemite\s+kingdom\s+of\s+|federation\s+of\s+(the\s+)?|federative\s+republic\s+of\s+|federal\s+republic\s+of\s+|federal\s+military\s+government\s+of\s+|islamic\s+republic\s+of\s+|democratic\s+people'?s\s+republic\s+of\s+|democratic\s+republic\s+of\s+(the\s+)?|socialist\s+republic\s+of\s+|united\s+republic\s+of\s+|united\s+states\s+of\s+|state\s+of\s+)/i, '')
+      .replace(/\s+(government|republic|kingdom|federation)$/i, '')
+      .trim();
+
+    if (countryMapTr[stripped]) return countryMapTr[stripped];
+
+    // Check partial containment in countryMapTr keys
+    for (const [k, v] of Object.entries(countryMapTr)) {
+      if (k.length > 3 && (rawLower.includes(k) || stripped.includes(k))) {
+        return v;
+      }
+    }
+
     return c;
   });
 
-  return translated.join(', ');
+  // Deduplicate results
+  const unique = Array.from(new Set(translated));
+  return unique.join(', ');
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -427,6 +549,7 @@ export function translateConflict(
 // ══════════════════════════════════════════════════════════════
 
 const landmarkTreatiesTr: Record<string, string> = {
+
   'framework agreement on cooperation in the field of water between the republic of turkey and the republic of iraq': 'Türkiye Cumhuriyeti ile Irak Cumhuriyeti Arasında Su Alanında İş Birliği Çerçeve Anlaşması',
   'agreement on the nile river basin cooperative framework': 'Nil Nehri Havzası İşbirliği Çerçeve Anlaşması (CFA / Entebbe Anlaşması)',
   'united states and canada agreement-in-principle on the modernization of the columbia river treaty': 'ABD ve Kanada Kolombiya Nehri Antlaşması Modernizasyonu İlke Anlaşması',
@@ -454,7 +577,6 @@ const landmarkTreatiesTr: Record<string, string> = {
   'berlin rules': 'Berlin Kuralları',
   'ramsar convention': 'Ramsar Sulak Alanlar Sözleşmesi',
 };
-
 // Common diplomatic phrases to translate
 const diplomaticGlossary: Array<[RegExp, string]> = [
   [/boundary waters and boundary questions/gi, 'sınır suları ve sınır meseleleri'],
