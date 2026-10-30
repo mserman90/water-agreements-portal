@@ -195,7 +195,6 @@ function buildAgreementPopup(a: Agreement, lang: 'tr' | 'en' = 'tr'): string {
   const countriesLabel = lang === 'tr' ? 'İmza Sahibi Ülkeler' : 'Signatory States';
   const basinLabel = lang === 'tr' ? 'Nehir / Göl Havzası' : 'River / Lake Basin';
   const focusLabel = lang === 'tr' ? 'Düzenleme Konusu' : 'Primary Scope';
-  const inspectBtnText = lang === 'tr' ? '🔍 Sol Panelde Detayları İncele' : '🔍 View Full Details in Sidebar';
 
   return `
     <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:12px;line-height:1.45;max-width:280px;color:#1e293b;">
@@ -230,13 +229,6 @@ function buildAgreementPopup(a: Agreement, lang: 'tr' | 'en' = 'tr'): string {
       <div style="border-top:1px solid #e2e8f0;padding-top:6px;font-size:11px;">
         ${linkHtml}
       </div>
-
-      <button
-        onclick="window.selectAgreement && window.selectAgreement('${a.id}')"
-        style="margin-top:6px;width:100%;padding:5px 8px;background:#f0f9ff;border:1px solid #0284c7;color:#0369a1;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;"
-      >
-        ${inspectBtnText}
-      </button>
     </div>
   `;
 }
@@ -256,7 +248,6 @@ function buildConflictPopup(c: WaterConflict, lang: 'tr' | 'en' = 'tr'): string 
   const badgeCategory = lang === 'tr' ? '⚡ TARİHİ SU OLAYI' : '⚡ HISTORIC WATER EVENT';
   const countriesLabel = lang === 'tr' ? 'Taraf Ülkeler' : 'Riparian States';
   const basinLabel = lang === 'tr' ? 'Havza' : 'Basin';
-  const inspectBtnText = lang === 'tr' ? '🔍 Sol Panelde Detayları İncele' : '🔍 View Full Details in Sidebar';
 
   const pacificInfo = c.pacificCategory ? PACIFIC_CATEGORIES[c.pacificCategory] : undefined;
   const pacificBadgeHtml = pacificInfo ? `
@@ -331,13 +322,6 @@ function buildConflictPopup(c: WaterConflict, lang: 'tr' | 'en' = 'tr'): string 
       </div>
 
       ${sourceHtml}
-
-      <button
-        onclick="window.selectAgreement && window.selectAgreement('${c.id}')"
-        style="margin-top:6px;width:100%;padding:5px 8px;background:#fef2f2;border:1px solid #ef4444;color:#dc2626;border-radius:4px;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;"
-      >
-        ${inspectBtnText}
-      </button>
     </div>
   `;
 }
