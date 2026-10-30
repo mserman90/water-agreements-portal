@@ -337,6 +337,51 @@ export default function AgreementSidebar({
         </div>
       )}
 
+      {/* OSU Master DB Download Banner (Treaties view) */}
+      {activeCategory === 'agreements' && (
+        <div
+          style={{
+            background: '#f0fdf4',
+            borderBottom: '1px solid #bbf7d0',
+            padding: '5px 12px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            fontSize: 11,
+            color: '#166534',
+            flexShrink: 0,
+          }}
+        >
+          <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+            <span style={{ fontSize: 13 }}>📊</span>
+            <span style={{ fontWeight: 600 }}>
+              {lang === 'tr' ? 'OSU TFDD Master Excel (115 Kolon)' : 'OSU TFDD Master Excel (115 Cols)'}
+            </span>
+          </span>
+          <a
+            href="./data/WebsiteTreatiesDB_20181124.xlsx"
+            download="WebsiteTreatiesDB_20181124.xlsx"
+            title={lang === 'tr' ? 'Orijinal OSU TFDD 115-kolon Master Excel tablosunu indir (1.18 MB)' : 'Download original OSU TFDD 115-column Master Excel sheet (1.18 MB)'}
+            style={{
+              textDecoration: 'none',
+              color: '#15803d',
+              fontWeight: 700,
+              fontSize: 10.5,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 4,
+              background: '#dcfce7',
+              border: '1px solid #86efac',
+              padding: '2px 7px',
+              borderRadius: 4,
+            }}
+          >
+            <FileDown size={11} />
+            .XLSX (1.18 MB)
+          </a>
+        </div>
+      )}
+
       {/* Virtualized Scroll Container */}
       <div
         ref={parentRef}
@@ -420,11 +465,63 @@ export default function AgreementSidebar({
                         </span>
                       </div>
 
-                      <div style={{ fontSize: 11, color: '#64748b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', marginBottom: 6 }}>
+                      {a.commName && (
+                        <div style={{ fontSize: 11, color: '#0369a1', fontWeight: 600, marginBottom: 4, display: 'flex', alignItems: 'center', gap: 4 }}>
+                          <span style={{ flexShrink: 0 }}>🤝</span>
+                          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} title={a.commName}>
+                            {a.commName}
+                          </span>
+                        </div>
+                      )}
+
+                      <div style={{ fontSize: 11, color: '#64748b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', marginBottom: 4 }}>
                         📍 {translateCountry(a.country, lang)}
+                        {a.locationSigned && <span style={{ color: '#94a3b8' }}> • {a.locationSigned}</span>}
                       </div>
 
-                      <div style={{ display: 'flex', gap: 8, fontSize: 10.5, borderTop: '1px solid #f1f5f9', paddingTop: 6 }} onClick={(e) => e.stopPropagation()}>
+                      {/* Provision Badges from OSU TFDD 115 variables */}
+                      {(a.alloc === 1 || a.hydro === 1 || a.groundwater === 1 || a.monitoring === 1 || a.conflictRes === 1) && (
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 3, marginBottom: 6 }}>
+                          {a.alloc === 1 && (
+                            <span style={{ fontSize: 9.5, padding: '1px 5px', background: '#e0f2fe', color: '#0369a1', borderRadius: 3, fontWeight: 600 }}>
+                              💧 {lang === 'tr' ? 'Su Tahsisi' : 'Allocation'}
+                            </span>
+                          )}
+                          {a.hydro === 1 && (
+                            <span style={{ fontSize: 9.5, padding: '1px 5px', background: '#fef3c7', color: '#b45309', borderRadius: 3, fontWeight: 600 }}>
+                              ⚡ {lang === 'tr' ? 'HES' : 'Hydro'}
+                            </span>
+                          )}
+                          {a.groundwater === 1 && (
+                            <span style={{ fontSize: 9.5, padding: '1px 5px', background: '#ecfdf5', color: '#047857', borderRadius: 3, fontWeight: 600 }}>
+                              🌿 {lang === 'tr' ? 'Akifer' : 'Aquifer'}
+                            </span>
+                          )}
+                          {a.monitoring === 1 && (
+                            <span style={{ fontSize: 9.5, padding: '1px 5px', background: '#f5f3ff', color: '#6d28d9', borderRadius: 3, fontWeight: 600 }}>
+                              📡 {lang === 'tr' ? 'İzleme' : 'Monitoring'}
+                            </span>
+                          )}
+                          {a.conflictRes === 1 && (
+                            <span style={{ fontSize: 9.5, padding: '1px 5px', background: '#fdf2f8', color: '#be185d', borderRadius: 3, fontWeight: 600 }}>
+                              ⚖️ {lang === 'tr' ? 'Çözüm' : 'Dispute Res.'}
+                            </span>
+                          )}
+                        </div>
+                      )}
+
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, fontSize: 10.5, borderTop: '1px solid #f1f5f9', paddingTop: 6, alignItems: 'center' }} onClick={(e) => e.stopPropagation()}>
+                        {a.bcode && (
+                          <a
+                            href="./data/WebsiteTreatiesDB_20181124.xlsx"
+                            download="WebsiteTreatiesDB_20181124.xlsx"
+                            title={lang === 'tr' ? `OSU TFDD Havza Kodu: ${a.bcode} — 115 Değişkenli Master Excel Tablosu` : `OSU TFDD Basin Code: ${a.bcode} — 115-Variable Master Excel Sheet`}
+                            style={{ color: '#047857', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 3, textDecoration: 'none', background: '#ecfdf5', padding: '1px 5px', borderRadius: 3, border: '1px solid #a7f3d0' }}
+                          >
+                            <span>📊</span>
+                            <span>OSU DB</span>
+                          </a>
+                        )}
                         {a.githubDocUrl ? (
                           <a
                             href={a.githubDocUrl}

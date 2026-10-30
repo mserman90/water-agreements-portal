@@ -26,6 +26,18 @@ export interface Agreement {
   pdfUrl?: string;
   faolexUrl?: string;
   githubDocUrl?: string;
+  signatories?: string;
+  locationSigned?: string;
+  bcode?: string;
+  commName?: string;
+  rbo?: number;
+  alloc?: number;
+  allocText?: string;
+  hydro?: number;
+  groundwater?: number;
+  enviro?: number;
+  monitoring?: number;
+  conflictRes?: number;
 }
 
 export interface WaterConflict {
@@ -164,6 +176,7 @@ function buildPopupLinks(a: Agreement, lang: 'tr' | 'en' = 'tr'): string {
   }
   const q = encodeURIComponent(a.name.slice(0, 80));
   links.push(`<a href="https://www.fao.org/faolex/results/en/?query=${q}" target="_blank" style="color:#64748b;text-decoration:none;">${searchFaolexText}</a>`);
+  links.push(`<a href="${import.meta.env.BASE_URL}data/WebsiteTreatiesDB_20181124.xlsx" download="WebsiteTreatiesDB_20181124.xlsx" style="color:#059669;font-weight:700;text-decoration:none;" title="Oregon State University TFDD Treaties Master Database (115 columns)">📊 OSU Excel</a>`);
   return links.join(' &nbsp;|&nbsp; ');
 }
 
@@ -224,7 +237,19 @@ function buildAgreementPopup(a: Agreement, lang: 'tr' | 'en' = 'tr'): string {
           <span style="color:#64748b;font-weight:600;">📋 ${focusLabel}:</span>
           <span style="color:#475569;margin-left:4px;">${purposeTr}</span>
         </div>
+        ${a.locationSigned ? `<div><span style="color:#64748b;font-weight:600;">🏛️ ${lang === 'tr' ? 'İmza Yeri' : 'Signed at'}:</span><span style="color:#334155;margin-left:4px;">${a.locationSigned}</span></div>` : ''}
+        ${a.commName ? `<div><span style="color:#64748b;font-weight:600;">🤝 ${lang === 'tr' ? 'Havza Komisyonu' : 'Commission'}:</span><span style="color:#0284c7;font-weight:700;margin-left:4px;">${a.commName}</span></div>` : ''}
       </div>
+
+      ${(a.alloc || a.hydro || a.groundwater || a.monitoring || a.conflictRes) ? `
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px;">
+          ${a.alloc ? `<span style="background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd;font-size:9.5px;padding:1px 5px;border-radius:3px;font-weight:600;">💧 ${lang === 'tr' ? 'Su Tahsisi' : 'Allocation'}</span>` : ''}
+          ${a.hydro ? `<span style="background:#fef3c7;color:#b45309;border:1px solid #fde68a;font-size:9.5px;padding:1px 5px;border-radius:3px;font-weight:600;">⚡ ${lang === 'tr' ? 'HES / Enerji' : 'Hydropower'}</span>` : ''}
+          ${a.groundwater ? `<span style="background:#ecfdf5;color:#047857;border:1px solid #a7f3d0;font-size:9.5px;padding:1px 5px;border-radius:3px;font-weight:600;">🌿 ${lang === 'tr' ? 'Yeraltı Suyu' : 'Aquifer'}</span>` : ''}
+          ${a.monitoring ? `<span style="background:#f3e8ff;color:#7e22ce;border:1px solid #e9d5ff;font-size:9.5px;padding:1px 5px;border-radius:3px;font-weight:600;">📡 ${lang === 'tr' ? 'İzleme' : 'Monitoring'}</span>` : ''}
+          ${a.conflictRes ? `<span style="background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5;font-size:9.5px;padding:1px 5px;border-radius:3px;font-weight:600;">⚖️ ${lang === 'tr' ? 'Çözüm Mekanizması' : 'Dispute Mech'}</span>` : ''}
+        </div>
+      ` : ''}
 
       <div style="border-top:1px solid #e2e8f0;padding-top:6px;font-size:11px;">
         ${linkHtml}

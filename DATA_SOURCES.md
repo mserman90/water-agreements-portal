@@ -39,6 +39,30 @@ TFDD veri setindeki amaç kodları, uluslararası su diplomasisindeki temel işl
 
 ---
 
+### 1.4. OSU TFDD Orijinal Master Excel Veritabanı (`WebsiteTreatiesDB_20181124.xlsx`)
+Oregon State University (OSU) Transboundary Freshwater Dispute Database projesinin resmi ham Excel master veritabanı doğrudan yerel depomuza indirilmiş, portal veri tabanımızla birleştirilmiş ve araştırmacıların doğrudan indirmesine açılmıştır:
+
+- **Dosya Adı:** `WebsiteTreatiesDB_20181124.xlsx` (1.182.567 bayt / ~1.18 MB)
+- **Doğrudan Yerel İndirme:** [client/public/data/WebsiteTreatiesDB_20181124.xlsx](client/public/data/WebsiteTreatiesDB_20181124.xlsx)
+- **Orijinal OSU Kaynak URL:** `https://transboundarywaters.science.oregonstate.edu/sites/transboundarywaters.ceoas.oregonstate.edu/files/Database/Data/Treaty/WebsiteTreatiesDB_20181124.xlsx`
+- **Kayıt ve Boyut:** 2.118 satır × 115 kodlanmış değişken sütunu.
+
+#### 1.4.1. 115 Kolonluk Kodlama Mimarisi ve Temel Değişken Grupları
+OSU master veritabanı, her anlaşmayı uluslararası hidro-diplomasinin 115 analitik parametresine göre etiketlemiştir:
+1. **Havza & Coğrafi Tanımlayıcılar:** `BCCODE` (Basin Country Code), `BCODE` (Basin Numeric Code), `Basin Name`, `Treaty Basin(s)`, `CCODE`, `Country_Name`, `Signatories` (Tüm imza sahibi ülkeler), `LocationSigned` (Anlaşmanın imzalandığı şehir/başkent).
+2. **Kurumsal Yapı ve Havza Komisyonları:** `RBO` (Nehir Havzası Örgütü varlığı, 0/1), `CommName` (Ortak nehir havzası komisyonunun resmi diplomatik adı, örn. *International Boundary and Water Commission, Mekong River Commission, Permanent Indus Commission*).
+3. **Su Tahsis Mekanizmaları:** `Allocation` (0/1), `Alloc_Text` (Debi payı, kota veya yüzdelik tahsis metninin detaylı alıntısı).
+4. **Sektörel ve Çevresel Hükümler:** `Hydropower` (0/1), `Groundwater` (Yeraltı suları/akifer hükümleri, 0/1), `Environment` (Çevresel akış ve ekosistem koruma hükümleri, 0/1).
+5. **Yönetişim, İzleme ve Uyuşmazlık Çözümü:** `Monitoring` (Ortak hidrolojik ölçüm ve veri paylaşımı, 0/1), `Conflict Resolution Mechanism` (Tahkim, arabuluculuk veya uluslararası yargı maddeleri, 0/1).
+
+#### 1.4.2. Portala Entegrasyon ve Zenginleştirme
+Portalımızdaki 3.059 anlaşmalık külliyatta:
+- 2.147 anlaşma kaydı bu 115 kolonluk master Excel tablosundaki kodlamalarla (`signatories`, `locationSigned`, `bcode`, `commName`, `alloc`, `allocText`, `hydro`, `groundwater`, `enviro`, `monitoring`, `conflictRes`, `rbo`) birebir zenginleştirilmiştir.
+- Geriye kalan modern anlaşmalar (2007 sonrası, 2024–2026 Nil CFA, Aral Restorasyonu, IBWC Dakika 330/331/332 vb.) portal derlemesiyle güncellenmiş ve haritada/kenar panelde aynı standartta sunulmaktadır.
+- Kullanıcılar sol paneldeki **"📊 OSU TFDD Master Excel (115 Kolon)"** butonuyla orijinal 1.18 MB .xlsx dosyasını tek tıkla indirebilmektedir.
+
+---
+
 ## 2. Basins at Risk (BAR) Olay Veri Seti ve Su Etkileşim Skalası
 
 ### 2.1. Metodolojik Çerçeve (Wolf, Yoffe & Giordano)
