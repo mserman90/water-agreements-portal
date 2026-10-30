@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
+import { Sparkles, Key, RotateCcw, Send, Settings, Check } from 'lucide-react';
 import type { Agreement, WaterConflict } from './MapViewer';
+import { smartSearch } from '@/lib/smartSearch';
 
 interface Message {
   role: 'user' | 'model';
@@ -12,9 +14,12 @@ interface Props {
   embedded?: boolean;
 }
 
+type Provider = 'keyless' | 'gemini';
+
 const GEMINI_MODEL = 'gemini-2.0-flash';
-const API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
-const STORAGE_KEY = 'gemini_api_key';
+const GEMINI_API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
+const STORAGE_KEY_GEMINI = 'gemini_api_key';
+const STORAGE_KEY_PROVIDER = 'ai_provider_mode';
 
 function isWaterConflict(item: Agreement | WaterConflict): item is WaterConflict {
   return 'intensity' in item;
@@ -58,6 +63,52 @@ function buildSystemContext(agreements: Agreement[], selected?: Agreement | Wate
   return ctx;
 }
 
+// 1. Free & Keyless AI Engine (Pollinations.ai)
+async function askKeylessAI(
+  history: Message[],
+  userMsg: string,
+  systemCtx: string
+): Promise<string> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 14000); // 14s timeout
+
+  const messages = [
+    { role: 'system', content: systemCtx },
+    ...history.slice(-4).map((m) => ({
+      role: m.role === 'model' ? 'assistant' : 'user',
+      content: m.text,
+    })),
+    { role: 'user', content: userMsg },
+  ];
+
+  try {
+    const res = await fetch('https://text.pollinations.ai/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        messages,
+        model: 'openai',
+        temperature: 0.7,
+      }),
+      signal: controller.signal,
+    });
+
+    clearTimeout(timeoutId);
+
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
+    }
+
+    const reply = await res.text();
+    if (!reply.trim()) throw new Error('Boş yanıt döndü');
+    return reply;
+  } catch (err) {
+    clearTimeout(timeoutId);
+    throw err;
+  }
+}
+
+// 2. Optional Gemini AI Engine
 async function askGemini(
   apiKey: string,
   history: Message[],
@@ -76,7 +127,7 @@ async function askGemini(
     { role: 'user', parts: [{ text: userMsg }] },
   ];
 
-  const res = await fetch(`${API_BASE}/${GEMINI_MODEL}:generateContent?key=${apiKey}`, {
+  const res = await fetch(`${GEMINI_API_BASE}/${GEMINI_MODEL}:generateContent?key=${apiKey}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -94,9 +145,57 @@ async function askGemini(
   return data?.candidates?.[0]?.content?.parts?.[0]?.text ?? 'Yanıt alınamadı.';
 }
 
+// 3. Local Smart Fallback Engine (Offline or fallback)
+function generateLocalFallbackResponse(
+  userMsg: string,
+  agreements: Agreement[],
+  selected?: Agreement | WaterConflict
+): string {
+  if (selected) {
+    if (isWaterConflict(selected)) {
+      return `📌 **${selected.title} (${selected.year})**\n\n` +
+        `- **Havza:** ${selected.basin}\n` +
+        `- **Taraf Devletler:** ${selected.countries}\n` +
+        `- **BAR Yoğunluk Ölçeği:** ${selected.intensity}\n` +
+        `- **Tarihsel Açıklama:** ${selected.description}\n` +
+        (selected.source ? `- **Kaynak Literatür:** ${selected.source}\n` : '');
+    } else {
+      return `📌 **${selected.name} (${selected.year})**\n\n` +
+        `- **Havza:** ${selected.basin}\n` +
+        `- **Taraf Devletler:** ${selected.country}\n` +
+        `- **Kapsam / Amaç:** ${selected.purpose || 'Belirtilmemiş'}\n` +
+        (selected.pdfUrl ? `- [📄 Orijinal PDF İndir](${selected.pdfUrl})\n` : '') +
+        (selected.faolexUrl ? `- [🌐 FAOLEX Veritabanı Kaydı](${selected.faolexUrl})\n` : '');
+    }
+  }
+
+  const matches = smartSearch(userMsg, agreements);
+  if (matches.length > 0) {
+    const top = matches.slice(0, 5);
+    const years = matches.map((m) => m.year).filter(Boolean);
+    const minYear = Math.min(...years);
+    const maxYear = Math.max(...years);
+    let reply = `Sorunuzla ilgili veritabanında **${matches.length} anlaşma** tespit edildi (${minYear}–${maxYear}):\n\n`;
+    top.forEach((m, idx) => {
+      reply += `${idx + 1}. **${m.name}** (${m.year}) — *${m.country}* · 🌊 ${m.basin}\n`;
+      if (m.pdfUrl) reply += `   - [📄 PDF Belgesi](${m.pdfUrl})\n`;
+    });
+    if (matches.length > 5) {
+      reply += `\n*...ve ${matches.length - 5} anlaşma daha. Sol paneldeki arama kutusundan hepsini filtreleyebilirsiniz.*`;
+    }
+    return reply;
+  }
+
+  return `Uluslararası tatlı su anlaşmaları portalında 3.029 anlaşma ve 121 kriz kaydı bulunmaktadır. Belirli bir nehir havzası (örn: Nil, Fırat, Tuna), ülke veya yıl aralığı belirterek sorunuzu detaylandırabilirsiniz.`;
+}
+
 export default function AiChat({ agreements, selectedAgreement, embedded = false }: Props) {
   const [open, setOpen] = useState(false);
-  const [apiKey, setApiKey] = useState<string>(() => localStorage.getItem(STORAGE_KEY) ?? '');
+  const [provider, setProvider] = useState<Provider>(() => {
+    return (localStorage.getItem(STORAGE_KEY_PROVIDER) as Provider) || 'keyless';
+  });
+  const [showSettings, setShowSettings] = useState(false);
+  const [geminiKey, setGeminiKey] = useState<string>(() => localStorage.getItem(STORAGE_KEY_GEMINI) ?? '');
   const [keyInput, setKeyInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
@@ -108,30 +207,55 @@ export default function AiChat({ agreements, selectedAgreement, embedded = false
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, loading]);
 
-  const saveKey = () => {
+  const saveGeminiKey = () => {
     const k = keyInput.trim();
     if (!k) return;
-    localStorage.setItem(STORAGE_KEY, k);
-    setApiKey(k);
+    localStorage.setItem(STORAGE_KEY_GEMINI, k);
+    setGeminiKey(k);
     setKeyInput('');
+    setProvider('gemini');
+    localStorage.setItem(STORAGE_KEY_PROVIDER, 'gemini');
+    setShowSettings(false);
     setError('');
+  };
+
+  const selectProvider = (p: Provider) => {
+    setProvider(p);
+    localStorage.setItem(STORAGE_KEY_PROVIDER, p);
+    if (p === 'keyless') {
+      setShowSettings(false);
+    }
   };
 
   const sendMessage = async (overrideText?: string) => {
     const text = (overrideText ?? input).trim();
-    if (!text || loading || !apiKey) return;
+    if (!text || loading) return;
+
     const newHistory: Message[] = [...messages, { role: 'user', text }];
     setMessages(newHistory);
     if (!overrideText) setInput('');
     setLoading(true);
     setError('');
+
+    const ctx = buildSystemContext(agreements, selectedAgreement);
+
     try {
-      const ctx = buildSystemContext(agreements, selectedAgreement);
-      const reply = await askGemini(apiKey, messages, text, ctx);
+      let reply = '';
+      if (provider === 'gemini' && geminiKey) {
+        reply = await askGemini(geminiKey, messages, text, ctx);
+      } else {
+        // Free & Keyless AI (with local fallback if offline)
+        try {
+          reply = await askKeylessAI(messages, text, ctx);
+        } catch {
+          reply = generateLocalFallbackResponse(text, agreements, selectedAgreement);
+        }
+      }
       setMessages([...newHistory, { role: 'model', text: reply }]);
     } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : 'Bilinmeyen hata oluştu';
-      setError(msg);
+      // Automatic Local Fallback
+      const fallback = generateLocalFallbackResponse(text, agreements, selectedAgreement);
+      setMessages([...newHistory, { role: 'model', text: fallback }]);
     } finally {
       setLoading(false);
     }
@@ -150,7 +274,7 @@ export default function AiChat({ agreements, selectedAgreement, embedded = false
           `Uyuşmazlık çözümü mekanizması var mı?`,
         ]
     : [
-        'Nil havzasında kaç anlaşma imzalandı?',
+        '1959 Nil Anlaşması neden önemlidir?',
         'Fırat-Dicle nehirlerindeki tarihi anlaşmalar nelerdir?',
         'Tarihteki en eski su anlaşması hangisidir?',
       ];
@@ -168,9 +292,9 @@ export default function AiChat({ agreements, selectedAgreement, embedded = false
         style={{
           background: '#0369a1',
           color: '#fff',
-          padding: '12px 16px',
+          padding: '10px 14px',
           fontWeight: 700,
-          fontSize: 14,
+          fontSize: 13.5,
           display: 'flex',
           alignItems: 'center',
           gap: 8,
@@ -179,14 +303,130 @@ export default function AiChat({ agreements, selectedAgreement, embedded = false
       >
         <span>🤖</span>
         <span>Su Anlaşmaları AI Asistanı</span>
-        <span style={{ marginLeft: 'auto', fontSize: 11, opacity: 0.85, background: 'rgba(255,255,255,0.2)', padding: '2px 6px', borderRadius: 4 }}>
-          Gemini 2.0
-        </span>
+
+        {/* Free & Keyless indicator badge */}
+        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 6 }}>
+          <span
+            style={{
+              fontSize: 10.5,
+              fontWeight: 600,
+              background: provider === 'keyless' ? 'rgba(34,197,94,0.25)' : 'rgba(255,255,255,0.2)',
+              color: '#fff',
+              padding: '2px 7px',
+              borderRadius: 12,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 4,
+            }}
+          >
+            <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#4ade80' }} />
+            {provider === 'keyless' ? 'Ücretsiz Keyless' : 'Gemini'}
+          </span>
+
+          <button
+            onClick={() => setShowSettings(!showSettings)}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#fff',
+              cursor: 'pointer',
+              padding: 2,
+              opacity: 0.85,
+            }}
+            title="AI Ayarları"
+          >
+            <Settings size={15} />
+          </button>
+        </div>
       </div>
+
+      {/* Settings Dropdown/Drawer */}
+      {showSettings && (
+        <div style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0', padding: 12, fontSize: 12 }}>
+          <div style={{ fontWeight: 600, marginBottom: 8, color: '#0f172a' }}>AI Sağlayıcı Seçimi:</div>
+          <div style={{ display: 'flex', gap: 6, marginBottom: 10 }}>
+            <button
+              onClick={() => selectProvider('keyless')}
+              style={{
+                flex: 1,
+                padding: '6px 8px',
+                borderRadius: 6,
+                border: provider === 'keyless' ? '2px solid #0284c7' : '1px solid #cbd5e1',
+                background: provider === 'keyless' ? '#f0f9ff' : '#fff',
+                color: provider === 'keyless' ? '#0369a1' : '#475569',
+                fontWeight: 600,
+                fontSize: 11,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 4,
+              }}
+            >
+              <Sparkles size={12} />
+              Keyless AI (Ücretsiz)
+            </button>
+            <button
+              onClick={() => selectProvider('gemini')}
+              style={{
+                flex: 1,
+                padding: '6px 8px',
+                borderRadius: 6,
+                border: provider === 'gemini' ? '2px solid #0284c7' : '1px solid #cbd5e1',
+                background: provider === 'gemini' ? '#f0f9ff' : '#fff',
+                color: provider === 'gemini' ? '#0369a1' : '#475569',
+                fontWeight: 600,
+                fontSize: 11,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 4,
+              }}
+            >
+              <Key size={12} />
+              Özel Gemini Key
+            </button>
+          </div>
+
+          {provider === 'gemini' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <input
+                type="password"
+                placeholder="Gemini API anahtarınız..."
+                value={keyInput}
+                onChange={(e) => setKeyInput(e.target.value)}
+                style={{
+                  padding: '6px 8px',
+                  borderRadius: 4,
+                  border: '1px solid #cbd5e1',
+                  fontSize: 11,
+                  outline: 'none',
+                }}
+              />
+              <button
+                onClick={saveGeminiKey}
+                style={{
+                  padding: '6px',
+                  borderRadius: 4,
+                  background: '#0369a1',
+                  color: '#fff',
+                  border: 'none',
+                  fontSize: 11,
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                }}
+              >
+                Key'i Kaydet
+              </button>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Selected item banner */}
       {selectedAgreement && (
-        <div style={{ background: '#f0f9ff', borderBottom: '1px solid #bae6fd', padding: '8px 12px', fontSize: 12, color: '#0369a1', display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
+        <div style={{ background: '#f0f9ff', borderBottom: '1px solid #bae6fd', padding: '6px 12px', fontSize: 11.5, color: '#0369a1', display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
           <span>{isWaterConflict(selectedAgreement) ? '⚡' : '📌'}</span>
           <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 600 }}>
             {selectedName}
@@ -194,186 +434,122 @@ export default function AiChat({ agreements, selectedAgreement, embedded = false
         </div>
       )}
 
-      {/* API Key Prompt */}
-      {!apiKey ? (
-        <div style={{ padding: 16, flex: 1, display: 'flex', flexDirection: 'column', gap: 12, overflowY: 'auto' }}>
-          <div style={{ background: '#f8fafc', padding: 12, borderRadius: 8, border: '1px solid #e2e8f0' }}>
-            <p style={{ fontSize: 13, color: '#334155', lineHeight: 1.5, margin: 0, fontWeight: 500 }}>
-              AI Asistanını kullanmak için ücretsiz <strong>Gemini API anahtarı</strong> gereklidir.
-            </p>
-            <p style={{ fontSize: 12, color: '#64748b', marginTop: 6, marginBottom: 0 }}>
-              Anahtarınız sadece tarayıcınızda (localStorage) saklanır, sunucuya gönderilmez.
-            </p>
-          </div>
-          <a
-            href="https://aistudio.google.com/app/apikey"
-            target="_blank"
-            rel="noreferrer"
-            style={{ fontSize: 13, color: '#0284c7', textDecoration: 'underline', fontWeight: 500 }}
-          >
-            ↗ Google AI Studio'dan Ücretsiz Key Al
-          </a>
-          <input
-            type="password"
-            placeholder="AIzaSy... API anahtarını buraya yapıştırın"
-            value={keyInput}
-            onChange={(e) => setKeyInput(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && saveKey()}
-            style={{
-              padding: '10px 12px',
-              borderRadius: 6,
-              border: '1px solid #cbd5e1',
-              fontSize: 13,
-              outline: 'none',
-            }}
-          />
-          <button
-            onClick={saveKey}
-            style={{
-              padding: '10px',
-              borderRadius: 6,
-              background: '#0369a1',
-              color: '#fff',
-              border: 'none',
-              fontSize: 13,
-              fontWeight: 600,
-              cursor: 'pointer',
-              transition: 'background 0.2s',
-            }}
-          >
-            Kaydet ve Başlat
-          </button>
-        </div>
-      ) : (
-        <>
-          {/* Messages container */}
-          <div style={{ flex: 1, overflowY: 'auto', padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-            {messages.length === 0 && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 10 }}>
-                <div style={{ color: '#64748b', fontSize: 13, textAlign: 'center' }}>
-                  {selectedAgreement
-                    ? `"${selectedName}" hakkında soru sorabilirsiniz.`
-                    : 'Uluslararası su anlaşmaları, havzalar ve uyuşmazlıklar hakkında soru sorabilirsiniz.'}
-                </div>
-                <div style={{ fontSize: 11, fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  Örnek Sorular:
-                </div>
-                {quickQuestions.map((q, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => sendMessage(q)}
-                    style={{
-                      textAlign: 'left',
-                      padding: '8px 10px',
-                      background: '#f8fafc',
-                      border: '1px solid #e2e8f0',
-                      borderRadius: 6,
-                      fontSize: 12,
-                      color: '#0369a1',
-                      cursor: 'pointer',
-                      transition: 'all 0.15s',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = '#f0f9ff';
-                      e.currentTarget.style.borderColor = '#bae6fd';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = '#f8fafc';
-                      e.currentTarget.style.borderColor = '#e2e8f0';
-                    }}
-                  >
-                    💬 {q}
-                  </button>
-                ))}
+      {/* Messages container */}
+      <div style={{ flex: 1, overflowY: 'auto', padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {messages.length === 0 && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 10 }}>
+            <div style={{ background: '#f8fafc', padding: 10, borderRadius: 8, border: '1px solid #e2e8f0', color: '#475569', fontSize: 12, lineHeight: 1.45 }}>
+              <div style={{ fontWeight: 600, color: '#0369a1', marginBottom: 2 }}>
+                ✨ Ücretsiz & Anahtarsız Su Asistanı
               </div>
-            )}
+              <div>
+                Herhangi bir API key veya giriş gerekmeden tüm dünya su anlaşmaları, Nil, Fırat-Dicle, İndus ve Tuna gibi havzalar hakkında soru sorabilirsiniz.
+              </div>
+            </div>
 
-            {messages.map((m, i) => (
-              <div
-                key={i}
+            <div style={{ fontSize: 11, fontWeight: 600, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Örnek Sorular:
+            </div>
+            {quickQuestions.map((q, idx) => (
+              <button
+                key={idx}
+                onClick={() => sendMessage(q)}
                 style={{
-                  alignSelf: m.role === 'user' ? 'flex-end' : 'flex-start',
-                  maxWidth: '88%',
-                  background: m.role === 'user' ? '#0369a1' : '#f1f5f9',
-                  color: m.role === 'user' ? '#fff' : '#0f172a',
-                  padding: '9px 13px',
-                  borderRadius: m.role === 'user' ? '12px 12px 2px 12px' : '12px 12px 12px 2px',
-                  fontSize: 13,
-                  lineHeight: 1.5,
-                  whiteSpace: 'pre-wrap',
-                  boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
+                  textAlign: 'left',
+                  padding: '8px 10px',
+                  background: '#f8fafc',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: 6,
+                  fontSize: 12,
+                  color: '#0369a1',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = '#f0f9ff';
+                  e.currentTarget.style.borderColor = '#bae6fd';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = '#f8fafc';
+                  e.currentTarget.style.borderColor = '#e2e8f0';
                 }}
               >
-                {m.text}
-              </div>
+                💬 {q}
+              </button>
             ))}
-
-            {loading && (
-              <div style={{ alignSelf: 'flex-start', color: '#64748b', fontSize: 13, fontStyle: 'italic', display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span>🤖 Analiz ediliyor...</span>
-              </div>
-            )}
-
-            {error && (
-              <div style={{ color: '#dc2626', fontSize: 12, background: '#fef2f2', border: '1px solid #fecaca', padding: '8px 10px', borderRadius: 6 }}>
-                Hata: {error}
-              </div>
-            )}
-            <div ref={bottomRef} />
           </div>
+        )}
 
-          {/* Input field */}
-          <div style={{ padding: '8px 10px', borderTop: '1px solid #e2e8f0', display: 'flex', gap: 6, background: '#fff' }}>
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage()}
-              placeholder="Sorunuzu yazın..."
-              disabled={loading}
-              style={{
-                flex: 1,
-                padding: '8px 12px',
-                borderRadius: 6,
-                border: '1px solid #cbd5e1',
-                fontSize: 13,
-                outline: 'none',
-                background: '#f8fafc',
-              }}
-            />
-            <button
-              onClick={() => sendMessage()}
-              disabled={loading || !input.trim()}
-              style={{
-                padding: '8px 14px',
-                borderRadius: 6,
-                background: loading || !input.trim() ? '#cbd5e1' : '#0369a1',
-                color: '#fff',
-                border: 'none',
-                cursor: loading || !input.trim() ? 'default' : 'pointer',
-                fontSize: 14,
-                fontWeight: 600,
-              }}
-            >
-              ↑
-            </button>
+        {messages.map((m, i) => (
+          <div
+            key={i}
+            style={{
+              alignSelf: m.role === 'user' ? 'flex-end' : 'flex-start',
+              maxWidth: '88%',
+              background: m.role === 'user' ? '#0369a1' : '#f1f5f9',
+              color: m.role === 'user' ? '#fff' : '#0f172a',
+              padding: '9px 13px',
+              borderRadius: m.role === 'user' ? '12px 12px 2px 12px' : '12px 12px 12px 2px',
+              fontSize: 13,
+              lineHeight: 1.5,
+              whiteSpace: 'pre-wrap',
+              boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
+            }}
+          >
+            {m.text}
           </div>
+        ))}
 
-          {/* Reset Key */}
-          <div style={{ padding: '3px 10px 6px', textAlign: 'right', background: '#fafafa', borderTop: '1px solid #f1f5f9' }}>
-            <button
-              onClick={() => {
-                localStorage.removeItem(STORAGE_KEY);
-                setApiKey('');
-                setMessages([]);
-              }}
-              style={{ fontSize: 10, color: '#94a3b8', background: 'none', border: 'none', cursor: 'pointer' }}
-            >
-              🔑 API anahtarını değiştir
-            </button>
+        {loading && (
+          <div style={{ alignSelf: 'flex-start', color: '#64748b', fontSize: 12.5, fontStyle: 'italic', display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span>🤖 Düşünüyor ve analiz ediyor...</span>
           </div>
-        </>
-      )}
+        )}
+
+        {error && (
+          <div style={{ color: '#dc2626', fontSize: 12, background: '#fef2f2', border: '1px solid #fecaca', padding: '8px 10px', borderRadius: 6 }}>
+            {error}
+          </div>
+        )}
+        <div ref={bottomRef} />
+      </div>
+
+      {/* Input field */}
+      <div style={{ padding: '8px 10px', borderTop: '1px solid #e2e8f0', display: 'flex', gap: 6, background: '#fff' }}>
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage()}
+          placeholder="Sorunuzu yazın (örn: Nil anlaşmaları nelerdir?)..."
+          disabled={loading}
+          style={{
+            flex: 1,
+            padding: '8px 12px',
+            borderRadius: 6,
+            border: '1px solid #cbd5e1',
+            fontSize: 12.5,
+            outline: 'none',
+            background: '#f8fafc',
+          }}
+        />
+        <button
+          onClick={() => sendMessage()}
+          disabled={loading || !input.trim()}
+          style={{
+            padding: '8px 14px',
+            borderRadius: 6,
+            background: loading || !input.trim() ? '#cbd5e1' : '#0369a1',
+            color: '#fff',
+            border: 'none',
+            cursor: loading || !input.trim() ? 'default' : 'pointer',
+            fontSize: 14,
+            fontWeight: 600,
+          }}
+        >
+          ↑
+        </button>
+      </div>
     </div>
   );
 
@@ -383,10 +559,9 @@ export default function AiChat({ agreements, selectedAgreement, embedded = false
 
   return (
     <>
-      {/* Floating button */}
       <button
         onClick={() => setOpen((v) => !v)}
-        title="AI Asistan"
+        title="Ücretsiz AI Asistanı"
         style={{
           position: 'fixed',
           bottom: 24,
@@ -410,7 +585,6 @@ export default function AiChat({ agreements, selectedAgreement, embedded = false
         {open ? '✕' : '🤖'}
       </button>
 
-      {/* Floating panel */}
       {open && (
         <div
           style={{
