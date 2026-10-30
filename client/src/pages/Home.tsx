@@ -89,6 +89,7 @@ export default function Home() {
   const [layers, setLayers] = useState<LayerConfig[]>([
     { id: 'agreements', label: { tr: 'Anlaşmalar', en: 'Agreements' }, icon: '📄', enabled: true, color: '#3b82f6' },
     { id: 'conflicts', label: { tr: 'Su Uyuşmazlıkları (BAR)', en: 'Water Conflicts' }, icon: '⚡', enabled: true, color: '#dc2626' },
+    { id: 'basins', label: { tr: 'Nehir Havzaları (310 Havza)', en: 'River Basins (310 Basins)' }, icon: '🌊', enabled: false, color: '#0284c7' },
   ]);
 
   const handleLayerToggle = (id: string) => {

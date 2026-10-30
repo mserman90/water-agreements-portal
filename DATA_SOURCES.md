@@ -116,6 +116,33 @@ Kılavuz, 115 değişkeni aşağıdaki metodolojik bloklarda tanımlar:
 
 ---
 
+### 1.6. OSU TFDD Mekânsal Havza Poligonları ve RBO Veritabanı (`hannahkfriedrich/tfdd`)
+Oregon State University (OSU) Coğrafya Bölümü araştırmacılarından Hannah K. Friedrich, Giovanni Svevo ve Alex Walters tarafından geliştirilen açık kaynaklı mekânsal TFDD reposu ([github.com/hannahkfriedrich/tfdd](https://github.com/hannahkfriedrich/tfdd)) bünyesindeki resmi jeo-uzamsal katmanlar ve Nehir Havzası Örgütleri (RBO) veri tabanı doğrudan portala entegre edilmiştir:
+
+#### 1.6.1. 310 Uluslararası Nehir Havzası Sınırları (`Basin310_Master_20180511.geojson`)
+- **Dosya Boyutu:** 1.365.382 bayt (~1,36 MB GeoJSON)
+- **Doğrudan Yerel İndirme:** [client/public/data/Basin310_Master_20180511.geojson](client/public/data/Basin310_Master_20180511.geojson)
+- **Mekânsal Kapsam:** Dünya üzerindeki tüm 310 uluslararası sınır-aşan nehir havzasının tam poligon geometrileri (WGS84).
+- **Öznitelikler:**
+  - `BCODE`: Uluslararası 4 harfli havza kodu (örn. `AMZN`, `NILE`, `INDL`, `DANU`, `EUPH`).
+  - `Basin_Name`: Havzanın tam adı.
+  - `Area_km2`: Havza drenaj alanı yüzölçümü ($km^2$).
+  - `Pop_2007`, `Pop_2015`, `Pop_2020`: Yıllara göre havzadaki toplam nüfus ve nüfus yoğunluğu.
+  - `Dams_Exist` / `Dam_Plnd`: Havzadaki mevcut baraj ve inşaatı planlanan baraj sayıları.
+  - `HydroPolTe`: Havza bazındaki hidropolitik gerilim skoru (0 ila 5 skalası).
+- **Harita Entegrasyonu:** Portalın sağ üst katman kontrol panelindeki **"🌊 Nehir Havzaları (310 Havza)"** katmanı açıldığında, 310 uluslararası havzanın tamamı harita üzerinde yarı saydam poligonlar olarak çizilir. Üzerine gelindiğinde poligon vurgulanır; tıklandığında alan, nüfus, mevcut baraj ve hidropolitik gerilim verileri popup olarak açılır.
+
+#### 1.6.2. River Basin Organizations (RBO) Veritabanı (`TFDD_RBODatabase_20131015.xlsx`)
+- **Dosya Boyutu:** 245.720 bayt (~246 KB Excel / 925 KB CSV)
+- **Doğrudan Yerel İndirme:** [client/public/data/TFDD_RBODatabase_20131015.xlsx](client/public/data/TFDD_RBODatabase_20131015.xlsx)
+- **Kapsam:** Dünya genelindeki 270'ten fazla Nehir Havzası Örgütü'nün (RBO) 77 analitik değişkene göre kodlanmış kurumsal yapısı:
+  - `RBO_NAME`: Havza komisyonu veya örgütünün resmi diplomasi adı.
+  - `AGREEMENT_NAME` ve `AGREEMENT_DATE`: Örgütü kuran kurucu antlaşma ve imza yılı.
+  - `MEMB_NAMES` ve `MEMB_NO`: Üye devletlerin listesi ve sayısı.
+  - `LATERALITY` (İkili veya Çok Taraflı) ve `INCLUSIVENESS` (Tüm kıyıdaşları kapsama oranı).
+
+---
+
 ## 2. Basins at Risk (BAR) Olay Veri Seti ve Su Etkileşim Skalası
 
 ### 2.1. Metodolojik Çerçeve (Wolf, Yoffe & Giordano)

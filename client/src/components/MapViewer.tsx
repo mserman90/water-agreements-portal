@@ -358,6 +358,8 @@ export default function MapViewer({ agreements, conflicts = [], selectedId, onMa
   const mapRef = useRef<L.Map | null>(null);
   const agreementClusterRef = useRef<L.MarkerClusterGroup | null>(null);
   const conflictClusterRef = useRef<L.MarkerClusterGroup | null>(null);
+  const basinsLayerRef = useRef<L.GeoJSON | null>(null);
+  const basinsGeoJsonCache = useRef<any>(null);
   const markersRef = useRef<Map<string, L.Marker>>(new Map());
 
   // Global bridge for Leaflet popup click actions
@@ -446,6 +448,93 @@ export default function MapViewer({ agreements, conflicts = [], selectedId, onMa
     map.addLayer(cluster);
     conflictClusterRef.current = cluster;
   }, [conflicts, selectedId, onMarkerClick, layers, lang]);
+
+  // Update Basins polygon layer
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+
+    const basinsLayer = layers?.find((l) => l.id === 'basins');
+    const isEnabled = basinsLayer ? basinsLayer.enabled : false;
+
+    if (!isEnabled) {
+      if (basinsLayerRef.current) {
+        map.removeLayer(basinsLayerRef.current);
+        basinsLayerRef.current = null;
+      }
+      return;
+    }
+
+    const renderGeoJson = (geoJsonData: any) => {
+      if (basinsLayerRef.current) {
+        map.removeLayer(basinsLayerRef.current);
+      }
+      const geoLayer = L.geoJSON(geoJsonData, {
+        style: () => ({
+          fillColor: '#0284c7',
+          weight: 1.2,
+          opacity: 0.8,
+          color: '#0369a1',
+          fillOpacity: 0.12,
+        }),
+        onEachFeature: (feature, layer) => {
+          const p = feature.properties || {};
+          const bName = p.Basin_Name || 'Unknown Basin';
+          const area = p.Area_km2 ? Number(p.Area_km2).toLocaleString() : 'N/A';
+          const pop = p.Pop_2020 ? Number(p.Pop_2020).toLocaleString() : 'N/A';
+          const dams = p.Dams_Exist ?? 0;
+          const tension = p.HydroPolTe && p.HydroPolTe !== 'N/A' ? `${p.HydroPolTe} / 5` : 'Normal';
+
+          const popupContent = `
+            <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:12px;min-width:200px;line-height:1.4;">
+              <div style="font-weight:700;font-size:13px;color:#0284c7;margin-bottom:4px;border-bottom:1px solid #e2e8f0;padding-bottom:3px;">
+                🌊 ${bName} (${p.BCODE || ''})
+              </div>
+              <div style="color:#475569;display:flex;flex-direction:column;gap:2px;">
+                <div>🌍 <b>${lang === 'tr' ? 'Kıta' : 'Continent'}:</b> ${p.Continent_ || 'N/A'}</div>
+                <div>📐 <b>${lang === 'tr' ? 'Yüzölçümü' : 'Area'}:</b> ${area} km²</div>
+                <div>👥 <b>${lang === 'tr' ? 'Nüfus (2020)' : 'Population (2020)'}:</b> ${pop}</div>
+                <div>🏗️ <b>${lang === 'tr' ? 'Mevcut Barajlar' : 'Existing Dams'}:</b> ${dams}</div>
+                ${p.Dam_Plnd ? `<div>🚧 <b>${lang === 'tr' ? 'Planlanan Barajlar' : 'Planned Dams'}:</b> ${p.Dam_Plnd}</div>` : ''}
+                <div>⚠️ <b>${lang === 'tr' ? 'Hidropolitik Gerilim' : 'Hydro-Political Tension'}:</b> <span style="font-weight:700;color:#dc2626;">${tension}</span></div>
+              </div>
+            </div>
+          `;
+          layer.bindPopup(popupContent);
+
+          layer.on({
+            mouseover: (e) => {
+              const target = e.target;
+              target.setStyle({
+                fillColor: '#38bdf8',
+                fillOpacity: 0.35,
+                weight: 2,
+                color: '#0284c7',
+              });
+            },
+            mouseout: (e) => {
+              geoLayer.resetStyle(e.target);
+            },
+          });
+        },
+      });
+
+      geoLayer.addTo(map);
+      basinsLayerRef.current = geoLayer;
+    };
+
+    if (basinsGeoJsonCache.current) {
+      renderGeoJson(basinsGeoJsonCache.current);
+    } else {
+      fetch(`${import.meta.env.BASE_URL}data/Basin310_Master_20180511.geojson`)
+        .then((res) => res.json())
+        .then((data) => {
+          basinsGeoJsonCache.current = data;
+          renderGeoJson(data);
+        })
+        .catch((err) => console.error('Error loading basin polygons:', err));
+    }
+  }, [layers, lang]);
 
   // Pan to selected marker
   useEffect(() => {

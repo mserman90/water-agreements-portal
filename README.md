@@ -71,6 +71,8 @@ Tüm veriler orijinal, hakemli ve uluslararası kabul görmüş resmi depolardan
 | :--- | :--- | :--- | :--- |
 | **TFDD Master Treaties Database** | Oregon State University (OSU TFDD) | 1.18 MB Excel (`WebsiteTreatiesDB_20181124.xlsx`, 2.118 kayıt, 115 değişken) | OSU Department of Geosciences / Prof. Aaron T. Wolf. |
 | **TFDD Treaty CodeBook (16 Sayfa)** | Oregon State University, IWMI, World Bank | 196 KB PDF (`WebsiteTreatyCodeBook_20180312.pdf`, 115 değişken tanımı) | OSU / IWMI / World Bank (2018). |
+| **310 International Basins GeoJSON** | OSU TFDD Spatial Data (Friedrich et al., 2018) | 1.36 MB GeoJSON (`Basin310_Master_20180511.geojson`) | Friedrich, H. K., Svevo, G., & Walters, A. (OSU). |
+| **TFDD RBO Database (77 Kolon)** | OSU Transboundary Freshwater Dispute Database | 246 KB Excel (`TFDD_RBODatabase_20131015.xlsx`) | OSU Department of Geosciences / Prof. Aaron T. Wolf. |
 | **TFDD & Modern Water Treaties** | Oregon State University, UNTS, FAOLEX, River Commissions | 1820–2026 (3.059+ ikili & çok taraflı anlaşma) | Wolf, A. T. (1999) & Portal 2026 Derlemesi. |
 | **BAR Event Dataset (Basins at Risk)** | OSU, World Bank & Portal Update | 1948–2026 (124 su krizi ve dönüm noktası) | Yoffe, S., Wolf, A. T., & Giordano, M. (2003). |
 | **FAOLEX Database** | Gıda ve Tarım Örgütü (UN FAO) | Milli mevzuat ve su anlaşmaları metinleri | FAO Legal Office (2026). *FAOLEX Treaty Collection*. fao.org/faolex |

@@ -383,6 +383,27 @@ export default function AgreementSidebar({
               CodeBook
             </a>
             <a
+              href="./data/TFDD_RBODatabase_20131015.xlsx"
+              download="TFDD_RBODatabase_20131015.xlsx"
+              title={lang === 'tr' ? 'OSU TFDD Nehir Havzası Örgütleri (RBO) Veritabanı (.xlsx, 77 Kolon)' : 'OSU TFDD River Basin Organizations (RBO) Database (.xlsx, 77 Cols)'}
+              style={{
+                textDecoration: 'none',
+                color: '#7c3aed',
+                fontWeight: 700,
+                fontSize: 10.5,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 3,
+                background: '#f5f3ff',
+                border: '1px solid #ddd6fe',
+                padding: '2px 6px',
+                borderRadius: 4,
+              }}
+            >
+              <FileDown size={11} />
+              RBO
+            </a>
+            <a
               href="./data/WebsiteTreatiesDB_20181124.xlsx"
               download="WebsiteTreatiesDB_20181124.xlsx"
               title={lang === 'tr' ? 'Orijinal OSU TFDD 115-kolon Master Excel tablosunu indir (1.18 MB)' : 'Download original OSU TFDD 115-column Master Excel sheet (1.18 MB)'}
