@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software or data in your research, please cite it using the metadata from this file."
+title: "Transboundary Freshwater Agreements and Hydro-Climatic Intelligence Portal"
+abstract: "A spatio-temporal database and interactive platform synthesizing over 3,000 international transboundary freshwater treaties (1820–2024), the Basins at Risk (BAR) conflict-cooperation event set, and ECMWF ERA5 historical climate reanalysis."
+authors:
+  - family-names: "Serman"
+    given-names: "Mert"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+version: 1.0.0
+date-released: 2026-10-30
+license: MIT
+repository-code: "https://github.com/mserman90/water-agreements-portal"
+url: "https://mserman90.github.io/water-agreements-portal/"
+keywords:
+  - "transboundary water"
+  - "water diplomacy"
+  - "hydro-hegemony"
+  - "TFDD"
+  - "ERA5 reanalysis"
+  - "international water law"
+  - "water conflict"
+  - "water cooperation"
+  - "climate change"

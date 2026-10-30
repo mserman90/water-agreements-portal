@@ -384,14 +384,30 @@ export default function LeftPanel({
                 </button>
               </div>
 
-              {/* Data source credits */}
+              {/* Data source credits & Academic documentation */}
               <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: 14, fontSize: 11.5, color: '#64748b', lineHeight: 1.5 }}>
-                <p style={{ fontWeight: 600, margin: '0 0 4px 0', color: '#334155' }}>
-                  {lang === 'tr' ? 'Veri Kaynakları & Teşekkür' : 'Data Sources & Credits'}
+                <p style={{ fontWeight: 700, margin: '0 0 6px 0', color: '#1e293b', fontSize: 12 }}>
+                  {lang === 'tr' ? '📚 Bilimsel Veri Kaynakları & Metodoloji' : '📚 Scientific Sources & Methodology'}
                 </p>
-                <p style={{ margin: 0 }}>
-                  Veriler, <strong>Oregon State University TFDD</strong> (Transboundary Freshwater Dispute Database), <strong>BAR Project</strong> ve <strong>FAOLEX</strong> kaynaklarından derlenmiştir.
-                </p>
+                <ul style={{ margin: '0 0 8px 0', paddingLeft: 16, display: 'flex', flexDirection: 'column', gap: 4 }}>
+                  <li><strong>TFDD (Oregon State University)</strong>: 3.000+ sınır-aşan su anlaşması (1820–2024).</li>
+                  <li><strong>BAR Project (OSU & World Bank)</strong>: -7 ile +7 arası su çatışma ve işbirliği olay veri seti.</li>
+                  <li><strong>ECMWF ERA5 (Copernicus C3S)</strong>: 1940–günümüz hidro-meteorolojik sıcaklık, yağış ve kuraklık reanalizi.</li>
+                  <li><strong>UN Treaty Series (UNTS) & FAOLEX</strong>: Birleşmiş Milletler ve FAO resmi anlaşma metinleri.</li>
+                </ul>
+                <div style={{ background: '#f1f5f9', padding: '8px 10px', borderRadius: 6, border: '1px solid #e2e8f0', marginTop: 6 }}>
+                  <p style={{ margin: '0 0 4px 0', fontWeight: 600, color: '#334155', fontSize: 11 }}>
+                    {lang === 'tr' ? 'Akademik Atıf & Dokümantasyon:' : 'Academic Citation & Documentation:'}
+                  </p>
+                  <a
+                    href="https://github.com/mserman90/water-agreements-portal#readme"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: '#0284c7', textDecoration: 'none', fontWeight: 600, fontSize: 11, display: 'inline-flex', alignItems: 'center', gap: 4 }}
+                  >
+                    <span>🔗 GitHub README & DATA_SOURCES.md</span>
+                  </a>
+                </div>
               </div>
             </div>
           )}
