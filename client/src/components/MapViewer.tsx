@@ -177,6 +177,7 @@ function buildPopupLinks(a: Agreement, lang: 'tr' | 'en' = 'tr'): string {
   const q = encodeURIComponent(a.name.slice(0, 80));
   links.push(`<a href="https://www.fao.org/faolex/results/en/?query=${q}" target="_blank" style="color:#64748b;text-decoration:none;">${searchFaolexText}</a>`);
   links.push(`<a href="${import.meta.env.BASE_URL}data/WebsiteTreatiesDB_20181124.xlsx" download="WebsiteTreatiesDB_20181124.xlsx" style="color:#059669;font-weight:700;text-decoration:none;" title="Oregon State University TFDD Treaties Master Database (115 columns)">📊 OSU Excel</a>`);
+  links.push(`<a href="${import.meta.env.BASE_URL}docs/WebsiteTreatyCodeBook_20180312.pdf" target="_blank" style="color:#0284c7;font-weight:700;text-decoration:none;" title="Oregon State University TFDD 115-Variable Official CodeBook PDF">📖 CodeBook</a>`);
   return links.join(' &nbsp;|&nbsp; ');
 }
 

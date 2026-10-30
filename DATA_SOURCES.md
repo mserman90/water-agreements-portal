@@ -63,6 +63,59 @@ Portalımızdaki 3.059 anlaşmalık külliyatta:
 
 ---
 
+### 1.5. OSU TFDD Resmi Kodlama Kılavuzu (`WebsiteTreatyCodeBook_20180312.pdf`)
+Oregon State University TFDD araştırma grubu, International Water Management Institute (IWMI) ve Dünya Bankası (World Bank) ortaklığıyla hazırlanan 16 sayfalık resmi metodolojik el kitabı doğrudan depolanmıştır:
+
+- **Dosya Adı:** `WebsiteTreatyCodeBook_20180312.pdf` (195.735 bayt / ~196 KB, 16 Sayfa)
+- **Doğrudan Yerel İndirme:** [client/public/docs/WebsiteTreatyCodeBook_20180312.pdf](client/public/docs/WebsiteTreatyCodeBook_20180312.pdf)
+- **Orijinal OSU Kaynak URL:** `https://transboundarywaters.science.oregonstate.edu/sites/transboundarywaters.ceoas.oregonstate.edu/files/Database/Data/Treaty/WebsiteTreatyCodeBook_20180312.pdf`
+- **Kapsam:** 1820–2007 (ve 2016–2018 güncellemeleri) TFDD anlaşma metinlerinin kodlama kuralları ve taksonomik sözlüğü.
+
+#### 1.5.1. Kodlama Kılavuzu Taksonomisi ve Analitik Bölümleri
+Kılavuz, 115 değişkeni aşağıdaki metodolojik bloklarda tanımlar:
+1. **Mekânsal ve Havza Tanımlayıcıları (A–X):** `Entry ID`, `BCCODE` (Basin Country Code), `BCODE`, `Basin Name`, `CCODE`, `Country_name`, `DateSigned`, `Signatories`, `Location Signed`, `Primary Country Sub-Region`, `Treaty Basin(s)`, `TFDD Basin(s)`.
+2. **Hukuki Niteliği ve Belge Formatı (Y–EE):** `Number of Parties`, `Minor Agreement (Y/N)`, `Reference to Precedence`, `Agreement Purpose`, `Geographic Scope (GeoScope)`, `Issue Area`.
+3. **Kurumsal Mimari (FF–GG):** `RBO (River Basin Organization Y/N)`, `Infrastructure (Y/N)`.
+4. **Su Tahsisi ve Kullanım Rejimi (HH–JJ):** `Allocation (Numerical)`, `Alloc_Article`, `Alloc_Text` (Tahsis metinlerinin doğrudan alıntıları).
+5. **Sektörel ve Çevresel Boyutlar (KK–XX):**
+   - `Hydropower` (KK, LL, MM)
+   - `Irrigation` (NN, OO)
+   - `Groundwater` (PP, QQ)
+   - `Environment` (RR, SS)
+   - `Equity or Sustainability` (TT, UU, VV)
+   - `Local Needs` (WW, XX)
+6. **Mühendislik ve İnşa Kısıtlamaları (YY–BBB):**
+   - `Right to Construct` (YY, ZZ)
+   - `Ban on Particular Constructions` (AAA, BBB)
+   - `Prior Notification Before New Water Needs are Realized` (CCC, DDD)
+7. **Geleneksel Kullanım ve Sınır Rejimi (EEE–LLL):**
+   - `Navigation` (EEE, FFF)
+   - `Fishing` (GGG, HHH)
+   - `Border Issues` (III, JJJ)
+   - `Territorial Issues` (KKK, LLL)
+8. **Su Dışı Bağlantılar ve Entegre Bağlam (MMM–PPP):**
+   - `Non-Water Linkages` (Ticaret, sınır düzenlemesi, enerji, askeri destek takası)
+   - `Embedded in a larger Non-Water Context`
+9. **Belirsizlik ve Hidro-İklimsel Değişkenlik Yönetimi (QQQ–ZZZ):**
+   - `Uncertainty Explicit`
+   - `Variability Management (VarMgmt)`
+   - `Variability in Water/Hydro needs`
+   - `Alternative Scenarios`
+   - `Prediction Modeling`
+10. **Bilgi Paylaşımı, İzleme ve Uyuşmazlık Çözümü (HHHH–JJJJ):**
+    - `Information Exchange`
+    - `Monitoring (Y/N)`
+    - `Conflict Resolution Mechanism` (1: Commission, 2: Diplomatic Channels, 3: Arbitration, 4: Third Party Involvement, vb.)
+11. **Tazminat, İç Hukuk Uyumu ve Emsal Hükümleri (RRRR–FFFFF):**
+    - `Compensation (Y/N)`
+    - `National Programs or Laws (Y/N)`
+    - `Interests of Non-Signatory Riparians (Y/N)`
+    - `Amendment Mechanism`
+    - `Precedent (Establishes / Not Establishes)`
+    - `Enforcement Provisions`
+
+---
+
 ## 2. Basins at Risk (BAR) Olay Veri Seti ve Su Etkileşim Skalası
 
 ### 2.1. Metodolojik Çerçeve (Wolf, Yoffe & Giordano)

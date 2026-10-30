@@ -350,35 +350,60 @@ export default function AgreementSidebar({
             fontSize: 11,
             color: '#166534',
             flexShrink: 0,
+            gap: 6,
           }}
         >
-          <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 5, overflow: 'hidden', whiteSpace: 'nowrap' }}>
             <span style={{ fontSize: 13 }}>📊</span>
-            <span style={{ fontWeight: 600 }}>
-              {lang === 'tr' ? 'OSU TFDD Master Excel (115 Kolon)' : 'OSU TFDD Master Excel (115 Cols)'}
+            <span style={{ fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              {lang === 'tr' ? 'OSU TFDD (115 Kolon)' : 'OSU TFDD (115 Cols)'}
             </span>
           </span>
-          <a
-            href="./data/WebsiteTreatiesDB_20181124.xlsx"
-            download="WebsiteTreatiesDB_20181124.xlsx"
-            title={lang === 'tr' ? 'Orijinal OSU TFDD 115-kolon Master Excel tablosunu indir (1.18 MB)' : 'Download original OSU TFDD 115-column Master Excel sheet (1.18 MB)'}
-            style={{
-              textDecoration: 'none',
-              color: '#15803d',
-              fontWeight: 700,
-              fontSize: 10.5,
-              display: 'flex',
-              alignItems: 'center',
-              gap: 4,
-              background: '#dcfce7',
-              border: '1px solid #86efac',
-              padding: '2px 7px',
-              borderRadius: 4,
-            }}
-          >
-            <FileDown size={11} />
-            .XLSX (1.18 MB)
-          </a>
+          <div style={{ display: 'flex', gap: 5, flexShrink: 0 }}>
+            <a
+              href="./docs/WebsiteTreatyCodeBook_20180312.pdf"
+              target="_blank"
+              rel="noreferrer"
+              title={lang === 'tr' ? 'OSU TFDD 115-değişken Resmi Metodoloji ve Kodlama Kılavuzu (CodeBook PDF)' : 'OSU TFDD 115-variable Official Methodology & CodeBook PDF'}
+              style={{
+                textDecoration: 'none',
+                color: '#0369a1',
+                fontWeight: 700,
+                fontSize: 10.5,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 3,
+                background: '#e0f2fe',
+                border: '1px solid #bae6fd',
+                padding: '2px 6px',
+                borderRadius: 4,
+              }}
+            >
+              <FileDown size={11} />
+              CodeBook
+            </a>
+            <a
+              href="./data/WebsiteTreatiesDB_20181124.xlsx"
+              download="WebsiteTreatiesDB_20181124.xlsx"
+              title={lang === 'tr' ? 'Orijinal OSU TFDD 115-kolon Master Excel tablosunu indir (1.18 MB)' : 'Download original OSU TFDD 115-column Master Excel sheet (1.18 MB)'}
+              style={{
+                textDecoration: 'none',
+                color: '#15803d',
+                fontWeight: 700,
+                fontSize: 10.5,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 3,
+                background: '#dcfce7',
+                border: '1px solid #86efac',
+                padding: '2px 6px',
+                borderRadius: 4,
+              }}
+            >
+              <FileDown size={11} />
+              .XLSX (1.18 MB)
+            </a>
+          </div>
         </div>
       )}
 
