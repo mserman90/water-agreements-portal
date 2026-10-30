@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from 'react';
 import { Sparkles, Key, RotateCcw, Send, Settings, Check } from 'lucide-react';
 import type { Agreement, WaterConflict } from './MapViewer';
 import { smartSearch } from '@/lib/smartSearch';
+import { useLanguage } from '@/i18n/LanguageContext';
+import { translateTreatyTitle, translateConflict } from '@/lib/treatyTranslator';
 
 interface Message {
   role: 'user' | 'model';
@@ -190,6 +192,7 @@ function generateLocalFallbackResponse(
 }
 
 export default function AiChat({ agreements, selectedAgreement, embedded = false }: Props) {
+  const { lang } = useLanguage();
   const [open, setOpen] = useState(false);
   const [provider, setProvider] = useState<Provider>(() => {
     return (localStorage.getItem(STORAGE_KEY_PROVIDER) as Provider) || 'keyless';
@@ -263,26 +266,44 @@ export default function AiChat({ agreements, selectedAgreement, embedded = false
 
   const quickQuestions = selectedAgreement
     ? isWaterConflict(selectedAgreement)
+      ? lang === 'tr'
+        ? [
+            `Bu krizin temel sebebi nedir ve nasıl sonuçlandı?`,
+            `Bu uyuşmazlığın ardından hangi su anlaşması imzalandı?`,
+            `Tarafların savunduğu su hakları nelerdi?`,
+          ]
+        : [
+            `What was the root cause of this crisis and how was it resolved?`,
+            `Which water treaty was signed following this dispute?`,
+            `What water rights did each party claim?`,
+          ]
+      : lang === 'tr'
       ? [
-          `Bu krizin temel sebebi nedir ve nasıl sonuçlandı?`,
-          `Bu uyuşmazlığın ardından hangi su anlaşması imzalandı?`,
-          `Tarafların savunduğu su hakları nelerdi?`,
-        ]
-      : [
           `Bu anlaşmanın ana konusu ve önemi nedir?`,
           `Taraflar su paylaşımını nasıl düzenlemiştir?`,
           `Uyuşmazlık çözümü mekanizması var mı?`,
         ]
-    : [
+      : [
+          `What is the main topic and significance of this agreement?`,
+          `How did the parties regulate water allocation?`,
+          `Is there a dispute resolution mechanism?`,
+        ]
+    : lang === 'tr'
+    ? [
         '1959 Nil Anlaşması neden önemlidir?',
         'Fırat-Dicle nehirlerindeki tarihi anlaşmalar nelerdir?',
         'Tarihteki en eski su anlaşması hangisidir?',
+      ]
+    : [
+        'Why is the 1959 Nile Waters Agreement significant?',
+        'What are the historic treaties on the Tigris-Euphrates?',
+        'What is the oldest recorded water agreement in history?',
       ];
 
   const selectedName = selectedAgreement
     ? isWaterConflict(selectedAgreement)
-      ? `${selectedAgreement.title} (${selectedAgreement.year})`
-      : `${selectedAgreement.name} (${selectedAgreement.year})`
+      ? `${translateConflict(selectedAgreement, lang).title} (${selectedAgreement.year})`
+      : `${translateTreatyTitle(selectedAgreement.name, lang)} (${selectedAgreement.year > 0 ? selectedAgreement.year : (lang === 'tr' ? 'Tarih Belirsiz' : 'Date Unknown')})`
     : '';
 
   const chatBody = (
@@ -502,7 +523,7 @@ export default function AiChat({ agreements, selectedAgreement, embedded = false
 
         {loading && (
           <div style={{ alignSelf: 'flex-start', color: '#64748b', fontSize: 12.5, fontStyle: 'italic', display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span>🤖 Düşünüyor ve analiz ediyor...</span>
+            <span>🤖 {lang === 'tr' ? 'Düşünüyor ve analiz ediyor...' : 'Thinking and analyzing...'}</span>
           </div>
         )}
 
@@ -521,7 +542,7 @@ export default function AiChat({ agreements, selectedAgreement, embedded = false
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && sendMessage()}
-          placeholder="Sorunuzu yazın (örn: Nil anlaşmaları nelerdir?)..."
+          placeholder={lang === 'tr' ? 'Sorunuzu yazın (örn: Nil anlaşmaları nelerdir?)...' : 'Type your question (e.g. What are the Nile treaties?)...'}
           disabled={loading}
           style={{
             flex: 1,

@@ -4,6 +4,12 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 import type { Agreement, WaterConflict } from './MapViewer';
 import { smartSearch, describeQuery, isSmartQuery } from '@/lib/smartSearch';
 import { useLanguage } from '@/i18n/LanguageContext';
+import {
+  translateTreatyTitle,
+  translateBasin,
+  translateCountry,
+  translateConflict,
+} from '@/lib/treatyTranslator';
 
 interface Props {
   agreements: Agreement[];
@@ -31,11 +37,11 @@ function deriveTypeBadge(purpose: string) {
   return { labelTr: 'İşbirliği', labelEn: 'Cooperation', color: '#15803d', bg: '#dcfce7' };
 }
 
-function getConflictBadge(intensity: number) {
-  if (intensity <= -4) return { label: 'Ağır Kriz', color: '#dc2626', bg: '#fee2e2' };
-  if (intensity < 0) return { label: 'Uyuşmazlık', color: '#ea580c', bg: '#ffedd5' };
-  if (intensity > 3) return { label: 'Büyük İşbirliği', color: '#16a34a', bg: '#dcfce7' };
-  return { label: 'Ortak Girişim', color: '#0284c7', bg: '#e0f2fe' };
+function getConflictBadge(intensity: number, lang: 'tr' | 'en' = 'tr') {
+  if (intensity <= -4) return { label: lang === 'tr' ? 'Ağır Kriz' : 'Severe Crisis', color: '#dc2626', bg: '#fee2e2' };
+  if (intensity < 0) return { label: lang === 'tr' ? 'Uyuşmazlık' : 'Dispute', color: '#ea580c', bg: '#ffedd5' };
+  if (intensity > 3) return { label: lang === 'tr' ? 'Büyük İşbirliği' : 'Major Cooperation', color: '#16a34a', bg: '#dcfce7' };
+  return { label: lang === 'tr' ? 'Ortak Girişim' : 'Joint Action', color: '#0284c7', bg: '#e0f2fe' };
 }
 
 export default function AgreementSidebar({
@@ -329,16 +335,16 @@ export default function AgreementSidebar({
                       }}
                     >
                       <div style={{ fontSize: 12.5, fontWeight: 600, color: '#0f172a', lineHeight: 1.35, marginBottom: 4 }}>
-                        {a.name}
+                        {translateTreatyTitle(a.name, lang)}
                       </div>
 
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, alignItems: 'center', fontSize: 11, color: '#475569', marginBottom: 6 }}>
                         <span style={{ fontWeight: 600, color: '#0369a1', background: '#e0f2fe', padding: '1px 5px', borderRadius: 3 }}>
-                          {a.year > 0 ? a.year : 'Tarih Belirsiz'}
+                          {a.year > 0 ? a.year : (lang === 'tr' ? 'Tarih Belirsiz' : 'Date Unknown')}
                         </span>
                         {a.basin && (
                           <span style={{ background: '#f1f5f9', padding: '1px 5px', borderRadius: 3 }}>
-                            🌊 {a.basin}
+                            🌊 {translateBasin(a.basin, lang)}
                           </span>
                         )}
                         <span style={{ background: badge.bg, color: badge.color, padding: '1px 5px', borderRadius: 3, fontWeight: 500 }}>
@@ -347,7 +353,7 @@ export default function AgreementSidebar({
                       </div>
 
                       <div style={{ fontSize: 11, color: '#64748b', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', marginBottom: 6 }}>
-                        📍 {a.country}
+                        📍 {translateCountry(a.country, lang)}
                       </div>
 
                       <div style={{ display: 'flex', gap: 8, fontSize: 10.5, borderTop: '1px solid #f1f5f9', paddingTop: 6 }} onClick={(e) => e.stopPropagation()}>
@@ -391,7 +397,8 @@ export default function AgreementSidebar({
               const c = filteredConflicts[virtualRow.index];
               if (!c) return null;
               const isSelected = c.id === selectedId;
-              const badge = getConflictBadge(c.intensity);
+              const badge = getConflictBadge(c.intensity, lang);
+              const cTr = translateConflict(c, lang);
 
               return (
                 <div
@@ -435,15 +442,15 @@ export default function AgreementSidebar({
                     </div>
 
                     <div style={{ fontSize: 12.5, fontWeight: 700, color: '#0f172a', lineHeight: 1.3, marginBottom: 4 }}>
-                      {c.title}
+                      {cTr.title}
                     </div>
 
                     <div style={{ fontSize: 11, color: '#475569', marginBottom: 6 }}>
-                      📍 {c.countries} &nbsp;·&nbsp; 🌊 {c.basin}
+                      📍 {cTr.countries} &nbsp;·&nbsp; 🌊 {cTr.basin}
                     </div>
 
                     <div style={{ fontSize: 11.5, color: '#334155', lineHeight: 1.45, background: '#f8fafc', padding: 6, borderRadius: 4, border: '1px solid #f1f5f9' }}>
-                      {c.description.slice(0, 140)}...
+                      {cTr.description.slice(0, 140)}...
                     </div>
                   </div>
                 </div>
