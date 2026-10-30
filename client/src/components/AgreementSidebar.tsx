@@ -537,7 +537,7 @@ export default function AgreementSidebar({
                         </span>
                       )}
                       <span style={{ fontSize: 11, fontWeight: 700, color: '#dc2626', marginLeft: 'auto' }}>
-                        📅 {c.year}
+                        📅 {c.dateStr || (c.year < 0 ? Math.abs(c.year) + (lang === 'tr' ? ' M.Ö.' : ' BC') : c.year)}
                       </span>
                     </div>
 

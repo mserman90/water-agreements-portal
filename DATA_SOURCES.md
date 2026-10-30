@@ -81,9 +81,10 @@ Etkileşimler, **-7** (tam askeri çatışma) ile **+7** (gönüllü birleşme /
 ### 3.1. Kapsam ve Kurumsal Köken
 **Pacific Institute Water Conflict Chronology**, Dr. Peter H. Gleick liderliğindeki araştırmacılar tarafından Oakland, Kaliforniya'da geliştirilen ve insanlık tarihinin bilinen ilk su çatışmalarından (M.Ö. 2500 Mezopotamya Lagaş-Umma savaşı) modern döneme kadar tatlı su kaynaklarıyla bağlantılı tüm şiddet, saldırı ve gerilim olaylarını kaydeden dünyanın en yetkin su güvenliği kronolojisidir.
 
-- **Resmi Veritabanı ve Literatür Kaynakçası:** [https://worldwater.org/conflict/refs.html](https://worldwater.org/conflict/refs.html)
-- **Kapsam:** 1.140'ı aşkın hakemli akademik makale, resmi hükümet raporu, Birleşmiş Milletler Güvenlik Konseyi tutanağı ve bağımsız araştırma raporundan derlenen külliyat.
-- **Portala Entegrasyon:** Portaldaki tüm tarihi su uyuşmazlığı ve işbirliği kayıtları (1920–2026), Pacific Institute taksonomisi ile etiketlenmiş, doğrudan `worldwater.org/conflict/refs.html#<anchor>` literatür bağlantıları ve akademik kaynakçalarıyla ilişkilendirilmiştir.
+- **Resmi Veritabanı ve Etkileşimli Kronoloji:** [https://www.worldwater.org/conflict/list/](https://www.worldwater.org/conflict/list/)
+- **Literatür ve Bibliyografya Kaynakçası:** [https://worldwater.org/conflict/refs.html](https://worldwater.org/conflict/refs.html)
+- **Kapsam:** M.Ö. 2500 (Antik Sümer Lagaş-Umma savaşı) yılından günümüze (2024–2026) kadar dünya genelindeki 2.758 doğrulanmış su çatışması, şiddet olayı ve altyapı saldırısı (tarihi diplomasi/işbirliği dönüm noktalarıyla birlikte toplam 2.809 kayıt).
+- **Portala Entegrasyon:** `https://www.worldwater.org/conflict/list/` veritabanındaki 2.758 olayın **tamamı** WGS84 coğrafi koordinatları, tarihleri, havzaları, taraf ülkeleri, BAR skalası skorları ve Pacific Institute taksonomisi (Trigger, Weapon, Casualty) ile portalın haritasına ve arama motoruna eksiksiz entegre edilmiştir. Her olay kartında ve harita popup penceresinde doğrudan `worldwater.org/conflict/refs.html#<anchor>` literatür kaynakları sunulmaktadır.
 
 ### 3.2. Pacific Institute Üçlü Rol Taksonomisi (*Tripartite Conflict Typology*)
 

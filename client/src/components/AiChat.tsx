@@ -34,7 +34,7 @@ function buildSystemContext(agreements: Agreement[], selected?: Agreement | Wate
   const maxYear = years.length ? Math.max(...years) : 0;
   const countries = [...new Set(agreements.flatMap((a) => a.country.split(/[,;/]/).map((c) => c.trim())))].slice(0, 30);
 
-  let ctx = `Sen uluslararası su diplomasisi, sınır-aşan nehirler, tarihi su uyuşmazlıkları ve uluslararası su anlaşmaları uzmanısın. Kullanıcı, ${total} uluslararası anlaşma ve 121 tarihi su krizini içeren Global Su Anlaşmaları Portalını kullanıyor.`;
+  let ctx = `Sen uluslararası su diplomasisi, sınır-aşan nehirler, tarihi su uyuşmazlıkları ve uluslararası su anlaşmaları uzmanısın. Kullanıcı, ${total} uluslararası anlaşma ve Pacific Institute (worldwater.org) veri tabanındaki 2.809 tarihi su krizini içeren Global Su Anlaşmaları Portalını kullanıyor.`;
   ctx += ` Veritabanında ${minYear > 0 ? minYear : '1820'} ile ${maxYear > 0 ? maxYear : '2024'} yılları arasında imzalanmış anlaşma ve uyuşmazlık kayıtları (BAR Ölçeği: -7 savaştan +7 tam birliğe) mevcut.`;
   ctx += ` Önemli bazı taraflar: ${countries.join(', ')}.`;
   ctx += ` Kullanıcı Türkçe veya İngilizce sorabilir; sorulan dilde yanıt ver.`;
@@ -190,7 +190,7 @@ function generateLocalFallbackResponse(
     return reply;
   }
 
-  return `Uluslararası tatlı su anlaşmaları portalında 3.029 anlaşma ve 121 kriz kaydı bulunmaktadır. Belirli bir nehir havzası (örn: Nil, Fırat, Tuna), ülke veya yıl aralığı belirterek sorunuzu detaylandırabilirsiniz.`;
+  return `Uluslararası tatlı su anlaşmaları portalında 3.059 anlaşma ve Pacific Institute (worldwater.org) veri tabanındaki 2.809 kriz kaydı bulunmaktadır. Belirli bir nehir havzası (örn: Nil, Fırat, Tuna), ülke veya yıl aralığı belirterek sorunuzu detaylandırabilirsiniz.`;
 }
 
 export default function AiChat({ agreements, selectedAgreement, embedded = false }: Props) {

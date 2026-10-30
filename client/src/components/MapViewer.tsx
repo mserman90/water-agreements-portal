@@ -31,6 +31,9 @@ export interface Agreement {
 export interface WaterConflict {
   id: string;
   year: number;
+  dateStr?: string;
+  region?: string;
+  conflictType?: string;
   title: string;
   description: string;
   countries: string;
@@ -309,8 +312,8 @@ function buildConflictPopup(c: WaterConflict, lang: 'tr' | 'en' = 'tr'): string 
 
       <div style="background:#f8fafc;padding:6px 8px;border-radius:6px;border:1px solid #e2e8f0;display:flex;flex-direction:column;gap:3px;font-size:11.5px;margin-bottom:6px;">
         <div>
-          <span style="color:#64748b;font-weight:600;">📅 ${lang === 'tr' ? 'Yıl' : 'Year'}:</span>
-          <span style="color:#0f172a;font-weight:700;margin-left:4px;">${c.year}</span>
+          <span style="color:#64748b;font-weight:600;">📅 ${lang === 'tr' ? 'Tarih' : 'Date'}:</span>
+          <span style="color:#0f172a;font-weight:700;margin-left:4px;">${c.dateStr || (c.year < 0 ? Math.abs(c.year) + (lang === 'tr' ? ' M.Ö.' : ' BC') : c.year)}</span>
         </div>
         <div>
           <span style="color:#64748b;font-weight:600;">📍 ${countriesLabel}:</span>
@@ -320,6 +323,7 @@ function buildConflictPopup(c: WaterConflict, lang: 'tr' | 'en' = 'tr'): string 
           <span style="color:#64748b;font-weight:600;">🌊 ${basinLabel}:</span>
           <span style="color:#0284c7;font-weight:600;margin-left:4px;">${cTr.basin}</span>
         </div>
+        ${c.region ? `<div><span style="color:#64748b;font-weight:600;">🌍 ${lang === 'tr' ? 'Bölge' : 'Region'}:</span><span style="color:#475569;font-weight:600;margin-left:4px;">${c.region}</span></div>` : ''}
       </div>
 
       <div style="color:#1e293b;background:#ffffff;padding:8px;border-radius:6px;border:1px solid #e2e8f0;font-size:11.5px;line-height:1.45;margin-bottom:4px;">

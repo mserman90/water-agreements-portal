@@ -140,7 +140,7 @@ export default function Home() {
       return conflicts.filter((c) => c.year <= currentYear);
     }
     const ds = Math.floor(currentYear / 10) * 10;
-    return conflicts.filter((c) => c.year >= ds && c.year <= ds + 9);
+    return conflicts.filter((c) => (c.year >= ds && c.year <= ds + 9) || (c.year < MIN_YEAR && currentYear === MIN_YEAR));
   }, [conflicts, currentYear, timelineMode]);
 
   // Search filtered agreements
