@@ -357,9 +357,20 @@ export default function AgreementSidebar({
                       </div>
 
                       <div style={{ display: 'flex', gap: 8, fontSize: 10.5, borderTop: '1px solid #f1f5f9', paddingTop: 6 }} onClick={(e) => e.stopPropagation()}>
-                        {(a.pdfUrl || a.githubDocUrl) && (
+                        {a.githubDocUrl ? (
                           <a
-                            href={a.pdfUrl || a.githubDocUrl}
+                            href={a.githubDocUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            style={{ color: '#0369a1', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 3, textDecoration: 'none', background: '#e0f2fe', padding: '1px 6px', borderRadius: 4 }}
+                            title={lang === 'tr' ? 'GitHub deposundan doğrudan PDF aç' : 'Open PDF directly from GitHub repo'}
+                          >
+                            <FileDown size={12} />
+                            {lang === 'tr' ? 'Depo PDF' : 'Repo PDF'}
+                          </a>
+                        ) : a.pdfUrl ? (
+                          <a
+                            href={a.pdfUrl}
                             target="_blank"
                             rel="noreferrer"
                             style={{ color: '#0369a1', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 3, textDecoration: 'none' }}
@@ -367,7 +378,7 @@ export default function AgreementSidebar({
                             <FileDown size={12} />
                             PDF
                           </a>
-                        )}
+                        ) : null}
                         {a.faolexUrl && (
                           <a
                             href={a.faolexUrl}

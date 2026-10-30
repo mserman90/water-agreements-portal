@@ -726,6 +726,18 @@ export const githubDocs: Record<string, string> = {
   '43481':  'bi-43481.pdf',    // Russia/Turkey natural gas 1997
   '43482':  'bi-43482.pdf',    // Protocol Russia/Turkey gas 1997
   'irq15920': 'irq15920.pdf',  // Iraq Euphrates water division law
+  '165320': 'bi-165320.pdf',   // Netherlands/Turkey water management
+  '165314': 'bi-165314.pdf',   // Jordan/Turkey water
+  '151208': 'bi-151208.pdf',   // Iraq/Turkey water resources
+  '174068': 'bi-174068.pdf',   // Russia/Turkey fisheries
+  '173274': 'bi-173274.pdf',   // Russia/Turkey agriculture
+  '217079': 'bi-217079.pdf',   // Romania/Turkey water protection
+  '32264':  'bi-32264.pdf',    // USSR/Turkey fisheries
+  '32270':  'bi-32270.pdf',    // USSR/Turkey maritime delimitation
+  '172993': 'bi-172993.pdf',   // Niger/Turkey water sector
+  '103257': 'bi-103257.pdf',   // Iran/Turkey environment protection
+  '7174':   'bi-7174.pdf',     // Hungary/Turkey environment protection
+  '187822': 'bi-187822.pdf',   // Sudan/Turkey water cooperation
 };
 
 // Find GitHub-hosted PDF for a FAOLEX URL or document name
@@ -740,6 +752,30 @@ export function findGithubDoc(faolexUrl?: string, docName?: string): string | nu
   // Try matching by document name keywords
   if (docName) {
     const lower = docName.toLowerCase();
+    if (lower.includes('indus waters treaty') || (lower.includes('indus') && lower.includes('karachi'))) {
+      return 'indus-treaty-1960.pdf';
+    }
+    if (lower.includes('non-navigational uses of international watercourses') || lower.includes('watercourses convention')) {
+      return 'un-watercourses-1997.pdf';
+    }
+    if (lower.includes('transboundary watercourses and international lakes') || (lower.includes('helsinki') && lower.includes('1992'))) {
+      return 'unece-water-1992.pdf';
+    }
+    if ((lower.includes('colorado') || lower.includes('rio grande')) && (lower.includes('1944') || lower.includes('mexico') || lower.includes('utilization of waters of the colorado'))) {
+      return 'us-mexico-1944.pdf';
+    }
+    if (lower.includes('nile') && (lower.includes('1959') || (lower.includes('sudan') && lower.includes('egypt')))) {
+      return 'nile-agreement-1959.pdf';
+    }
+    if (lower.includes('uruguay') && (lower.includes('statute') || lower.includes('1975'))) {
+      return 'uruguay-statute-1975.pdf';
+    }
+    if (lower.includes('danube') && (lower.includes('navigation') || lower.includes('1948') || lower.includes('belgrade'))) {
+      return 'danube-convention-1948.pdf';
+    }
+    if (lower.includes('rhine') && (lower.includes('chloride') || lower.includes('chemical') || lower.includes('1976'))) {
+      return 'rhine-chlorides-1976.pdf';
+    }
     if (lower.includes('euphrates') && lower.includes('provisional')) return githubDocs['irq15920'] || null;
     if (lower.includes('maritime boundary') && lower.includes('black')) return githubDocs['32263'] || null;
   }

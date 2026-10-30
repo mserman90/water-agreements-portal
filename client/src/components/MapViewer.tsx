@@ -121,21 +121,21 @@ function buildConflictIcon(conflict: WaterConflict, isSelected: boolean): L.DivI
 
 function buildPopupLinks(a: Agreement, lang: 'tr' | 'en' = 'tr'): string {
   const links: string[] = [];
-  const pdfDownloadText = lang === 'tr' ? '📄 PDF İndir' : '📄 Download PDF';
-  const pdfDocText = lang === 'tr' ? '📥 PDF Belgesi' : '📥 PDF Document';
+  const repoDocText = lang === 'tr' ? '📥 Depo Belgesi (PDF)' : '📥 Repo Document (PDF)';
+  const pdfDownloadText = lang === 'tr' ? '📄 Orijinal Kaynak' : '📄 Source Link';
   const searchFaolexText = lang === 'tr' ? 'FAOLEX Ara ↗' : 'Search FAOLEX ↗';
 
-  if (a.pdfUrl) {
-    links.push(`<a href="${a.pdfUrl}" target="_blank" style="color:#0369a1;font-weight:600;">${pdfDownloadText}</a>`);
-  }
   if (a.githubDocUrl) {
-    links.push(`<a href="${a.githubDocUrl}" target="_blank" style="color:#0369a1;font-weight:600;">${pdfDocText}</a>`);
+    links.push(`<a href="${a.githubDocUrl}" target="_blank" style="color:#0369a1;font-weight:700;">${repoDocText}</a>`);
+  }
+  if (a.pdfUrl && a.pdfUrl !== a.githubDocUrl) {
+    links.push(`<a href="${a.pdfUrl}" target="_blank" style="color:#0284c7;font-weight:600;">${pdfDownloadText}</a>`);
   }
   if (a.faolexUrl) {
-    links.push(`<a href="${a.faolexUrl}" target="_blank" style="color:#0284c7;">FAOLEX</a>`);
+    links.push(`<a href="${a.faolexUrl}" target="_blank" style="color:#64748b;">FAOLEX</a>`);
   }
   const q = encodeURIComponent(a.name.slice(0, 80));
-  links.push(`<a href="https://www.fao.org/faolex/results/en/?query=${q}" target="_blank" style="color:#64748b;">${searchFaolexText}</a>`);
+  links.push(`<a href="https://www.fao.org/faolex/results/en/?query=${q}" target="_blank" style="color:#94a3b8;">${searchFaolexText}</a>`);
   return links.join(' &nbsp;|&nbsp; ');
 }
 

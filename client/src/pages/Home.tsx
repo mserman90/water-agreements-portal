@@ -215,7 +215,16 @@ export default function Home() {
       })
       .then((data: Agreement[]) => {
         if (Array.isArray(data) && data.length > 0) {
-          setAgreements(data);
+          const baseUrl = import.meta.env.BASE_URL;
+          const formatted = data.map((a) => ({
+            ...a,
+            githubDocUrl: a.githubDocUrl
+              ? a.githubDocUrl.startsWith('http') || a.githubDocUrl.startsWith(baseUrl)
+                ? a.githubDocUrl
+                : `${baseUrl}${a.githubDocUrl}`
+              : undefined,
+          }));
+          setAgreements(formatted);
         } else {
           throw new Error('Empty minified agreements');
         }
