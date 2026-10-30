@@ -13,15 +13,22 @@ export interface LayerConfig {
 interface LayerControlProps {
   layers: LayerConfig[];
   onLayerToggle: (id: string) => void;
+  embedded?: boolean;
 }
 
-export default function LayerControl({ layers, onLayerToggle }: LayerControlProps) {
+export default function LayerControl({ layers, onLayerToggle, embedded = false }: LayerControlProps) {
   const { lang } = useLanguage();
   const [isOpen, setIsOpen] = useState(true);
 
-  return (
-    <div
-      style={{
+  const containerStyle: React.CSSProperties = embedded
+    ? {
+        width: '100%',
+        backgroundColor: 'white',
+        borderRadius: 8,
+        border: '1px solid #e5e7eb',
+        overflow: 'hidden',
+      }
+    : {
         position: 'absolute',
         top: 10,
         left: 10,
@@ -31,8 +38,10 @@ export default function LayerControl({ layers, onLayerToggle }: LayerControlProp
         boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
         minWidth: 200,
         maxWidth: 300,
-      }}
-    >
+      };
+
+  return (
+    <div style={containerStyle}>
       {/* Header */}
       <button
         onClick={() => setIsOpen((v) => !v)}

@@ -112,6 +112,12 @@ const translations = {
 
 export type TranslationKey = keyof typeof translations;
 
-export function t(key: TranslationKey, lang: Lang): string {
-  return translations[key][lang];
+export function t(key: TranslationKey, lang: Lang, params?: Record<string, string | number>): string {
+  let str = translations[key]?.[lang] ?? '';
+  if (params) {
+    Object.entries(params).forEach(([k, v]) => {
+      str = str.replace(new RegExp(`\\{${k}\\}`, 'g'), String(v));
+    });
+  }
+  return str;
 }

@@ -3,10 +3,12 @@ import Papa from 'papaparse';
 import { basinCoords } from '@/data/basinCoords';
 import { findTreatyLink, findGithubDoc } from '@/data/treatyLinks';
 import MapViewer from '@/components/MapViewer';
-import AgreementSidebar from '@/components/AgreementSidebar';
+import LeftPanel from '@/components/LeftPanel';
 import TimelineOverlay from '@/components/TimelineOverlay';
-import type { Agreement } from '@/components/MapViewer';
+import type { Agreement, WaterConflict } from '@/components/MapViewer';
 import type { TimelineMode } from '@/components/TimelineOverlay';
+import type { LayerConfig } from '@/components/LayerControl';
+import { smartSearch, isSmartQuery } from '@/lib/smartSearch';
 
 const MIN_YEAR = 1820;
 const MAX_YEAR = 2024;
@@ -76,10 +78,27 @@ function deriveType(purpose: string): 'cooperation' | 'conflict' | 'mixed' {
 
 export default function Home() {
   const [agreements, setAgreements] = useState<Agreement[]>([]);
+  const [conflicts, setConflicts] = useState<WaterConflict[]>([]);
   const [selectedId, setSelectedId] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(true);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
 
+  // Search state
+  const [searchTerm, setSearchTerm] = useState('');
+  const [aiMode, setAiMode] = useState(false);
+
+  // Layers state
+  const [layers, setLayers] = useState<LayerConfig[]>([
+    { id: 'agreements', label: { tr: 'Anlaşmalar', en: 'Agreements' }, icon: '📄', enabled: true, color: '#3b82f6' },
+    { id: 'conflicts', label: { tr: 'Su Uyuşmazlıkları (BAR)', en: 'Water Conflicts' }, icon: '⚡', enabled: true, color: '#dc2626' },
+  ]);
+
+  const handleLayerToggle = (id: string) => {
+    setLayers((prev) =>
+      prev.map((l) => (l.id === id ? { ...l, enabled: !l.enabled } : l))
+    );
+  };
+
+  // Timeline state
   const [currentYear, setCurrentYear] = useState(MAX_YEAR);
   const [timelineMode, setTimelineMode] = useState<TimelineMode>('cumulative');
   const [isPlaying, setIsPlaying] = useState(false);
@@ -93,6 +112,7 @@ export default function Home() {
     [],
   );
 
+  // Auto-play animation
   useEffect(() => {
     if (!isPlaying) return;
     const id = window.setInterval(() => {
@@ -104,7 +124,8 @@ export default function Home() {
     return () => window.clearInterval(id);
   }, [isPlaying]);
 
-  const filteredAgreements = useMemo(() => {
+  // Timeline filtered agreements
+  const timelineFilteredAgreements = useMemo(() => {
     if (!agreements.length) return [];
     if (timelineMode === 'cumulative') {
       return agreements.filter((a) => a.year <= currentYear);
@@ -113,21 +134,59 @@ export default function Home() {
     return agreements.filter((a) => a.year >= ds && a.year <= ds + 9);
   }, [agreements, currentYear, timelineMode]);
 
+  // Timeline filtered conflicts
+  const timelineFilteredConflicts = useMemo(() => {
+    if (!conflicts.length) return [];
+    if (timelineMode === 'cumulative') {
+      return conflicts.filter((c) => c.year <= currentYear);
+    }
+    const ds = Math.floor(currentYear / 10) * 10;
+    return conflicts.filter((c) => c.year >= ds && c.year <= ds + 9);
+  }, [conflicts, currentYear, timelineMode]);
+
+  // Search filtered agreements
+  const displayedAgreements = useMemo(() => {
+    if (!searchTerm.trim()) {
+      return timelineFilteredAgreements;
+    }
+    if (aiMode || isSmartQuery(searchTerm)) {
+      return smartSearch(searchTerm, agreements);
+    }
+    const q = searchTerm.toLowerCase();
+    return agreements.filter(
+      (a) =>
+        a.name.toLowerCase().includes(q) ||
+        a.country.toLowerCase().includes(q) ||
+        a.basin.toLowerCase().includes(q) ||
+        String(a.year).includes(q)
+    );
+  }, [searchTerm, aiMode, agreements, timelineFilteredAgreements]);
+
+  // Counts for live counter
   const { totalCount, coopCount, conflictCount, mixedCount } = useMemo(() => {
     let coop = 0, conflict = 0, mixed = 0;
-    filteredAgreements.forEach((a) => {
+    displayedAgreements.forEach((a) => {
       const t = deriveType(a.purpose);
       if (t === 'cooperation') coop++;
       else if (t === 'conflict') conflict++;
       else mixed++;
     });
-    return { totalCount: filteredAgreements.length, coopCount: coop, conflictCount: conflict, mixedCount: mixed };
-  }, [filteredAgreements]);
+    return { totalCount: displayedAgreements.length, coopCount: coop, conflictCount: conflict, mixedCount: mixed };
+  }, [displayedAgreements]);
 
-  const selectedAgreement = useMemo(
-    () => agreements.find((a) => a.id === selectedId),
-    [agreements, selectedId],
-  );
+  // Selected item (either agreement or conflict)
+  const selectedItem = useMemo(() => {
+    if (!selectedId) return undefined;
+    if (selectedId.startsWith('conflict-')) {
+      return conflicts.find((c) => c.id === selectedId);
+    }
+    return agreements.find((a) => a.id === selectedId);
+  }, [agreements, conflicts, selectedId]);
+
+  const selectedAgreementForTimeline = useMemo(() => {
+    if (!selectedId || selectedId.startsWith('conflict-')) return undefined;
+    return agreements.find((a) => a.id === selectedId);
+  }, [agreements, selectedId]);
 
   const processJSON = useCallback((text: string): Agreement[] => {
     const raw = JSON.parse(text.replace(/[\x00-\x1f\x7f]/g, ''));
@@ -147,15 +206,45 @@ export default function Home() {
     return parseRows(data as Record<string, unknown>[]);
   }, []);
 
+  // Load datasets on mount
   useEffect(() => {
-    fetch(`${import.meta.env.BASE_URL}data/MASTER.json`)
-      .then((r) => r.text())
-      .then((text) => {
-        const parsed = processJSON(text);
-        if (parsed.length > 0) setAgreements(parsed);
+    const p1 = fetch(`${import.meta.env.BASE_URL}data/agreements.min.json`)
+      .then((r) => {
+        if (!r.ok) throw new Error('agreements.min.json not found');
+        return r.json();
       })
-      .catch(console.warn)
-      .finally(() => setIsLoading(false));
+      .then((data: Agreement[]) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setAgreements(data);
+        } else {
+          throw new Error('Empty minified agreements');
+        }
+      })
+      .catch(() => {
+        // Fallback to legacy MASTER.json
+        return fetch(`${import.meta.env.BASE_URL}data/MASTER.json`)
+          .then((r) => r.text())
+          .then((text) => {
+            const parsed = processJSON(text);
+            if (parsed.length > 0) setAgreements(parsed);
+          });
+      })
+      .catch(console.warn);
+
+    const p2 = fetch(`${import.meta.env.BASE_URL}data/water_conflicts.json`)
+      .then((r) => r.json())
+      .then((data: Array<Omit<WaterConflict, 'id'>>) => {
+        if (Array.isArray(data)) {
+          const formatted: WaterConflict[] = data.map((item, idx) => ({
+            ...item,
+            id: `conflict-${idx}`,
+          }));
+          setConflicts(formatted);
+        }
+      })
+      .catch(console.warn);
+
+    Promise.allSettled([p1, p2]).finally(() => setIsLoading(false));
   }, [processJSON]);
 
   const handleFileUpload = (file: File) => {
@@ -168,7 +257,7 @@ export default function Home() {
           setAgreements(parsed);
         } catch (err) {
           console.error(err);
-          alert('JSON dosyasi okunamadi.');
+          alert('JSON dosyası okunamadı.');
         } finally {
           setIsLoading(false);
         }
@@ -184,7 +273,7 @@ export default function Home() {
           setIsLoading(false);
         },
         error: () => {
-          alert('CSV dosyasi okunamadi.');
+          alert('CSV dosyası okunamadı.');
           setIsLoading(false);
         },
       });
@@ -193,45 +282,34 @@ export default function Home() {
 
   return (
     <>
-      <button
-        onClick={() => setSidebarOpen((v) => !v)}
-        style={{
-          position: 'absolute',
-          top: 90,
-          left: sidebarOpen ? 328 : 8,
-          zIndex: 1000,
-          background: '#0369a1',
-          color: '#fff',
-          border: 'none',
-          borderRadius: 4,
-          padding: '4px 8px',
-          cursor: 'pointer',
-          fontSize: 16,
-          lineHeight: 1,
-          transition: 'left 0.25s',
-          boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
-        }}
-        title={sidebarOpen ? 'Kapat' : 'Ac'}
-      >
-        {sidebarOpen ? '<-' : '='}
-      </button>
+      {/* Unified Left Panel (Agreements, Conflicts, Layers, AI Chat, Guide) */}
+      <LeftPanel
+        layers={layers}
+        onLayerToggle={handleLayerToggle}
+        agreements={displayedAgreements}
+        allAgreements={agreements}
+        conflicts={timelineFilteredConflicts}
+        selectedId={selectedId}
+        onSelect={setSelectedId}
+        selectedAgreement={selectedItem}
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+        aiMode={aiMode}
+        onToggleAiMode={() => setAiMode((v) => !v)}
+        onUploadFile={handleFileUpload}
+      />
 
-      {sidebarOpen && (
-        <AgreementSidebar
-          agreements={filteredAgreements}
-          selectedId={selectedId}
-          onSelect={setSelectedId}
-          onUploadFile={handleFileUpload}
-        />
-      )}
-
+      {/* Map with Dual Clustering (Agreements + Conflicts) */}
       <MapViewer
-        agreements={filteredAgreements}
+        agreements={displayedAgreements}
+        conflicts={timelineFilteredConflicts}
         selectedId={selectedId}
         onMarkerClick={setSelectedId}
         currentYear={currentYear}
+        layers={layers}
       />
 
+      {/* Timeline overlay */}
       <TimelineOverlay
         currentYear={currentYear}
         setCurrentYear={setCurrentYear}
@@ -245,7 +323,7 @@ export default function Home() {
         coopCount={coopCount}
         conflictCount={conflictCount}
         mixedCount={mixedCount}
-        selectedAgreement={selectedAgreement}
+        selectedAgreement={selectedAgreementForTimeline}
       />
 
       {isLoading && (
@@ -254,14 +332,21 @@ export default function Home() {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          background: 'rgba(0,0,0,0.7)',
+          background: 'rgba(15, 23, 42, 0.85)',
+          backdropFilter: 'blur(4px)',
           color: '#fff',
-          padding: '16px 24px',
+          padding: '16px 28px',
           borderRadius: 8,
           zIndex: 2000,
           fontSize: 14,
+          fontWeight: 500,
+          boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 10,
         }}>
-          Veriler yukleniyor...
+          <span style={{ fontSize: 18 }}>💧</span>
+          <span>Veriler yükleniyor...</span>
         </div>
       )}
     </>
