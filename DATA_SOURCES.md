@@ -10,7 +10,7 @@ Bu doküman, **Sınır Aşan Su Anlaşmaları ve Hidro-İklimsel Analiz Portalı
 ### 1.1. Genel Bakış ve Tarihçe
 **Transboundary Freshwater Dispute Database (TFDD)**, Oregon State Üniversitesi Coğrafya ve Yer Bilimleri Bölümü'nde Prof. Aaron T. Wolf liderliğindeki araştırma grubu tarafından geliştirilmiş, dünyadaki en kapsamlı sınır-aşan su anlaşmaları külliyatıdır.
 
-- **Kapsam:** 1820'den günümüze kadar 280'den fazla uluslararası nehir havzasını kapsayan 3.000'i aşkın ikili ve çok taraflı anlaşma.
+- **Kapsam:** 1820'den 2026 yılına kadar 280'den fazla uluslararası nehir havzasını kapsayan 3.059 ikili ve çok taraflı anlaşma (2024–2026 modern anlaşmaları ve protokolleri dahil).
 - **Dahil Edilme Kriterleri:**
   1. Anlaşmanın en az iki egemen devlet veya uluslararası tüzel kişilik arasında akdedilmiş olması.
   2. Anlaşma konusunun doğrudan veya dolaylı olarak tatlı su kaynakları (yüzeysel sular, yeraltı suları, sınır oluşturan veya sınırı kesen nehir ve göller) ile ilgili olması.

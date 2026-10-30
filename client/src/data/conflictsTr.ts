@@ -980,6 +980,18 @@ export const conflictsTrByTitle: Record<string, ConflictTr> = {
     title: "Özbekistan Aral Krizi Ortasında Sulanan Alanları Genişletti",
     description: "Aral Denizi kuruma felaketine rağmen Özbekistan ve komşu bölgelerde su yoğun tarım ve yeni baraj projeleri devam ederken, Türkmenistan'ın Karakum Gölü projesi ve Afganistan'ın Kuş Tepe Kanalı Amuderya akışını daha da tehdit eder hale geldi.",
   },
+  "Kazakhstan-Uzbekistan Northern Aral Sea Restoration Treaty": {
+    title: "Kazakistan-Özbekistan Kuzey Aral Denizi Restorasyon Antlaşması",
+    description: "Kazakistan ve Özbekistan, Kuzey Aral Denizi'ne garanti ekolojik su akışını, tuz-toz fırtınalarının önlenmesini ve Kokaral Barajı yükseltme projesini içeren tarihi sınır aşan su antlaşmasını imzaladı.",
+  },
+  "Turkey-Iraq Operational Drought Protocol Signed": {
+    title: "Türkiye-Irak Kuraklık Dönemi Operasyonel Su Protokolü İmzalandı",
+    description: "Türkiye ve Irak, 2024 Çerçeve Anlaşması uyarınca meteorolojik kuraklık dönemlerinde dinamik su bırakma kotalarını ve telemetrik doğrulamayı içeren operasyonel protokolü imzaladı.",
+  },
+  "Mekong Commission Enacts Mainstream Dam Cascading Rules": {
+    title: "Mekong Komisyonu Ana Kol Baraj Kademeleri Kurallarını Yürürlüğe Koydu",
+    description: "Mekong Nehri Komisyonu (MRC), kuraklık dönemlerinde Tonle Sap ters akışını korumak ve tortu geçişini sağlamak üzere ana kol barajlarına bağlayıcı kademeli su bırakma kuralları getirdi.",
+  },
 };
 
 /**

@@ -68,13 +68,13 @@ Tüm veriler orijinal, hakemli ve uluslararası kabul görmüş resmi depolardan
 
 | Kaynak / Veri Seti | Kurum / Sağlayıcı | Kapsam / Boyut | Akademik Referans |
 | :--- | :--- | :--- | :--- |
-| **TFDD (Transboundary Freshwater Dispute Database)** | Oregon State University, College of Earth, Ocean, and Atmospheric Sciences | 1820–2024 (3.000+ ikili & çok taraflı anlaşma) | Wolf, A. T. (1999). *Criteria for equitable allocations: The inventory of transboundary water resources*. Water Policy. |
-| **BAR Event Dataset (Basins at Risk)** | OSU & World Bank | 1948–2020 (Su krizleri ve olay kronolojisi) | Yoffe, S., Wolf, A. T., & Giordano, M. (2003). *Conflict and cooperation over international freshwater resources: Indicators of basins at risk*. JAWRA. |
-| **FAOLEX Database** | Gıda ve Tarım Örgütü (UN FAO) | Milli mevzuat ve su anlaşmaları metinleri | FAO Legal Office (2024). *FAOLEX Treaty Collection*. fao.org/faolex |
-| **UN Treaty Series (UNTS)** | Birleşmiş Milletler Hukuk İşleri Ofisi | Orijinal anlaşma metinleri (PDF) | United Nations (1946–2024). *Treaty Series*. treaties.un.org |
-| **UNECE Water Convention** | BM Avrupa Ekonomik Komisyonu | Sınır-aşan su organları ve sözleşmeler | UNECE (1992). *Convention on the Protection and Use of Transboundary Watercourses*. |
-| **ERA5 Atmospheric Reanalysis** | ECMWF / Copernicus Climate Change Service (C3S) | 1940–2023 (Yıllık sıcaklık, yağış, kuraklık indisi) | Hersbach, H., et al. (2020). *The ERA5 global reanalysis*. Quarterly Journal of the Royal Meteorological Society. |
-| **IBWC / CILA Archives** | Uluslararası Sınır ve Su Komisyonu (ABD-Meksika) | Colorado ve Rio Grande ikili antlaşmaları | IBWC Minute Series (1889–2024). ibwc.gov |
+| **TFDD & Modern Water Treaties** | Oregon State University, UNTS, FAOLEX, River Commissions | 1820–2026 (3.059+ ikili & çok taraflı anlaşma) | Wolf, A. T. (1999) & Portal 2026 Derlemesi. |
+| **BAR Event Dataset (Basins at Risk)** | OSU, World Bank & Portal Update | 1948–2026 (124 su krizi ve dönüm noktası) | Yoffe, S., Wolf, A. T., & Giordano, M. (2003). |
+| **FAOLEX Database** | Gıda ve Tarım Örgütü (UN FAO) | Milli mevzuat ve su anlaşmaları metinleri | FAO Legal Office (2026). *FAOLEX Treaty Collection*. fao.org/faolex |
+| **UN Treaty Series (UNTS)** | Birleşmiş Milletler Hukuk İşleri Ofisi | Orijinal anlaşma metinleri (PDF) | United Nations (1946–2026). *Treaty Series*. treaties.un.org |
+| **UNECE Water Convention** | BM Avrupa Ekonomik Komisyonu | Sınır-aşan su organları ve küresel katılımlar | UNECE (1992–2026). *Water Convention Secretariat*. |
+| **ERA5 Atmospheric Reanalysis** | ECMWF / Copernicus Climate Change Service (C3S) | 1940–2025 (Yıllık sıcaklık, yağış, kuraklık indisi) | Hersbach, H., et al. (2020). *The ERA5 global reanalysis*. |
+| **IBWC / CILA Archives** | Uluslararası Sınır ve Su Komisyonu (ABD-Meksika) | Colorado ve Rio Grande ikili antlaşmaları (Dakika 330, 331, 332 dahil) | IBWC Minute Series (1889–2026). ibwc.gov |
 
 > Detaylı metodolojik açıklamalar, değişken tanımları ve kodlama şeması için **[DATA_SOURCES.md](DATA_SOURCES.md)** belgesine bakınız.
 

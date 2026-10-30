@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software or data in your research, please cite it using the metadata from this file."
 title: "Transboundary Freshwater Agreements and Hydro-Climatic Intelligence Portal"
-abstract: "A spatio-temporal database and interactive platform synthesizing over 3,000 international transboundary freshwater treaties (1820–2024), the Basins at Risk (BAR) conflict-cooperation event set, and ECMWF ERA5 historical climate reanalysis."
+abstract: "A spatio-temporal database and interactive platform synthesizing over 3,059 international transboundary freshwater treaties (1820–2026), the Basins at Risk (BAR) conflict-cooperation event set, and ECMWF ERA5 historical climate reanalysis."
 authors:
   - family-names: "Serman"
     given-names: "Mert"

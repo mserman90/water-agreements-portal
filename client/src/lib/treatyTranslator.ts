@@ -427,6 +427,24 @@ export function translateConflict(
 // ══════════════════════════════════════════════════════════════
 
 const landmarkTreatiesTr: Record<string, string> = {
+  'framework agreement on cooperation in the field of water between the republic of turkey and the republic of iraq': 'Türkiye Cumhuriyeti ile Irak Cumhuriyeti Arasında Su Alanında İş Birliği Çerçeve Anlaşması',
+  'agreement on the nile river basin cooperative framework': 'Nil Nehri Havzası İşbirliği Çerçeve Anlaşması (CFA / Entebbe Anlaşması)',
+  'united states and canada agreement-in-principle on the modernization of the columbia river treaty': 'ABD ve Kanada Kolombiya Nehri Antlaşması Modernizasyonu İlke Anlaşması',
+  'treaty between the united states and canada relating to the modernization of the columbia river basin water regime': 'ABD ve Kanada Arasında Kolombiya Nehri Havzası Su Rejimi Modernizasyon Antlaşması',
+  'ibwc minute no. 330': 'IBWC 330 Sayılı Karar: Kolorado Nehri Geçici Önlemlerinin Genişletilmesi',
+  'ibwc minute no. 331': 'IBWC 331 Sayılı Karar: Rio Grande Su Teslimatının Güvenilirliği ve Öngörülebilirliği',
+  'ibwc minute no. 332': 'IBWC 332 Sayılı Karar: Amistad Uluslararası Barajı Geçirimsizlik Duvarı İnşası',
+  'trilateral ministerial agreement on joint development and operation of kambarata-1 hpp': 'Kambarata-1 HES Ortak İnşası ve İşletilmesine İlişkin Üçlü Bakanlar Anlaşması (Kırgızistan-Kazakistan-Özbekistan)',
+  'joint interstate protocol on digital automation of transboundary water accounting stations': 'Sınır Aşan Su Ölçüm İstasyonlarının Dijital Otomasyonuna İlişkin Devletlerarası Ortak Protokol (Kazakistan-Özbekistan)',
+  'interstate agreement on the delimitation of state border and shared water facilities on the isfara river': 'İsfara Nehri Üzerindeki Devlet Sınırının Belirlenmesi ve Ortak Su Tesislerine İlişkin Devletlerarası Anlaşma (Kırgızistan-Tacikistan)',
+  'intergovernmental agreement on the establishment of the central asian water-energy consortium': 'Orta Asya Su-Enerji Konsorsiyumu Kurulmasına Dair Hükümetlerarası Anlaşma',
+  'nile river basin commission (nrbc) inaugural ministerial convention and headquarters agreement': 'Nil Nehri Havzası Komisyonu (NRBC) Açılış Bakanlar Sözleşmesi ve Merkez Anlaşması',
+  'treaty on transboundary water cooperation and ecological restoration of the northern aral sea': 'Kuzey Aral Denizi\'nin Ekolojik Restorasyonu ve Sınır Aşan Su İşbirliği Antlaşması (Kazakistan-Özbekistan)',
+  'operational annexes to the turkey-iraq framework water agreement for severe drought periods': 'Türkiye-Irak Çerçeve Su Anlaşması Aşırı Kuraklık Dönemleri Operasyonel Ekleri',
+  'icpdr ministerial declaration on climate-adaptive danube basin management and water scarcity': 'İklim Uyumlu Tuna Havzası Yönetimi ve Su Kıtlığına İlişkin ICPDR Bakanlar Deklarasyonu',
+  'mekong river commission (mrc) joint operational protocol on mainstream cascading hydropower and flow regulations': 'Mekong Ana Kol Kademeli Hidroelektrik ve Akış Düzenlemelerine İlişkin MRC Ortak Operasyonel Protokolü',
+  'multilateral treaty on the joint environmental management of the guarani aquifer system': 'Guarani Akifer Sistemi Ortak Çevresel Yönetimine İlişkin Çok Taraflı Antlaşma',
+
   'act of santiago': 'Santiago Senedi (Arjantin - Şili Sınır Suları)',
   'statute of the river uruguay': 'Uruguay Nehri Statüsü',
   'indus waters treaty': 'İndus Suları Antlaşması',

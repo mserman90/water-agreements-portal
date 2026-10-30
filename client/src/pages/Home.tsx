@@ -10,7 +10,7 @@ import type { LayerConfig } from '@/components/LayerControl';
 import { smartSearch, isSmartQuery } from '@/lib/smartSearch';
 
 const MIN_YEAR = 1820;
-const MAX_YEAR = 2024;
+const MAX_YEAR = 2026;
 const YEAR_STEP_MS = 120;
 
 function findBasinCoords(basinName: string): [number, number] | null {

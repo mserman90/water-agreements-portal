@@ -31,8 +31,8 @@ interface TimelineClimatePanelProps {
 }
 
 const MIN_YEAR = 1820;
-const MAX_YEAR = 2024;
-const ERA5_END = new Date().getFullYear() - 1;
+const MAX_YEAR = 2026;
+const ERA5_END = 2025;
 
 const METRIC_OPTIONS: { key: MeteoLayerType; labelTr: string; labelEn: string; unit: string; color: string; icon: any }[] = [
   { key: 'temperature', labelTr: 'Sıcaklık', labelEn: 'Temperature', unit: '°C', color: '#f97316', icon: Thermometer },
@@ -46,6 +46,9 @@ const HISTORIC_MILESTONES = [
   { year: 1995, labelTr: '1995 Mekong Anlaşması', labelEn: '1995 Mekong Agreement', basin: 'Mekong' },
   { year: 1997, labelTr: '1997 BM Su Sözleşmesi', labelEn: '1997 UN Watercourses', basin: 'Global' },
   { year: 2015, labelTr: '2015 Nil İlkeler Bildirgesi', labelEn: '2015 Nile GERD Declaration', basin: 'Nile' },
+  { year: 2024, labelTr: '2024 Türkiye-Irak Su Anlaşması & Nil CFA', labelEn: '2024 Turkey-Iraq & Nile CFA', basin: 'Tigris-Nile' },
+  { year: 2025, labelTr: '2025 Kolombiya Nehri Antlaşması', labelEn: '2025 Modern Columbia Treaty', basin: 'Columbia' },
+  { year: 2026, labelTr: '2026 Kuzey Aral Denizi Antlaşması', labelEn: '2026 Northern Aral Treaty', basin: 'Aral Sea' },
 ];
 
 export default function TimelineClimatePanel({
@@ -271,7 +274,7 @@ export default function TimelineClimatePanel({
       <div style={{ background: '#f8fafc', borderRadius: 8, padding: 12, border: '1px solid #e2e8f0' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
           <span style={{ fontSize: 11.5, fontWeight: 700, color: '#334155' }}>
-            {lang === 'tr' ? '5 Yıllık Anlaşma Dağılımı (1820–2024)' : '5-Year Distribution (1820–2024)'}
+            {lang === 'tr' ? '5 Yıllık Anlaşma Dağılımı (1820–2026)' : '5-Year Distribution (1820–2026)'}
           </span>
           <span style={{ fontSize: 10.5, color: '#64748b' }}>
             {lang === 'tr' ? 'Yeşil: İşbirliği / Kırmızı: Çatışma' : 'Green: Coop / Red: Conflict'}
@@ -323,7 +326,7 @@ export default function TimelineClimatePanel({
           <span>1900</span>
           <span>1950</span>
           <span>2000</span>
-          <span>2024</span>
+          <span>2026</span>
         </div>
       </div>
 

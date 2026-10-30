@@ -1450,5 +1450,47 @@
     "intensity": -2,
     "type": "conflict",
     "source": "NPR Aral Sea interactive (2024). https://apps.npr.org/aral-sea-shrinking-map/"
+  },
+  {
+    "year": 2026,
+    "headline": "Kazakhstan-Uzbekistan Northern Aral Sea Restoration Treaty",
+    "title": "Kazakhstan-Uzbekistan Northern Aral Sea Restoration Treaty",
+    "description": "Kazakhstan and Uzbekistan finalize historic treaty guaranteeing minimum ecological flows into the Northern Aral Sea and joint Kokaral dam elevation.",
+    "countries": "Kazakhstan, Uzbekistan",
+    "basin": "Aral Sea",
+    "latitude": 46.002,
+    "longitude": 60.505,
+    "intensity": 6,
+    "barScale": "+6",
+    "type": "cooperation",
+    "source": "EC-IFAS, Astana Summit 2026"
+  },
+  {
+    "year": 2026,
+    "headline": "Turkey-Iraq Operational Drought Protocol Signed",
+    "title": "Turkey-Iraq Operational Drought Protocol Signed",
+    "description": "Turkey and Iraq conclude operational drought protocol under the 2024 Framework Agreement, locking in guaranteed releases and digital hydrometric verification.",
+    "countries": "Turkey, Iraq",
+    "basin": "Tigris-Euphrates/Shatt al Arab",
+    "latitude": 33.315,
+    "longitude": 44.366,
+    "intensity": 5,
+    "barScale": "+5",
+    "type": "cooperation",
+    "source": "Ankara Ministerial Communique 2026"
+  },
+  {
+    "year": 2026,
+    "headline": "Mekong Commission Enacts Mainstream Dam Cascading Rules",
+    "title": "Mekong Commission Enacts Mainstream Dam Cascading Rules",
+    "description": "The MRC Council agrees on legally binding cascading flow release rules for upstream mainstream hydropower projects during El Nino drought periods.",
+    "countries": "Cambodia, Laos, Thailand, Vietnam, China",
+    "basin": "Mekong",
+    "latitude": 17.975,
+    "longitude": 102.633,
+    "intensity": 4,
+    "barScale": "+4",
+    "type": "cooperation",
+    "source": "MRC Vientiane Declaration 2026"
   }
 ]
