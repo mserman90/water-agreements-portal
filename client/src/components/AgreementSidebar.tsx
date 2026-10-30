@@ -361,6 +361,28 @@ export default function AgreementSidebar({
           </span>
           <div style={{ display: 'flex', gap: 5, flexShrink: 0 }}>
             <a
+              href="./docs/UN-Water_Policy_Brief_Global_Water_Conventions.pdf"
+              target="_blank"
+              rel="noreferrer"
+              title={lang === 'tr' ? 'UN-Water Politika Raporu: Birleşmiş Milletler Küresel Su Sözleşmeleri (38 Sayfa, 2020)' : 'UN-Water Policy Brief: The United Nations Global Water Conventions (38 Pages, 2020)'}
+              style={{
+                textDecoration: 'none',
+                color: '#0891b2',
+                fontWeight: 700,
+                fontSize: 10.5,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 3,
+                background: '#ecfeff',
+                border: '1px solid #a5f3fc',
+                padding: '2px 6px',
+                borderRadius: 4,
+              }}
+            >
+              <FileDown size={11} />
+              UN-Water
+            </a>
+            <a
               href="./docs/TransboundaryHydropowerLawChecklist_2023.pdf"
               target="_blank"
               rel="noreferrer"

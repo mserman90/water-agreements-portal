@@ -209,6 +209,29 @@ Northumbria University, Leiden University, Wuhan University International Water 
 
 ---
 
+### 1.9. UN-Water Politika Raporu: Birleşmiş Milletler Küresel Su Sözleşmeleri (*UN-Water Policy Brief on the United Nations Global Water Conventions*)
+Birleşmiş Milletler'in su alanındaki koordinasyon organı olan **UN-Water** (UN-Water Expert Group on Transboundary Waters) tarafından yayımlanan bu resmi politika raporu, iki küresel su sözleşmesinin (1992 Helsinki ve 1997 New York) birbiriyle uyumunu ve sınır-aşan su barışına katkısını analiz eden en üst düzey BM belgesidir:
+
+- **Eser Başlığı:** *The United Nations Global Water Conventions: Fostering Sustainable Development and Peace*
+- **Yayıncı & Tarih:** United Nations / UN-Water, Cenevre (1 Aralık 2020) | **Sayfa:** 38 Sayfa
+- **Dosya Konumu:** [client/public/docs/UN-Water_Policy_Brief_Global_Water_Conventions.pdf](client/public/docs/UN-Water_Policy_Brief_Global_Water_Conventions.pdf) (2,48 MB)
+- **Doğrudan UN-Water Resmi Bağlantısı:** [https://www.unwater.org/publications/the-united-nations-global-water-conventions-fostering-sustainable-development-and-peace/](https://www.unwater.org/publications/the-united-nations-global-water-conventions-fostering-sustainable-development-and-peace/)
+
+#### 1.9.1. Küresel Boyut ve SDG 6.5 Hedefleri
+- **Hidrolojik Gerçeklik:** Küresel tatlı su akışının %80'i sınır-aşan havzalardadır ve dünya nüfusunun %40'ı 153 egemen devlete yayılan 276'dan fazla uluslararası nehir/göl havzası ile 600'den fazla sınır-aşan akifer sisteminde yaşamaktadır.
+- **SDG Göstergesi 6.5.2:** 2030 Sürdürülebilir Kalkınma Amaçları kapsamında sınır-aşan havzaların operasyonel işbirliği düzenlemeleriyle yönetilme oranı mevcut hızla yetersiz kalmakta; BM Genel Sekreteri António Guterres tüm devletleri her iki sözleşmeye de katılmaya davet etmektedir.
+
+#### 1.9.2. İki Sözleşmenin Eşzamanlı Tamamlayıcılığı (*Complementary Package*)
+Rapor, 1992 Helsinki ve 1997 New York Sözleşmeleri'nin birbirine rakip değil, birbirini mükemmel şekilde bütünleyen bir "normlar paketi" olduğunu ortaya koyar:
+1. **1997 Su Yolları Sözleşmesi:** Hakça ve makul kullanım faktörlerini (Madde 6) ve planlanan tedbirlerin bildirim prosedürlerini detaylandırır.
+2. **1992 Su Sözleşmesi:** Ortak havza komisyonu (RBO) kurma zorunluluğunu (Madde 9), kirlilik önleme kurallarını, taraflar toplantısı (MOP) kurumsal mekanizmasını ve tüm sınır-aşan akiferleri kapsayan geniş koruma alanını sunar.
+
+#### 1.9.3. Katılımın 6 Temel Faydası ve Yanlış Algıların Çürütülmesi
+- **Faydalar:** 1) Havza işbirliğini pekiştirme, 2) Ortak faydaları maksimize etme (su-gıda-enerji-ekosistem bağı), 3) Küresel su diplomasisi platformuna erişim, 4) Ulusal düzeyde IWRM yönetişimini güçlendirme, 5) Uluslararası finans kuruluşlarından (Dünya Bankası, kalkınma bankaları) yatırım çekme güvenliği, 6) Uluslararası teamül hukukunu pekiştirme.
+- **Çürütülen Mitler:** Sözleşmelerin memba veya mansap yanlısı olmadığı (eşitlik ve karşılıklılık esastır); mevcut ikili antlaşmaları ilga etmeyip onları desteklediği; bölgesel değil küresel olduğu; ve hem yüzey sularını hem de yeraltı sularını (akiferleri) kapsadığı kanıtlanmıştır.
+
+---
+
 ## 2. Basins at Risk (BAR) Olay Veri Seti ve Su Etkileşim Skalası
 
 ### 2.1. Metodolojik Çerçeve (Wolf, Yoffe & Giordano)
