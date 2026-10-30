@@ -361,6 +361,28 @@ export default function AgreementSidebar({
           </span>
           <div style={{ display: 'flex', gap: 5, flexShrink: 0 }}>
             <a
+              href="./docs/TransboundaryHydropowerLawChecklist_2023.pdf"
+              target="_blank"
+              rel="noreferrer"
+              title={lang === 'tr' ? 'Sınır Aşan Hidroelektrik ve Barajlar Uluslararası Hukuk Kontrol Listesi (Northumbria, Leiden, Wuhan, UCC 2023)' : 'Checklist for Assessing the International Law Applicable to Transboundary Hydropower (Northumbria, Leiden, Wuhan, UCC 2023)'}
+              style={{
+                textDecoration: 'none',
+                color: '#dc2626',
+                fontWeight: 700,
+                fontSize: 10.5,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 3,
+                background: '#fee2e2',
+                border: '1px solid #fca5a5',
+                padding: '2px 6px',
+                borderRadius: 4,
+              }}
+            >
+              <FileDown size={11} />
+              ⚖️ {lang === 'tr' ? 'HES Hukuk' : 'Hydro Law'}
+            </a>
+            <a
               href="https://transboundarywaters.science.oregonstate.edu/sites/transboundarywaters.ceoas.oregonstate.edu/files/2023-08/AtlasFreshwaterAgreements.pdf"
               target="_blank"
               rel="noreferrer"

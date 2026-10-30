@@ -178,6 +178,37 @@ Atlas, küresel sınır-aşan havzaları 5 ana coğrafi kıtada fihristlemiştir
 
 ---
 
+### 1.8. Sınır Aşan Hidroelektrik ve Barajlar Uluslararası Hukuk Kontrol Listesi (*Checklist for Assessing the International Law Applicable to Transboundary Hydropower*)
+Northumbria University, Leiden University, Wuhan University International Water Law Academy ve University College Cork (UCC) işbirliğiyle; Dünya Bankası, IUCN ve Cenevre Su Merkezi (Geneva Water Hub) uzmanlarının katkılarıyla 2023 yılında yayımlanan bu kılavuz, sınır-aşan nehirler üzerindeki baraj ve HES projelerinin uluslararası hukuka uygunluğunu değerlendiren en güncel başvuru aracıdır:
+
+- **Eser Başlığı:** *Checklist for Assessing the International Law Applicable to Transboundary Hydropower*
+- **Yazarlar:** Prof. Alistair Rieu-Clarke (Başyazar), Dr. Bernadette Adjei, Dr. Ana Maria Daza Vargas, Dr. David J. Devlaeminck, Dr. Oliver Hensengerth, Prof. Emmanuel Kasimbazi, Prof. Kong Lingjie, Prof. Owen McIntyre, Dr. Otto Spijkers, Prof. Patricia Wouters.
+- **İnceleme Kurulu:** Dr. Christina Leb (Dünya Bankası), Diego Jara (IUCN), Dr. Mara Tignino & Dr. Tadesse Kebebew (Geneva Water Hub), Dr. Yumiko Yasuda & Dr. Loreen Katiyo (Global Water Partnership).
+- **Yayıncı & Yıl:** Northumbria University (2023) | **Sayfa:** 56 Sayfa
+- **Dosya Konumu:** [client/public/docs/TransboundaryHydropowerLawChecklist_2023.pdf](client/public/docs/TransboundaryHydropowerLawChecklist_2023.pdf) (1,67 MB)
+- **Akademik Referans:** Adjei et al. (2023). *Checklist for Assessing the International Law Applicable to Transboundary Hydropower*. Northumbria University.
+
+#### 1.8.1. 3 Aşamalı Hukuki Uyumluluk Mimarisi
+1. **Aşama 1: Projenin Sınır-Aşan Kapsamı (*Scope*):**
+   1992 Helsinki ve 1997 BM Su Yolları Sözleşmeleri gereğince "sistem yaklaşımı" (*systems approach*). Ana nehir yatağı, yan kollar, yüzeysel sular ve hidrolojik bağlantılı yeraltı suları (akiferler) birlikte ele alınır. Başka bir devletin egemenlik alanında zararlı etki yaratma potansiyeli test edilir.
+2. **Aşama 2: Usulî Uluslararası Hukuk Yükümlülükleri (*Procedural Obligations*):**
+   - **Özen Gösterme Yükümlülüğü (*Due diligence*):** Sınır-aşan etkinin önceden tespiti ve risk analizi.
+   - **Önceden Bildirim ve Danışma (*Notification & Consultation*):** Planlanan tedbirlerin diğer kıyıdaşlara zamanında sunulması (BM 1997 Madde 12; Espoo Sözleşmesi; Dünya Bankası OP 7.50).
+   - **Sınır-Aşan ÇED (*Transboundary EIA*):** Uluslararası teamül hukuku uyarınca zorunlu çevresel ve sosyal etki değerlendirmesi (UAD Kosta Rika v. Nikaragua, 2015).
+   - **Etkilenen Topluluklar ve FPIC:** Serbest, Önceden ve Bilgilendirilmiş Onam (*Free, Prior and Informed Consent - ILO 169 ve BM Yerli Halkların Hakları Bildirisi*), Aarhus ve Escazú Sözleşmeleri.
+3. **Aşama 3: Esasa İlişkin Uluslararası Hukuk Yükümlülükleri (*Substantive Obligations*):**
+   - **Hakça ve Makul Kullanım (*Equitable and Reasonable Utilisation - ERU*):** Kıyıdaşların faydaları maksimize, zararları minimize etme dengesi (1997 Sözleşmesi Madde 5-6).
+   - **Önemli Zarar Vermeme Kuralı (*No Significant Harm*):** Önleyici tedbirlerin alınması; Dünya Bankası "kayda değer zarar" (*appreciable harm*) standartları.
+   - **Ekosistem Koruma ve Çevresel Akış (*E-Flow Regimes*):** Baraj mansabında ekosistemin sürekliliği için asgari çevresel akış rejimi zorunluluğu (Kishenganga Tahkim Kararı, 2013; Ramsar 1971; CBD 1992).
+   - **Temel İnsan Hakları ve Hayati Su İhtiyaçları (*Vital Human Needs*):** BM 1997 Madde 10 ve CESCR 15 No'lu Genel Yorum uyarınca içme ve gıda güvenliği amaçlı suyun mutlak önceliği.
+
+#### 1.8.2. Çok Katmanlı Uyuşmazlık Çözüm Matrisi
+- **Devlet - Devlet:** Müzakere, İyi niyet arabuluculuğu, Uzlaşma komisyonu, Tahkim (PCA) ve Uluslararası Adalet Divanı (UAD/ICJ).
+- **Devlet - Birey/Topluluk:** Dünya Bankası Teftiş Paneli (*Inspection Panel*), AfDB Bağımsız İnceleme Mekanizması (*IRM*), OECD Ulusal Temas Noktaları.
+- **Devlet - Yabancı Yatırımcı:** Uluslararası Yatırım Anlaşmaları (IIA), Enerji Şartı Antlaşması (ECT), Yatırımcı-Devlet Uyuşmazlık Çözümü (ISDS / ICSID).
+
+---
+
 ## 2. Basins at Risk (BAR) Olay Veri Seti ve Su Etkileşim Skalası
 
 ### 2.1. Metodolojik Çerçeve (Wolf, Yoffe & Giordano)
