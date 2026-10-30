@@ -79,7 +79,7 @@ Tüm veriler orijinal, hakemli ve uluslararası kabul görmüş resmi depolardan
 | **BAR Event Dataset (Basins at Risk)** | OSU, World Bank & Portal Update | 1948–2026 (124 su krizi ve dönüm noktası) | Yoffe, S., Wolf, A. T., & Giordano, M. (2003). |
 | **FAOLEX Database** | Gıda ve Tarım Örgütü (UN FAO) | Milli mevzuat ve su anlaşmaları metinleri | FAO Legal Office (2026). *FAOLEX Treaty Collection*. fao.org/faolex |
 | **UN Treaty Series (UNTS)** | Birleşmiş Milletler Hukuk İşleri Ofisi | Orijinal anlaşma metinleri (PDF) | United Nations (1946–2026). *Treaty Series*. treaties.un.org |
-| **UNECE Water Convention** | BM Avrupa Ekonomik Komisyonu | Sınır-aşan su organları ve küresel katılımlar | UNECE (1992–2026). *Water Convention Secretariat*. |
+| **UNECE Water Convention (Amended Text)** | Birleşmiş Milletler UNECE | Resmi Konsolide Metin (`ECE/MP.WAT/41`, Karar VI/3 ile Küresel Katılım) | UNECE (2014). *Convention on the Protection and Use of Transboundary Watercourses*. |
 | **ERA5 Atmospheric Reanalysis** | ECMWF / Copernicus Climate Change Service (C3S) | 1940–2025 (Yıllık sıcaklık, yağış, kuraklık indisi) | Hersbach, H., et al. (2020). *The ERA5 global reanalysis*. |
 | **IBWC / CILA Archives** | Uluslararası Sınır ve Su Komisyonu (ABD-Meksika) | Colorado ve Rio Grande ikili antlaşmaları (Dakika 330, 331, 332 dahil) | IBWC Minute Series (1889–2026). ibwc.gov |
 

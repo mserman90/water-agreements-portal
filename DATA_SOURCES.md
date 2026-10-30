@@ -322,6 +322,29 @@ Akademik araştırmalarda en sık karşılaşılan problemlerden biri olan dış
 
 ---
 
+### 5.3. 1992 UNECE Helsinki Su Sözleşmesi ve Küresel Katılım Değişiklikleri (`ECE/MP.WAT/41`)
+Birleşmiş Milletler Avrupa Ekonomik Komisyonu (**UNECE**) bünyesinde akdedilen ve küresel katılıma açılan temel su sözleşmesinin konsolide resmi metnidir:
+
+- **Resmi BM Belgesi:** *Convention on the Protection and Use of Transboundary Watercourses and International Lakes as amended, along with decision VI/3 clarifying the accession procedure* (ECE/MP.WAT/41)
+- **Yayıncı & Yıl:** United Nations, New York & Geneva (2014) | **ISBN:** 92-1-117077-8 | **Belge Kodu:** ECE/MP.WAT/41
+- **Doğrudan UNECE Resmi Bağlantısı:** [https://unece.org/sites/default/files/2021-04/ECE_MP.WAT_41.pdf](https://unece.org/sites/default/files/2021-04/ECE_MP.WAT_41.pdf)
+- **Orijinal Onaylı BM Arşiv Metni:** [client/public/docs/unece-water-1992.pdf](client/public/docs/unece-water-1992.pdf) (86 Sayfa, UNTS Cilt 1936, No. 33207)
+
+#### 5.3.1. 2003 Değişiklikleri ve Küreselleşme Süreci
+- **Helsinki Kabulü (1992) & Yürürlük (1996):** Sözleşme ilk olarak Pan-Avrupa bölgesinde sınır-aşan nehir, göl ve yeraltı sularının korunması amacıyla kabul edildi.
+- **2003 Değişikliği (Karar III/1):** 25. ve 26. maddelerde yapılan değişiklikle, Sözleşme'nin UNECE bölgesi dışındaki tüm Birleşmiş Milletler üye devletlerinin katılımına açılması kararlaştırıldı. Bu değişiklik 6 Şubat 2013 tarihinde uluslararası hukukta yürürlüğe girdi.
+- **Karar VI/3 (Roma, 2012):** Taraflar Toplantısı (MOP), UNECE dışı devletlerin katılımını teşvik eden ve prosedürleri sadeleştiren VI/3 sayılı kararı kabul etti.
+- **Küresel Taraf Devletler:** 2016 yılında küresel katılıma fiilen açılmasının ardından Çad (2018), Senegal (2018), Gana (2020), Togo (2021), Kamerun (2022), Gine-Bissau (2023), Namibya (2023), Panama (2023) ve Fildişi Sahili (2024) gibi Afrika ve Latin Amerika ülkeleri Sözleşme'ye katılmış; taraf devlet sayısı 52'yi aşmıştır.
+
+#### 5.3.2. Sözleşmenin Temel Hukuki Sütunları
+1. **Sınır-Aşan Etkileri Önleme, Kontrol Etme ve Azaltma Yükümlülüğü (Madde 2):** Kirlilik ve biyolojik bozulmayı kaynağında önleme.
+2. **Kirleten Öder İlkesi (*Polluter-Pays Principle*):** Önleme ve arıtma maliyetlerinin kirletici tarafından üstlenilmesi.
+3. **İhtiyat İlkesi (*Precautionary Principle*):** Bilimsel kesinliğin olmamasının önleyici tedbirleri ertelemek için gerekçe sayılmaması.
+4. **Gelecek Nesillerin Hakları (*Inter-generational Equity*):** Su kaynaklarının sürdürülebilir yönetimi.
+5. **İkili ve Çok Taraflı Anlaşma Akdetme ve Ortak Organ (Komisyon) Kurma Zorunluluğu (Madde 9):** Kıyıdaş devletlerin ortak havza komisyonları kurmasını yasal bir zorunluluk haline getiren dünyadaki tek küresel çerçeve sözleşmedir.
+
+---
+
 ## 6. Metodolojik Kısıtlar ve Dikkat Edilmesi Gereken Hususlar
 
 Araştırmacıların veri analizlerinde göz önünde bulundurması gereken metodolojik kısıtlar şunlardır:
