@@ -361,6 +361,28 @@ export default function AgreementSidebar({
           </span>
           <div style={{ display: 'flex', gap: 5, flexShrink: 0 }}>
             <a
+              href="https://transboundarywaters.science.oregonstate.edu/sites/transboundarywaters.ceoas.oregonstate.edu/files/2023-08/AtlasFreshwaterAgreements.pdf"
+              target="_blank"
+              rel="noreferrer"
+              title={lang === 'tr' ? 'UNEP / FAO / OSU Uluslararası Tatlı Su Anlaşmaları Atlası (192 Sayfa, ISBN 92 807 2232 8)' : 'UNEP / FAO / OSU Atlas of International Freshwater Agreements (192 Pages, ISBN 92 807 2232 8)'}
+              style={{
+                textDecoration: 'none',
+                color: '#b45309',
+                fontWeight: 700,
+                fontSize: 10.5,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 3,
+                background: '#fef3c7',
+                border: '1px solid #fde68a',
+                padding: '2px 6px',
+                borderRadius: 4,
+              }}
+            >
+              <ExternalLink size={11} />
+              Atlas
+            </a>
+            <a
               href="./docs/WebsiteTreatyCodeBook_20180312.pdf"
               target="_blank"
               rel="noreferrer"

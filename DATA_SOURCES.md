@@ -143,6 +143,41 @@ Oregon State University (OSU) Coğrafya Bölümü araştırmacılarından Hannah
 
 ---
 
+### 1.7. UNEP, FAO & OSU Ortak Yayını: Uluslararası Tatlı Su Anlaşmaları Atlası (*Atlas of International Freshwater Agreements*)
+Birleşmiş Milletler Çevre Programı (**UNEP**), Birleşmiş Milletler Gıda ve Tarım Örgütü (**FAO**) ve Oregon State Üniversitesi (**OSU TFDD**) işbirliğiyle yayımlanan bu başvuru eseri, modern sınır-aşan su diplomasisinin ve TFDD veri tabanının kurumsal ve kartografik omurgasını oluşturmaktadır:
+
+- **Eser Adı:** *Atlas of International Freshwater Agreements*
+- **Yazarlar & Direktör:** Prof. Aaron T. Wolf (Direktör), Dr. Meredith A. Giordano (OSU)
+- **Sunuş & Önsöz:** Klaus Töpfer (UNEP İcra Direktörü), Stefano Burchi (FAO Hukuk Kıdemli Yetkilisi)
+- **ISBN:** 92 807 2232 8 | **Yayın Yılı:** 2002 | **Sayfa:** 192 Sayfa
+- **Resmi Dijital Arşiv (PDF - 75 MB):** [AtlasFreshwaterAgreements.pdf (OSU)](https://transboundarywaters.science.oregonstate.edu/sites/transboundarywaters.ceoas.oregonstate.edu/files/2023-08/AtlasFreshwaterAgreements.pdf)
+
+#### 1.7.1. Atlas'ın Kuramsal Tezi: "Su Savaşları Değil, Su İşbirliği"
+Klaus Töpfer ve Stefano Burchi'nin önsözlerinde ve Aaron Wolf ile Meredith Giordano'nun analizlerinde vurgulandığı üzere, medyadaki yaygın "su savaşları" (*water wars*) söyleminin aksine, insanlık tarihi ampirik olarak suyun bir savaş nedeni olmaktan ziyade **kurumsal diplomasi ve işbirliğinin katalizörü** olduğunu kanıtlamaktadır. 1820'lerden bu yana akdedilen yüzlerce sınır-aşan antlaşma, nehir havzası örgütü ve ortak komisyon bu tezin birincil kanıtıdır.
+
+#### 1.7.2. 10 Tematik Mekânsal İndikatör Haritası
+Atlas, sınır-aşan nehir havzalarını salt hukuki metinlerle değil, havza ölçeğinde 10 temel sosyo-ekonomik ve hidro-iklimsel göstergeyle görselleştirmiştir:
+1. **Havza Başına Anlaşma Sayısı (*Number of Agreements per Basin*):** Hukuki kurumsallaşmanın coğrafi yoğunluğu.
+2. **Kişi Başına Düşen Milli Gelir (*GDP per Capita*):** Kıyıdaş ülkeler arasındaki ekonomik asimetriler.
+3. **Nüfus Dağılımı (*Population Distribution*):** Havza genelinde demografik yoğunlaşma merkezleri.
+4. **Havza Nüfus Yoğunluğu (*Population Density per River Basin*):** Su kaynağı üzerindeki antropolojik baskı.
+5. **İklim Bölgeleri (*Climatic Regions*):** Köppen iklim zonları ve kurak/yarı-kurak alanların sınır-aşan dağılımı.
+6. **Arazi Örtüsü ve Kullanımı (*Land Cover and Use*):** Orman, tarım, mera ve sulak alan kompozisyonu.
+7. **Sulanabilir Tarım Alanları (*Irrigated Areas*):** Tarımsal su tüketiminin yoğunlaştığı ovalar.
+8. **Baraj Yoğunluğu (*Dam Density per International Basin*):** Büyük hidroelektrik ve depolama rezervuarları.
+9. **Ortalama Yıllık Yüzey Akışı (*Average Annual Runoff*):** Havza hidrolojik su bütçesi ve debi verimi.
+10. **Su Stresi ve Kıtlık İndeksi (*Water Stress per International Basin*):** Kullanılabilir su miktarı ile tüketim talebi arasındaki oran.
+
+#### 1.7.3. Kıtalar Bazında Antlaşmalar Fihristi
+Atlas, küresel sınır-aşan havzaları 5 ana coğrafi kıtada fihristlemiştir:
+- **Afrika (ss. 27–50):** Nil, Kongo, Nijer, Zambezi, Çad, Senegal ve Okavango anlaşmaları.
+- **Asya (ss. 51–76):** İndus, Ganj-Brahmaputra, Mekong, Fırat-Dicle, Aral Denizi (Amu Derya/Siri Derya), Ürdün Nehri.
+- **Avrupa (ss. 77–132):** Tuna, Ren, Elbe, Oder, Douro, Tagus ve İskandinav havzaları.
+- **Kuzey Amerika (ss. 133–162):** Büyük Göller / St. Lawrence, Colorado, Rio Grande, Columbia.
+- **Güney Amerika (ss. 163–170):** Amazon, La Plata (Paraná-Paraguay-Uruguay), Orinoco.
+
+---
+
 ## 2. Basins at Risk (BAR) Olay Veri Seti ve Su Etkileşim Skalası
 
 ### 2.1. Metodolojik Çerçeve (Wolf, Yoffe & Giordano)

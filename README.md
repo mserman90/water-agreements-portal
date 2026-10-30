@@ -70,6 +70,7 @@ Tüm veriler orijinal, hakemli ve uluslararası kabul görmüş resmi depolardan
 | Kaynak / Veri Seti | Kurum / Sağlayıcı | Kapsam / Boyut | Akademik Referans |
 | :--- | :--- | :--- | :--- |
 | **TFDD Master Treaties Database** | Oregon State University (OSU TFDD) | 1.18 MB Excel (`WebsiteTreatiesDB_20181124.xlsx`, 2.118 kayıt, 115 değişken) | OSU Department of Geosciences / Prof. Aaron T. Wolf. |
+| **UNEP / FAO / OSU Atlas (192 Sayfa)** | UNEP, FAO & Oregon State University (Prof. Aaron Wolf) | 75 MB PDF Eser (ISBN 92 807 2232 8, 10 Tematik Harita) | UNEP / FAO / OSU (2002). *Atlas of International Freshwater Agreements*. |
 | **TFDD Treaty CodeBook (16 Sayfa)** | Oregon State University, IWMI, World Bank | 196 KB PDF (`WebsiteTreatyCodeBook_20180312.pdf`, 115 değişken tanımı) | OSU / IWMI / World Bank (2018). |
 | **310 International Basins GeoJSON** | OSU TFDD Spatial Data (Friedrich et al., 2018) | 1.36 MB GeoJSON (`Basin310_Master_20180511.geojson`) | Friedrich, H. K., Svevo, G., & Walters, A. (OSU). |
 | **TFDD RBO Database (77 Kolon)** | OSU Transboundary Freshwater Dispute Database | 246 KB Excel (`TFDD_RBODatabase_20131015.xlsx`) | OSU Department of Geosciences / Prof. Aaron T. Wolf. |
