@@ -48,6 +48,8 @@ function buildSystemContext(agreements: Agreement[], selected?: Agreement | Wate
       ctx += `Taraf Ülkeler: ${selected.countries}\n`;
       ctx += `Havza: ${selected.basin}\n`;
       ctx += `BAR Yoğunluk Skoru: ${selected.intensity}\n`;
+      if (selected.pacificCategory) ctx += `Pacific Institute Kategorisi: ${selected.pacificCategory.toUpperCase()} (Tetikleyici / Silah / Hedef / İşbirliği)\n`;
+      if (selected.pacificRefUrl) ctx += `Pacific Institute Kaynak Bağlantısı: ${selected.pacificRefUrl}\n`;
       ctx += `Açıklama: ${selected.description}\n`;
       if (selected.source) ctx += `Kaynak: ${selected.source}\n`;
     } else {

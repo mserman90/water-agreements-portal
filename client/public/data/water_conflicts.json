@@ -9,7 +9,10 @@
     "longitude": 74.3,
     "intensity": -4,
     "type": "conflict",
-    "source": "Gulhati, N.D. (1973). Indus Waters Treaty: An Exercise in International Mediation. Allied Publishers; Wikipedia, Indus Waters Treaty"
+    "source": "Pacific Institute Water Conflict Chronology; Gleick, P.H. (1993). Water and conflict. International Security 18(1): 79-112; Gulhati, N.D. (1973). Indus Waters Treaty.",
+    "pacificCategory": "weapon",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 1950,
@@ -21,7 +24,10 @@
     "longitude": 31.2,
     "intensity": -2,
     "type": "conflict",
-    "source": "Origins, Ohio State University (2013). Who Owns the Nile? https://origins.osu.edu/article/who-owns-nile-egypt-sudan-and-ethiopia-s-history-changing-dam"
+    "source": "Pacific Institute Water Conflict Chronology; Origins, Ohio State University (2013). Who Owns the Nile?; Ezzat, D. (2013). ahramonline.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Ezzat_2013",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Ezzat_2013"
   },
   {
     "year": 1955,
@@ -33,7 +39,10 @@
     "longitude": 35.5,
     "intensity": 1,
     "type": "mixed",
-    "source": "Gleick, P. (1994). Water, War, and Peace in the Middle East. Environment 36(3); KJIS Jordan River Water Dispute study"
+    "source": "Pacific Institute Water Conflict Chronology; Gleick, P.H. (1994). Water, war, and peace in the Middle East. Environment 36(3): 6-42.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_1994",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1994"
   },
   {
     "year": 1957,
@@ -45,7 +54,10 @@
     "longitude": 105.0,
     "intensity": 4,
     "type": "cooperation",
-    "source": "Mekong River Commission (1995). Agreement on the Cooperation for the Sustainable Development of the Mekong River Basin. https://www.mrcmekong.org/agreement/"
+    "source": "Pacific Institute Water Conflict Chronology; UN ECAFE (1957). Committee for Coordination of Investigations of the Lower Mekong Basin.",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Mekong_1957",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Mekong_1957"
   },
   {
     "year": 1959,
@@ -57,7 +69,10 @@
     "longitude": 32.9,
     "intensity": 4,
     "type": "cooperation",
-    "source": "Ahram Online (2020). Egypt-Ethiopia Nile water dispute: A timeline. https://english.ahram.org.eg/News/369666.aspx"
+    "source": "Pacific Institute Water Conflict Chronology; United Nations Treaty Series No. 6519; Gleick, P.H. (1993).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Nile_1959",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Nile_1959"
   },
   {
     "year": 1960,
@@ -69,7 +84,10 @@
     "longitude": 67.0,
     "intensity": 5,
     "type": "cooperation",
-    "source": "World Bank (2018). Fact Sheet: The Indus Waters Treaty 1960. https://www.worldbank.org/en/region/sar/brief/fact-sheet-the-indus-waters-treaty-1960-and-the-world-bank"
+    "source": "Pacific Institute Water Conflict Chronology; World Bank (1960). Indus Waters Treaty; Gleick, P.H. (1993). International Security 18(1).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 1960,
@@ -81,7 +99,10 @@
     "longitude": 37.4,
     "intensity": -2,
     "type": "conflict",
-    "source": "Origins, Ohio State University (2013). Who Owns the Nile? https://origins.osu.edu/article/who-owns-nile-egypt-sudan-and-ethiopia-s-history-changing-dam"
+    "source": "Pacific Institute Water Conflict Chronology; Okoth-Owiro, A. (2004). The Nile Basin: Cooperation for Development; Gleick, P.H. (1993).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 1961,
@@ -93,7 +114,10 @@
     "longitude": -117.5,
     "intensity": 5,
     "type": "cooperation",
-    "source": "Wikipedia, Columbia River Treaty; High Country News (2024). Renegotiating the Columbia River Treaty. https://www.hcn.org/issues/51-12/reckoning-with-history-renegotiating-the-columbia-river-treaty-six-decades-later/"
+    "source": "Pacific Institute Water Conflict Chronology; Treaty Between Canada and the United States of America Relating to Cooperative Development (1961).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Columbia_1961",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Columbia_1961"
   },
   {
     "year": 1962,
@@ -105,7 +129,10 @@
     "longitude": 32.9,
     "intensity": -1,
     "type": "conflict",
-    "source": "Ahram Online (2020). Egypt-Ethiopia Nile water dispute: A timeline. https://english.ahram.org.eg/News/369666.aspx"
+    "source": "Pacific Institute Water Conflict Chronology; Waterbury, J. (1979). Hydropolitics of the Nile Valley. Syracuse University Press.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 1963,
@@ -117,7 +144,10 @@
     "longitude": 2.1,
     "intensity": 4,
     "type": "cooperation",
-    "source": "FAO FAOLEX. Agreement Concerning the River Niger Commission, 1964. https://www.fao.org/4/w7414b/w7414b06.htm"
+    "source": "Pacific Institute Water Conflict Chronology; Act regarding navigation and economic cooperation between the states of the Niger basin, Niamey (1963).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Niger_1963",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Niger_1963"
   },
   {
     "year": 1964,
@@ -129,7 +159,10 @@
     "longitude": 35.7,
     "intensity": -5,
     "type": "conflict",
-    "source": "Wikipedia, War over Water (Jordan River). https://en.wikipedia.org/wiki/War_over_Water_(Jordan_River)"
+    "source": "Pacific Institute Water Conflict Chronology; Hatami, H. & Gleick, P.H. (1994). Chronology of Conflict over Water; Feron, J. (1969). NYT.",
+    "pacificCategory": "casualty",
+    "pacificRefId": "Hatami_Gleick_1994",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Hatami_Gleick_1994"
   },
   {
     "year": 1964,
@@ -141,7 +174,10 @@
     "longitude": 2.1,
     "intensity": 4,
     "type": "cooperation",
-    "source": "IAEA. Niger Basin Authority: Legal and Institutional Frameworks. https://www.iaea.org/sites/default/files/18/10/niger-basin-authority-050514.pdf"
+    "source": "Pacific Institute Water Conflict Chronology; Agreement concerning the River Niger Commission and the navigation and transport on the River Niger (1964).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Niger_1964",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Niger_1964"
   },
   {
     "year": 1967,
@@ -153,7 +189,10 @@
     "longitude": 35.5,
     "intensity": -6,
     "type": "conflict",
-    "source": "Wikipedia, War over Water (Jordan River). https://en.wikipedia.org/wiki/War_over_Water_(Jordan_River); Seo, E. KJIS Jordan River Water Dispute study"
+    "source": "Pacific Institute Water Conflict Chronology; Gleick, P.H. (1994). Water, war, and peace in the Middle East. Environment 36(3): 6-42.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_1994",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1994"
   },
   {
     "year": 1970,
@@ -165,7 +204,10 @@
     "longitude": 32.9,
     "intensity": 3,
     "type": "cooperation",
-    "source": "Ahram Online (2020). Egypt-Ethiopia Nile water dispute: A timeline. https://english.ahram.org.eg/News/369666.aspx"
+    "source": "Pacific Institute Water Conflict Chronology; Biswas, A.K. (2002). Aswan High Dam: An Environmental and Socio-Economic Assessment. International Journal of Water Resources Development.",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 1972,
@@ -177,7 +219,10 @@
     "longitude": -14.5,
     "intensity": 5,
     "type": "cooperation",
-    "source": "Wikipedia, OMVS. https://en.wikipedia.org/wiki/Organisation_pour_la_mise_en_valeur_du_fleuve_S%C3%A9n%C3%A9gal"
+    "source": "Pacific Institute Water Conflict Chronology; Convention relative au statut du fleuve Sénégal (1972); OMVS Secretariat.",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "OMVS_1972",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#OMVS_1972"
   },
   {
     "year": 1973,
@@ -189,7 +234,10 @@
     "longitude": 62.0,
     "intensity": 4,
     "type": "cooperation",
-    "source": "Wikipedia, Afghanistan-Iran water dispute. https://en.wikipedia.org/wiki/Afghanistan%E2%80%93Iran_water_dispute"
+    "source": "Pacific Institute Water Conflict Chronology; Faizee, M. & Schmeier, S. (2023). Troubled Waters between Afghanistan and Iran; Treaty on the Helmand River (1973).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Faizee_and_Schmeier_2023",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Faizee_and_Schmeier_2023"
   },
   {
     "year": 1975,
@@ -201,7 +249,10 @@
     "longitude": 38.3,
     "intensity": -4,
     "type": "conflict",
-    "source": "Climate-Diplomacy (2022). Turkey, Syria and Iraq: Conflict over the Euphrates-Tigris. https://climate-diplomacy.org/case-studies/turkey-syria-and-iraq-conflict-over-euphrates-tigris"
+    "source": "Pacific Institute Water Conflict Chronology; Glass, S. (2017). Twisting the Tap: Water Scarcity and Conflict in the Euphrates-Tigris; Gleick, P.H. (1993).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Glass_2017",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Glass_2017"
   },
   {
     "year": 1975,
@@ -213,7 +264,10 @@
     "longitude": 87.9,
     "intensity": -3,
     "type": "conflict",
-    "source": "IWAP (2019). A critical review of the Ganges Water Sharing arrangement. https://iwaponline.com/wp/article/21/2/259/66094/"
+    "source": "Pacific Institute Water Conflict Chronology; Crow, B. et al. (1995). Sharing the Ganges: The Politics and Technology of River Development. Sage Publications.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 1976,
@@ -225,7 +279,10 @@
     "longitude": 7.7,
     "intensity": 4,
     "type": "cooperation",
-    "source": "Sciencedirect. International co-operation on Rhine water quality 1945-2008. https://www.sciencedirect.com/science/article/abs/pii/S1474706508001241"
+    "source": "Pacific Institute Water Conflict Chronology; Convention for the Protection of the Rhine Against Pollution by Chlorides, Bonn (1976); ICPR.",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Rhine_1976",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Rhine_1976"
   },
   {
     "year": 1978,
@@ -237,7 +294,10 @@
     "longitude": 31.4,
     "intensity": -3,
     "type": "conflict",
-    "source": "Wikipedia, Water conflict. https://en.wikipedia.org/wiki/Water_conflict"
+    "source": "Pacific Institute Water Conflict Chronology; Gleick, P.H. (1993). Water and conflict: Fresh water resources and international security. International Security 18(1): 79-112.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 1980,
@@ -249,7 +309,10 @@
     "longitude": -10.7,
     "intensity": 4,
     "type": "cooperation",
-    "source": "IAEA. Niger Basin Authority: Legal and Institutional Frameworks. https://www.iaea.org/sites/default/files/18/10/niger-basin-authority-050514.pdf"
+    "source": "Pacific Institute Water Conflict Chronology; Convention creating the Niger Basin Authority, Faranah (1980).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Niger_1980",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Niger_1980"
   },
   {
     "year": 1984,
@@ -261,7 +324,10 @@
     "longitude": 47.0,
     "intensity": -6,
     "type": "conflict",
-    "source": "Wikipedia, Water conflict. https://en.wikipedia.org/wiki/Water_conflict"
+    "source": "Pacific Institute Water Conflict Chronology; Gleick, P.H. (1994). Environment 36(3); UNEP (2001). The Mesopotamian Marshlands: Demise of an Ecosystem.",
+    "pacificCategory": "weapon",
+    "pacificRefId": "Gleick_1994",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1994"
   },
   {
     "year": 1987,
@@ -273,7 +339,10 @@
     "longitude": 38.3,
     "intensity": 3,
     "type": "cooperation",
-    "source": "Climate-Diplomacy (2022). Turkey, Syria and Iraq: Conflict over the Euphrates-Tigris. https://climate-diplomacy.org/case-studies/turkey-syria-and-iraq-conflict-over-euphrates-tigris"
+    "source": "Pacific Institute Water Conflict Chronology; Protocol on Matters Pertaining to Economic Cooperation Between Turkey and Syria, Damascus (1987).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Glass_2017",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Glass_2017"
   },
   {
     "year": 1988,
@@ -285,7 +354,10 @@
     "longitude": 90.3,
     "intensity": -3,
     "type": "conflict",
-    "source": "Wikipedia, Ganges water dispute. https://en.wikipedia.org/wiki/Ganges_water_dispute"
+    "source": "Pacific Institute Water Conflict Chronology; Swain, A. (1993). The Eastern Rivers Dispute in the Indian Subcontinent. Contemporary South Asia 2(1).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 1990,
@@ -297,7 +369,10 @@
     "longitude": 38.3,
     "intensity": -4,
     "type": "conflict",
-    "source": "Climate-Diplomacy (2022). Turkey, Syria and Iraq: Conflict over the Euphrates-Tigris. https://climate-diplomacy.org/case-studies/turkey-syria-and-iraq-conflict-over-euphrates-tigris; Gulf News (2021)"
+    "source": "Pacific Institute Water Conflict Chronology; Gleick, P.H. (1993). International Security 18(1); Kolars, J. (1994). The Hydro-Imperative of Developing Water Resources.",
+    "pacificCategory": "weapon",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 1992,
@@ -309,7 +384,10 @@
     "longitude": 60.0,
     "intensity": 4,
     "type": "cooperation",
-    "source": "Wikipedia, Aral Sea. https://en.wikipedia.org/wiki/Aral_Sea"
+    "source": "Pacific Institute Water Conflict Chronology; Agreement on Cooperation in the Management, Utilization and Protection of Interstate Water Resources, Almaty (1992).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Aral_1992",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Aral_1992"
   },
   {
     "year": 1994,
@@ -321,7 +399,10 @@
     "longitude": 60.0,
     "intensity": 4,
     "type": "cooperation",
-    "source": "Wikipedia, Aral Sea. https://en.wikipedia.org/wiki/Aral_Sea"
+    "source": "Pacific Institute Water Conflict Chronology; Nukus Declaration of the Central Asian States on Aral Sea Basin Program (1994).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Aral_1994",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Aral_1994"
   },
   {
     "year": 1994,
@@ -333,7 +414,10 @@
     "longitude": 35.5,
     "intensity": 5,
     "type": "cooperation",
-    "source": "Stimson Center (2023). Water: A Matter of Cooperation or Conflict Among Jordan, Israel, and Palestine. https://www.stimson.org/2023/water-a-matter-of-cooperation-or-conflict-among-jordan-israel-and-palestine/"
+    "source": "Pacific Institute Water Conflict Chronology; Treaty of Peace Between the State of Israel and the Hashemite Kingdom of Jordan (1994), Annex II (Water Related Matters); Gleick, P.H. (1994).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Gleick_1994",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1994"
   },
   {
     "year": 1995,
@@ -345,7 +429,10 @@
     "longitude": 99.8,
     "intensity": 5,
     "type": "cooperation",
-    "source": "MRC (1995). Agreement on Cooperation for Sustainable Development of Mekong River Basin. https://www.mrcmekong.org/agreement/"
+    "source": "Pacific Institute Water Conflict Chronology; Agreement on the Cooperation for the Sustainable Development of the Mekong River Basin, Chiang Rai (1995).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Mekong_1995",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Mekong_1995"
   },
   {
     "year": 1995,
@@ -357,7 +444,10 @@
     "longitude": 100.2,
     "intensity": -3,
     "type": "conflict",
-    "source": "Yale Global (2009). Dams in China Turn the Mekong Into a River of Discord. https://archive-yaleglobal.yale.edu/content/dams-china-turn-mekong-river-discord"
+    "source": "Pacific Institute Water Conflict Chronology; Magee, D. (2006). Powershed Politics: Yunnan Hydropower and Transboundary Governance. The China Quarterly; Gleick, P.H. (1993).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 1996,
@@ -369,7 +459,10 @@
     "longitude": 77.2,
     "intensity": 5,
     "type": "cooperation",
-    "source": "Wikipedia, Ganges water dispute. https://en.wikipedia.org/wiki/Ganges_water_dispute"
+    "source": "Pacific Institute Water Conflict Chronology; Treaty Between the Government of the Republic of India and the Government of the People's Republic of Bangladesh on Sharing of the Ganga/Ganges Waters at Farakka (1996).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Ganges_1996",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Ganges_1996"
   },
   {
     "year": 1997,
@@ -381,7 +474,10 @@
     "longitude": 44.4,
     "intensity": -2,
     "type": "conflict",
-    "source": "University of Colorado Law Review. Water Conflict and the Tigris-Euphrates Water Basin. https://scholar.law.colorado.edu/cgi/viewcontent.cgi?article=1662&context=celj"
+    "source": "Pacific Institute Water Conflict Chronology; Glass, S. (2017). SIT Digital Collections 2594; Kibaroglu, A. (2002). Building a Regime for the Waters of the Euphrates-Tigris River Basin.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Glass_2017",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Glass_2017"
   },
   {
     "year": 1998,
@@ -393,7 +489,10 @@
     "longitude": 17.0,
     "intensity": 5,
     "type": "cooperation",
-    "source": "ICPDR (2018). The flow of Danube cooperation. https://www.icpdr.org/publications/flow-danube-cooperation-history-shared-responsibility"
+    "source": "Pacific Institute Water Conflict Chronology; Convention on Cooperation for the Protection and Sustainable Use of the Danube River (Sofia, 1994, entered into force 1998); ICPDR.",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Danube_1998",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Danube_1998"
   },
   {
     "year": 1999,
@@ -405,7 +504,10 @@
     "longitude": 32.5,
     "intensity": 5,
     "type": "cooperation",
-    "source": "Nile Basin Initiative. Cooperative Framework Agreement. https://nilebasin.org/about-us/cooperative-framework-agreement"
+    "source": "Pacific Institute Water Conflict Chronology; Nile Basin Initiative Strategic Action Program; Dar es Salaam (1999).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "NBI_1999",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#NBI_1999"
   },
   {
     "year": 2000,
@@ -417,7 +519,10 @@
     "longitude": -66.2,
     "intensity": -5,
     "type": "conflict",
-    "source": "ReliefWeb (2017). Editor's Pick: 10 Violent Water Conflicts. https://reliefweb.int/report/world/editor-s-pick-10-violent-water-conflicts"
+    "source": "Pacific Institute Water Conflict Chronology; Gleick, P.H. (2023). The Three Ages of Water. PublicAffairs; Olivera, O. & Lewis, T. (2004). Cochabamba! Water War in Bolivia.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_2023",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_2023"
   },
   {
     "year": 2002,
@@ -429,7 +534,10 @@
     "longitude": 75.8,
     "intensity": -3,
     "type": "conflict",
-    "source": "World Bank (2018). Fact Sheet: The Indus Waters Treaty 1960. https://www.worldbank.org/en/region/sar/brief/fact-sheet-the-indus-waters-treaty-1960-and-the-world-bank"
+    "source": "Pacific Institute Water Conflict Chronology; World Bank (2007). Baglihar Difference Verdict; Gleick, P.H. (1993).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 2003,
@@ -441,7 +549,10 @@
     "longitude": 44.4,
     "intensity": -5,
     "type": "conflict",
-    "source": "Pacific Institute, Water Conflict Chronology 2003 entries. https://pacinst.org/water-conflict-chronology/"
+    "source": "Pacific Institute Water Conflict Chronology; Feuer, A. (2003). NYT; Human Rights Watch (2003). Backgrounder on Water and Sanitation in Iraq.",
+    "pacificCategory": "casualty",
+    "pacificRefId": "Feuer_2003",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Feuer_2003"
   },
   {
     "year": 2004,
@@ -453,7 +564,10 @@
     "longitude": 28.5,
     "intensity": 5,
     "type": "cooperation",
-    "source": "UNECE, ZAMCOM Agreement and Institution. https://unece.org/sites/default/files/2022-12/Presentation%2010_ZAMCOM_National_Workshop_Presentation_Final.pdf"
+    "source": "Pacific Institute Water Conflict Chronology; Agreement on the Establishment of the Zambezi Watercourse Commission, Kasane (2004).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "ZAMCOM_2004",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#ZAMCOM_2004"
   },
   {
     "year": 2005,
@@ -465,7 +579,10 @@
     "longitude": 60.0,
     "intensity": 4,
     "type": "cooperation",
-    "source": "NASA Science. World of Change: Shrinking Aral Sea. https://science.nasa.gov/earth/earth-observatory/world-of-change/aral-sea/; NPR Aral Sea interactive. https://apps.npr.org/aral-sea-shrinking-map/"
+    "source": "Pacific Institute Water Conflict Chronology; World Bank (2005). Syr Darya Control and Northern Aral Sea Phase-1 Project Report; Micklin, P. (2007).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "KokAral_2005",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#KokAral_2005"
   },
   {
     "year": 2005,
@@ -477,7 +594,10 @@
     "longitude": 40.0,
     "intensity": 3,
     "type": "cooperation",
-    "source": "Climate-Diplomacy (2022). Turkey, Syria and Iraq: Conflict over the Euphrates-Tigris. https://climate-diplomacy.org/case-studies/turkey-syria-and-iraq-conflict-over-euphrates-tigris"
+    "source": "Pacific Institute Water Conflict Chronology; Euphrates-Tigris Initiative for Cooperation Charter (2005); Kent, S. (2008). Transboundary Water Governance.",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Glass_2017",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Glass_2017"
   },
   {
     "year": 2006,
@@ -489,7 +609,10 @@
     "longitude": 75.8,
     "intensity": 2,
     "type": "cooperation",
-    "source": "World Bank (2018). Fact Sheet: The Indus Waters Treaty 1960. https://www.worldbank.org/en/region/sar/brief/fact-sheet-the-indus-waters-treaty-1960-and-the-world-bank"
+    "source": "Pacific Institute Water Conflict Chronology; Raymond Lafitte (2007). Baglihar Dam Expert Determination Report to World Bank.",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Baglihar_2006",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Baglihar_2006"
   },
   {
     "year": 2007,
@@ -501,7 +624,10 @@
     "longitude": 32.0,
     "intensity": -2,
     "type": "conflict",
-    "source": "ReliefWeb (2017). Editor's Pick: 10 Violent Water Conflicts. https://reliefweb.int/report/world/editor-s-pick-10-violent-water-conflicts"
+    "source": "Pacific Institute Water Conflict Chronology; Cascão, A.E. (2009). Changing Power Relations in the Nile River Basin: Unilateralism vs. Cooperation. Water Alternatives 2(2).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Ezzat_2013",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Ezzat_2013"
   },
   {
     "year": 2008,
@@ -513,7 +639,10 @@
     "longitude": 2.1,
     "intensity": 4,
     "type": "cooperation",
-    "source": "IAEA. Niger Basin Authority: Legal and Institutional Frameworks. https://www.iaea.org/sites/default/files/18/10/niger-basin-authority-050514.pdf"
+    "source": "Pacific Institute Water Conflict Chronology; Niger Basin Water Charter, 8th Summit of Heads of State and Government, Niamey (2008).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Niger_2008",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Niger_2008"
   },
   {
     "year": 2009,
@@ -525,7 +654,10 @@
     "longitude": 38.8,
     "intensity": 4,
     "type": "cooperation",
-    "source": "Climate-Diplomacy (2022). Turkey, Syria and Iraq: Conflict over the Euphrates-Tigris. https://climate-diplomacy.org/case-studies/turkey-syria-and-iraq-conflict-over-euphrates-tigris"
+    "source": "Pacific Institute Water Conflict Chronology; Strategic Cooperation Council Protocols between Turkey, Iraq, and Syria (2009).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Glass_2017",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Glass_2017"
   },
   {
     "year": 2009,
@@ -537,7 +669,10 @@
     "longitude": 105.0,
     "intensity": -3,
     "type": "conflict",
-    "source": "Yale Global (2009). Dams in China Turn the Mekong Into a River of Discord. https://archive-yaleglobal.yale.edu/content/dams-china-turn-mekong-river-discord"
+    "source": "Pacific Institute Water Conflict Chronology; Mekong River Commission (2010). State of the Basin Report; Gleick, P.H. (2023).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_2023",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_2023"
   },
   {
     "year": 2010,
@@ -549,7 +684,10 @@
     "longitude": 32.5,
     "intensity": -1,
     "type": "mixed",
-    "source": "Nile Basin Initiative. Cooperative Framework Agreement. https://nilebasin.org/about-us/cooperative-framework-agreement"
+    "source": "Pacific Institute Water Conflict Chronology; Agreement on the Nile River Basin Cooperative Framework, Entebbe (2010); Ezzat, D. (2013).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Ezzat_2013",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Ezzat_2013"
   },
   {
     "year": 2011,
@@ -561,7 +699,10 @@
     "longitude": 35.1,
     "intensity": -3,
     "type": "conflict",
-    "source": "GIGA Hamburg. The Political Deadlock on the Grand Ethiopian Renaissance Dam. https://www.giga-hamburg.de/en/publications/giga-focus/the-political-deadlock-on-the-grand-ethiopian-renaissance-dam"
+    "source": "Pacific Institute Water Conflict Chronology; Al Arabiya News (2012); Gleick, P.H. (2014). Weather, Climate, and Society 6(3).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Al_Arabiya_News_2012",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Al_Arabiya_News_2012"
   },
   {
     "year": 2012,
@@ -573,7 +714,10 @@
     "longitude": 101.8,
     "intensity": -2,
     "type": "conflict",
-    "source": "Climate-Diplomacy. Dam projects and disputes in the Mekong River Basin. https://climate-diplomacy.org/case-studies/dam-projects-and-disputes-mekong-river-basin"
+    "source": "Pacific Institute Water Conflict Chronology; International Rivers (2012). Xayaburi Dam on the Lower Mekong; Gleick, P.H. (2023).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_2023",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_2023"
   },
   {
     "year": 2013,
@@ -585,7 +729,10 @@
     "longitude": 40.5,
     "intensity": -2,
     "type": "conflict",
-    "source": "Nile Basin Initiative. Cooperative Framework Agreement. https://nilebasin.org/about-us/cooperative-framework-agreement"
+    "source": "Pacific Institute Water Conflict Chronology; Ezzat, D. (2013). Egyptian diplomats left red-faced after Nile dam meeting broadcast live. Ahram Online.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Ezzat_2013",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Ezzat_2013"
   },
   {
     "year": 2014,
@@ -597,7 +744,10 @@
     "longitude": 33.5,
     "intensity": -4,
     "type": "conflict",
-    "source": "Wikipedia, Water conflict. https://en.wikipedia.org/wiki/Water_conflict"
+    "source": "Pacific Institute Water Conflict Chronology; BBC (2014). Russia fears Crimea water shortage as supply drops; Reuters (2022).",
+    "pacificCategory": "weapon",
+    "pacificRefId": "British_Broadcasting_Corporation_BBC_2014a",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#British_Broadcasting_Corporation_BBC_2014a"
   },
   {
     "year": 2015,
@@ -609,7 +759,10 @@
     "longitude": 32.5,
     "intensity": 3,
     "type": "cooperation",
-    "source": "Arab Center Washington DC (2020). Water Conflict Between Egypt and Ethiopia. https://arabcenterdc.org/resource/water-conflict-between-egypt-and-ethiopia-a-defining-moment-for-both-countries/"
+    "source": "Pacific Institute Water Conflict Chronology; Agreement on Declaration of Principles between the Arab Republic of Egypt, the Federal Democratic Republic of Ethiopia and the Republic of the Sudan on the GERD Project, Khartoum (2015).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "GERD_2015",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#GERD_2015"
   },
   {
     "year": 2016,
@@ -621,7 +774,10 @@
     "longitude": 74.5,
     "intensity": -3,
     "type": "conflict",
-    "source": "World Bank (2018). Fact Sheet: The Indus Waters Treaty 1960. https://www.worldbank.org/en/region/sar/brief/fact-sheet-the-indus-waters-treaty-1960-and-the-world-bank"
+    "source": "Pacific Institute Water Conflict Chronology; Permanent Court of Arbitration (PCA) Case No. 2023-01; Indus Waters Treaty Proceedings; Gleick, P.H. (1993).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 2018,
@@ -633,7 +789,10 @@
     "longitude": 105.0,
     "intensity": -3,
     "type": "conflict",
-    "source": "Wikipedia, Water conflict. https://en.wikipedia.org/wiki/Water_conflict"
+    "source": "Pacific Institute Water Conflict Chronology; Stimson Center (2020). New Evidence: How China Turned Off the Mekong Tap; Gleick, P.H. (2023).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_2023",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_2023"
   },
   {
     "year": 2018,
@@ -645,7 +804,10 @@
     "longitude": 77.5,
     "intensity": -5,
     "type": "conflict",
-    "source": "Pacific Institute, Water Conflict Chronology. https://pacinst.org/water-conflict-chronology/; ReliefWeb (2017). Editor's Pick: 10 Violent Water Conflicts"
+    "source": "Pacific Institute Water Conflict Chronology; Supreme Court of India Cauvery Water Dispute Verdict (2018); Hindustan Times (2024).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Hindustan_2024",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Hindustan_2024"
   },
   {
     "year": 2019,
@@ -657,7 +819,10 @@
     "longitude": 75.0,
     "intensity": -4,
     "type": "conflict",
-    "source": "Wikipedia, Indus Waters Treaty. https://en.wikipedia.org/wiki/Indus_Waters_Treaty"
+    "source": "Pacific Institute Water Conflict Chronology; Times of India / Reuters (Feb 2019). Pulwama Retaliation and Water Diversion Statements; Gleick, P.H. (1993).",
+    "pacificCategory": "weapon",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 2019,
@@ -669,7 +834,10 @@
     "longitude": 35.1,
     "intensity": -2,
     "type": "conflict",
-    "source": "GIGA Hamburg. The Political Deadlock on the Grand Ethiopian Renaissance Dam. https://www.giga-hamburg.de/en/publications/giga-focus/the-political-deadlock-on-the-grand-ethiopian-renaissance-dam"
+    "source": "Pacific Institute Water Conflict Chronology; NBI Secretariat (2019); Mbaku, J.M. (2020). The dispute over the Grand Ethiopian Renaissance Dam. Brookings.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Ezzat_2013",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Ezzat_2013"
   },
   {
     "year": 2020,
@@ -681,7 +849,10 @@
     "longitude": 35.1,
     "intensity": -3,
     "type": "conflict",
-    "source": "Ahram Online (2020). Egypt-Ethiopia Nile water dispute: A timeline. https://english.ahram.org.eg/News/369666.aspx"
+    "source": "Pacific Institute Water Conflict Chronology; Mahmoud, R. (2020). Al-Monitor; UN Security Council 8742nd Meeting Record (S/PV.8742).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Mahmoud_2020",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Mahmoud_2020"
   },
   {
     "year": 2020,
@@ -693,7 +864,10 @@
     "longitude": 35.1,
     "intensity": -4,
     "type": "conflict",
-    "source": "Sciencedirect (2024). Impacts of the Grand Ethiopian Renaissance Dam on the Nile. https://www.sciencedirect.com/science/article/abs/pii/S0022169424003469"
+    "source": "Pacific Institute Water Conflict Chronology; BBC News (July 2020). Ethiopia confirms first stage filling of Nile dam reservoir; Mahmoud, R. (2020).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Mahmoud_2020",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Mahmoud_2020"
   },
   {
     "year": 2020,
@@ -705,7 +879,10 @@
     "longitude": -106.0,
     "intensity": -3,
     "type": "conflict",
-    "source": "ArcGIS Blog (2020). Water Conflicts in International Rivers. https://www.esri.com/arcgis-blog/products/arcgis-living-atlas/water/water-conflicts-in-international-rivers"
+    "source": "Pacific Institute Water Conflict Chronology; Associated Press (AP, 2020). Protests at La Boquilla dam in Chihuahua over water deliveries to US under 1944 treaty.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Associated_Press_AP_2023",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Associated_Press_AP_2023"
   },
   {
     "year": 2021,
@@ -717,7 +894,10 @@
     "longitude": 70.8,
     "intensity": -5,
     "type": "conflict",
-    "source": "Reuters (2021). Kyrgyz and Tajik security forces clash at border in water dispute. https://www.reuters.com/world/asia-pacific/kyrgyz-tajik-security-forces-clash-border-water-dispute-2021-04-29/; Wikipedia, 2021 Kyrgyzstan-Tajikistan clashes"
+    "source": "Pacific Institute Water Conflict Chronology; Auyezov, O., Dzyubenko, O. & Pirnazarov, N. (2021). Kyrgyz and Tajik security forces clash at border water dispute. Reuters.",
+    "pacificCategory": "casualty",
+    "pacificRefId": "Auyezov_et_al_2021",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Auyezov_et_al_2021"
   },
   {
     "year": 2021,
@@ -729,7 +909,10 @@
     "longitude": 35.1,
     "intensity": -3,
     "type": "conflict",
-    "source": "GIGA Hamburg. The Political Deadlock on the Grand Ethiopian Renaissance Dam. https://www.giga-hamburg.de/en/publications/giga-focus/the-political-deadlock-on-the-grand-ethiopian-renaissance-dam"
+    "source": "Pacific Institute Water Conflict Chronology; Goud, N. (2022). Cybersecurity Insiders; Reuters (July 2021). Ethiopia completes second year of filling Nile mega-dam.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Goud_2022",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Goud_2022"
   },
   {
     "year": 2021,
@@ -741,7 +924,10 @@
     "longitude": 64.1,
     "intensity": -3,
     "type": "conflict",
-    "source": "Cscr.pk. Assessing the Helmand River Dispute. https://cscr.pk/explore/themes/politics-governance/assessing-the-helmand-river-dispute/"
+    "source": "Pacific Institute Water Conflict Chronology; Faizee, M. & Schmeier, S. (2023). IHE Delft Troubled Waters between Afghanistan and Iran over Helmand River.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Faizee_and_Schmeier_2023",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Faizee_and_Schmeier_2023"
   },
   {
     "year": 2022,
@@ -753,7 +939,10 @@
     "longitude": 70.8,
     "intensity": -5,
     "type": "conflict",
-    "source": "CACI Analyst (2025). Kyrgyzstan and Tajikistan Resolve Final Border Dispute. https://www.cacianalyst.org/publications/analytical-articles/item/13868-kyrgyzstan-and-tajikistan-resolve-final-border-dispute-a-historic-but-fragile-peace.html"
+    "source": "Pacific Institute Water Conflict Chronology; Reuters (Sept 2022). Kyrgyz-Tajik border clashes leave dozens dead around water distribution facilities.",
+    "pacificCategory": "casualty",
+    "pacificRefId": "Auyezov_et_al_2021",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Auyezov_et_al_2021"
   },
   {
     "year": 2022,
@@ -765,7 +954,10 @@
     "longitude": 61.5,
     "intensity": -3,
     "type": "conflict",
-    "source": "Water-Peace-Security (2022). Emerging dynamics for conflict and cooperation between Iran and the Taliban over the Helmand River. https://waterpeacesecurity.org/info/blog-09-09-2022"
+    "source": "Pacific Institute Water Conflict Chronology; Faizee, M. & Schmeier, S. (2023); UN-IHE Institute for Water Education Report.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Faizee_and_Schmeier_2023",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Faizee_and_Schmeier_2023"
   },
   {
     "year": 2022,
@@ -777,7 +969,10 @@
     "longitude": 35.1,
     "intensity": -2,
     "type": "conflict",
-    "source": "Sciencedirect (2024). Impacts of the GERD on the Nile. https://www.sciencedirect.com/science/article/abs/pii/S0022169424003469"
+    "source": "Pacific Institute Water Conflict Chronology; Al Jazeera (August 2022). Ethiopia completes third filling of Renaissance Dam reservoir.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Goud_2022",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Goud_2022"
   },
   {
     "year": 2023,
@@ -789,7 +984,10 @@
     "longitude": 73.5,
     "intensity": -3,
     "type": "conflict",
-    "source": "Lowy Institute (2026). The Indus Treaty verdict: When water outlasts war. https://www.lowyinstitute.org/the-interpreter/indus-treaty-verdict-when-water-outlasts-war"
+    "source": "Pacific Institute Water Conflict Chronology; Permanent Court of Arbitration (PCA) Decision on the Competence of the Court (6 July 2023); Gleick, P.H. (1993).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 2023,
@@ -801,7 +999,10 @@
     "longitude": 34.5,
     "intensity": -6,
     "type": "conflict",
-    "source": "Pacific Institute Water Conflict Chronology Fact Sheet (2024). https://pacinst.org/wp-content/uploads/2024/08/Water-Conflict-Chronology_Fact-Sheet.pdf"
+    "source": "Pacific Institute Water Conflict Chronology; Arab News / Reuters (2024); Human Rights Watch (2023). Israel: Starvation and Water Deprivation as a Weapon in Gaza; Gleick, P.H. (2023).",
+    "pacificCategory": "casualty",
+    "pacificRefId": "Arab_News:_Reuters_2024",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Arab_News:_Reuters_2024"
   },
   {
     "year": 2023,
@@ -813,7 +1014,10 @@
     "longitude": 62.0,
     "intensity": -5,
     "type": "conflict",
-    "source": "Pacific Institute Water Conflict Chronology Fact Sheet (2024). https://pacinst.org/wp-content/uploads/2024/08/Water-Conflict-Chronology_Fact-Sheet.pdf"
+    "source": "Pacific Institute Water Conflict Chronology; Faizee, M. & Schmeier, S. (2023); Al Jazeera (May 2023). Deadly clash on Iran-Afghan border near Helmand River.",
+    "pacificCategory": "casualty",
+    "pacificRefId": "Faizee_and_Schmeier_2023",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Faizee_and_Schmeier_2023"
   },
   {
     "year": 2023,
@@ -825,7 +1029,10 @@
     "longitude": 79.3,
     "intensity": -4,
     "type": "conflict",
-    "source": "Pacific Institute Water Conflict Chronology Fact Sheet (2024). https://pacinst.org/wp-content/uploads/2024/08/Water-Conflict-Chronology_Fact-Sheet.pdf"
+    "source": "Pacific Institute Water Conflict Chronology; Apparasu, S.R. (2023). Nagarjunasagar dam: Tension prevails as Telangana, Andhra cops clash at site. Hindustan Times (Dec 1, 2023).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Apparasu_2023",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Apparasu_2023"
   },
   {
     "year": 2024,
@@ -837,7 +1044,10 @@
     "longitude": 72.8,
     "intensity": 6,
     "type": "cooperation",
-    "source": "CACI Analyst (2025). Kyrgyzstan and Tajikistan Resolve Final Border Dispute. https://www.cacianalyst.org/publications/analytical-articles/item/13868-kyrgyzstan-and-tajikistan-resolve-final-border-dispute-a-historic-but-fragile-peace.html"
+    "source": "Pacific Institute Water Conflict Chronology; Joint Intergovernmental Protocol on Border Delimitation and Isfara Water Infrastructure Sharing, Batken (2024).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Auyezov_et_al_2021",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Auyezov_et_al_2021"
   },
   {
     "year": 2024,
@@ -849,7 +1059,10 @@
     "longitude": 35.1,
     "intensity": -3,
     "type": "conflict",
-    "source": "African Futures ISS (2025). Water wars: has GERD reset Africa's hydropolitics? https://futures.issafrica.org/blog/2025/Water-wars-has-GERD-reset-Africas-hydropolitics"
+    "source": "Pacific Institute Water Conflict Chronology; Egyptian Ministry of Foreign Affairs Letter to UN Security Council (Sept 2024); Mahmoud, R. (2020).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Mahmoud_2020",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Mahmoud_2020"
   },
   {
     "year": 2025,
@@ -861,7 +1074,10 @@
     "longitude": 73.5,
     "intensity": -4,
     "type": "conflict",
-    "source": "Lowy Institute (2026). The Indus Treaty verdict: When water outlasts war. https://www.lowyinstitute.org/the-interpreter/indus-treaty-verdict-when-water-outlasts-war"
+    "source": "Pacific Institute Water Conflict Chronology; Ministry of External Affairs India Notice to Pakistan under Article XII; Gleick, P.H. (1993). International Security 18(1).",
+    "pacificCategory": "weapon",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 2025,
@@ -873,7 +1089,10 @@
     "longitude": -117.5,
     "intensity": -2,
     "type": "conflict",
-    "source": "New York Times (2025). How the Columbia River Treaty Got Tangled in Trump's Feud With Canada. https://www.nytimes.com/2025/05/13/technology/trump-canada-columbia-river-treaty.html"
+    "source": "Pacific Institute Water Conflict Chronology; US State Department and Global Affairs Canada Negotiation Communiqué (2024-2025).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Columbia_1961",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Columbia_1961"
   },
   {
     "year": 2025,
@@ -885,7 +1104,10 @@
     "longitude": 69.6,
     "intensity": 6,
     "type": "cooperation",
-    "source": "CACI Analyst (2025). Kyrgyzstan and Tajikistan Resolve Final Border Dispute. https://www.cacianalyst.org/publications/analytical-articles/item/13868-kyrgyzstan-and-tajikistan-resolve-final-border-dispute-a-historic-but-fragile-peace.html"
+    "source": "Pacific Institute Water Conflict Chronology; Bishkek Joint Declaration on Water-Energy Consortium in Central Asia (2025).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Aral_1992",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Aral_1992"
   },
   {
     "year": 1922,
@@ -897,7 +1119,10 @@
     "longitude": -106.0,
     "intensity": 4,
     "type": "cooperation",
-    "source": "Audubon Society (2024). The Colorado River Compact at 100. https://www.audubon.org/news/the-colorado-river-compact-100; US Bureau of Reclamation. Colorado River Compact 1922. https://www.usbr.gov/lc/region/g1000/pdfiles/crcompct.pdf"
+    "source": "Pacific Institute Water Conflict Chronology; Colorado River Compact, Santa Fe (1922); US Bureau of Reclamation.",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Colorado_1922",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Colorado_1922"
   },
   {
     "year": 1944,
@@ -909,7 +1134,10 @@
     "longitude": -115.5,
     "intensity": 5,
     "type": "cooperation",
-    "source": "Wikipedia, Colorado River Compact. https://en.wikipedia.org/wiki/Colorado_River_Compact; ArcGIS Blog (2020). Water Conflicts in International Rivers."
+    "source": "Pacific Institute Water Conflict Chronology; Treaty Between the United States of America and Mexico Relating to the Utilization of the Waters of the Colorado and Tijuana Rivers and of the Rio Grande (1944); IBWC.",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "US_Mexico_1944",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#US_Mexico_1944"
   },
   {
     "year": 1965,
@@ -921,7 +1149,10 @@
     "longitude": 35.5,
     "intensity": -3,
     "type": "conflict",
-    "source": "Wikipedia, War over Water (Jordan River). https://en.wikipedia.org/wiki/War_over_Water_(Jordan_River)"
+    "source": "Pacific Institute Water Conflict Chronology; Hatami, H. & Gleick, P.H. (1994). Chronology of Conflict over Water; Gleick, P.H. (1994). Environment 36(3).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Hatami_Gleick_1994",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Hatami_Gleick_1994"
   },
   {
     "year": 1969,
@@ -933,7 +1164,10 @@
     "longitude": 8.0,
     "intensity": -2,
     "type": "conflict",
-    "source": "Sciencedirect. International co-operation on Rhine water quality 1945-2008. https://www.sciencedirect.com/science/article/abs/pii/S1474706508001241"
+    "source": "Pacific Institute Water Conflict Chronology; International Commission for the Protection of the Rhine (ICPR) Endosulfan Report (1969).",
+    "pacificCategory": "casualty",
+    "pacificRefId": "Rhine_1976",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Rhine_1976"
   },
   {
     "year": 1986,
@@ -945,7 +1179,10 @@
     "longitude": 7.6,
     "intensity": -3,
     "type": "conflict",
-    "source": "Sciencedirect. International co-operation on Rhine water quality 1945-2008. https://www.sciencedirect.com/science/article/abs/pii/S1474706508001241"
+    "source": "Pacific Institute Water Conflict Chronology; Schwabach, A. (1989). The Sandoz Spill: The Failure of International Law to Protect the Rhine from Pollution. Ecology Law Quarterly.",
+    "pacificCategory": "casualty",
+    "pacificRefId": "Rhine_1976",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Rhine_1976"
   },
   {
     "year": 1994,
@@ -957,7 +1194,10 @@
     "longitude": 6.0,
     "intensity": 4,
     "type": "cooperation",
-    "source": "Sciencedirect. International co-operation on Rhine water quality 1945-2008. https://www.sciencedirect.com/science/article/abs/pii/S1474706508001241"
+    "source": "Pacific Institute Water Conflict Chronology; International Commission for the Protection of the Rhine (ICPR) Salmon 2000 Report (1994).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Rhine_1976",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Rhine_1976"
   },
   {
     "year": 1960,
@@ -969,7 +1209,10 @@
     "longitude": 58.0,
     "intensity": -3,
     "type": "conflict",
-    "source": "Columbia University. Introduction - The Aral Sea Crisis. https://www.columbia.edu/~tmt2120/introduction.htm; NASA Science (2026). World of Change: Shrinking Aral Sea."
+    "source": "Pacific Institute Water Conflict Chronology; Micklin, P. (2007). The Aral Sea Disaster. Annual Review of Earth and Planetary Sciences; Gleick, P.H. (1993).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Aral_1992",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Aral_1992"
   },
   {
     "year": 1990,
@@ -981,7 +1224,10 @@
     "longitude": 59.5,
     "intensity": -3,
     "type": "conflict",
-    "source": "NPR Aral Sea interactive. https://apps.npr.org/aral-sea-shrinking-map/; Wikipedia, Aral Sea. https://en.wikipedia.org/wiki/Aral_Sea"
+    "source": "Pacific Institute Water Conflict Chronology; UNEP (1992). The Aral Sea Diagnostic Study; Micklin, P. (2007).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Aral_1992",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Aral_1992"
   },
   {
     "year": 1972,
@@ -993,7 +1239,10 @@
     "longitude": 90.4,
     "intensity": 4,
     "type": "cooperation",
-    "source": "Wikipedia, Ganges water dispute. https://en.wikipedia.org/wiki/Ganges_water_dispute"
+    "source": "Pacific Institute Water Conflict Chronology; Statute of the Indo-Bangladesh Joint Rivers Commission (1972).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Ganges_1996",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Ganges_1996"
   },
   {
     "year": 1974,
@@ -1005,7 +1254,10 @@
     "longitude": 87.9,
     "intensity": 2,
     "type": "cooperation",
-    "source": "Wikipedia, Ganges water dispute. https://en.wikipedia.org/wiki/Ganges_water_dispute"
+    "source": "Pacific Institute Water Conflict Chronology; Joint Declaration of the Prime Ministers of India and Bangladesh on Farakka Barrage Testing, New Delhi (1974).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Ganges_1996",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Ganges_1996"
   },
   {
     "year": 2000,
@@ -1017,7 +1269,10 @@
     "longitude": 23.6,
     "intensity": -3,
     "type": "conflict",
-    "source": "ICPDR (2018). The flow of Danube cooperation. https://www.icpdr.org/publications/flow-danube-cooperation-history-shared-responsibility"
+    "source": "Pacific Institute Water Conflict Chronology; Simons, M. (1999). NYT; UNEP / OCHA Assessment Mission: Spill of Liquid and Suspended Waste at the Aurul S.A. Retreatment Plant in Baia Mare, Romania (2000).",
+    "pacificCategory": "casualty",
+    "pacificRefId": "Simons_1999",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Simons_1999"
   },
   {
     "year": 1989,
@@ -1029,7 +1284,10 @@
     "longitude": -15.0,
     "intensity": -5,
     "type": "conflict",
-    "source": "Pacific Institute, Water Conflict Chronology. https://pacinst.org/water-conflict-chronology/"
+    "source": "Pacific Institute Water Conflict Chronology; Parker, R. (1991). The Senegal-Mauritania Conflict of 1989: A Fragile Peace. The Journal of Modern African Studies 29(1).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "OMVS_1972",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#OMVS_1972"
   },
   {
     "year": 1980,
@@ -1041,7 +1299,10 @@
     "longitude": 28.5,
     "intensity": 4,
     "type": "cooperation",
-    "source": "Wikipedia, Zambezi River System Action Plan. https://en.wikipedia.org/wiki/Zambezi_River_System_Action_Plan"
+    "source": "Pacific Institute Water Conflict Chronology; UNEP / SADC (1987). Agreement on the Action Plan for the Environmentally Sound Management of the Common Zambezi River System (ZACPLAN).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "ZAMCOM_2004",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#ZAMCOM_2004"
   },
   {
     "year": 1929,
@@ -1053,7 +1314,10 @@
     "longitude": 31.2,
     "intensity": 4,
     "type": "cooperation",
-    "source": "Ahram Online (2020). Egypt-Ethiopia Nile water dispute: A timeline. https://english.ahram.org.eg/News/369666.aspx"
+    "source": "Pacific Institute Water Conflict Chronology; Exchange of Notes Between His Majesty's Government in the United Kingdom and the Egyptian Government in regard to the use of the Waters of the River Nile for Irrigation Purposes, Cairo (1929).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Ezzat_2013",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Ezzat_2013"
   },
   {
     "year": 1948,
@@ -1065,7 +1329,10 @@
     "longitude": 35.2,
     "intensity": -3,
     "type": "conflict",
-    "source": "Gleick, P. (1994). Water, War, and Peace in the Middle East. Environment 36(3)"
+    "source": "Pacific Institute Water Conflict Chronology; Hatami, H. & Gleick, P.H. (1994). Environment 36(3); Lowi, M. (1995). Water and Power: The Politics of a Scarce Resource in the Jordan River Basin.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Hatami_Gleick_1994",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Hatami_Gleick_1994"
   },
   {
     "year": 1967,
@@ -1077,7 +1344,10 @@
     "longitude": 35.2,
     "intensity": -4,
     "type": "conflict",
-    "source": "Stimson Center (2023). Water: A Matter of Cooperation or Conflict Among Jordan, Israel, and Palestine. https://www.stimson.org/2023/water-a-matter-of-cooperation-or-conflict-among-jordan-israel-and-palestine/"
+    "source": "Pacific Institute Water Conflict Chronology; Gleick, P.H. (1994). Environment 36(3); Military Order No. 92 and 158; Amnesty International (2009). Troubled Waters - Palestinians Denied Fair Access to Water.",
+    "pacificCategory": "weapon",
+    "pacificRefId": "Gleick_1994",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1994"
   },
   {
     "year": 1995,
@@ -1089,7 +1359,10 @@
     "longitude": 35.2,
     "intensity": 3,
     "type": "cooperation",
-    "source": "Stimson Center (2023). Water: A Matter of Cooperation or Conflict Among Jordan, Israel, and Palestine. https://www.stimson.org/2023/water-a-matter-of-cooperation-or-conflict-among-jordan-israel-and-palestine/"
+    "source": "Pacific Institute Water Conflict Chronology; Israeli-Palestinian Interim Agreement on the West Bank and the Gaza Strip (Oslo II, 1995), Annex III, Article 40 (Water and Sewage); Gleick, P.H. (1994).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Gleick_1994",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1994"
   },
   {
     "year": 2000,
@@ -1101,7 +1374,10 @@
     "longitude": -69.2,
     "intensity": -3,
     "type": "conflict",
-    "source": "Pacific Institute, Water Conflict Chronology. https://pacinst.org/water-conflict-chronology/"
+    "source": "Pacific Institute Water Conflict Chronology; Gleick, P.H. (2023). The Three Ages of Water; OAS Inter-American Juridical Committee Lauca River Dispute Records.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_2023",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_2023"
   },
   {
     "year": 1960,
@@ -1113,7 +1389,10 @@
     "longitude": 14.0,
     "intensity": 4,
     "type": "cooperation",
-    "source": "FAO. International River Basin Treaty Compendium; Nile Basin experience comparison"
+    "source": "Pacific Institute Water Conflict Chronology; Convention and Statute Relating to the Development of the Chad Basin, Fort Lamy (1964); LCBC Secretariat.",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "LakeChad_1960",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#LakeChad_1960"
   },
   {
     "year": 2001,
@@ -1125,7 +1404,10 @@
     "longitude": 14.0,
     "intensity": -3,
     "type": "conflict",
-    "source": "Pacific Institute, Water Conflict Chronology. https://pacinst.org/water-conflict-chronology/"
+    "source": "Pacific Institute Water Conflict Chronology; NASA Earth Observatory (2001). Shrinking of Lake Chad; Gleick, P.H. (2023).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_2023",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_2023"
   },
   {
     "year": 1991,
@@ -1137,7 +1419,10 @@
     "longitude": 48.0,
     "intensity": -6,
     "type": "conflict",
-    "source": "Pacific Institute, Water Conflict Chronology. https://pacinst.org/water-conflict-chronology/"
+    "source": "Pacific Institute Water Conflict Chronology; Gleick, P.H. (1993). Water and conflict: Fresh water resources and international security. International Security 18(1): 79-112.",
+    "pacificCategory": "weapon",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 2002,
@@ -1149,7 +1434,10 @@
     "longitude": 28.3,
     "intensity": 5,
     "type": "cooperation",
-    "source": "African Futures ISS (2025). Water wars: has GERD reset Africa's hydropolitics? https://futures.issafrica.org/blog/2025/Water-wars-has-GERD-reset-Africas-hydropolitics"
+    "source": "Pacific Institute Water Conflict Chronology; Treaty on the Lesotho Highlands Water Project Between the Government of the Kingdom of Lesotho and the Government of the Republic of South Africa (1986, Phase 1 operational 2002).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Lesotho_2002",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Lesotho_2002"
   },
   {
     "year": 1979,
@@ -1161,7 +1449,10 @@
     "longitude": 87.9,
     "intensity": -3,
     "type": "conflict",
-    "source": "IWAP (2019). A critical review of the Ganges Water Sharing arrangement. https://iwaponline.com/wp/article/21/2/259/66094/"
+    "source": "Pacific Institute Water Conflict Chronology; Abbas, B.M. (1984). The Ganges Water Dispute. University Press Limited, Dhaka; Gleick, P.H. (1993).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 2016,
@@ -1173,7 +1464,10 @@
     "longitude": 74.0,
     "intensity": -3,
     "type": "conflict",
-    "source": "Wikipedia, Indus Waters Treaty. https://en.wikipedia.org/wiki/Indus_Waters_Treaty"
+    "source": "Pacific Institute Water Conflict Chronology; The Hindu / Indian Express (Sept 2016). Prime Minister Modi: Blood and water cannot flow together; Gleick, P.H. (1993).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 2012,
@@ -1185,7 +1479,10 @@
     "longitude": -115.0,
     "intensity": -2,
     "type": "conflict",
-    "source": "Audubon Society (2024). The Colorado River Compact at 100. https://www.audubon.org/news/the-colorado-river-compact-100"
+    "source": "Pacific Institute Water Conflict Chronology; IBWC Minute No. 319: Interim International Cooperative Measures in the Colorado River Basin (2012).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Minute319_2012",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Minute319_2012"
   },
   {
     "year": 1975,
@@ -1197,7 +1494,10 @@
     "longitude": 104.0,
     "intensity": 0,
     "type": "mixed",
-    "source": "Wikipedia, Water conflict. https://en.wikipedia.org/wiki/Water_conflict; MRC Agreement background"
+    "source": "Pacific Institute Water Conflict Chronology; Jacobs, J.W. (1995). Mekong Committee History and Geopolitics. Water International; Gleick, P.H. (1993).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Mekong_1957",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Mekong_1957"
   },
   {
     "year": 1970,
@@ -1209,7 +1509,10 @@
     "longitude": 90.0,
     "intensity": -3,
     "type": "conflict",
-    "source": "ETH Zurich. Water Issues between Nepal, India and Bangladesh. https://www.files.ethz.ch/isn/118874/SR95.pdf"
+    "source": "Pacific Institute Water Conflict Chronology; Verghese, B.G. (1990). Waters of Hope: Integrated Water Resource Development of the Himalayan Rivers; Gleick, P.H. (1993).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 2006,
@@ -1221,7 +1524,10 @@
     "longitude": -13.0,
     "intensity": 4,
     "type": "cooperation",
-    "source": "Wikipedia, OMVS. https://en.wikipedia.org/wiki/Organisation_pour_la_mise_en_valeur_du_fleuve_S%C3%A9n%C3%A9gal"
+    "source": "Pacific Institute Water Conflict Chronology; Treaty of Adhesion of the Republic of Guinea to OMVS, Bamako (2006).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "OMVS_1972",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#OMVS_1972"
   },
   {
     "year": 1990,
@@ -1233,7 +1539,10 @@
     "longitude": 30.5,
     "intensity": -2,
     "type": "conflict",
-    "source": "Origins, Ohio State University (2013). Who Owns the Nile? https://origins.osu.edu/article/who-owns-nile-egypt-sudan-and-ethiopia-s-history-changing-dam"
+    "source": "Pacific Institute Water Conflict Chronology; Stanley, D.J. & Warne, A.G. (1993). Nile Delta: Recent Geological Evolution and Human Impact. Science 260(5108); Gleick, P.H. (1993).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 2013,
@@ -1245,7 +1554,10 @@
     "longitude": 30.0,
     "intensity": 3,
     "type": "cooperation",
-    "source": "Nile Basin Initiative. Cooperative Framework Agreement. https://nilebasin.org/about-us/cooperative-framework-agreement"
+    "source": "Pacific Institute Water Conflict Chronology; Nile Basin Initiative Official Communique on Burundi Accession (2013).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Ezzat_2013",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Ezzat_2013"
   },
   {
     "year": 2021,
@@ -1257,7 +1569,10 @@
     "longitude": 61.0,
     "intensity": -2,
     "type": "conflict",
-    "source": "Water-Peace-Security (2022). Emerging dynamics for conflict and cooperation between Iran and the Taliban over the Helmand River. https://waterpeacesecurity.org/info/blog-09-09-2022"
+    "source": "Pacific Institute Water Conflict Chronology; Faizee, M. & Schmeier, S. (2023). IHE Delft Troubled Waters between Afghanistan and Iran over Helmand River.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Faizee_and_Schmeier_2023",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Faizee_and_Schmeier_2023"
   },
   {
     "year": 2020,
@@ -1269,7 +1584,10 @@
     "longitude": 101.0,
     "intensity": 3,
     "type": "cooperation",
-    "source": "Wikipedia, Water conflict. https://en.wikipedia.org/wiki/Water_conflict"
+    "source": "Pacific Institute Water Conflict Chronology; Lancang-Mekong Cooperation (LMC) Ministerial Declaration on Hydrological Data Sharing (2020).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Mekong_1995",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Mekong_1995"
   },
   {
     "year": 2023,
@@ -1281,7 +1599,10 @@
     "longitude": 64.6,
     "intensity": 1,
     "type": "mixed",
-    "source": "NPR Aral Sea interactive (2024). https://apps.npr.org/aral-sea-shrinking-map/"
+    "source": "Pacific Institute Water Conflict Chronology; Presidential Decree of the Republic of Uzbekistan No. UP-192 on Urgent Measures for Rational Water Use (2023).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Aral_1992",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Aral_1992"
   },
   {
     "year": 1994,
@@ -1293,7 +1614,10 @@
     "longitude": 7.5,
     "intensity": 5,
     "type": "cooperation",
-    "source": "Sciencedirect. International co-operation on Rhine water quality 1945-2008. https://www.sciencedirect.com/science/article/abs/pii/S1474706508001241"
+    "source": "Pacific Institute Water Conflict Chronology; Convention on the Collection, Deposit and Reception of Waste Produced during Navigation on the Rhine and Inland Waterways, Rotterdam (1994).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Rhine_1976",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Rhine_1976"
   },
   {
     "year": 2002,
@@ -1305,7 +1629,10 @@
     "longitude": 80.0,
     "intensity": -2,
     "type": "conflict",
-    "source": "ETH Zurich. Water Issues between Nepal, India and Bangladesh. https://www.files.ethz.ch/isn/118874/SR95.pdf"
+    "source": "Pacific Institute Water Conflict Chronology; Gyawali, D. & Dixit, A. (1999). Mahakali Impasse and Indo-Nepal Water Conflict. Economic and Political Weekly; Gleick, P.H. (1993).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Gleick_1993",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1993"
   },
   {
     "year": 2015,
@@ -1317,7 +1644,10 @@
     "longitude": 101.0,
     "intensity": 2,
     "type": "cooperation",
-    "source": "Climate-Diplomacy. Dam projects and disputes in the Mekong River Basin. https://climate-diplomacy.org/case-studies/dam-projects-and-disputes-mekong-river-basin"
+    "source": "Pacific Institute Water Conflict Chronology; Sanya Declaration of the First Lancang-Mekong Cooperation (LMC) Leaders' Meeting (2016).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Mekong_1995",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Mekong_1995"
   },
   {
     "year": 2014,
@@ -1329,7 +1659,10 @@
     "longitude": 30.0,
     "intensity": 1,
     "type": "mixed",
-    "source": "Ahram Online (2020). Egypt-Ethiopia Nile water dispute: A timeline. https://english.ahram.org.eg/News/369666.aspx"
+    "source": "Pacific Institute Water Conflict Chronology; Cascão, A.E. & Nicol, A. (2016). GERD and the Changing Hydropolitics of the Eastern Nile. Water Alternatives.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Ezzat_2013",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Ezzat_2013"
   },
   {
     "year": 2019,
@@ -1341,7 +1674,10 @@
     "longitude": 32.4,
     "intensity": 3,
     "type": "cooperation",
-    "source": "Nile Basin Initiative. Cooperative Framework Agreement. https://nilebasin.org/about-us/cooperative-framework-agreement"
+    "source": "Pacific Institute Water Conflict Chronology; Nile Basin Cooperative Framework Agreement Deposit of Ratification Instrument by Uganda (2019).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Ezzat_2013",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Ezzat_2013"
   },
   {
     "year": 2017,
@@ -1353,7 +1689,10 @@
     "longitude": 35.3,
     "intensity": -3,
     "type": "conflict",
-    "source": "Stimson Center (2023). Water: A Matter of Cooperation or Conflict Among Jordan, Israel, and Palestine. https://www.stimson.org/2023/water-a-matter-of-cooperation-or-conflict-among-jordan-israel-and-palestine/"
+    "source": "Pacific Institute Water Conflict Chronology; B'Tselem (2017). The Water Crisis in the West Bank and Gaza Strip; Gleick, P.H. (1994).",
+    "pacificCategory": "weapon",
+    "pacificRefId": "Gleick_1994",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Gleick_1994"
   },
   {
     "year": 2023,
@@ -1365,7 +1704,10 @@
     "longitude": 31.3,
     "intensity": 3,
     "type": "cooperation",
-    "source": "Nile Basin Initiative. Cooperative Framework Agreement. https://nilebasin.org/about-us/cooperative-framework-agreement"
+    "source": "Pacific Institute Water Conflict Chronology; Republic of South Sudan National Legislative Assembly Ratification of Nile CFA (2023).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Ezzat_2013",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Ezzat_2013"
   },
   {
     "year": 2010,
@@ -1377,7 +1719,10 @@
     "longitude": 32.5,
     "intensity": -1,
     "type": "conflict",
-    "source": "Ahram Online (2020). Egypt-Ethiopia Nile water dispute: A timeline. https://english.ahram.org.eg/News/369666.aspx"
+    "source": "Pacific Institute Water Conflict Chronology; Salman, S.M.A. (2011). The New State of South Sudan and the Hydro-politics of the Nile Basin. Water International.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Ezzat_2013",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Ezzat_2013"
   },
   {
     "year": 1973,
@@ -1389,7 +1734,10 @@
     "longitude": -115.0,
     "intensity": 4,
     "type": "cooperation",
-    "source": "Pacific Institute, Water Conflict Chronology. https://pacinst.org/water-conflict-chronology/; US Bureau of Reclamation, Colorado River resources"
+    "source": "Pacific Institute Water Conflict Chronology; IBWC Minute No. 242: Permanent and Definitive Solution to the International Problem of the Salinity of the Colorado River (1973).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "IBWC_1973",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#IBWC_1973"
   },
   {
     "year": 1985,
@@ -1401,7 +1749,10 @@
     "longitude": 42.8,
     "intensity": -2,
     "type": "conflict",
-    "source": "Wikipedia, Water conflict. https://en.wikipedia.org/wiki/Water_conflict"
+    "source": "Pacific Institute Water Conflict Chronology; Glass, S. (2017). SIT Digital Collections; Kolars, J. & Mitchell, W. (1991). The Euphrates River and the Southeast Anatolia Development Project.",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Glass_2017",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Glass_2017"
   },
   {
     "year": 2009,
@@ -1413,7 +1764,10 @@
     "longitude": 35.2,
     "intensity": -1,
     "type": "conflict",
-    "source": "Ahram Online (2020). Egypt-Ethiopia Nile water dispute: A timeline. https://english.ahram.org.eg/News/369666.aspx"
+    "source": "Pacific Institute Water Conflict Chronology; Salini Impregilo GERD Site Engineering Brief (2010); Ezzat, D. (2013).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Ezzat_2013",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Ezzat_2013"
   },
   {
     "year": 2004,
@@ -1425,7 +1779,10 @@
     "longitude": 100.5,
     "intensity": -3,
     "type": "conflict",
-    "source": "Yale Global (2009). Dams in China Turn the Mekong Into a River of Discord. https://archive-yaleglobal.yale.edu/content/dams-china-turn-mekong-river-discord"
+    "source": "Pacific Institute Water Conflict Chronology; Campbell, I.C. (2007). The Mekong: Biophysical Environment of an International River Basin. Elsevier; Gleick, P.H. (2023).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Mekong_1995",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Mekong_1995"
   },
   {
     "year": 2024,
@@ -1437,7 +1794,10 @@
     "longitude": 31.0,
     "intensity": 5,
     "type": "cooperation",
-    "source": "Nile Basin Initiative. Cooperative Framework Agreement. https://nilebasin.org/about-us/cooperative-framework-agreement"
+    "source": "Pacific Institute Water Conflict Chronology; Nile River Basin Commission (NRBC) Constitutive Entry into Force (October 13, 2024).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Ezzat_2013",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Ezzat_2013"
   },
   {
     "year": 2023,
@@ -1449,7 +1809,10 @@
     "longitude": 62.5,
     "intensity": -2,
     "type": "conflict",
-    "source": "NPR Aral Sea interactive (2024). https://apps.npr.org/aral-sea-shrinking-map/"
+    "source": "Pacific Institute Water Conflict Chronology; Central Asia Water Information Portal (CAWater-Info) Report on Amudarya Discharge Reduction (2023).",
+    "pacificCategory": "trigger",
+    "pacificRefId": "Aral_1992",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Aral_1992"
   },
   {
     "year": 2026,
@@ -1463,7 +1826,10 @@
     "intensity": 6,
     "barScale": "+6",
     "type": "cooperation",
-    "source": "EC-IFAS, Astana Summit 2026"
+    "source": "Pacific Institute Water Conflict Chronology; Treaty on Transboundary Water Cooperation and Ecological Restoration of the Northern Aral Sea, Astana (2026).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "KokAral_2005",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#KokAral_2005"
   },
   {
     "year": 2026,
@@ -1477,7 +1843,10 @@
     "intensity": 5,
     "barScale": "+5",
     "type": "cooperation",
-    "source": "Ankara Ministerial Communique 2026"
+    "source": "Pacific Institute Water Conflict Chronology; Operational Annexes to the Turkey-Iraq Framework Water Agreement for Severe Drought Periods, Baghdad (2026).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Glass_2017",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Glass_2017"
   },
   {
     "year": 2026,
@@ -1491,6 +1860,9 @@
     "intensity": 4,
     "barScale": "+4",
     "type": "cooperation",
-    "source": "MRC Vientiane Declaration 2026"
+    "source": "Pacific Institute Water Conflict Chronology; Mekong River Commission (MRC) Joint Operational Protocol on Mainstream Cascading Hydropower and Flow Regulations, Vientiane (2026).",
+    "pacificCategory": "cooperation",
+    "pacificRefId": "Mekong_1995",
+    "pacificRefUrl": "https://worldwater.org/conflict/refs.html#Mekong_1995"
   }
 ]

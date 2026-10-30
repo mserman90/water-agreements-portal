@@ -10,6 +10,9 @@ import {
   translatePurpose,
   translateConflict,
 } from '@/lib/treatyTranslator';
+import { PACIFIC_CATEGORIES, type PacificCategoryType } from '@/data/conflictsTr';
+
+export type { PacificCategoryType };
 
 export interface Agreement {
   id: string;
@@ -36,6 +39,9 @@ export interface WaterConflict {
   longitude: number;
   intensity: number; // -7 to +7 BAR Scale
   type: 'conflict' | 'cooperation' | 'mixed';
+  pacificCategory?: PacificCategoryType;
+  pacificRefId?: string;
+  pacificRefUrl?: string;
   source?: string;
 }
 
@@ -90,10 +96,28 @@ function buildMarkerIcon(color: string, isSelected: boolean): L.DivIcon {
 }
 
 function buildConflictIcon(conflict: WaterConflict, isSelected: boolean): L.DivIcon {
-  const isNegative = conflict.intensity < 0;
   const size = isSelected ? 24 : 20;
-  const bg = isNegative ? '#dc2626' : conflict.intensity > 0 ? '#16a34a' : '#ea580c';
-  const symbol = isNegative ? '⚡' : conflict.intensity > 0 ? '🤝' : '⚖️';
+  
+  // Custom symbol and color according to Pacific Institute taxonomy
+  let symbol = '⚡';
+  let bg = '#ea580c';
+  if (conflict.pacificCategory === 'weapon') {
+    symbol = '⚔️';
+    bg = '#dc2626';
+  } else if (conflict.pacificCategory === 'casualty') {
+    symbol = '💥';
+    bg = '#9333ea';
+  } else if (conflict.pacificCategory === 'cooperation' || conflict.intensity > 0) {
+    symbol = '🤝';
+    bg = '#16a34a';
+  } else if (conflict.intensity <= -4) {
+    symbol = '⚡';
+    bg = '#dc2626';
+  } else {
+    symbol = '🎯';
+    bg = '#ea580c';
+  }
+
   const shadow = isSelected ? '0 0 10px 3px rgba(220,38,38,0.75)' : '0 2px 6px rgba(0,0,0,0.4)';
   const border = isSelected ? '2px solid #facc15' : '1.5px solid #ffffff';
 
@@ -226,27 +250,44 @@ function buildConflictPopup(c: WaterConflict, lang: 'tr' | 'en' = 'tr'): string 
       ? lang === 'tr' ? 'Büyük İşbirliği / Kurum Kuruluşu' : 'Major Cooperation / Treaty'
       : lang === 'tr' ? 'Müzakere / Ortak Girişim' : 'Negotiation / Joint Action';
 
-  const badgeCategory = lang === 'tr' ? '⚡ TARİHİ SU OLAYI (BAR)' : '⚡ HISTORIC WATER EVENT (BAR)';
+  const badgeCategory = lang === 'tr' ? '⚡ TARİHİ SU OLAYI' : '⚡ HISTORIC WATER EVENT';
   const countriesLabel = lang === 'tr' ? 'Taraf Ülkeler' : 'Riparian States';
   const basinLabel = lang === 'tr' ? 'Havza' : 'Basin';
   const inspectBtnText = lang === 'tr' ? '🔍 Sol Panelde Detayları İncele' : '🔍 View Full Details in Sidebar';
 
-  let sourceHtml = '';
-  if (c.source) {
-    const urlMatch = c.source.match(/https?:\/\/[^\s)]+/);
-    const sourceLabel = lang === 'tr' ? 'Akademik Kaynak' : 'Academic Source';
-    const litLabel = lang === 'tr' ? 'Literatür Bağlantısı ↗' : 'Literature Link ↗';
-    if (urlMatch) {
-      sourceHtml = `<div style="margin-top:6px;font-size:10.5px;color:#64748b;border-top:1px dashed #e2e8f0;padding-top:4px;">
-        <strong>${sourceLabel}:</strong> <a href="${urlMatch[0]}" target="_blank" style="color:#0284c7;text-decoration:underline;">${litLabel}</a>
-      </div>`;
-    } else {
-      sourceHtml = `<div style="margin-top:6px;font-size:10.5px;color:#64748b;border-top:1px dashed #e2e8f0;padding-top:4px;"><strong>${sourceLabel}:</strong> ${c.source}</div>`;
-    }
-  }
+  const pacificInfo = c.pacificCategory ? PACIFIC_CATEGORIES[c.pacificCategory] : undefined;
+  const pacificBadgeHtml = pacificInfo ? `
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;background:${pacificInfo.bg};border:1px solid ${pacificInfo.border};padding:4px 8px;border-radius:5px;">
+      <span style="font-size:12px;">${pacificInfo.icon}</span>
+      <div style="display:flex;flex-direction:column;">
+        <div style="font-size:10.5px;font-weight:700;color:${pacificInfo.color};line-height:1.2;">
+          ${lang === 'tr' ? pacificInfo.badgeTr : pacificInfo.badgeEn}
+        </div>
+        <div style="font-size:9.5px;color:#64748b;line-height:1.25;">
+          ${lang === 'tr' ? pacificInfo.descriptionTr : pacificInfo.descriptionEn}
+        </div>
+      </div>
+    </div>
+  ` : '';
+
+  const refUrl = c.pacificRefUrl || 'https://worldwater.org/conflict/refs.html';
+  const refLinkText = lang === 'tr' ? 'Pacific Institute Kaynakça & Literatür ↗' : 'Pacific Institute Chronology Reference ↗';
+  const sourceLabel = lang === 'tr' ? 'Akademik Kaynakça' : 'Academic Reference';
+
+  const sourceHtml = `
+    <div style="margin-top:6px;font-size:10px;color:#475569;border-top:1px dashed #cbd5e1;padding-top:5px;background:#f8fafc;padding:6px;border-radius:5px;border:1px solid #e2e8f0;">
+      <div style="font-weight:700;color:#334155;margin-bottom:2px;">📚 ${sourceLabel}:</div>
+      <div style="color:#64748b;line-height:1.35;margin-bottom:4px;">
+        ${c.source || 'Pacific Institute Water Conflict Chronology'}
+      </div>
+      <a href="${refUrl}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:4px;color:#0284c7;font-weight:700;text-decoration:underline;">
+        🏛️ ${refLinkText}
+      </a>
+    </div>
+  `;
 
   return `
-    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:12px;line-height:1.45;max-width:280px;color:#1e293b;">
+    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:12px;line-height:1.45;max-width:290px;color:#1e293b;">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:6px;">
         <span style="background:${intensityColor};color:#fff;padding:2px 7px;border-radius:4px;font-weight:700;font-size:9.5px;letter-spacing:0.3px;">
           ${badgeCategory}
@@ -263,6 +304,8 @@ function buildConflictPopup(c: WaterConflict, lang: 'tr' | 'en' = 'tr'): string 
       <div style="font-weight:700;font-size:11px;color:${intensityColor};margin-bottom:6px;">
         ● ${intensityLabel}
       </div>
+
+      ${pacificBadgeHtml}
 
       <div style="background:#f8fafc;padding:6px 8px;border-radius:6px;border:1px solid #e2e8f0;display:flex;flex-direction:column;gap:3px;font-size:11.5px;margin-bottom:6px;">
         <div>

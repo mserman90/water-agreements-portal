@@ -10,6 +10,7 @@ import {
   translateCountry,
   translateConflict,
 } from '@/lib/treatyTranslator';
+import { PACIFIC_CATEGORIES, PacificCategoryType } from '@/data/conflictsTr';
 
 interface Props {
   agreements: Agreement[];
@@ -57,6 +58,7 @@ export default function AgreementSidebar({
 }: Props) {
   const { lang } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<'agreements' | 'conflicts'>('agreements');
+  const [pacificFilter, setPacificFilter] = useState<'all' | PacificCategoryType>('all');
   const parentRef = useRef<HTMLDivElement>(null);
 
   const isSmart = aiMode || isSmartQuery(searchTerm);
@@ -68,9 +70,13 @@ export default function AgreementSidebar({
 
   // Filter conflicts if in conflicts tab and searching
   const filteredConflicts = useMemo(() => {
-    if (!searchTerm.trim()) return conflicts;
+    let list = conflicts;
+    if (pacificFilter !== 'all') {
+      list = list.filter((c) => c.pacificCategory === pacificFilter);
+    }
+    if (!searchTerm.trim()) return list;
     const q = searchTerm.toLowerCase();
-    return conflicts.filter(
+    return list.filter(
       (c) =>
         c.title.toLowerCase().includes(q) ||
         c.countries.toLowerCase().includes(q) ||
@@ -78,7 +84,7 @@ export default function AgreementSidebar({
         c.description.toLowerCase().includes(q) ||
         String(c.year).includes(q)
     );
-  }, [conflicts, searchTerm]);
+  }, [conflicts, searchTerm, pacificFilter]);
 
   const activeItemsCount = activeCategory === 'agreements' ? agreements.length : filteredConflicts.length;
 
@@ -269,6 +275,68 @@ export default function AgreementSidebar({
         )}
       </div>
 
+      {/* Pacific Institute Chronology Taxonomy Filter Strip */}
+      {activeCategory === 'conflicts' && (
+        <div
+          style={{
+            background: '#f8fafc',
+            borderBottom: '1px solid #e2e8f0',
+            padding: '6px 10px',
+            display: 'flex',
+            gap: 4,
+            overflowX: 'auto',
+            flexShrink: 0,
+          }}
+        >
+          <button
+            onClick={() => setPacificFilter('all')}
+            style={{
+              padding: '3px 8px',
+              borderRadius: 4,
+              fontSize: 10.5,
+              fontWeight: pacificFilter === 'all' ? 700 : 500,
+              border: pacificFilter === 'all' ? '1px solid #0284c7' : '1px solid #cbd5e1',
+              background: pacificFilter === 'all' ? '#e0f2fe' : '#ffffff',
+              color: pacificFilter === 'all' ? '#0369a1' : '#475569',
+              cursor: 'pointer',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {lang === 'tr' ? 'Tümü' : 'All'} ({conflicts.length})
+          </button>
+          {(['trigger', 'weapon', 'casualty', 'cooperation'] as PacificCategoryType[]).map((cat) => {
+            const meta = PACIFIC_CATEGORIES[cat];
+            const isAct = pacificFilter === cat;
+            const count = conflicts.filter((c) => c.pacificCategory === cat).length;
+            return (
+              <button
+                key={cat}
+                onClick={() => setPacificFilter(cat)}
+                title={lang === 'tr' ? meta.descriptionTr : meta.descriptionEn}
+                style={{
+                  padding: '3px 7px',
+                  borderRadius: 4,
+                  fontSize: 10.5,
+                  fontWeight: isAct ? 700 : 500,
+                  border: `1px solid ${isAct ? meta.color : meta.border}`,
+                  background: isAct ? meta.bg : '#ffffff',
+                  color: isAct ? meta.color : '#475569',
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 3,
+                }}
+              >
+                <span>{meta.icon}</span>
+                <span>{lang === 'tr' ? meta.labelTr : meta.labelEn}</span>
+                <span style={{ fontSize: 9.5, opacity: 0.8 }}>({count})</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+
       {/* Virtualized Scroll Container */}
       <div
         ref={parentRef}
@@ -410,6 +478,7 @@ export default function AgreementSidebar({
               const isSelected = c.id === selectedId;
               const badge = getConflictBadge(c.intensity, lang);
               const cTr = translateConflict(c, lang);
+              const pacificMeta = c.pacificCategory ? PACIFIC_CATEGORIES[c.pacificCategory] : undefined;
 
               return (
                 <div
@@ -443,10 +512,30 @@ export default function AgreementSidebar({
                       if (!isSelected) e.currentTarget.style.borderColor = '#fee2e2';
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-                      <span style={{ background: badge.bg, color: badge.color, padding: '1px 5px', borderRadius: 4, fontSize: 10.5, fontWeight: 700 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 5, flexWrap: 'wrap' }}>
+                      <span style={{ background: badge.bg, color: badge.color, padding: '1px 5px', borderRadius: 4, fontSize: 10, fontWeight: 700 }}>
                         BAR: {c.intensity > 0 ? '+' + c.intensity : c.intensity} · {badge.label}
                       </span>
+                      {pacificMeta && (
+                        <span
+                          style={{
+                            background: pacificMeta.bg,
+                            color: pacificMeta.color,
+                            border: `1px solid ${pacificMeta.border}`,
+                            padding: '1px 5px',
+                            borderRadius: 4,
+                            fontSize: 10,
+                            fontWeight: 700,
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: 3,
+                          }}
+                          title={lang === 'tr' ? pacificMeta.descriptionTr : pacificMeta.descriptionEn}
+                        >
+                          <span>{pacificMeta.icon}</span>
+                          <span>{lang === 'tr' ? pacificMeta.labelTr : pacificMeta.labelEn}</span>
+                        </span>
+                      )}
                       <span style={{ fontSize: 11, fontWeight: 700, color: '#dc2626', marginLeft: 'auto' }}>
                         📅 {c.year}
                       </span>
@@ -460,8 +549,31 @@ export default function AgreementSidebar({
                       📍 {cTr.countries} &nbsp;·&nbsp; 🌊 {cTr.basin}
                     </div>
 
-                    <div style={{ fontSize: 11.5, color: '#334155', lineHeight: 1.45, background: '#f8fafc', padding: 6, borderRadius: 4, border: '1px solid #f1f5f9' }}>
+                    <div style={{ fontSize: 11.5, color: '#334155', lineHeight: 1.45, background: '#f8fafc', padding: 6, borderRadius: 4, border: '1px solid #f1f5f9', marginBottom: 5 }}>
                       {cTr.description.slice(0, 140)}...
+                    </div>
+
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px dashed #e2e8f0', paddingTop: 4 }}>
+                      <a
+                        href={c.pacificRefUrl || 'https://worldwater.org/conflict/refs.html'}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        style={{
+                          fontSize: 10,
+                          color: '#0284c7',
+                          textDecoration: 'none',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 3,
+                          fontWeight: 600,
+                        }}
+                      >
+                        🏛️ {lang === 'tr' ? 'Pacific Institute Kaynağı ↗' : 'Pacific Inst. Ref ↗'}
+                      </a>
+                      <span style={{ fontSize: 9.5, color: '#94a3b8' }}>
+                        worldwater.org
+                      </span>
                     </div>
                   </div>
                 </div>

@@ -4,6 +4,7 @@ import MeteoTimelineChart from './MeteoTimelineChart';
 import type { MeteoLayerType } from '@/hooks/useMeteoLayer';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { getItemDisplayName, isWaterConflictItem } from '@/lib/treatyTranslator';
+import { PACIFIC_CATEGORIES } from '@/data/conflictsTr';
 import { Play, Pause, Calendar, TrendingUp, Droplets, Thermometer, CloudRain, Award } from 'lucide-react';
 
 export type TimelineMode = 'cumulative' | 'decade';
@@ -379,7 +380,7 @@ export default function TimelineClimatePanel({
             padding: '10px 12px',
             display: 'flex',
             flexDirection: 'column',
-            gap: 4,
+            gap: 5,
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -409,6 +410,39 @@ export default function TimelineClimatePanel({
           <div style={{ fontSize: 10.5, color: '#64748b' }}>
             🌊 {selectedAgreement.basin || (lang === 'tr' ? 'Bilinmeyen Havza' : 'Unknown Basin')} · 🌐 {countryDisplay}
           </div>
+
+          {/* Pacific Category badge & reference for conflicts */}
+          {isConflict && (selectedAgreement as WaterConflict).pacificCategory && (
+            (() => {
+              const pCat = (selectedAgreement as WaterConflict).pacificCategory!;
+              const meta = PACIFIC_CATEGORIES[pCat];
+              const refUrl = (selectedAgreement as WaterConflict).pacificRefUrl || 'https://worldwater.org/conflict/refs.html';
+              return (
+                <div style={{ marginTop: 2, display: 'flex', flexDirection: 'column', gap: 3 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 4, background: meta.bg, border: `1px solid ${meta.border}`, padding: '2px 6px', borderRadius: 4 }}>
+                    <span style={{ fontSize: 11 }}>{meta.icon}</span>
+                    <span style={{ fontSize: 10, fontWeight: 700, color: meta.color }}>
+                      {lang === 'tr' ? meta.badgeTr : meta.badgeEn}
+                    </span>
+                    <span style={{ fontSize: 9.5, color: '#64748b', marginLeft: 'auto' }}>
+                      (Pacific Inst.)
+                    </span>
+                  </div>
+                  <div style={{ fontSize: 9.5, color: '#475569', lineHeight: 1.25 }}>
+                    {lang === 'tr' ? meta.descriptionTr : meta.descriptionEn}
+                  </div>
+                  <a
+                    href={refUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ fontSize: 10, color: '#0284c7', textDecoration: 'underline', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: 3 }}
+                  >
+                    🏛️ {lang === 'tr' ? 'Pacific Institute Kaynakça & Literatür ↗' : 'Pacific Institute Chronology Reference ↗'}
+                  </a>
+                </div>
+              );
+            })()
+          )}
 
           {selectedAgreement.latitude && selectedAgreement.longitude && (
             <div style={{ fontSize: 10, color: '#0284c7', fontWeight: 600, marginTop: 2 }}>

@@ -74,16 +74,54 @@ Etkileşimler, **-7** (tam askeri çatışma) ile **+7** (gönüllü birleşme /
 
 ---
 
-## 3. ECMWF ERA5 Tarihsel Atmosferik Reanaliz Verisi
+---
 
-### 3.1. Reanaliz Teknolojisi ve Veri Kalitesi
+## 3. Pacific Institute Su Çatışmaları Kronolojisi (Dr. Peter H. Gleick)
+
+### 3.1. Kapsam ve Kurumsal Köken
+**Pacific Institute Water Conflict Chronology**, Dr. Peter H. Gleick liderliğindeki araştırmacılar tarafından Oakland, Kaliforniya'da geliştirilen ve insanlık tarihinin bilinen ilk su çatışmalarından (M.Ö. 2500 Mezopotamya Lagaş-Umma savaşı) modern döneme kadar tatlı su kaynaklarıyla bağlantılı tüm şiddet, saldırı ve gerilim olaylarını kaydeden dünyanın en yetkin su güvenliği kronolojisidir.
+
+- **Resmi Veritabanı ve Literatür Kaynakçası:** [https://worldwater.org/conflict/refs.html](https://worldwater.org/conflict/refs.html)
+- **Kapsam:** 1.140'ı aşkın hakemli akademik makale, resmi hükümet raporu, Birleşmiş Milletler Güvenlik Konseyi tutanağı ve bağımsız araştırma raporundan derlenen külliyat.
+- **Portala Entegrasyon:** Portaldaki tüm tarihi su uyuşmazlığı ve işbirliği kayıtları (1920–2026), Pacific Institute taksonomisi ile etiketlenmiş, doğrudan `worldwater.org/conflict/refs.html#<anchor>` literatür bağlantıları ve akademik kaynakçalarıyla ilişkilendirilmiştir.
+
+### 3.2. Pacific Institute Üçlü Rol Taksonomisi (*Tripartite Conflict Typology*)
+
+Pacific Institute, suyun çatışmalardaki rolünü üç temel analitik kategoriye ayırır:
+
+1. **🎯 Tetikleyici (*Trigger*):**
+   Suyun veya su altyapısının kontrolü, tahsisi ya da su kıtlığı/kuraklık nedeniyle yaşanan ekonomik-fiziksel baskılar doğrudan çatışmanın ya da şiddetin kök nedeni veya kıvılcımı olmuştur.
+   - *Örnekler:* 1975 Farakka Bendi açılışı (Ganj), 2000 Bolivya Cochabamba Su Savaşı, 2011–2024 Büyük Etiyopya Rönesans Barajı (GERD) uyuşmazlığı, 2021 Kırgızistan-Tacikistan İsfara Golovnoy su dağıtım noktası çatışması.
+
+2. **⚔️ Silah / Askeri Araç (*Weapon / Tool*):**
+   Su kaynakları veya su dağıtım sistemleri, askeri harekat, kuşatma ya da siyasi baskı amacıyla bir araç veya silah olarak kullanılmıştır.
+   - *Örnekler:* 1948 yılında Hindistan'ın Pakistan kanallarına giden suyu kesmesi, 1984'te Saddam Hüseyin'in Şii muhalifleri sindirmek için Mezopotamya bataklıklarını kurutması, 1991 Körfez Savaşı'nda petrolün Basra Körfezi'ndeki tuz giderme tesislerine boşaltılması, 2014'te Ukrayna'nın Kuzey Kırım Kanalı'nı kapatması.
+
+3. **💥 Hedef / Zayiat (*Casualty / Target*):**
+   Su kaynakları veya su altyapıları (barajlar, arıtma tesisleri, su boru hatları, pompa istasyonları, kanallar) askeri çatışmalar sırasında kasıtlı ya da ikincil hedef olmuş, bombalanmış, tahrip edilmiş veya zehirlenmiştir.
+   - *Örnekler:* 1964–1966 İsrail-Suriye Şeria Nehri saptırma kanalları bombardımanı, 1986 Ren Sandoz kimyasal zehirlenmesi, 2003 Irak Savaşı'nda su arıtma tesislerinin bombalanması ve yağmalanması, 2023 Gazze su iletim ve tuz giderme altyapısının tahrip edilmesi.
+
+4. **🤝 İşbirliği ve Barışçıl Dönüm Noktası (*Cooperation / Institutional Milestone*):**
+   Pacific Institute kronolojisinin barışçıl boyutunu ve OSU TFDD işbirliği skalasını bütünlemek amacıyla eklenen dördüncü kategori; çatışmaları sona erdiren diplomatik antlaşmaları ve ortak nehir havzası komisyonlarını ifade eder.
+   - *Örnekler:* 1960 İndus Suları Antlaşması, 1994 İsrail-Ürdün Barış Antlaşması Su Maddesi, 1996 Ganj Antlaşması, 2024 Nil CFA'sının yürürlüğe girmesi, 2026 Kuzey Aral Denizi Restorasyon Antlaşması.
+
+### 3.3. TFDD BAR Skalası ve Pacific Institute Taksonomisinin Çapraz Eşlemesi
+
+Portalda sunulan analitik derinlik, iki önde gelen metodolojinin birleşimiyle sağlanmaktadır:
+- **OSU BAR Skalası (-7 ila +7):** Uyuşmazlığın ya da işbirliğinin yoğunluk derecesini (şiddet skalasını) ölçer.
+- **Pacific Institute Taksonomisi (Trigger / Weapon / Casualty):** Suyun bu etkileşimdeki nedensel rolünü (kök neden mi, araç mı, hedef mi) açıklar.
+
+
+## 4. ECMWF ERA5 Tarihsel Atmosferik Reanaliz Verisi
+
+### 5.1. Reanaliz Teknolojisi ve Veri Kalitesi
 **ERA5**, Avrupa Orta Vadeli Hava Tahminleri Merkezi (**ECMWF**) tarafından Copernicus İklim Değişikliği Servisi (C3S) kapsamında üretilen beşinci nesil küresel atmosferik reanalizdir.
 
 - **Model Çözünürlüğü:** Yatayda ~31 km (0.25° × 0.25°), dikeyde 137 atmosferik katman.
 - **Veri Asimilasyonu:** 4D-Var (Dört Boyutlu Değişimsel Asimilasyon) tekniği ile yer gözlemleri, uydular ve radyo sondalar birleştirilmiştir.
 - **Portaldaki Zaman Aralığı:** 1940'tan bir önceki takvim yılının sonuna kadar yıllık agregasyon.
 
-### 3.2. Türetilen İklim İndikatörleri ve Formülasyon
+### 5.2. Türetilen İklim İndikatörleri ve Formülasyon
 
 1. **Yıllık Sıcaklık Anomalisi ($\Delta T_y$):**
    $$\Delta T_y = T_y - \overline{T}_{1991-2020}$$
@@ -100,20 +138,20 @@ Etkileşimler, **-7** (tam askeri çatışma) ile **+7** (gönüllü birleşme /
 
 ---
 
-## 4. FAOLEX ve Birleşmiş Milletler Hukuk Arşivleri
+## 5. FAOLEX ve Birleşmiş Milletler Hukuk Arşivleri
 
-### 4.1. UN FAO FAOLEX Entegrasyonu
+### 5.1. UN FAO FAOLEX Entegrasyonu
 FAO Legal Office tarafından işletilen **FAOLEX**, dünyanın en büyük çevre, su ve tarım hukuku veritabanıdır.
 - Her anlaşma için FAOLEX LEX-FAOC kayıt kodları indekslenmiş; ulusal uygulama yasaları ve ikincil mevzuat bağlantıları ilişkilendirilmiştir.
 
-### 4.2. Birincil PDF Belge Saklama Mimarisi
+### 5.2. Birincil PDF Belge Saklama Mimarisi
 Akademik araştırmalarda en sık karşılaşılan problemlerden biri olan dış web sitelerindeki kırık linkler (*link rot / 404 hataları*), portala dahil edilen yerel arşiv sistemiyle çözülmüştür:
 - Kritik anlaşmalar resmi BM Antlaşmalar Serisi (UNTS), FAOLEX ve ikili sınır komisyonlarından (IBWC, MRC) PDF formatında temin edilerek doğrudan `client/public/docs/` dizininde versiyonlanmıştır.
 - Her anlaşma kartında sağlanan **📥 Depo PDF** butonu, bu birincil hukuki metinleri harici ağ bağlantısı kesintilerinden etkilenmeksizin doğrudan sunar.
 
 ---
 
-## 5. Metodolojik Kısıtlar ve Dikkat Edilmesi Gereken Hususlar
+## 6. Metodolojik Kısıtlar ve Dikkat Edilmesi Gereken Hususlar
 
 Araştırmacıların veri analizlerinde göz önünde bulundurması gereken metodolojik kısıtlar şunlardır:
 
@@ -123,11 +161,18 @@ Araştırmacıların veri analizlerinde göz önünde bulundurması gereken meto
 
 ---
 
-## 6. Temel Akademik Kaynakça / References
+## 7. Temel Akademik Kaynakça / References
 
 - **Allan, J. A.** (2002). *The Middle East Water Question: Hydropolitics and the Global Economy*. I.B. Tauris.
 - **Dinar, A., Blankespoor, B., Dinar, S., & Kurukulasuriya, P.** (2019). *Water Scarcity, Conflict, and Cooperation: Analytical and Empirical Perspectives*. World Scientific.
+- **Gleick, P. H.** (1991). Environment and security: The clear connections. *Bulletin of the Atomic Scientists*, April, 17–21.
 - **Gleick, P. H.** (1993). Water and conflict: Fresh water resources and international security. *International Security*, 18(1), 79–112.
+- **Gleick, P. H.** (1994). Water, war, and peace in the Middle East. *Environment: Science and Policy for Sustainable Development*, 36(3), 6–42.
+- **Gleick, P. H.** (2014). Water, drought, climate change, and conflict in Syria. *Weather, Climate, and Society*, 6(3), 331–340.
+- **Gleick, P. H.** (2023). *The Three Ages of Water: Prehistoric Past, Imperiled Present, and a Hope for the Future*. PublicAffairs, New York.
+- **Gleick, P. H., Vyshnevskyi, V., & Shevchuk, S.** (2023). The use of Ukraine rivers and water systems as defense, weapons, and casualties of the Russia-Ukraine war. *Earth's Future*, 11(8), e2023EF003883.
+- **Hatami, H., & Gleick, P. H.** (1994). Chronology of conflict over water in the legends, myths, and history of the ancient Middle East. *Environment*, 36(3).
+- **Pacific Institute.** (2024). *Water Conflict Chronology & Literature References*. World Water Project. URL: [https://worldwater.org/conflict/refs.html](https://worldwater.org/conflict/refs.html).
 - **Hersbach, H., et al.** (2020). The ERA5 global reanalysis. *Quarterly Journal of the Royal Meteorological Society*, 146(730), 1999–2049.
 - **McCaffrey, S. C.** (2019). *The Law of International Watercourses* (3rd ed.). Oxford University Press.
 - **Salman, S. M.** (2007). The United Nations Watercourses Convention ten years later: Why has its entry into force proven difficult? *Water International*, 32(1), 1–15.

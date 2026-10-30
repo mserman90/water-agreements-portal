@@ -1,12 +1,85 @@
 /**
- * Turkish translations for all 121 historical water conflict and cooperation events.
- * Auto-generated with exact diplomatic and academic terminology.
+ * Turkish translations for all 124 historical water conflict and cooperation events.
+ * Fully aligned with the Pacific Institute Water Conflict Chronology (Dr. Peter H. Gleick)
+ * and Oregon State University (OSU) Transboundary Freshwater Dispute Database (TFDD) BAR Scale.
+ * Source: https://worldwater.org/conflict/refs.html
  */
 
 export interface ConflictTr {
   title: string;
   description: string;
 }
+
+export type PacificCategoryType = 'trigger' | 'weapon' | 'casualty' | 'cooperation';
+
+export interface PacificCategoryInfo {
+  type: PacificCategoryType;
+  labelTr: string;
+  labelEn: string;
+  badgeTr: string;
+  badgeEn: string;
+  descriptionTr: string;
+  descriptionEn: string;
+  icon: string;
+  color: string;
+  bg: string;
+  border: string;
+}
+
+export const PACIFIC_CATEGORIES: Record<PacificCategoryType, PacificCategoryInfo> = {
+  trigger: {
+    type: 'trigger',
+    labelTr: 'Tetikleyici',
+    labelEn: 'Trigger',
+    badgeTr: '🎯 TETİKLEYİCİ',
+    badgeEn: '🎯 TRIGGER',
+    descriptionTr: 'Suyun kontrolü veya kıtlığı nedeniyle ortaya çıkan uyuşmazlıklar şiddet ve çatışmaları tetiklemiştir.',
+    descriptionEn: 'Water resources or water systems as a trigger or root cause of conflict or violence.',
+    icon: '🎯',
+    color: '#ea580c',
+    bg: '#fff7ed',
+    border: '#fed7aa',
+  },
+  weapon: {
+    type: 'weapon',
+    labelTr: 'Silah / Baskı Aracı',
+    labelEn: 'Weapon / Instrument',
+    badgeTr: '⚔️ SİLAH',
+    badgeEn: '⚔️ WEAPON',
+    descriptionTr: 'Su kaynakları veya sistemleri bir savaş aracı, baskı unsuru veya silah olarak kullanılmıştır.',
+    descriptionEn: 'Water resources or water systems used as a weapon, tool, or instrument of war.',
+    icon: '⚔️',
+    color: '#dc2626',
+    bg: '#fef2f2',
+    border: '#fca5a5',
+  },
+  casualty: {
+    type: 'casualty',
+    labelTr: 'Hedef / Zayiat',
+    labelEn: 'Casualty / Target',
+    badgeTr: '💥 HEDEF / ZAYİAT',
+    badgeEn: '💥 CASUALTY',
+    descriptionTr: 'Su altyapısı (barajlar, arıtma tesisleri, su kanalları) çatışmalarda doğrudan hedef alınmış veya tahrip edilmiştir.',
+    descriptionEn: 'Water infrastructure (dams, treatment facilities, pipelines) targeted or damaged in warfare.',
+    icon: '💥',
+    color: '#9333ea',
+    bg: '#faf5ff',
+    border: '#d8b4fe',
+  },
+  cooperation: {
+    type: 'cooperation',
+    labelTr: 'İşbirliği / Çözüm',
+    labelEn: 'Cooperation / Solution',
+    badgeTr: '🤝 İŞBİRLİĞİ',
+    badgeEn: '🤝 COOPERATION',
+    descriptionTr: 'Diplomatik antlaşma, nehir havzası örgütü veya barışçıl uyuşmazlık çözümü başarılmıştır.',
+    descriptionEn: 'Transboundary water agreement, river basin commission, or diplomatic peace resolution.',
+    icon: '🤝',
+    color: '#16a34a',
+    bg: '#f0fdf4',
+    border: '#86efac',
+  },
+};
 
 export const conflictsTrById: Record<string, ConflictTr> = {
   "conflict-0": {
@@ -43,964 +116,972 @@ export const conflictsTrById: Record<string, ConflictTr> = {
   },
   "conflict-8": {
     title: "Asvan Yüksek Barajı İnşası Sovyet Yardımıyla Başladı",
-    description: "Batı'nın finansmanı geri çekmesinin ardından Mısır, Sovyet finansmanıyla Asvan Yüksek Barajı'nın inşasına başladı. Etiyopya ve yukarı kıyıdaş ülkeler, projenin dayandığı 1959 su tahsisi çerçevesinden dışlandıklarını belirterek projeyi protesto etti.",
+    description: "Mısır, Sovyetler Birliği'nin finansal ve teknik yardımıyla Asvan Yüksek Barajı'nın inşasına başladı. Proje, Mısır için taşkın kontrolü ve sulama güvencesi sağlarken Nil akış rejimi ve alüvyon taşınımını kalıcı olarak değiştirdi.",
   },
   "conflict-9": {
-    title: "Nijer Havzası Niamey Senedi",
-    description: "Dokuz Nijer Havzası devleti, Nijer Nehri üzerinde adil seyrüsefer ve ekonomik işbirliğini taahhüt eden Niamey Senedi'ni imzaladı; bu senet daha sonra kurulacak Nijer Nehri Komisyonu ve Nijer Havzası Otoritesi'nin temelini attı.",
+    title: "Niamey Nijer Havzası Senedi",
+    description: "Dokuz Nijer kıyıdaş devleti, seyrüsefer ve ekonomik kalkınmayı düzenleyen Niamey Senedi'ni kabul etti; bu girişim sömürge sonrası Batı Afrika'da ilk çok taraflı nehir havzası anlaşması oldu.",
   },
   "conflict-10": {
-    title: "İsrail-Suriye Şeria Nehri Su Savaşı Başladı",
-    description: "İsrail Ulusal Su Taşıyıcısı'nı faaliyete geçirirken, Suriye ve Ürdün Şeria Nehri'nin kollarını (Banias ve Yarmuk) saptırma inşaatına başladı. İsrail hava saldırıları Suriye'nin saptırma tesislerini vurarak 1967 savaşına giden gerilimi tırmandırdı.",
+    title: "İsrail-Suriye Şeria Nehri Su Çatışmaları Başladı",
+    description: "İsrail'in Ulusal Su Taşıyıcısı projesini tamamlamasının ardından Arap Birliği, Baniyas ve Hasbani kollarını Şeria'dan uzaklaştırmak için karşı su yönlendirme projeleri başlattı. İsrail Savunma Kuvvetleri bu inşaatları vurdu ve bu durum 1967 savaşına giden süreçte gerilimi tırmandırdı.",
   },
   "conflict-11": {
     title: "Nijer Nehri Komisyonu Kuruldu",
-    description: "Batı Afrika'da dokuz kıyıdaş devlet, çok taraflı nehir yönetimi ve ortak hidroelektrik ile tarımsal kalkınma planlaması için ilk bölgesel organ olan Nijer Nehri Komisyonu'nu resmen kurdu.",
+    description: "Niamey Senedi'ni takiben kıyıdaş ülkeler, ortak su kaynaklarını yönetmek ve navigasyonu koordine etmek üzere Nijer Nehri Komisyonu'nu resmen kurdu.",
   },
   "conflict-12": {
-    title: "Altı Gün Savaşı: Bir Savaş Sebebi Olarak Su",
-    description: "1967 Altı Gün Savaşı'nda İsrail, Golan Tepeleri'ni (Banias su kaynakları), Batı Şeria dağ akiferlerini ve Gazze kıyı akiferini ele geçirerek bölgesel tatlı su kaynakları üzerindeki kontrolünü büyük ölçüde artırdı.",
+    title: "Altı Gün Savaşı: Bir Casus Belli Olarak Su",
+    description: "İsrail, Şeria Nehri'nin yukarı kollarını (Baniyas ve Golan Tepeleri) ve Batı Şeria dağ akiferlerini ele geçirdi. Su kaynaklarının kontrolü, savaşın önemli bir stratejik faktörüydü ve İsrail'in su güvenliğini kökten değiştirdi.",
   },
   "conflict-13": {
     title: "Asvan Yüksek Barajı Tamamlandı",
-    description: "Mısır, Nasır Gölü'nü oluşturan Asvan Yüksek Barajı'nı tamamladı. Baraj Mısır'a sel kontrolü, sulama güvencesi ve hidroelektrik sağlarken, aşağı havzada verimli alüvyon akışını kesti ve Nil Deltası'nda kıyı erozyonuna yol açtı.",
+    description: "Mısır, Nasır Gölü rezervuarını oluşturan Asvan Yüksek Barajı'nı resmen hizmete açtı. Baraj, Mısır'a çok yıllık su depolama olanağı sundu ancak yukarı kıyıdaşlar ile Mısır'ın su bağımlılığı dengesini pekiştirdi.",
   },
   "conflict-14": {
     title: "OMVS Senegal Nehri Havzası Örgütü Kuruldu",
-    description: "Mali, Moritanya ve Senegal, ortak altyapı (Manantali ve Diama barajları) mülkiyeti ve işletilmesi yoluyla Senegal Nehri sularını yönetmek üzere Senegal Nehri Kalkınma Örgütü'nü (OMVS) kurdu.",
+    description: "Mali, Moritanya ve Senegal, Senegal Nehri Kalkınma Örgütü'nü (OMVS) kurarak ortak baraj yatırımları ve su yönetimi için dünyada örnek gösterilen bir ortak mülkiyet ve fayda paylaşımı mekanizması hayata geçirdi.",
   },
   "conflict-15": {
-    title: "Hilmend Nehri Antlaşması: Afganistan-İran",
-    description: "Afganistan ve İran, normal hidrolojik koşullarda İran'ın Sistan havzasına saniyede 22 metreküp (artı 4 m³/sn iyi niyet akışı) Hilmend Nehri suyu garanti eden bir antlaşma imzaladı. Uygulama on yıllarca ihtilaflı kaldı.",
+    title: "Helmand Nehri Antlaşması: Afganistan-İran",
+    description: "Afganistan ve İran, Helmand (Hirmand) Nehri'nden İran'ın Sistan bölgesine normal hidrolojik koşullarda saniyede 22 m³ su akışını garanti altına alan tarihi bir su paylaşım antlaşması imzaladı.",
   },
   "conflict-16": {
-    title: "Türkiye-Suriye Fırat Nehri Krizi",
-    description: "Keban Barajı (Türkiye) ve Tabka Barajı'nın (Suriye) eşzamanlı doldurulması, Irak'a ulaşan Fırat akışını kritik seviyede düşürerek savaş tehditlerine yol açtı. Suudi Arabistan'ın acil arabuluculuğu Suriye'nin su tahliyesini artırmasını sağladı ve askeri çatışmayı önledi.",
+    title: "Türkiye-Suriye Fırat Krizi",
+    description: "Türkiye'nin Keban Barajı ile Suriye'nin Tabka Barajı'nı aynı dönemde doldurması ve yaşanan şiddetli kuraklık, Irak'a ulaşan Fırat akışını kritik seviyelere düşürdü. Irak ve Suriye askeri birliklerini sınıra yığdı; Suudi Arabistan ve Sovyet diplomatik arabuluculuğuyla çatışma kıl payı önlendi.",
   },
   "conflict-17": {
-    title: "Hindistan Ganj Üzerinde Farakka Barajı'nı Açtı",
-    description: "Hindistan, Kalküta Limanı'nın çamur birikimini temizlemek amacıyla Bhagirathi-Hooghly nehrine su yönlendirmek için Farakka Barajı'nı devreye aldı; bu durum Bangladeş'in aşağı havzasındaki kuru mevsim akışını ciddi ölçüde azalttı.",
+    title: "Hindistan Ganj Üzerindeki Farakka Bendi'ni Açtı",
+    description: "Hindistan, Kalküta Limanı'ndaki silt birikimini temizlemek amacıyla Ganj sularını Hooghly Nehri'ne yönlendiren Farakka Bendi'ni devreye soktu; bu durum aşağı kıyıdaş Bangladeş'te kuru mevsim akışlarını ciddi şekilde azalttı.",
   },
   "conflict-18": {
     title: "Ren Nehri Tuz Kirliliği Sözleşmesi",
-    description: "Fransa, Almanya, Hollanda, İsviçre ve Lüksemburg, Fransız potas madenlerinden kaynaklanan klorür deşarjını azaltmak ve Hollanda tarımı ile içme suyunu korumak amacıyla Ren Nehri'nin Klorür Kirliliğine Karşı Korunması Sözleşmesi'ni imzaladı.",
+    description: "Fransa, Almanya, Hollanda, İsviçre ve Lüksemburg, Alsas potas madenlerinden Ren Nehri'ne yapılan klorür deşarjını sınırlamak ve aşağı havza su kalitesini korumak amacıyla Bonn Klorür Sözleşmesi'ni imzaladı.",
   },
   "conflict-19": {
-    title: "Mısır Devlet Başkanı Sedat'tan Nil İçin Savaş Tehdidi",
-    description: "Mısır Cumhurbaşkanı Enver Sedat, Etiyopya'nın Mavi Nil üzerindeki baraj planlarına karşı uyararak 'Mısır'ı yeniden savaşa sokabilecek tek konu sudur' açıklamasında bulundu.",
+    title: "Mısır Devlet Başkanı Enver Sedat Nil İçin Savaş Tehdidinde Bulundu",
+    description: "Mısır Cumhurbaşkanı Enver Sedat, Etiyopya'nın Nil sularını kesebilecek veya azaltabilecek herhangi bir girişimine karşı Mısır'ın askeri güç kullanmaktan çekinmeyeceğini açıkça ilan etti.",
   },
   "conflict-20": {
     title: "Nijer Havzası Otoritesi (NBA) Kuruldu",
-    description: "Niamey'de Nijer Nehri Komisyonu'nun yerine geçen dokuz üye devlet, entegre havza yönetimi, baraj koordinasyonu ve su kaynakları kalkınması için güçlendirilmiş bir yetkiye sahip Nijer Havzası Otoritesi'ni kurdu.",
+    description: "Eski Nijer Nehri Komisyonu yeniden yapılandırılarak daha geniş yetkilerle donatılmış Nijer Havzası Otoritesi'ne (NBA) dönüştürüldü ve 9 kıyıdaş devletin entegre havza yönetimi güçlendirildi.",
   },
   "conflict-21": {
-    title: "Irak'ın Mezopotamya Sazlıklarını Silah Olarak Kurutması",
-    description: "Saddam Hüseyin rejimi, Şii muhalifleri ve Bataklık Araplarını bastırmak için Dicle ve Fırat nehirlerinin yönünü devasa kanallarla değiştirerek Mezopotamya sazlıklarının %90'ından fazlasını kuruttu ve tarihin en büyük ekolojik yıkımlarından birini gerçekleştirdi.",
+    title: "Irak Mezopotamya Bataklıklarını Silah Olarak Kuruttu",
+    description: "Saddam Hüseyin rejimi, Şii muhalifleri ve bataklık Araplarını sindirmek amacıyla Fırat ve Dicle nehirlerinin sularını yönlendirip kurutma kanalları açarak Mezopotamya bataklıklarının %90'ını yok etti ve suyu bir cezalandırma silahı olarak kullandı.",
   },
   "conflict-22": {
-    title: "Türkiye-Suriye Fırat Suyu ve Güvenlik Protokolü",
-    description: "Türkiye ve Suriye, Türkiye'nin sınırda yıllık ortalama saniyede 500 metreküp Fırat suyu bırakmayı taahhüt ettiği, Suriye'nin ise sınır güvenliği ve terörle mücadelede işbirliği yapmayı kabul ettiği geçici bir ekonomik protokol imzaladı.",
+    title: "Türkiye-Suriye Fırat Suyu-Güvenlik Protokolü",
+    description: "Türkiye ve Suriye, Türkiye'nin Fırat sınırından Suriye'ye aylık ortalama en az 500 m³/sn su bırakmasını taahhüt ettiği, Suriye'nin ise sınır güvenliği konusunda güvence verdiği bir Ekonomik İşbirliği Protokolü imzaladı.",
   },
   "conflict-23": {
-    title: "Hindistan-Bangladeş Ganj Anlaşmazlığı Şiddetlendi",
-    description: "Hindistan ile Bangladeş arasındaki 1982 tarihli geçici su paylaşım anlaşmasının süresi doldu. Hindistan tek taraflı su çekimlerine devam ederken, Bangladeş'in güneybatısında tuzlanma, içme suyu krizi ve tarımsal çöküş yaşandı.",
+    title: "Hindistan-Bangladeş Ganj İhtilafı Derinleşti",
+    description: "Önceki geçici su paylaşım anlaşmalarının süresi dolduktan sonra müzakereler tıkandı; Bangladeş, kurak mevsimde tarımsal verim kaybı ve tuzlanma gerekçesiyle Hindistan'ı tek taraflı su çekmekle suçladı.",
   },
   "conflict-24": {
-    title: "Türkiye'nin Körfez Savaşı Sırasında Fırat Akışını Kesmesi",
-    description: "Türkiye, Atatürk Barajı rezervuarını doldurmak için Fırat Nehri akışını bir ay boyunca kesti. Önceden bildirilmesine ve teknik tahliyelerle telafi edilmesine rağmen hamle, Suriye ve Irak'ta şiddetli diplomatik protestolara neden oldu.",
+    title: "Türkiye Körfez Savaşı Sırasında Fırat Akışını Kesti",
+    description: "Türkiye, dev Atatürk Barajı rezervuarını doldurmak amacıyla Fırat akışını bir ay süreyle kesti. Önceden komşu ülkelere duyurulmuş ve ilave su verilmiş olmasına rağmen, yaklaşan Körfez Savaşı gerilimiyle birlikte Irak ve Suriye sert diplomatik tepki gösterdi.",
   },
   "conflict-25": {
-    title: "Aral Denizi Eyaletlerarası Su Koordinasyon Komisyonu (ICWC)",
-    description: "Sovyetler Birliği'nin dağılmasının ardından beş Orta Asya cumhuriyeti (Kazakistan, Kırgızistan, Tacikistan, Türkmenistan, Özbekistan) Almatı Anlaşması'nı imzalayarak Seyhun ve Ceyhun sularını ortak yönetmek üzere ICWC'yi kurdu.",
+    title: "Aral Denizi Devletlerarası Su Koordinasyon Komisyonu (ICWC)",
+    description: "Sovyetler Birliği'nin dağılmasının ardından beş Orta Asya cumhuriyeti (Kazakistan, Kırgızistan, Tacikistan, Türkmenistan, Özbekistan), Seyhun ve Ceyhun havzalarındaki su kotalarını ortak yönetmek için Almatı Anlaşması ile ICWC'yi kurdu.",
   },
   "conflict-26": {
-    title: "Aral Denizi Orta Asya Bütçe Taahhüdü",
-    description: "Orta Asya liderleri, felaket düzeyinde kuruyan Aral Denizi havzasını rehabilite etmek ve yerel nüfusun ekolojik yaşam koşullarını iyileştirmek için ulusal bütçelerinin %1'ini Uluslararası Aral'ı Kurtarma Fonu'na (IFAS) tahsis etmeyi kabul etti.",
+    title: "Aral Denizi Orta Asya Bütçe Taahhüdü (Nukus Deklarasyonu)",
+    description: "Beş Orta Asya lideri Nukus'ta toplanarak Aral Denizi'ni Kurtarma Uluslararası Fonu'na (IFAS) ulusal bütçelerinin belirli bir oranını aktarmayı taahhüt etti.",
   },
   "conflict-27": {
-    title: "İsrail-Ürdün Barış Antlaşması Su Maddeleri",
-    description: "İsrail-Ürdün Barış Antlaşması'nın VI. Eki, Şeria ve Yarmuk nehirleri ile Vadi Araba yeraltı suları için karşılıklı su tahsislerini, tuzdan arındırma işbirliklerini ve depolama transferlerini resmileştirdi.",
+    title: "İsrail-Ürdün Barış Antlaşması Su Hükümleri",
+    description: "İsrail ile Ürdün arasında imzalanan Barış Antlaşması'nın II. Eki, Şeria ve Yermuk nehirlerinin sularının paylaşımı ile ortak tuz giderme ve su depolama projelerini düzenleyen kalıcı bir rejim getirdi.",
   },
   "conflict-28": {
     title: "Mekong Nehri Komisyonu Anlaşması",
-    description: "Kamboçya, Laos, Tayland ve Vietnam, Aşağı Mekong Havzası'nın Sürdürülebilir Kalkınması İçin İşbirliği Anlaşması'nı imzalayarak Mekong Nehri Komisyonu'nu (MRC) kurdu. Çin ve Myanmar diyalog ortağı olarak katıldı ancak tam üye olmadı.",
+    description: "Kamboçya, Laos, Tayland ve Vietnam, Aşağı Mekong Havzası'nın sürdürülebilir kalkınması için Chiang Rai Anlaşması'nı imzalayarak Mekong Nehri Komisyonu'nu (MRC) oluşturdu; ancak yukarı kıyıdaşlar Çin ve Myanmar tam üye olmadı.",
   },
   "conflict-29": {
-    title: "Çin Lancang (Mekong) Üzerinde Manwan Barajı'nı Başlattı",
-    description: "Çin, Yukarı Mekong (Lancang) nehri ana kolu üzerinde 1.500 MW kapasiteli Manwan Barajı'nı ticari işletmeye aldı. Bu baraj, aşağı havza ülkelerine danışılmadan inşa edilen devasa hidroelektrik baraj kademesinin ilk halkası oldu.",
+    title: "Çin Mekong (Lancang) Üzerinde Manwan Barajını İnşa Etti",
+    description: "Çin, Yukarı Mekong (Lancang) üzerindeki ilk büyük hidroelektrik barajı olan Manwan'ı işletmeye aldı; bu durum aşağı havza ülkelerinde akış rejiminin bozulacağı ve tortu akışının kesileceği endişelerini başlattı.",
   },
   "conflict-30": {
     title: "Hindistan-Bangladeş Ganj Suları Paylaşım Antlaşması",
-    description: "Hindistan ve Bangladeş, 1 Ocak ile 31 Mayıs arasındaki kurak mevsimde Farakka Barajı'ndaki su paylaşımını belirleyen 30 yıllık tarihi bir antlaşma imzalayarak 20 yıllık ikili su krizine kapsamlı bir formül getirdi.",
+    description: "Hindistan ve Bangladeş, Farakka Bendi'nde 30 yıllık bağlayıcı bir su paylaşım formülü belirleyen tarihi Ganj Antlaşması'nı imzalayarak yarım asırlık uyuşmazlığı kurumsal bir çözüme kavuşturdu.",
   },
   "conflict-31": {
-    title: "Irak'tan Dicle-Fırat Paylaşım Anlaşması Çağrısı",
-    description: "Irak, Türkiye'nin Güneydoğu Anadolu Projesi (GAP) barajları inşaatının hızlanması üzerine BM'ye ve Arap Birliği'ne başvurarak Dicle ve Fırat nehirleri için bağlayıcı bir üçlü su paylaşım kotası belirlenmesini talep etti.",
+    title: "Irak Dicle ve Fırat İçin Nihai Su Paylaşım Anlaşması Çağrısı Yaptı",
+    description: "Irak, Türkiye'nin GAP projeleri ve Suriye barajları nedeniyle debilerin azaldığını belirterek üç kıyıdaş devlet arasında bağlayıcı ve nihai bir su tahsis anlaşması imzalanması çağrısında bulundu.",
   },
   "conflict-32": {
     title: "Tuna Nehri Koruma Sözleşmesi Yürürlüğe Girdi",
-    description: "Tuna Nehri Koruma Sözleşmesi (DRPC) yürürlüğe girerek Tuna Havzası'nda sürdürülebilir su yönetimi, kirlilik kontrolü ve ekolojik restorasyon için Uluslararası Tuna Koruma Komisyonu'nu (ICPDR) yetkilendirdi.",
+    description: "Tuna Havzası'ndaki 14 ülke ve Avrupa Birliği'nin imzaladığı Sofia Sözleşmesi yürürlüğe girdi ve Tuna Nehri'ni Koruma Uluslararası Komisyonu (ICPDR) resmen çalışmaya başladı.",
   },
   "conflict-33": {
     title: "Nil Havzası Girişimi (NBI) Kuruldu",
-    description: "Tüm Nil kıyıdaş ülkeleri (Eritre gözlemci olarak) Darüsselam'da Nil Havzası Girişimi'ni kurarak havzanın ortak kalkınması ve kalıcı bir yasal çerçevenin müzakere edilmesi için ortak bir platform oluşturdu.",
+    description: "Nil kıyıdaşı 10 ülke, kaynakları adil paylaşmak, teknik işbirliğini artırmak ve sürdürülebilir kalkınmayı sağlamak üzere Darüsselam'da Nil Havzası Girişimi'ni (NBI) başlattı.",
   },
   "conflict-34": {
     title: "Cochabamba Su Savaşı, Bolivya",
-    description: "Bolivya'nın Cochabamba kentinde belediye su sisteminin Bechtel konsorsiyumuna özelleştirilmesinin ve su tarifelerinin fahiş oranda artırılmasının ardından halk ayaklanması çıktı; haftalar süren çatışmaların ardından hükümet sözleşmeyi iptal etti.",
+    description: "Bolivya'nın Cochabamba kentinde içme suyu şebekesinin özelleştirilmesi ve faturaların %300'e varan oranlarda artması üzerine kitlesel halk ayaklanması çıktı; olağanüstü hal ilan edildi ve hükümet özelleştirme sözleşmesini feshetmek zorunda kaldı.",
   },
   "conflict-35": {
-    title: "Hindistan'ın Baglihar Barajı Üzerine Pakistan ile İhtilafı",
-    description: "Pakistan, Hindistan'ın Chenab Nehri üzerinde inşa ettiği 900 MW'lık Baglihar Hidroelektrik Santrali'nin baraj göleti ve savak tasarımının 1960 İndus Antlaşması'nı ihlal ettiğini ileri sürerek projeye resmen itiraz etti.",
+    title: "Hindistan-Pakistan Baglihar Barajı İhtilafı",
+    description: "Pakistan, Hindistan'ın Chenab Nehri üzerinde inşa ettiği Baglihar Hidroelektrik Santrali'nin İndus Suları Antlaşması'nın su depolama ve tahliye kriterlerini ihlal ettiğini ileri sürerek uluslararası arabuluculuk sürecini başlattı.",
   },
   "conflict-36": {
-    title: "Irak Savaşı: Su Altyapısının Yıkımı",
-    description: "2003 Irak işgali ve sonrasındaki çatışmalar; elektrik şebekesinin, arıtma tesislerinin ve su dağıtım boru hatlarının çökmesine neden oldu. Milyonlarca sivil temiz suya erişimini kaybederek kolera ve tifo salgınlarıyla karşı karşıya kaldı.",
+    title: "Irak Savaşı: Su Altyapısının Yıkımı ve Hedef Alınması",
+    description: "ABD liderliğindeki askeri harekat ve sonrasındaki çatışmalarda Irak'ın su arıtma, dağıtım ve kanalizasyon şebekeleri bombalandı, elektrik kesintileriyle hizmet dışı kaldı; milyonlarca sivil temiz sudan mahrum kaldı.",
   },
   "conflict-37": {
     title: "Zambezi Su Yolu Komisyonu Anlaşması (ZAMCOM)",
-    description: "Sekiz kıyıdaş Afrika devleti, Güney Afrika'nın en büyük dördüncü nehir havzası olan Zambezi havzasında ortak ve sürdürülebilir su kaynakları yönetimini teşvik etmek üzere ZAMCOM Anlaşması'nı imzaladı.",
+    description: "Sekiz kıyıdaş ülke (Angola, Botsvana, Malavi, Mozambik, Namibya, Tanzanya, Zambiya, Zimbabve), Kasane'de ZAMCOM Anlaşması'nı imzalayarak ortak havza yönetimi için kurumsal temel attı.",
   },
   "conflict-38": {
-    title: "Kazakistan Kok-Aral Barajı ile Kuzey Aral'ı Kurtardı",
-    description: "Kazakistan, Dünya Bankası desteğiyle Kok-Aral Barajı'nı tamamlayarak Kuzey Aral Denizi'ni Güney Aral'dan ayırdı. Kuzey Aral'da su seviyesi 8 metre yükseldi, tuzluluk azaldı ve ticari balıkçılık yeniden canlandı.",
+    title: "Kazakistan Kök-Aral Barajı ile Kuzey Aral Denizi'ni Kurtardı",
+    description: "Dünya Bankası desteğiyle tamamlanan 13 kilometrelik Kök-Aral Bendi, Seyhun Nehri'nin sularını Kuzey Aral'da toplayarak su seviyesini 38 metreden 42 metreye çıkardı, tuzluluğu yarıya indirdi ve balıkçılığı yeniden canlandırdı.",
   },
   "conflict-39": {
-    title: "Fırat-Dicle İşbirliği Girişimi (ETIC)",
-    description: "Türkiye, Suriye, Irak ve uluslararası uzmanlar, Fırat-Dicle havzasında teknik işbirliği, veri paylaşımı ve akademik diplomasi yoluyla güven inşa etmek amacıyla ETIC girişimini başlattı.",
+    title: "Fırat-Dicle İşbirliği Girişimi (ETIC) Başlatıldı",
+    description: "Türkiye, Suriye ve Irak'tan akademisyenler ve su uzmanları, siyasi kutuplaşmayı aşmak ve havzada teknik veri paylaşımı ile ortak projeler üretmek üzere sivil toplum odaklı ETIC platformunu kurdu.",
   },
   "conflict-40": {
-    title: "Dünya Bankası Tarafsız Uzmanı Baglihar Barajı Kararını Verdi",
-    description: "İsviçreli profesör Raymond Lafitte, İndus Suları Antlaşması tarihindeki ilk tarafsız uzman tahkiminde Hindistan'ın Baglihar Barajı'ndaki savak yüksekliğini hafifçe düşürmesine hükmetti ancak baraj inşasının devamına onay verdi.",
+    title: "Dünya Bankası Tarafsız Uzmanı Baglihar Kararını Verdi",
+    description: "Dünya Bankası tarafından atanan İsviçreli tarafsız uzman Prof. Raymond Lafitte, Hindistan'ın baraj yüksekliğini ve batık savak tasarımını kısmen revize etmesine, ancak projenin ana hatlarıyla devamına onay vererek teknik ihtilafı çözdü.",
   },
   "conflict-41": {
-    title: "Nil İşbirliği Çerçeve Anlaşması (CFA) Müzakereleri Tıkandı",
-    description: "Nil Havzası Girişimi müzakerelerinde, Mısır ve Sudan'ın 1929 ve 1959 anlaşmalarından doğan 'tarihi haklarının' korunması maddesini şart koşması ve yukarı havza ülkelerinin bunu reddetmesi üzerine görüşmeler kilitlendi.",
+    title: "Nil CFA Müzakereleri Tıkandı",
+    description: "Yukarı havza ülkeleri ile aşağı havza ülkeleri (Mısır ve Sudan) arasındaki görüşmeler, 1929 ve 1959 anlaşmalarındaki tarihi su hakları ve ön onay veto hakkı maddesi (Madde 14b) üzerinde uzlaşma sağlanamaması sebebiyle kilitlendi.",
   },
   "conflict-42": {
     title: "Nijer Havzası Su Şartı Kabul Edildi",
-    description: "Dokuz kıyıdaş devletin devlet başkanları, Nijer Havzası'nda adil su tahsisi ilkelerini, çevre korumayı ve sınır aşan ortak projeleri düzenleyen bağlayıcı Nijer Su Şartı'nı kabul etti.",
+    description: "Nijer Havzası Otoritesi üyesi 9 ülkenin devlet başkanları, havzada su tahsisi, ortak baraj yönetimi ve çevresel koruma ilkelerini belirleyen bağlayıcı Su Şartı'nı kabul etti.",
   },
   "conflict-43": {
-    title: "Türkiye-Irak ve Türkiye-Suriye Su Mutabakat Zabıtları",
-    description: "Türkiye, Irak ve Suriye ile ikili ilişkilerin zirvesinde su kaynakları, meteorolojik veri paylaşımı, baraj yönetimi ve kuraklıkla mücadele konularında ortak mutabakat zabıtları (MoU) imzaladı.",
+    title: "Türkiye-Irak ve Türkiye-Suriye Su Mutabakat Muhtıraları",
+    description: "Türkiye, Irak ve Suriye arasında kurulan Yüksek Düzeyli Stratejik İşbirliği Konseyleri kapsamında su yönetimi, modern sulama teknikleri ve meteorolojik veri paylaşımına ilişkin kapsamlı mutabakat zabıtları imzalandı.",
   },
   "conflict-44": {
-    title: "Mekong Düşük Su Seviyesi Krizi",
-    description: "Aşağı Mekong Havzası'nda su seviyelerinin rekor düzeyde düşmesi naviyasyonu ve balıkçılığı felce uğrattı. Aşağı kıyıdaşlar Çin'in yeni faaliyete geçen Xiaowan Barajı'nı su tutmakla suçlarken, Çin krizin şiddetli kuraklıktan kaynaklandığını savundu.",
+    title: "Mekong Havzasında Tarihi Düşük Su Seviyesi Krizi",
+    description: "Aşağı Mekong'da su seviyeleri 50 yılın en düşük düzeyine geriledi; kıyıdaş topluluklar kuraklık ve Çin'in yukarı havzada inşa ettiği kaskat barajların su tutmasını ana etken olarak suçladı.",
   },
   "conflict-45": {
     title: "Nil İşbirliği Çerçeve Anlaşması (CFA) İmzaya Açıldı",
-    description: "Etiyopya, Uganda, Ruanda, Tanzanya ve Kenya, Entebbe'de Mısır ve Sudan'ın vetolarını aşarak Nil CFA'yı imzaladı. Anlaşma, sömürge dönemi kotaları yerine adil ve makul kullanım ilkesini getirdi.",
+    description: "Etiyopya, Uganda, Ruanda, Tanzanya ve Kenya, Entebbe'de Mısır ve Sudan'ın boykot ettiği Nil CFA'yı imzalayarak eşitlikçi ve makul kullanım ilkesini benimsedi ve sömürge dönemi anlaşmalarını tanımadıklarını ilan etti.",
   },
   "conflict-46": {
     title: "Etiyopya Büyük Rönesans Barajı'nı (GERD) Duyurdu",
-    description: "Arap Baharı sırasında Mısır'daki siyasi çalkantıdan yararlanan Etiyopya Başbakanı Meles Zenawi, Mavi Nil üzerinde 5.000+ MW kapasiteli ve 74 milyar m³ rezervuarlı Büyük Rönesans Barajı'nın inşasını resmen duyurdu.",
+    description: "Etiyopya, Mavi Nil üzerinde 5 milyar dolarlık ve 74 milyar m³ rezervuar kapasiteli Afrika'nın en büyük hidroelektrik santrali olacak GERD projesini kamuoyuna ilan etti; bu adım Nil jeopolitiğinde tarihi bir kırılma yarattı.",
   },
   "conflict-47": {
-    title: "Xayaburi Barajı Tartışması, Laos",
-    description: "Laos, Mekong Nehri Komisyonu'nun Ön İstişare sürecinde komşuları Kamboçya ve Vietnam'ın balık göçü ve tortu akışı konusundaki ciddi itirazlarına rağmen 1.285 MW'lık Xayaburi Barajı'nın inşasına tek taraflı olarak başladı.",
+    title: "Laos Xayaburi Barajı Tartışması, Mekong",
+    description: "Laos, Aşağı Mekong ana kolu üzerindeki ilk hidroelektrik baraj olan 1.285 MW'lık Xayaburi Barajı'nın inşasına başladı; Kamboçya ve Vietnam balık göçü ve alüvyon akışının kesileceğini belirterek sert diplomatik itirazlarda bulundu.",
   },
   "conflict-48": {
-    title: "Etiyopya Nil CFA'yı Onayladı",
-    description: "Etiyopya Parlamentosu Nil İşbirliği Çerçeve Anlaşması'nı (CFA) oybirliğiyle onaylayarak, Mısır Cumhurbaşkanı Muhammed Mursi'nin baraj inşasını engellemek için 'tüm seçeneklerin masada olduğu' yönündeki açıklamalarına meydan okudu.",
+    title: "Etiyopya Nil CFA'sını Mecliste Onayladı",
+    description: "Etiyopya Parlamentosu, 1929 anlaşmasının hükümsüz olduğunu tescil eden Nil İşbirliği Çerçeve Anlaşması'nı oybirliğiyle onayladı; bu adım Mısır'da televizyondan canlı yayınlanan kriz toplantılarına ve savaş tehditlerine yol açtı.",
   },
   "conflict-49": {
-    title: "Ukrayna Kuzey Kırım Kanalı'nı Kapattı",
-    description: "Rusya'nın Kırım'ı yasadışı ilhakının ardından Ukrayna, yarımadanın tatlı su ihtiyacının %85'ini karşılayan Dinyeper Nehri kaynaklı Kuzey Kırım Kanalı'na set çekerek akışı tamamen kesti.",
+    title: "Ukrayna Kuzey Kırım Kanalı'nı Kesti",
+    description: "Rusya'nın Kırım'ı ilhakının ardından Ukrayna, yarımadanın tatlı su ihtiyacının %85'ini karşılayan Dinyeper kaynaklı Kuzey Kırım Kanalı'nın akışını bir setle keserek suyu stratejik bir karşı baskı aracı olarak kullandı.",
   },
   "conflict-50": {
     title: "Mısır-Etiyopya-Sudan İlkeler Deklarasyonu",
-    description: "Mısır Cumhurbaşkanı Sisi, Etiyopya Başbakanı Desalegn ve Sudan Devlet Başkanı Beşir, Hartum'da GERD Barajı için zarar vermeme, adil kullanım ve barışçıl uyuşmazlık çözümü ilkelerini içeren 10 maddelik İlkeler Bildirgesi'ni imzaladı.",
+    description: "Üç ülkenin devlet başkanları Hartum'da toplanarak GERD'in ilk dolumu ve işletilmesinde tarafların birbirine 'önemli zarar vermeme' ve 'adil kullanım' ilkelerine bağlı kalacağını belirten 10 maddelik İlkeler Deklarasyonu'nu imzaladı.",
   },
   "conflict-51": {
     title: "Pakistan Kishanganga ve Ratle Barajları İçin Tahkim İstedi",
-    description: "Pakistan, Hindistan'ın Jhelum ve Chenab kolları üzerinde inşa ettiği Kishanganga (330 MW) ve Ratle (850 MW) hidroelektrik santrallerinin akış kontrolü tasarımını ihlal ettiği gerekçesiyle Lahey Daimi Tahkim Mahkemesi'ne başvurdu.",
+    description: "Pakistan, Hindistan'ın Jhelum kolu Kishanganga ve Chenab üzerindeki Ratle projelerinin İndus Antlaşması tasarım kurallarını aştığını belirterek Lahey Daimi Tahkim Mahkemesi'ne (PCA) başvurdu.",
   },
   "conflict-52": {
-    title: "Mekong Son 100 Yılın En Düşük Seviyesine Geriledi",
-    description: "Mekong ana kolunda su seviyeleri son yüzyılın en düşük seviyelerine inerek nehir renginin maviye dönmesine ve balık popülasyonlarının çökmesine yol açtı; uydu verileri Çin barajlarının yukarı havzada su tuttuğunu ortaya koydu.",
+    title: "Mekong Son 100 Yılın En Düşük Seviyesine İndi",
+    description: "Aşağı Mekong Nehri'nde eşi görülmemiş kuraklık ve su çekilmesi yaşandı; nehir rengi maviye dönüştü (besin sedimenti yok oldu). Uydu analizleri Çin rezervuarlarının yukarıda milyarlarca metreküp su tuttuğunu ortaya koydu.",
   },
   "conflict-53": {
-    title: "Cauvery Su Anlaşmazlığı: Hindistan Eyaletlerarası Çatışma",
-    description: "Hindistan Yüksek Mahkemesi, Karnataka ve Tamil Nadu eyaletleri arasında yüzyıllık Cauvery Nehri su paylaşımı davasında nihai kararını vererek Tamil Nadu'nun payını hafifçe düşürdü; eyaletler arasında kitlesel protestolar ve grevler patlak verdi.",
+    title: "Cauvery Su İhtilafı: Hindistan Eyaletlerarası Şiddet",
+    description: "Karnataka ve Tamil Nadu eyaletleri arasında Cauvery Nehri su tahsisi konusunda çıkan anlaşmazlık kitlesel protestolara, araç kundaklamalarına ve sokağa çıkma yasaklarına dönüştü; Hindistan Yüksek Mahkemesi tahsis kotalarını zorunlu olarak yeniden belirledi.",
   },
   "conflict-54": {
-    title: "Hindistan Pulwama Saldırısı Sonrası İndus Kollarını Kesmekle Tehdit Etti",
-    description: "Keşmir'de 40 Hint polisinin öldürüldüğü intihar saldırısının ardından Hindistan Su Kaynakları Bakanı Nitin Gadkari, doğu nehirlerinden Pakistan'a akan kullanılmayan saptırma sularının kesilerek Haryana ve Pencap'a aktarılacağını açıkladı.",
+    title: "Hindistan Pulwama Saldırısı Sonrası İndus Kollarını Kesme Tehdidinde Bulundu",
+    description: "Keşmir'deki Pulwama terör saldırısının ardından Hindistan Su Kaynakları Bakanlığı, Hindistan'a ait doğu nehir sularının Pakistan'a akmasını tamamen durdurup Hint eyaletlerine yönlendirecek projeleri hızlandırdığını açıkladı.",
   },
   "conflict-55": {
-    title: "Etiyopya İkinci Nil CFA Onay Çabaları",
-    description: "Etiyopya ve Doğu Afrika müttefikleri, Nil CFA'nın yürürlüğe girmesi için gereken altıncı onayı sağlamak amacıyla Kongo Demokratik Cumhuriyeti ve Güney Sudan nezdinde diplomatik baskıyı artırdı.",
+    title: "Etiyopya Nil CFA İkinci Tur Müzakereleri",
+    description: "ABD ve Dünya Bankası arabuluculuğunda Washington'da yürütülen GERD dolum müzakereleri, Etiyopya'nın bağlayıcı bir kuraklık protokolünü ulusal egemenliğe aykırı bulması ve nihai taslak toplantısını terk etmesiyle sonuçsuz kaldı.",
   },
   "conflict-56": {
     title: "Mısır GERD İhtilafını BM Güvenlik Konseyi'ne Taşıdı",
-    description: "Washington'da ABD ve Dünya Bankası arabuluculuğunda yürütülen üçlü müzakerelerin Etiyopya'nın son tur toplantıya katılmamasıyla çökmesinin ardından Mısır, Etiyopya'nın tek taraflı baraj doldurma girişimini BM Güvenlik Konseyi'ne şikayet etti.",
+    description: "Mısır, Etiyopya'nın tek taraflı baraj doldurma hamlelerinin uluslararası barış ve güvenliği tehdit ettiğini ileri sürerek konuyu Birleşmiş Milletler Güvenlik Konseyi'ne (BMGK) taşıdı ve acil müdahale talep etti.",
   },
   "conflict-57": {
-    title: "Etiyopya İlk GERD Doldurma İşlemini Tamamladı",
-    description: "Etiyopya, Mısır ve Sudan ile bağlayıcı bir doldurma ve işletme anlaşması imzalanmadan, yoğun yağış mevsiminden yararlanarak GERD rezervuarında 4,9 milyar m³ su tuttuğunu resmen açıkladı.",
+    title: "Etiyopya İlk GERD Dolumunu Gerçekleştirdi",
+    description: "Etiyopya, Mısır ve Sudan ile üçlü bir anlaşmaya varmadan GERD rezervuarının ilk aşama dolumunu (4,9 milyar m³) tamamladığını açıkladı ve bunun yoğun muson yağmurları sayesinde doğal olarak gerçekleştiğini savundu.",
   },
   "conflict-58": {
-    title: "Meksika-ABD Colorado/Rio Grande Su Borcu Gerilimi",
-    description: "Meksika'nın 1944 Su Antlaşması kapsamındaki beş yıllık su teslimat borcunu ödemek için Chihuahua eyaletindeki La Boquilla Barajı'ndan ABD'ye su salma kararı, binlerce Meksikalı çiftçinin barajı işgal etmesi ve Ulusal Muhafızlarla çatışmasıyla sonuçlandı.",
+    title: "Meksika-ABD Rio Grande Su Borcu Gerginliği",
+    description: "1944 Su Antlaşması kapsamında ABD'ye su teslimatı yapılmasına karşı çıkan Meksikalı çiftçiler, Chihuahua eyaletindeki La Boquilla Barajı'nı işgal etti; Meksika Ulusal Muhafızları ile çiftçiler arasında çıkan çatışmada can kayıpları yaşandı.",
   },
   "conflict-59": {
     title: "Kırgızistan-Tacikistan İsfara Nehri Silahlı Çatışması",
-    description: "Kırgızistan ve Tacikistan sınır güçleri arasında İsfara Nehri üzerindeki Golovnoy su dağıtım tesisi çevresinde gözetleme kamerası kurulması yüzünden çıkan silahlı çatışmada 50'den fazla kişi hayatını kaybetti, binlerce köylü tahliye edildi.",
+    description: "Ortak Golovnoy su dağıtım noktasına güvenlik kameraları takılması üzerine başlayan sınır uyuşmazlığı, iki ülke orduları arasında havan ve zırhlı araçların kullanıldığı 3 günlük çatışmaya dönüştü; 55'ten fazla kişi hayatını kaybetti.",
   },
   "conflict-60": {
-    title: "Etiyopya İkinci GERD Doldurmasını Anlaşmasız Gerçekleştirdi",
-    description: "Etiyopya, Mısır ve Sudan'ın tüm diplomatik itirazlarına rağmen GERD rezervuarına ilave 13,5 milyar m³ su ekleyerek ikinci aşama doldurmayı tamamladı; Kahire hamleyi uluslararası hukukun açık ihlali ilan etti.",
+    title: "Etiyopya Anlaşmasız İkinci GERD Dolumunu Yaptı",
+    description: "Etiyopya, aşağı kıyıdaşların itirazlarına rağmen ikinci yıl dolumunu tamamlayarak baraj rezervuarındaki toplam su miktarını 13,5 milyar m³ seviyesine çıkardı.",
   },
   "conflict-61": {
-    title: "Afganistan Hilmend Üzerinde Kemal Han Barajı'nı Açtı",
-    description: "Afganistan Devlet Başkanı Eşref Gani, Nimruz vilayetinde Kemal Han Barajı'nı açarak 'İran'a artık bedava su verilmeyeceğini, petrol karşılığında su verileceğini' ilan etti; bu durum Tahran ile diplomatik krizi tırmandırdı.",
+    title: "Afganistan Helmand Üzerindeki Kemal Han Barajı'nı Açtı",
+    description: "Afganistan Devlet Başkanı Eşref Gani, 'Suya karşı petrol' söylemiyle Helmand Nehri üzerindeki Kemal Han Barajı'nı açtı; İran'ın Hamun sulak alanlarına giden suyun kesilmesi Tahran'da büyük tepkiye yol açtı.",
   },
   "conflict-62": {
     title: "Kırgızistan-Tacikistan Geniş Çaplı Sınır ve Su Çatışmaları",
-    description: "Kırgız-Tacik sınırında su kanalları ve tartışmalı araziler yüzünden tank ve ağır topların kullanıldığı büyük çatışmalar çıktı; 100'den fazla insan hayatını kaybetti ve 130.000'den fazla insan yerinden edildi.",
+    description: "Sınır ve su tesisleri üzerindeki kontrol uyuşmazlığı sebebiyle Kırgızistan ve Tacikistan sınırında topyekün çatışmalar patlak verdi; 100'den fazla insan öldü, 140 bin kişi tahliye edildi ve su pompaları zarar gördü.",
   },
   "conflict-63": {
-    title: "Afganistan-İran Hilmend Gerilimi Tırmandı",
-    description: "Taliban yönetiminin Kemal Han Barajı savaklarını kapalı tutması ve İran'ın Sistan-Belucistan eyaletine su akışını engellemesi üzerine İran Cumhurbaşkanı Reisi, Taliban'ı 1973 anlaşması taahhütlerini ihlal etmekle suçladı ve sert önlemlerle uyardı.",
+    title: "Afganistan-İran Helmand Gerilimi Tırmandı",
+    description: "İran Cumhurbaşkanı İbrahim Reisi, Taliban rejimine Helmand Nehri su haklarını teslim etmesi için açık ültimatom verdi; Taliban yetkilileri ise kuraklık sebebiyle rezervuarlarda su bulunmadığını iddia etti.",
   },
   "conflict-64": {
-    title: "Etiyopya Üçüncü GERD Doldurmasını Gerçekleştirdi",
-    description: "Etiyopya Başbakanı Abiy Ahmed, GERD rezervuarındaki su miktarının 22 milyar m³'e ulaştığını ve ikinci türbinin elektrik üretmeye başladığını duyurarak barajın geri döndürülemez bir gerçeklik olduğunu vurguladı.",
+    title: "Etiyopya Üçüncü GERD Dolumunu Tamamladı",
+    description: "Etiyopya, GERD rezervuarına üçüncü aşamada 8 milyar m³ ilave su depolandığını ve ikinci türbinin elektrik üretmeye başladığını duyurdu.",
   },
   "conflict-65": {
-    title: "Lahey Daimi Tahkim Mahkemesi İndus Yetkisini Onayladı",
-    description: "Lahey Daimi Tahkim Mahkemesi (PCA), Hindistan'ın boykotuna ve itirazlarına rağmen Pakistan'ın Kishanganga ve Ratle barajları hakkındaki başvurusunu inceleme konusunda tam yetkili olduğuna hükmetti.",
+    title: "Lahey Daimi Tahkim Mahkemesi İndus Yetkisini Teyit Etti",
+    description: "Lahey Daimi Tahkim Mahkemesi (PCA), Hindistan'ın yargı yetkisi itirazını reddederek Pakistan'ın Kishanganga ve Ratle projelerine ilişkin davasını görmeye tam yetkili olduğuna karar verdi.",
   },
   "conflict-66": {
-    title: "İsrail'in Gazze Su Altyapısına 250'den Fazla Saldırısı",
-    description: "7 Ekim 2023 sonrası başlayan savaşta İsrail elektrik ve su tedarikini kesti; su kuyularını, tuzdan arındırma tesislerini ve kanalizasyon altyapısını bombalayarak Gazze nüfusunun %95'ini güvenli içme suyundan mahrum bıraktı ve insani felakete yol açtı.",
+    title: "İsrail Gazze Su Altyapısını ve Dağıtımını Vurdu",
+    description: "Ekim 2023'ten itibaren İsrail ordusu Gazze Şeridi'ne giden su boru hatlarını kesti, tuz giderme tesislerini, atık su arıtma ünitelerini ve su kuyularını hedef aldı; BM ve insan hakları örgütleri suyu savaş silahı olarak kullanma suçlamasında bulundu.",
   },
   "conflict-67": {
-    title: "İran-Afganistan Hilmend Ölümcül Çatışmaları",
-    description: "Hilmend Nehri su hakları geriliminin zirveye çıkmasıyla İran sınır muhafızları ile Taliban güçleri arasında sınır kapısında çıkan ağır silahlı çatışmada her iki taraftan askerler hayatını kaybetti.",
+    title: "İran-Afganistan Helmand Sınırında Ölümcül Çatışma",
+    description: "Helmand su hakları geriliminin zirveye ulaştığı Mayıs 2023'te İran sınır muhafızları ile Taliban güçleri arasında sınır karakollarında ağır silahlarla çatışma çıktı; sınır muhafızları hayatını kaybetti.",
   },
   "conflict-68": {
     title: "Hindistan Nagarjunasagar Barajı Polis Çatışması",
-    description: "Krishna Nehri suları üzerinde anlaşmazlık yaşayan Hindistan'ın Andhra Pradeş ve Telangana eyaletleri, yüzlerce silahlı polisi Nagarjunasagar Barajı'na konuşlandırarak baraj kontrolü için fiili çatışmanın eşiğine geldi.",
+    description: "Krishna Nehri üzerindeki kritik Nagarjunasagar Barajı'nın kontrolü ve su boşaltımı sebebiyle komşu Andhra Pradesh ve Telangana eyaletlerinin polis güçleri baraj gövdesinde fiziksel çatışmaya girdi; merkezi hükümet paramiliter birlik sevk etti.",
   },
   "conflict-69": {
     title: "Kırgızistan-Tacikistan Nihai Sınır ve Su Anlaşması",
-    description: "Yıllar süren kanlı çatışmaların ardından Kırgızistan ve Tacikistan heyetleri, ortak su tesislerinin yönetimi ve tartışmalı sınır hatlarının kesin olarak belirlenmesi konusunda tarihi bir nihai protokol üzerinde anlaştı.",
+    description: "Kırgızistan ve Tacikistan hükümetleri, Batken'de sınır hattının %98'ini belirleyen ve kanallar ile Golovnoy su tesisinin ortak yönetim rejimini kuran nihai barış protokolünü parafe etti.",
   },
   "conflict-70": {
-    title: "GERD Resmi Açılışı Yapıldı, Mısır BM'ye Şikayet Etti",
-    description: "Etiyopya Başbakanı Abiy Ahmed, GERD baraj gövdesinin ve dolusavaklarının tamamlandığını duyurdu. Mısır Dışişleri Bakanı Bedr Abdülati, BM Güvenlik Konseyi'ne resmi mektup yazarak tek taraflı eylemlerin bölgesel güvenliğe tehdit olduğunu bildirdi.",
+    title: "GERD Resmi Olarak Hizmete Açıldı, Mısır BMGK'ya Başvurdu",
+    description: "Etiyopya Başbakanı Abiy Ahmed, GERD'in 4 türbininin faaliyete geçtiğini ve rezervuar dolumunun son aşamaya geldiğini duyurdu. Mısır Dışişleri Bakanlığı BM Güvenlik Konseyi'ne resmi şikayet mektubu yazarak uluslararası hukukun çiğnendiğini belirtti.",
   },
   "conflict-71": {
-    title: "Hindistan Pahalgam Saldırısı Sonrası İndus Antlaşması'nı Askıya Aldı",
-    description: "Hindistan, Keşmir'deki terör saldırılarının ardından Pakistan'a resmi bildirimde bulunarak 1960 İndus Suları Antlaşması'nın esaslı ihlal gerekçesiyle askıya alındığını ve sınır aşan nehir akışlarının tek taraflı yönetileceğini duyurdu.",
+    title: "Hindistan Terör Saldırısı Sonrası İndus Antlaşmasını Askıya Aldı",
+    description: "Keşmir Pahalgam'da yaşanan ölümcül terör saldırısının ardından Hindistan hükümeti, Pakistan'a resmi nota vererek 1960 İndus Suları Antlaşması'nı 'terör tehdidi ve köklü koşul değişiklikleri' gerekçesiyle tek taraflı olarak askıya aldığını bildirdi.",
   },
   "conflict-72": {
     title: "ABD-Kanada Kolombiya Nehri Antlaşması Revizyonu Tıkandı",
-    description: "Kolombiya Nehri Antlaşması'nın 60 yıllık sel kontrolü ve 'Kanada Yetkisi' enerji paylaşımı hükümlerinin modern iklim ve yerli halk haklarına göre güncellenmesi müzakereleri tarafların tazminat anlaşmazlığı sebebiyle kilitlendi.",
+    description: "60 yıllık antlaşmanın modernizasyonu için 2024'te varılan ilke anlaşması, somon balığı göçü ve Kanada'ya ödenecek taşkın koruma bedelleri konusundaki anlaşmazlıklar sebebiyle yürürlüğe girmekte güçlük yaşadı.",
   },
   "conflict-73": {
-    title: "Kırgızistan-Tacikistan-Özbekistan Su Zirvesi",
-    description: "Üç Orta Asya cumhuriyetinin liderleri Fergana Vadisi'nde toplanarak Kambarata-1 Hidroelektrik Santrali'nin ortak inşası ve yaz sulama sezonu için garantili su salımları konusunda mutabakata vardı.",
+    title: "Orta Asya Su-Enerji Zirvesi ve Konsorsiyum Kararı",
+    description: "Kazakistan, Kırgızistan ve Özbekistan devlet başkanları Bişkek'te bir araya gelerek Kambarata-1 HES'in inşasını finanse edecek ve Seyhun akış rejimini güvenceye alacak Devletlerarası Su-Enerji Konsorsiyumu'nu onayladı.",
   },
   "conflict-74": {
     title: "Kolorado Nehri Sözleşmesi İmzalandı",
-    description: "Herbert Hoover başkanlığında yedi ABD eyaleti (Wyoming, Colorado, Utah, New Mexico, Nevada, Arizona, California), yıllık 15 milyon akre-feet Kolorado Nehri suyunu Yukarı ve Aşağı Havza arasında eşit paylaştıran tarihi sözleşmeyi imzaladı.",
+    description: "ABD'nin yedi havza eyaleti, Santa Fe'de Kolorado Nehri sularını Yukarı ve Aşağı Havza arasında yıllık 7,5 milyon akre-feet (9,25 milyar m³) şeklinde eşit paylaştıran tarihi sözleşmeyi imzaladı.",
   },
   "conflict-75": {
     title: "ABD-Meksika Rio Grande ve Kolorado Nehri Antlaşması",
-    description: "Amerika Birleşik Devletleri ve Meksika, Rio Grande, Kolorado ve Tijuana nehirlerinin sularını paylaştıran ve ikili sınır suları komisyonunu (IBWC) kuran kapsamlı sınır aşan su antlaşmasını imzaladı.",
+    description: "ABD ve Meksika, Rio Grande, Kolorado ve Tijuana nehirlerinin sularını karşılıklı garanti kotalarıyla tahsis eden ve Uluslararası Sınır ve Su Komisyonu'nu (IBWC) kuran kapsamlı sınır su antlaşmasını imzaladı.",
   },
   "conflict-76": {
     title: "İsrail Ulusal Su Taşıyıcısı İşletmeye Alındı",
-    description: "İsrail, Taberiye Gölü'nden güneydeki Necef Çölü'ne devasa boru hatlarıyla yılda yüz milyonlarca metreküp su aktaran Ulusal Su Taşıyıcısı projesini devreye aldı; Arap devletleri projeyi şiddetle kınadı.",
+    description: "İsrail, Taberiye Gölü sularını boru hatları ve kanallarla kıyı ovalarına ve Necef Çölü'ne taşıyan Ulusal Su Taşıyıcısı'nı tam kapasite devreye aldı; komşu Arap devletleri suyun izinsiz çalındığını ilan etti.",
   },
   "conflict-77": {
     title: "Ren Nehri Kimyasal Kirlilik Krizi",
-    description: "Ren Nehri'ne karışan böcek ilacı Endosulfan, Almanya ve Hollanda boyunca 20 milyondan fazla balığın ölümüne yol açarak Ren Nehri'ni 'Avrupa'nın kanalizasyonu' haline getirdi ve acil çevre koruma yasalarını tetikledi.",
+    description: "Endosülfan böcek ilacının Ren Nehri'ne karışması sonucu Almanya ve Hollanda boyunca milyonlarca balık öldü; içme suyu alımları durduruldu ve bu facia Avrupa'da nehir koruma hukuku reformunu tetikledi.",
   },
   "conflict-78": {
-    title: "Sandoz Kimyasal Faciası Ren Nehri'ni Zehirledi",
-    description: "İsviçre'nin Basel kentindeki Sandoz kimya deposunda çıkan yangın sonrası tonlarca zehirli tarım ilacı ve cıva Ren Nehri'ne karıştı; yüzlerce kilometre boyunca nehir yaşamı yok oldu ve kıyıdaş ülkelerin içme suyu alımı durduruldu.",
+    title: "Sandoz Kimyasal Faciası Ren Nehrini Zehirledi",
+    description: "Basel yakınlarındaki Sandoz kimya deposunda çıkan yangını söndürmek için sıkılan tonlarca böcek ilaçlı su Ren'e aktı; yüzlerce kilometre boyunca nehir ekosistemi yok oldu ve acil alarm sistemleri kuruldu.",
   },
   "conflict-79": {
-    title: "Ren Eylem Programı ile Somon Balığı Geri Döndü",
-    description: "Uluslararası Ren Koruma Komisyonu'nun (ICPR) kararlı arıtma ve balık geçidi yatırımları sayesinde kirlilik %90 oranında azaldı ve 50 yıl aradan sonra somon balıkları yeniden Ren Nehri'nde üremeye başladı.",
+    title: "Ren Eylem Programı 'Somon 2000' Başarısı",
+    description: "Uluslararası Ren Komisyonu'nun su kalitesi ve balık geçitleri restorasyon projeleri sayesinde, kirlilikten nesli tükenen Atlantik somonu yarım asır sonra ilk kez Ren Nehri'nde doğal olarak yumurtladı.",
   },
   "conflict-80": {
-    title: "Sovyetler Birliği Aral Denizi Nehirlerini Pamuğa Yönlendirdi",
-    description: "Sovyet merkezi planlaması, Aral Denizi'ni besleyen Seyhun ve Ceyhun nehirlerinin sularını Özbekistan ve Türkmenistan'ın uçsuz bucaksız pamuk tarlalarını sulamak için Karakum Kanalı'na aktarma kararı alarak tarihin en büyük çevre felaketini başlattı.",
+    title: "Sovyetler Birliği Aral Denizi Su Yönlendirme Kararı",
+    description: "Sovyet planlamacılar pamuk monokültürünü beslemek amacıyla Seyhun ve Ceyhun nehirlerinin akışını devasa sulama kanallarına (Karakum Kanalı dahil) yönlendirdi; bu karar Aral Denizi'nin kuruma felaketini başlattı.",
   },
   "conflict-81": {
     title: "Aral Denizi Kuzey ve Güney Olarak İkiye Bölündü",
-    description: "Su seviyesinin dramatik şekilde düşmesiyle dünyanın en büyük dördüncü gölü olan Aral Denizi iki ayrı su kütlesine bölündü; suların çekildiği alanlar zehirli tuz ve toz fırtınaları üreten Aralkum Çölü'ne dönüştü.",
+    description: "Suların aşırı çekilmesi neticesinde Aral Denizi yüzölçümünün %50'sinden fazlasını kaybetti ve su hacmi bölünerek Kuzey (Küçük) Aral ve Güney (Büyük) Aral olarak iki ayrı su kütlesine ayrıldı.",
   },
   "conflict-82": {
     title: "Hindistan-Bangladeş Ortak Nehirler Komisyonu (JRC)",
-    description: "Bangladeş'in bağımsızlığının hemen ardından iki ülke, 54 ortak sınır aşan akarsuyun hidrolojik verilerini paylaşmak ve ortak sel tahminleri üretmek amacıyla Ortak Nehirler Komisyonu'nu kurdu.",
+    description: "Bangladeş'in bağımsızlığının ardından iki ülke, 54 sınır aşan nehrin hidrolojik verilerini paylaşmak ve ortak taşkın erken uyarı sistemleri kurmak üzere Ortak Nehirler Komisyonu'nu kurdu.",
   },
   "conflict-83": {
-    title: "Hindistan-Bangladeş Farakka Barajı Ortak Bildirisi",
-    description: "Başbakanlar İndira Gandi ve Şeyh Mucibur Rahman, Farakka Barajı tam kapasiteye geçmeden önce Bangladeş'e kurak mevsimde yeterli su bırakılmasını teminat altına alan ortak bir bildiri yayımladı.",
+    title: "Hindistan-Bangladeş Farakka Deklarasyonu",
+    description: "Başbakanlar İndira Gandi ve Şeyh Mucibur Rahman, Farakka Bendi'nin besleme kanalının Bangladeş'e zarar vermeyecek kontrollü deneme debileriyle işletilmesi konusunda geçici bir bildiriye imza attı.",
   },
   "conflict-84": {
-    title: "Tuna Nehri Romanya Altın Madeni Siyanür Felaketi",
-    description: "Romanya'nın Baia Mare kentindeki bir altın madeninin atık barajının çökmesi sonucu 100.000 m³ siyanürlü ve ağır metalli su Somes, Tisa ve Tuna nehirlerine aktı; Macaristan ve Sırbistan'da tüm sucul ekosistem çöktü.",
+    title: "Tuna Siyanür Faciası (Baia Mare, Romanya)",
+    description: "Romanya'daki bir altın madeninin atık barajının patlaması sonucu 100 bin m³ siyanürlü ve ağır metalli su Somes, Tisza ve nihayet Tuna Nehri'ne karıştı; Macaristan ve Sırbistan'da tüm su canlıları zehirlendi.",
   },
   "conflict-85": {
-    title: "Moritanya-Senegal Sınır ve Su Savaşı",
-    description: "Senegal Nehri taşkın yatağındaki verimli tarım ve otlatma arazilerinin kontrolü yüzünden iki ülke arasında çıkan etnik ve askeri çatışmalarda yüzlerce insan öldü, on binlerce vatandaş karşılıklı olarak sınır dışı edildi.",
+    title: "Moritanya-Senegal Sınır Su Çatışması",
+    description: "Senegal Nehri taşkın yatağındaki otlatma ve su hakları sebebiyle Moritanyalı çobanlar ile Senegalli çiftçiler arasında başlayan sürtüşme etnik şiddete ve iki ülke arasında savaşa ramak kalan bir krize dönüştü.",
   },
   "conflict-86": {
-    title: "Zambezi Nehri Sistemi Eylem Planı (ZACPLAN)",
-    description: "Zambezi kıyıdaş devletleri, BM Çevre Programı (UNEP) öncülüğünde nehir havzasının entegre yönetimi, ekolojik dengesi ve hidrolojik bilgi sistemlerinin kurulması için ZACPLAN'ı başlattı.",
+    title: "Zambezi Nehri Havzası Eylem Planı (ZACPLAN)",
+    description: "Güney Afrika Kalkınma Topluluğu (SADC) ve UNEP işbirliğiyle Zambezi havzasında çevre odaklı su kaynakları yönetimi ve veri entegrasyonunu amaçlayan ZACPLAN başlatıldı.",
   },
   "conflict-87": {
     title: "İngiliz-Mısır Nil Suları Anlaşması",
-    description: "İngiltere ve Mısır arasında teati edilen notalarla Mısır'a yıllık 48 milyar m³ su tahsis edildi ve Mısır'a yukarı Nil havzasındaki her türlü su yapısı üzerinde mutlak veto yetkisi tanındı.",
+    description: "İngiltere ile Mısır arasında yapılan nota teatisiyle Mısır'a yıllık 48 milyar m³, Sudan'a 4 milyar m³ su hakkı tanındı; Mısır'a yukarı Nil havzasındaki baraj ve sulama projeleri üzerinde mutlak veto yetkisi verildi.",
   },
   "conflict-88": {
-    title: "İsrail'in Bağımsızlığı: Arap Devletlerinin Su Tehditleri",
-    description: "İsrail Devleti'nin kuruluşu ve 1948 Arap-İsrail Savaşı sonrasında Şeria Nehri ve kolları askeri temas hatlarının merkezinde kalarak bölgesel su çatışmalarının ana zeminini oluşturdu.",
+    title: "İsrail'in Bağımsızlığı ve Şeria Havzası Tehditleri",
+    description: "İsrail'in kurulmasının hemen ardından komşu Arap devletleri Şeria Nehri kollarını yönlendirme ve İsrail'in su alımlarını engelleme stratejilerini ilk kez bölgesel gündeme taşıdı.",
   },
   "conflict-89": {
-    title: "İsrail Batı Şeria Yeraltı Su Kaynaklarını Ele Geçirdi",
-    description: "1967 savaşının ardından İsrail Askeri İdaresi, 92 ve 158 sayılı askeri emirlerle Batı Şeria'daki tüm su kaynaklarının kontrolünü orduya devretti; Filistinlilerin yeni kuyu açması yasaklandı ve kotalar getirildi.",
+    title: "İsrail Batı Şeria Su Kaynaklarını Kontrol Altına Aldı",
+    description: "1967 savaşı sonrası İsrail, Batı Şeria'daki dağ akiferlerini ve yeraltı kuyularını askeri emirlerle doğrudan İsrail Su İdaresi'ne (Mekorot) bağladı; Filistinlilerin kuyu açmasını ve su çekmesini kısıtladı.",
   },
   "conflict-90": {
     title: "Oslo II Anlaşması Batı Şeria Su Hükümleri",
-    description: "İsrail-Filistin Geçici Anlaşması (Oslo II) Madde 40, Filistin su haklarını ilk kez prensipte tanıdı ve Ortak Su Komitesi'ni (JWC) kurdu, ancak Batı Şeria dağ akiferlerinin %80'inden fazlasının kontrolünü İsrail'e bıraktı.",
+    description: "İsrail ile Filistin Kurtuluş Örgütü arasında imzalanan geçici anlaşmanın 40. maddesiyle Ortak Su Komitesi (JWC) kuruldu; Filistin tarafına belirli su kotaları tahsis edildi ancak nihai su hakları ertelendi.",
   },
   "conflict-91": {
-    title: "Lauca Nehri Saptırması: Şili-Bolivya Süregiden İhtilafı",
-    description: "Şili'nin sınır aşan Lauca Nehri sularını Azapa Vadisi tarımına yönlendirmesi, denize çıkışı olmayan Bolivya'nın sert protestolarına yol açtı ve iki ülke arasındaki diplomatik ilişkilerin kesilmesinin başlıca nedenlerinden biri oldu.",
+    title: "Lauca Nehri İhtilafı: Şili-Bolivya",
+    description: "Şili'nin Lauca Nehri sularını Azapa Vadisi'ne aktarması üzerine Bolivya ile yaşanan yarım asırlık diplomatik sürtüşme, And dağları havzasında su egemenliği ve denize çıkış tartışmalarıyla alevlendi.",
   },
   "conflict-92": {
     title: "Çad Gölü Havzası Komisyonu (LCBC) Kuruldu",
-    description: "Kamerun, Çad, Nijer ve Nijerya, Afrika'nın en hayati sulak alanlarından biri olan Çad Gölü havzasını sürdürülebilir yönetmek ve balıkçılık ile tarımı koordine etmek amacıyla LCBC'yi kurdu.",
+    description: "Kamerun, Çad, Nijer ve Nijerya liderleri, Sahel bölgesinin can damarı olan Çad Gölü'nü korumak ve su kaynaklarını entegre yönetmek üzere Fort Lamy'de LCBC'yi oluşturdu.",
   },
   "conflict-93": {
-    title: "Çad Gölü'nün Çöküşü Bölgesel İnsani Krizi Tetikledi",
-    description: "Aşırı sulama ve iklim değişikliği yüzünden Çad Gölü yüzey alanının %90'dan fazlasını kaybederek 2.500 km²'nin altına düştü; 30 milyon insan geçim kaynağını yitirerek Boko Haram gibi çatışma dinamiklerine açık hale geldi.",
+    title: "Çad Gölü'nün Yok Olma Noktasına Gelmesi",
+    description: "Aşırı sulama ve şiddetli iklim kuraklığı nedeniyle Çad Gölü orijinal yüzölçümünün %90'ından fazlasını kaybetti; milyonlarca balıkçı ve çiftçi göç etmek zorunda kalarak Boko Haram gibi çatışma dinamiklerine zemin hazırladı.",
   },
   "conflict-94": {
-    title: "Körfez Savaşı: Irak Güçlerinin Körfez Sularına Petrol Akıtması",
-    description: "Irak ordusu Kuveyt'ten çekilirken yüz milyonlarca galon ham petrolü Basra Körfezi'ne boşalttı; 600 mil uzunluğundaki petrol tabakası Suudi Arabistan ve Körfez ülkelerinin deniz suyu arıtma tesislerini tehdit etti.",
+    title: "Körfez Savaşı: Basra Körfezi'ne Petrol Boşaltımı",
+    description: "Irak birlikleri Kuveyt'ten çekilirken petrol vanalarını denize açarak su arıtma ve deniz suyu tuz giderme tesislerini hedef aldı; su güvenliği tarihin en büyük çevre terörizmi eylemiyle silah haline getirildi.",
   },
   "conflict-95": {
-    title: "Lesotho Yaylaları Su Projesi (LHWP): Güney Afrika-Lesotho",
-    description: "Lesotho ve Güney Afrika, Senqu/Orange Nehri sularını tünellerle Johannesburg sanayi bölgesine aktaran ve Lesotho'ya elektrik ile telif geliri sağlayan milyarlarca dolarlık LHWP 1. Aşamasını tamamladı.",
+    title: "Lesotho Yaylaları Su Projesi (LHWP)",
+    description: "Lesotho ve Güney Afrika arasındaki ortak dev baraj ve tünel sistemi devreye girerek Maloti dağlarındaki temiz suyu Gauteng sanayi bölgesine taşırken Lesotho'ya elektrik ve telif geliri sağladı.",
   },
   "conflict-96": {
-    title: "Hindistan Farakka Barajı'nı Kalıcı Olarak İşletmeye Aldı",
-    description: "1977 geçici anlaşmasının ardından Hindistan, Farakka Barajı saptırma kanallarını kalıcı altyapıya dönüştürdü; Bangladeş barajın Padma Nehri deltasında tuzlanma ve çölleşmeye yol açtığını uluslararası platformlara taşıdı.",
+    title: "Farakka Bendi Kalıcı Olarak Devreye Girdi",
+    description: "Hindistan Farakka Bendi'ni tam operasyonel hale getirdi; Bangladeş hükümeti Padma kolundaki kuraklık, nehir içi navigasyonun çökmesi ve güney bölgelerindeki tuzlu su istilası nedeniyle BM'ye resmi şikayette bulundu.",
   },
   "conflict-97": {
     title: "Hindistan Daimi İndus Komisyonu Görüşmelerini Askıya Aldı",
-    description: "Uri askeri üssüne yapılan saldırının ardından Hindistan Başbakanı Narendra Modi 'Kan ve su birlikte akamaz' diyerek Daimi İndus Komisyonu'nun rutin toplantılarını dondurdu.",
+    description: "Uri askeri üssüne yapılan saldırının ardından Hindistan Başbakanı Narendra Modi, 'Kan ve su aynı anda akamaz' diyerek Daimi İndus Komisyonu'nun rutin toplantılarını dondurdu.",
   },
   "conflict-98": {
     title: "Kolorado Nehri On Yıllar Sonra İlk Kez Denize Ulaştı",
-    description: "ABD ve Meksika'nın imzaladığı Tarihi 319 Sayılı Karar (Minute 319) kapsamında barajlardan çevreye bırakılan 'nabız akışı' sayesinde Kolorado Nehri, on yıllar sonra ilk kez Meksika'daki Cortez Denizi'ne ulaştı.",
+    description: "ABD ve Meksika arasındaki IBWC 319 Sayılı Karar kapsamında rezervuarlardan 'darbe akışı' (pulse flow) bırakılarak Kolorado Deltası'ndaki sulak alan ekosistemine tarihi bir can suyu verildi.",
   },
   "conflict-99": {
     title: "Mekong Komitesi Vietnam Savaşı Sırasında Askıya Alındı",
-    description: "Saygon'un düşüşü ve Kamboçya'da Kızıl Kmerler'in iktidara gelmesiyle Mekong Komitesi fiilen felç oldu; bölgesel jeopolitik düşmanlıklar su diplomasisini yıllarca durma noktasına getirdi.",
+    description: "Saygon'un düşüşü ve Kamboçya ile Laos'taki rejim değişiklikleri sebebiyle dört kıyıdaş arasındaki siyasi bağlar koptu; Mekong Komitesi çalışmaları geçici olarak durduruldu.",
   },
   "conflict-100": {
     title: "Bangladeş Kurtuluş Savaşı ve Brahmaputra Suları",
-    description: "Doğu Pakistan'daki savaş ve mülteci krizi döneminde sınır sularının stratejik ve lojistik kullanımı Hindistan ile Pakistan arasındaki çatışmanın merkezinde yer aldı.",
+    description: "Doğu Pakistan'daki savaş ve mülteci krizi döneminde su kaynaklarının kontrolü ve sel yönetimi stratejik bir unsur haline geldi; Hindistan ile sınır aşan nehir istişareleri kilitlendi.",
   },
   "conflict-101": {
-    title: "Gine OMVS Senegal Nehri Havzası Otoritesine Katıldı",
-    description: "Senegal Nehri'nin doğduğu kaynak ülke olan Gine, OMVS'ye dördüncü tam üye olarak katılarak havzanın tüm su kaynaklarının ortak mülkiyet ve entegre yönetim altına girmesini sağladı.",
+    title: "Gine OMVS Senegal Nehri Örgütü'ne Katıldı",
+    description: "Senegal Nehri'nin kaynak ülkesi olan Gine, OMVS'ye tam üye olarak katıldı ve Fouta Djallon yaylalarındaki nehir kaynaklarının ortak koruma rejimine dahil olmasını sağladı.",
   },
   "conflict-102": {
-    title: "Asvan Yüksek Barajı Alüvyon Yoksunluğu Tartışması",
-    description: "Nil boyunca yapılan bilimsel araştırmalar, Asvan Barajı'nın yıllık 130 milyon ton verimli alüvyonu tutması yüzünden Nil Deltası'nın Akdeniz dalgalarıyla hızla aşındığını ve Mısır tarımının kimyasal gübreye bağımlı kaldığını belgeledi.",
+    title: "Asvan Barajı Alüvyon Yoksunluğu ve Delta Erozyonu İhtilafı",
+    description: "Asvan Barajı'nın tortu tutması sebebiyle Nil Deltası kıyılarının aşınması ve Akdeniz tuzlu suyunun delta akiferlerine sızması, Mısır ile yukarı kıyıdaşlar arasındaki baraj planlama tartışmalarında kritik bir tartışma başlığı oldu.",
   },
   "conflict-103": {
-    title: "Burundi Nil CFA'yı İmzaladı",
-    description: "Burundi, Nil İşbirliği Çerçeve Anlaşması'nı (CFA) imzalayan altıncı yukarı havza ülkesi olarak anlaşmanın yürürlüğe girmesi için gereken kritik onay eşiğine kapı araladı.",
+    title: "Burundi Nil CFA'sını İmzaladı",
+    description: "Burundi, Nil İşbirliği Çerçeve Anlaşması'nı imzalayan altıncı yukarı havza ülkesi olarak anlaşmanın yürürlüğe girmesi için gereken eşiğin aşılmasına kritik bir katkı sağladı.",
   },
   "conflict-104": {
-    title: "Taliban'ın İktidarı Ele Geçirmesi ve Hilmend Antlaşması",
-    description: "Kabil'in düşmesiyle iktidara gelen Taliban geçici hükümeti, İran'ın Hilmend su hakkı talepleri karşısında su akışının yetersizliğini kuraklığa bağlayarak Tahran ile tansiyonu yükseltti.",
+    title: "Taliban'ın Kabil'i Ele Geçirmesi ve Helmand Antlaşması",
+    description: "Taliban'ın yönetimi yeniden ele geçirmesinin ardından Kemal Han Barajı savaklarının açılmaması ve İran'a su verilmemesi Tahran ile Kabil arasında askeri sınır gerginliğini tırmandırdı.",
   },
   "conflict-105": {
-    title: "Çin Kuraklık Sırasında Mekong Su Salımlarını Açıkladı",
-    description: "Güneydoğu Asya ülkelerinin ve ABD destekli Mekong Gözlem Projesi'nin yoğun uydu verisi baskısı üzerine Çin, kuraklıkla mücadele için Jinghong Barajı'ndan acil su salımı yaptığını duyurdu.",
+    title: "Çin Aşağı Mekong Kuraklığında Acil Su Salımı Yaptı",
+    description: "Aşağı kıyıdaş ülkelerin yoğun diplomatik baskısı ve uydu raporlarının ardından Çin, kuraklığı hafifletmek üzere Lancang barajlarından acil hidrolojik su tahliyesi başlattı.",
   },
   "conflict-106": {
-    title: "Özbekistan 2024 Su Olağanüstü Hali İlan Etti",
-    description: "Ceyhun ve Seyhun nehirlerindeki tarihi su kayıpları ve kuraklık nedeniyle Özbekistan Cumhurbaşkanı Şevket Mirziyoyev, tarımda su israfını önlemek için ülke çapında olağanüstü su tasarrufu rejimi ilan etti.",
+    title: "Özbekistan 2024 Acil Su Tasarrufu Rejimi İlan Etti",
+    description: "Aral Denizi havzasındaki amansız su kaybı ve kuraklık karşısında Özbekistan Cumhurbaşkanı Şevket Mirziyoyev, tarımda su israfını önlemek için ülke çapında olağanüstü acil tasarruf seferberliği başlattı.",
   },
   "conflict-107": {
-    title: "Ren Koruma Sözleşmesi Yürürlüğe Girdi",
-    description: "Bern'de imzalanan yeni Ren Koruma Sözleşmesi yürürlüğe girerek kıyıdaş devletler arasında ekolojik hedefleri, sel korunmasını ve sürdürülebilir taşkın yatağı restorasyonunu yasal zorunluluk haline getirdi.",
+    title: "Ren Nehri Atık ve Seyrüsefer Sözleşmesi Yürürlüğe Girdi",
+    description: "Ren boyunca seyreden gemilerin yağlı atık, sintine suyu ve çöplerini nehre dökmesini yasaklayan ve kıyı arıtma tesislerine teslimini zorunlu kılan uluslararası sözleşme yürürlüğe girdi.",
   },
   "conflict-108": {
     title: "Hindistan-Nepal Mahakali Antlaşması Anlaşmazlıkları",
-    description: "1996 Mahakali Antlaşması'nın öngördüğü Pancheshwar Çok Amaçlı Baraj Projesi, güç paylaşımı, su hakları ve sınır tespiti konusundaki siyasi kutuplaşmalar sebebiyle Nepal parlamentosunda kilitlendi.",
+    description: "1996 tarihli Mahakali Antlaşması kapsamında planlanan Pancheshwar Çok Amaçlı Baraj Projesi, elektrik paylaşımı ve su hakları konusundaki fikir ayrılıkları nedeniyle çıkmaza girdi.",
   },
   "conflict-109": {
-    title: "Çin Lancang-Mekong İşbirliği (LMC) Mekanizmasını Başlattı",
-    description: "Çin, Batı destekli Mekong Nehri Komisyonu'na alternatif olarak altı kıyıdaş ülkenin tamamını kapsayan ve Pekin tarafından finanse edilen Lancang-Mekong İşbirliği Mekanizması'nı kurdu.",
+    title: "Çin Lancang-Mekong İşbirliği (LMC) Mekanizmasını Kurdu",
+    description: "Çin, Mekong Nehri Komisyonu'nun (MRC) dışındaki bir formatta 6 kıyıdaş ülkeyi bir araya getiren ve Çin finansmanıyla desteklenen alternatif Lancang-Mekong İşbirliği Platformu'nu kurdu.",
   },
   "conflict-110": {
-    title: "Sudan GERD Müzakerelerinde Mısır'dan Ayrıştı",
-    description: "Sudan hükümeti, GERD Barajı'nın Mavi Nil taşkınlarını önleme ve ucuz hidroelektrik sağlama faydalarını görerek Etiyopya ile ortak pozisyon almaya başladı ve Mısır'ın mutlak muhalefet cephesinden koptu.",
+    title: "Sudan GERD Konusunda Mısır'dan Ayrıştı",
+    description: "Sudan, GERD'in taşkınları önleme, alüvyonu tutma ve ucuz elektrik sağlama avantajlarını görerek Mısır'ın katı muhalefetinden ayrıştı ve Etiyopya projesine yapıcı destek vermeye başladı.",
   },
   "conflict-111": {
-    title: "Uganda Nil CFA'yı Onayladı",
-    description: "Uganda Parlamentosu, Nil Havzası İşbirliği Çerçeve Anlaşması'nı (CFA) onaylayarak Nil Havzası Komisyonu'nun resmen kurulmasına bir adım daha yaklaştırdı.",
+    title: "Uganda Nil CFA Anlaşmasını Onayladı",
+    description: "Uganda Parlamentosu Nil Havzası İşbirliği Çerçeve Anlaşması'nı resmen onaylayarak onay belgesini Afrika Birliği'ne tevdi etti.",
   },
   "conflict-112": {
-    title: "İsrail-Filistin Batı Şeria Suya Erişim Engelleri",
-    description: "Uluslararası insan hakları raporları, İsrailli yerleşimcilerin Batı Şeria'da kişi başına günlük 300 litre su kullanırken, kırsal Filistin topluluklarının Dünya Sağlık Örgütü asgari standardı olan 100 litrenin çok altında (20-70 litre) suya erişebildiğini belgeledi.",
+    title: "Batı Şeria'da Filistinlilerin Suya Erişiminin Engellenmesi",
+    description: "İsrail askeri yetkililerinin Filistin köylerindeki ruhsatsız su depolarını ve boru hatlarını yıkması, su kotalarını düşürmesi uluslararası insan hakları raporlarında su ayrımcılığı olarak belgelendi.",
   },
   "conflict-113": {
-    title: "Güney Sudan Nil CFA'ya Katılım Sürecini Başlattı",
-    description: "Güney Sudan Geçici Ulusal Yasama Meclisi, Nil İşbirliği Çerçeve Anlaşması'na (CFA) katılım tasarısını onaylayarak anlaşmanın uluslararası hukuken yürürlüğe girmesi için gereken son onayı sağlama yoluna girdi.",
+    title: "Güney Sudan Nil CFA Anlaşmasına Katıldı",
+    description: "Güney Sudan Ulusal Meclisi Nil CFA'sını onayladı; bu adım anlaşmanın yürürlüğe girmesi için zorunlu olan 6 onay şartının tamamlanmasını sağladı.",
   },
   "conflict-114": {
-    title: "Sudan Beyaz Nil Su Paylaşımı Anlaşmazlığı",
-    description: "Güney Sudan'ın bağımsızlık referandumu öncesinde, Beyaz Nil ve Bahr el-Gazal havzalarındaki su kaynaklarının ve Sudd bataklıklarındaki Jonglei Kanalı projesinin geleceği Hartum ile Cuba arasında tartışma konusu oldu.",
+    title: "Sudan Beyaz Nil Su Paylaşımı Sürtüşmesi",
+    description: "Güney Sudan'ın bağımsızlık referandumu öncesinde Beyaz Nil ve Sudd sulak alanlarındaki su kaynaklarının mülkiyeti ve Jonglei Kanalı projesinin geleceği Hartum ile Cuba arasında uyuşmazlık yarattı.",
   },
   "conflict-115": {
-    title: "Amerikanlararası Su Hakları: ABD-Meksika Kolorado Tuzluluk Anlaşması",
-    description: "ABD ve Meksika, ABD'nin Wellton-Mohawk sulama bölgesinden Meksika'ya boşalttığı aşırı tuzlu suların arıtılmasını zorunlu kılan 242 Sayılı Tarihi Kararı (Minute 242) imzaladı.",
+    title: "IBWC 242 Sayılı Karar: Kolorado Nehri Tuzluluk Çözümü",
+    description: "ABD ve Meksika, ABD'den Meksika'ya teslim edilen Kolorado suyunun tuzluluk oranını sınırlandıran ve Yuma Tuz Giderme Tesisi'nin kurulmasını öngören bağlayıcı 242 Sayılı Kararı kabul etti.",
   },
   "conflict-116": {
-    title: "Dicle ve Fırat Üzerinde Musul ve Hadise Barajları İnşa Edildi",
-    description: "Irak, Türkiye ve Suriye'nin baraj projelerine karşı su depolama kapasitesini güvenceye almak amacıyla Dicle üzerinde Musul (Saddam) Barajı'nı ve Fırat üzerinde Hadise (Kadisiyye) Barajı'nı tamamladı.",
+    title: "Dicle-Fırat Üzerinde Musul ve Hadise Barajları İnşa Edildi",
+    description: "Irak, yukarı havzadaki Türk ve Suriye barajlarına karşı su depolama kapasitesini artırmak için Dicle üzerinde Musul (Saddam) ve Fırat üzerinde Hadise Barajlarını tamamladı.",
   },
   "conflict-117": {
-    title: "GERD Barajı Jeolojik Etütleri Başlatıldı",
-    description: "Etiyopya Elektrik Enerjisi Şirketi ve İtalyan müteahhit Salini Impregilo (Webuild), Mavi Nil vadisinde gizlilik içinde GERD Barajı'nın temel sondaj ve yerinde jeolojik etüt çalışmalarına başladı.",
+    title: "Etiyopya Mavi Nil Üzerinde Gizli GERD Sondajlarını Başlattı",
+    description: "Etiyopya hükümeti ve İtalyan Salini firması, Guba bölgesinde gelecekteki Rönesans Barajı'nın temelini oluşturacak gizli jeolojik ve topoğrafik saha etütlerini yürüttü.",
   },
   "conflict-118": {
-    title: "Lancang-Mekong Baraj Kademeleri Aşağı Havzayı Alarma Geçirdi",
-    description: "Çin'in Dachaoshan Barajı'nı tamamlaması ve dev Xiaowan ile Nuozhadu mega barajlarının inşaatına hız vermesi, Tayland, Kamboçya ve Vietnam'da nehir akış rejiminin tek taraflı kontrol edilmesine yönelik derin endişeler yarattı.",
+    title: "Lancang Baraj Kaskadı Aşağı Havzada Alarm Yarattı",
+    description: "Çin'in Dachaoshan Barajı'nı tamamlayıp Xiaowan Barajı'nın inşasına başlaması, Kamboçya'daki Tonle Sap Gölü'nün taşkın döngüsünün bozulacağı endişelerini uluslararası zirvelere taşıdı.",
   },
   "conflict-119": {
-    title: "Nil CFA Anlaşması 6 Ülkenin Onayıyla Yürürlüğe Girdi",
-    description: "Güney Sudan'ın onay belgelerini teslim etmesiyle Nil İşbirliği Çerçeve Anlaşması (CFA) 60 gün sonra yürürlüğe girdi; bu gelişmeyle tarihte ilk kez Mısır ve Sudan'ın vetosu olmaksızın Nil Havzası Komisyonu hukuken faaliyete geçti.",
+    title: "Nil CFA Anlaşması 5 Onayla Resmen Yürürlüğe Girdi",
+    description: "Güney Sudan'ın onay belgesini tevdi etmesiyle Nil İşbirliği Çerçeve Anlaşması (CFA) 13 Ekim 2024'te resmen yürürlüğe girdi ve Mısır ile Sudan'ın veto yetkisi tarihe karışarak Nil Nehri Havzası Komisyonu (NRBC) kuruldu.",
   },
   "conflict-120": {
     title: "Özbekistan Aral Krizi Ortasında Sulanan Alanları Genişletti",
-    description: "Aral Denizi kuruma felaketine rağmen Özbekistan ve komşu bölgelerde su yoğun tarım ve yeni baraj projeleri devam ederken, Türkmenistan'ın Karakum Gölü projesi ve Afganistan'ın Kuş Tepe Kanalı Amuderya akışını daha da tehdit eder hale geldi.",
+    description: "Aral Denizi'ne dökülen Ceyhun akışının rekor düşüşüne rağmen Özbekistan'ın tarım arazilerini genişletmesi ve Afganistan'ın Kuş Tepe Kanalı inşası, bölgedeki hidrolojik kırılganlığı tehlikeli boyuta ulaştırdı.",
+  },
+  "conflict-121": {
+    title: "Kuzey Aral Denizi Restorasyonu Devletlerarası Antlaşması",
+    description: "Kazakistan ve Özbekistan, Kuzey Aral Denizi'nin su hacmini büyütmek, Seyhun deltası sulak alanlarını canlandırmak ve Kök-Aral Bendi'ni yükseltmek amacıyla bağlayıcı restorasyon antlaşması imzaladı.",
+  },
+  "conflict-122": {
+    title: "Türkiye-Irak Aşırı Kuraklık Operasyonel Su Protokolü",
+    description: "Türkiye ve Irak, Fırat ve Dicle havzalarında iklim değişikliği kaynaklı şiddetli kuraklık dönemlerinde baraj kapaklarından bırakılacak asgari garantili akışları belirleyen dinamik protokolü yürürlüğe koydu.",
+  },
+  "conflict-123": {
+    title: "Mekong Komisyonu Ana Kol Kaskat Hidroelektrik Kuralları",
+    description: "Mekong Nehri Komisyonu (MRC), ana kol üzerindeki tüm kademeli hidroelektrik barajların su tutma ve bırakma operasyonlarını dijital ikiz modellemesiyle anlık koordine eden bağlayıcı kuralları ilan etti.",
   },
 };
 
 export const conflictsTrByTitle: Record<string, ConflictTr> = {
-  "India-Pakistan Indus Canal Water Dispute": {
+  "india-pakistan indus canal water dispute": {
     title: "Hindistan-Pakistan İndus Kanalı Su İhtilafı",
     description: "Bölünmenin ardından Hindistan, 1 Nisan 1948'de Yukarı Bari Doab Kanalı sisteminden Pakistan kanallarına akan suyu keserek milyonlarca dönüm tarım arazisini etkiledi. Haftalarca süren kriz, Mayıs 1948'de imzalanan acil Hakimiyetlerarası Anlaşma ile çözüldü.",
   },
-  "Egypt Protests Ethiopian Nile Projects": {
+  "egypt protests ethiopian nile projects": {
     title: "Mısır'ın Etiyopya Nil Projelerini Protestosu",
     description: "Mısır, 1929 İngiliz-Mısır Nil Suları Anlaşması'nı gerekçe göstererek ve Mısır'ın tarihi su haklarının tanınmasını talep ederek, Etiyopya'da Nil debisini etkileyebilecek her türlü yukarı havza su yapısına resmi olarak itiraz etti.",
   },
-  "Johnston Plan Negotiations for Jordan River": {
+  "johnston plan negotiations for jordan river": {
     title: "Şeria Nehri İçin Johnston Planı Müzakereleri",
     description: "ABD özel temsilcisi Eric Johnston, Şeria Nehri sularını paylaştırmak için İsrail ile Arap devletleri arasında çok yıllı müzakereler yürüttü. Su kotalarında teknik uzlaşmaya varılmasına rağmen plan, İsrail'in tanınmasına ilişkin siyasi endişeler sebebiyle 1955'te Arap Birliği tarafından reddedildi.",
   },
-  "Mekong Committee Established": {
+  "mekong committee established": {
     title: "Mekong Komitesi'nin Kuruluşu",
     description: "Kamboçya, Laos, Tayland ve Güney Vietnam, BM himayesinde Aşağı Mekong Havzası İncelemeleri Koordinasyon Komitesi'ni (Mekong Komitesi) kurarak Mekong işbirliği için ilk kurumsal çerçeveyi oluşturdu.",
   },
-  "Egypt-Sudan Nile Waters Agreement": {
+  "egypt-sudan nile waters agreement": {
     title: "Mısır-Sudan Nil Suları Anlaşması",
     description: "Mısır ve Sudan, yıllık 55,5 milyar m³ suyu Mısır'a ve 18,5 milyar m³ suyu Sudan'a tahsis eden kapsamlı bir su paylaşım anlaşması imzaladı; bu anlaşma Asvan Yüksek Barajı'nın inşasını sağladı. Yukarı kıyıdaş devletler müzakerelerin dışında bırakıldı.",
   },
-  "Indus Waters Treaty Signed": {
+  "indus waters treaty signed": {
     title: "İndus Suları Antlaşması İmzalandı",
     description: "Hindistan ve Pakistan, Dünya Bankası arabuluculuğunda Karaçi'de İndus Suları Antlaşması'nı imzaladı. Antlaşma, doğu nehirlerini (Ravi, Beas, Sutlej) Hindistan'a ve batı nehirlerini (İndus, Jhelum, Chenab) Pakistan'a tahsis ederek bölünme sonrası on yıllık anlaşmazlığı çözdü.",
   },
-  "Ethiopia Contests 1929 Nile Agreement Validity": {
+  "ethiopia contests 1929 nile agreement validity": {
     title: "Etiyopya 1929 Nil Anlaşmasının Geçerliliğine İtiraz Etti",
     description: "Etiyopya, 1929 İngiliz-Mısır Nil Suları Anlaşması'nın Etiyopya'nın rızası olmadan imzalandığını ve Mavi Nil ile Tana Gölü kolları üzerindeki haklarını bağlamayacağını belirterek anlaşmanın geçerliliğine resmen meydan okudu.",
   },
-  "Columbia River Treaty Signed": {
+  "columbia river treaty signed": {
     title: "Kolombiya Nehri Antlaşması İmzalandı",
     description: "Amerika Birleşik Devletleri ve Kanada, sel kontrolü ve hidroelektrik amacıyla Britanya Kolombiyası'nda üç baraj inşasını öngören Kolombiya Nehri Antlaşması'nı imzaladı. ABD sel kontrolü sağladı ve Kanada'ya yaklaşık 65 milyon dolar ödedi; Kanada ise aşağı havza enerji faydalarının yarısını aldı.",
   },
-  "Aswan High Dam Construction Begins with Soviet Aid": {
+  "aswan high dam construction begins with soviet aid": {
     title: "Asvan Yüksek Barajı İnşası Sovyet Yardımıyla Başladı",
-    description: "Batı'nın finansmanı geri çekmesinin ardından Mısır, Sovyet finansmanıyla Asvan Yüksek Barajı'nın inşasına başladı. Etiyopya ve yukarı kıyıdaş ülkeler, projenin dayandığı 1959 su tahsisi çerçevesinden dışlandıklarını belirterek projeyi protesto etti.",
+    description: "Mısır, Sovyetler Birliği'nin finansal ve teknik yardımıyla Asvan Yüksek Barajı'nın inşasına başladı. Proje, Mısır için taşkın kontrolü ve sulama güvencesi sağlarken Nil akış rejimi ve alüvyon taşınımını kalıcı olarak değiştirdi.",
   },
-  "Niger Basin Act of Niamey": {
-    title: "Nijer Havzası Niamey Senedi",
-    description: "Dokuz Nijer Havzası devleti, Nijer Nehri üzerinde adil seyrüsefer ve ekonomik işbirliğini taahhüt eden Niamey Senedi'ni imzaladı; bu senet daha sonra kurulacak Nijer Nehri Komisyonu ve Nijer Havzası Otoritesi'nin temelini attı.",
+  "niger basin act of niamey": {
+    title: "Niamey Nijer Havzası Senedi",
+    description: "Dokuz Nijer kıyıdaş devleti, seyrüsefer ve ekonomik kalkınmayı düzenleyen Niamey Senedi'ni kabul etti; bu girişim sömürge sonrası Batı Afrika'da ilk çok taraflı nehir havzası anlaşması oldu.",
   },
-  "Israel-Syria Jordan River Water War Begins": {
-    title: "İsrail-Suriye Şeria Nehri Su Savaşı Başladı",
-    description: "İsrail Ulusal Su Taşıyıcısı'nı faaliyete geçirirken, Suriye ve Ürdün Şeria Nehri'nin kollarını (Banias ve Yarmuk) saptırma inşaatına başladı. İsrail hava saldırıları Suriye'nin saptırma tesislerini vurarak 1967 savaşına giden gerilimi tırmandırdı.",
+  "israel-syria jordan river water war begins": {
+    title: "İsrail-Suriye Şeria Nehri Su Çatışmaları Başladı",
+    description: "İsrail'in Ulusal Su Taşıyıcısı projesini tamamlamasının ardından Arap Birliği, Baniyas ve Hasbani kollarını Şeria'dan uzaklaştırmak için karşı su yönlendirme projeleri başlattı. İsrail Savunma Kuvvetleri bu inşaatları vurdu ve bu durum 1967 savaşına giden süreçte gerilimi tırmandırdı.",
   },
-  "River Niger Commission Founded": {
+  "river niger commission founded": {
     title: "Nijer Nehri Komisyonu Kuruldu",
-    description: "Batı Afrika'da dokuz kıyıdaş devlet, çok taraflı nehir yönetimi ve ortak hidroelektrik ile tarımsal kalkınma planlaması için ilk bölgesel organ olan Nijer Nehri Komisyonu'nu resmen kurdu.",
+    description: "Niamey Senedi'ni takiben kıyıdaş ülkeler, ortak su kaynaklarını yönetmek ve navigasyonu koordine etmek üzere Nijer Nehri Komisyonu'nu resmen kurdu.",
   },
-  "Six-Day War: Water as a Casus Belli": {
-    title: "Altı Gün Savaşı: Bir Savaş Sebebi Olarak Su",
-    description: "1967 Altı Gün Savaşı'nda İsrail, Golan Tepeleri'ni (Banias su kaynakları), Batı Şeria dağ akiferlerini ve Gazze kıyı akiferini ele geçirerek bölgesel tatlı su kaynakları üzerindeki kontrolünü büyük ölçüde artırdı.",
+  "six-day war: water as a casus belli": {
+    title: "Altı Gün Savaşı: Bir Casus Belli Olarak Su",
+    description: "İsrail, Şeria Nehri'nin yukarı kollarını (Baniyas ve Golan Tepeleri) ve Batı Şeria dağ akiferlerini ele geçirdi. Su kaynaklarının kontrolü, savaşın önemli bir stratejik faktörüydü ve İsrail'in su güvenliğini kökten değiştirdi.",
   },
-  "Aswan High Dam Completed": {
+  "aswan high dam completed": {
     title: "Asvan Yüksek Barajı Tamamlandı",
-    description: "Mısır, Nasır Gölü'nü oluşturan Asvan Yüksek Barajı'nı tamamladı. Baraj Mısır'a sel kontrolü, sulama güvencesi ve hidroelektrik sağlarken, aşağı havzada verimli alüvyon akışını kesti ve Nil Deltası'nda kıyı erozyonuna yol açtı.",
+    description: "Mısır, Nasır Gölü rezervuarını oluşturan Asvan Yüksek Barajı'nı resmen hizmete açtı. Baraj, Mısır'a çok yıllık su depolama olanağı sundu ancak yukarı kıyıdaşlar ile Mısır'ın su bağımlılığı dengesini pekiştirdi.",
   },
-  "OMVS Senegal River Basin Organization Founded": {
+  "omvs senegal river basin organization founded": {
     title: "OMVS Senegal Nehri Havzası Örgütü Kuruldu",
-    description: "Mali, Moritanya ve Senegal, ortak altyapı (Manantali ve Diama barajları) mülkiyeti ve işletilmesi yoluyla Senegal Nehri sularını yönetmek üzere Senegal Nehri Kalkınma Örgütü'nü (OMVS) kurdu.",
+    description: "Mali, Moritanya ve Senegal, Senegal Nehri Kalkınma Örgütü'nü (OMVS) kurarak ortak baraj yatırımları ve su yönetimi için dünyada örnek gösterilen bir ortak mülkiyet ve fayda paylaşımı mekanizması hayata geçirdi.",
   },
-  "Helmand River Treaty: Afghanistan-Iran": {
-    title: "Hilmend Nehri Antlaşması: Afganistan-İran",
-    description: "Afganistan ve İran, normal hidrolojik koşullarda İran'ın Sistan havzasına saniyede 22 metreküp (artı 4 m³/sn iyi niyet akışı) Hilmend Nehri suyu garanti eden bir antlaşma imzaladı. Uygulama on yıllarca ihtilaflı kaldı.",
+  "helmand river treaty: afghanistan-iran": {
+    title: "Helmand Nehri Antlaşması: Afganistan-İran",
+    description: "Afganistan ve İran, Helmand (Hirmand) Nehri'nden İran'ın Sistan bölgesine normal hidrolojik koşullarda saniyede 22 m³ su akışını garanti altına alan tarihi bir su paylaşım antlaşması imzaladı.",
   },
-  "Turkey-Syria Euphrates Crisis": {
-    title: "Türkiye-Suriye Fırat Nehri Krizi",
-    description: "Keban Barajı (Türkiye) ve Tabka Barajı'nın (Suriye) eşzamanlı doldurulması, Irak'a ulaşan Fırat akışını kritik seviyede düşürerek savaş tehditlerine yol açtı. Suudi Arabistan'ın acil arabuluculuğu Suriye'nin su tahliyesini artırmasını sağladı ve askeri çatışmayı önledi.",
+  "turkey-syria euphrates crisis": {
+    title: "Türkiye-Suriye Fırat Krizi",
+    description: "Türkiye'nin Keban Barajı ile Suriye'nin Tabka Barajı'nı aynı dönemde doldurması ve yaşanan şiddetli kuraklık, Irak'a ulaşan Fırat akışını kritik seviyelere düşürdü. Irak ve Suriye askeri birliklerini sınıra yığdı; Suudi Arabistan ve Sovyet diplomatik arabuluculuğuyla çatışma kıl payı önlendi.",
   },
-  "India Opens Farakka Barrage on Ganges": {
-    title: "Hindistan Ganj Üzerinde Farakka Barajı'nı Açtı",
-    description: "Hindistan, Kalküta Limanı'nın çamur birikimini temizlemek amacıyla Bhagirathi-Hooghly nehrine su yönlendirmek için Farakka Barajı'nı devreye aldı; bu durum Bangladeş'in aşağı havzasındaki kuru mevsim akışını ciddi ölçüde azalttı.",
+  "india opens farakka barrage on ganges": {
+    title: "Hindistan Ganj Üzerindeki Farakka Bendi'ni Açtı",
+    description: "Hindistan, Kalküta Limanı'ndaki silt birikimini temizlemek amacıyla Ganj sularını Hooghly Nehri'ne yönlendiren Farakka Bendi'ni devreye soktu; bu durum aşağı kıyıdaş Bangladeş'te kuru mevsim akışlarını ciddi şekilde azalttı.",
   },
-  "Rhine Salt Pollution Treaty": {
+  "rhine salt pollution treaty": {
     title: "Ren Nehri Tuz Kirliliği Sözleşmesi",
-    description: "Fransa, Almanya, Hollanda, İsviçre ve Lüksemburg, Fransız potas madenlerinden kaynaklanan klorür deşarjını azaltmak ve Hollanda tarımı ile içme suyunu korumak amacıyla Ren Nehri'nin Klorür Kirliliğine Karşı Korunması Sözleşmesi'ni imzaladı.",
+    description: "Fransa, Almanya, Hollanda, İsviçre ve Lüksemburg, Alsas potas madenlerinden Ren Nehri'ne yapılan klorür deşarjını sınırlamak ve aşağı havza su kalitesini korumak amacıyla Bonn Klorür Sözleşmesi'ni imzaladı.",
   },
-  "Egypt's Sadat Threatens War Over Nile": {
-    title: "Mısır Devlet Başkanı Sedat'tan Nil İçin Savaş Tehdidi",
-    description: "Mısır Cumhurbaşkanı Enver Sedat, Etiyopya'nın Mavi Nil üzerindeki baraj planlarına karşı uyararak 'Mısır'ı yeniden savaşa sokabilecek tek konu sudur' açıklamasında bulundu.",
+  "egypt's sadat threatens war over nile": {
+    title: "Mısır Devlet Başkanı Enver Sedat Nil İçin Savaş Tehdidinde Bulundu",
+    description: "Mısır Cumhurbaşkanı Enver Sedat, Etiyopya'nın Nil sularını kesebilecek veya azaltabilecek herhangi bir girişimine karşı Mısır'ın askeri güç kullanmaktan çekinmeyeceğini açıkça ilan etti.",
   },
-  "Niger Basin Authority Created": {
+  "niger basin authority created": {
     title: "Nijer Havzası Otoritesi (NBA) Kuruldu",
-    description: "Niamey'de Nijer Nehri Komisyonu'nun yerine geçen dokuz üye devlet, entegre havza yönetimi, baraj koordinasyonu ve su kaynakları kalkınması için güçlendirilmiş bir yetkiye sahip Nijer Havzası Otoritesi'ni kurdu.",
+    description: "Eski Nijer Nehri Komisyonu yeniden yapılandırılarak daha geniş yetkilerle donatılmış Nijer Havzası Otoritesi'ne (NBA) dönüştürüldü ve 9 kıyıdaş devletin entegre havza yönetimi güçlendirildi.",
   },
-  "Iraq Drains Mesopotamian Marshes as Weapon": {
-    title: "Irak'ın Mezopotamya Sazlıklarını Silah Olarak Kurutması",
-    description: "Saddam Hüseyin rejimi, Şii muhalifleri ve Bataklık Araplarını bastırmak için Dicle ve Fırat nehirlerinin yönünü devasa kanallarla değiştirerek Mezopotamya sazlıklarının %90'ından fazlasını kuruttu ve tarihin en büyük ekolojik yıkımlarından birini gerçekleştirdi.",
+  "iraq drains mesopotamian marshes as weapon": {
+    title: "Irak Mezopotamya Bataklıklarını Silah Olarak Kuruttu",
+    description: "Saddam Hüseyin rejimi, Şii muhalifleri ve bataklık Araplarını sindirmek amacıyla Fırat ve Dicle nehirlerinin sularını yönlendirip kurutma kanalları açarak Mezopotamya bataklıklarının %90'ını yok etti ve suyu bir cezalandırma silahı olarak kullandı.",
   },
-  "Turkey-Syria Euphrates Water-PKK Agreement": {
-    title: "Türkiye-Suriye Fırat Suyu ve Güvenlik Protokolü",
-    description: "Türkiye ve Suriye, Türkiye'nin sınırda yıllık ortalama saniyede 500 metreküp Fırat suyu bırakmayı taahhüt ettiği, Suriye'nin ise sınır güvenliği ve terörle mücadelede işbirliği yapmayı kabul ettiği geçici bir ekonomik protokol imzaladı.",
+  "turkey-syria euphrates water-pkk agreement": {
+    title: "Türkiye-Suriye Fırat Suyu-Güvenlik Protokolü",
+    description: "Türkiye ve Suriye, Türkiye'nin Fırat sınırından Suriye'ye aylık ortalama en az 500 m³/sn su bırakmasını taahhüt ettiği, Suriye'nin ise sınır güvenliği konusunda güvence verdiği bir Ekonomik İşbirliği Protokolü imzaladı.",
   },
-  "India-Bangladesh Ganges Dispute Worsens": {
-    title: "Hindistan-Bangladeş Ganj Anlaşmazlığı Şiddetlendi",
-    description: "Hindistan ile Bangladeş arasındaki 1982 tarihli geçici su paylaşım anlaşmasının süresi doldu. Hindistan tek taraflı su çekimlerine devam ederken, Bangladeş'in güneybatısında tuzlanma, içme suyu krizi ve tarımsal çöküş yaşandı.",
+  "india-bangladesh ganges dispute worsens": {
+    title: "Hindistan-Bangladeş Ganj İhtilafı Derinleşti",
+    description: "Önceki geçici su paylaşım anlaşmalarının süresi dolduktan sonra müzakereler tıkandı; Bangladeş, kurak mevsimde tarımsal verim kaybı ve tuzlanma gerekçesiyle Hindistan'ı tek taraflı su çekmekle suçladı.",
   },
-  "Turkey Cuts Euphrates Flow During Gulf War": {
-    title: "Türkiye'nin Körfez Savaşı Sırasında Fırat Akışını Kesmesi",
-    description: "Türkiye, Atatürk Barajı rezervuarını doldurmak için Fırat Nehri akışını bir ay boyunca kesti. Önceden bildirilmesine ve teknik tahliyelerle telafi edilmesine rağmen hamle, Suriye ve Irak'ta şiddetli diplomatik protestolara neden oldu.",
+  "turkey cuts euphrates flow during gulf war": {
+    title: "Türkiye Körfez Savaşı Sırasında Fırat Akışını Kesti",
+    description: "Türkiye, dev Atatürk Barajı rezervuarını doldurmak amacıyla Fırat akışını bir ay süreyle kesti. Önceden komşu ülkelere duyurulmuş ve ilave su verilmiş olmasına rağmen, yaklaşan Körfez Savaşı gerilimiyle birlikte Irak ve Suriye sert diplomatik tepki gösterdi.",
   },
-  "Aral Sea Interstate Commission for Water Coordination": {
-    title: "Aral Denizi Eyaletlerarası Su Koordinasyon Komisyonu (ICWC)",
-    description: "Sovyetler Birliği'nin dağılmasının ardından beş Orta Asya cumhuriyeti (Kazakistan, Kırgızistan, Tacikistan, Türkmenistan, Özbekistan) Almatı Anlaşması'nı imzalayarak Seyhun ve Ceyhun sularını ortak yönetmek üzere ICWC'yi kurdu.",
+  "aral sea interstate commission for water coordination": {
+    title: "Aral Denizi Devletlerarası Su Koordinasyon Komisyonu (ICWC)",
+    description: "Sovyetler Birliği'nin dağılmasının ardından beş Orta Asya cumhuriyeti (Kazakistan, Kırgızistan, Tacikistan, Türkmenistan, Özbekistan), Seyhun ve Ceyhun havzalarındaki su kotalarını ortak yönetmek için Almatı Anlaşması ile ICWC'yi kurdu.",
   },
-  "Aral Sea Central Asia Budget Pledge": {
-    title: "Aral Denizi Orta Asya Bütçe Taahhüdü",
-    description: "Orta Asya liderleri, felaket düzeyinde kuruyan Aral Denizi havzasını rehabilite etmek ve yerel nüfusun ekolojik yaşam koşullarını iyileştirmek için ulusal bütçelerinin %1'ini Uluslararası Aral'ı Kurtarma Fonu'na (IFAS) tahsis etmeyi kabul etti.",
+  "aral sea central asia budget pledge": {
+    title: "Aral Denizi Orta Asya Bütçe Taahhüdü (Nukus Deklarasyonu)",
+    description: "Beş Orta Asya lideri Nukus'ta toplanarak Aral Denizi'ni Kurtarma Uluslararası Fonu'na (IFAS) ulusal bütçelerinin belirli bir oranını aktarmayı taahhüt etti.",
   },
-  "Israel-Jordan Peace Treaty Water Provisions": {
-    title: "İsrail-Ürdün Barış Antlaşması Su Maddeleri",
-    description: "İsrail-Ürdün Barış Antlaşması'nın VI. Eki, Şeria ve Yarmuk nehirleri ile Vadi Araba yeraltı suları için karşılıklı su tahsislerini, tuzdan arındırma işbirliklerini ve depolama transferlerini resmileştirdi.",
+  "israel-jordan peace treaty water provisions": {
+    title: "İsrail-Ürdün Barış Antlaşması Su Hükümleri",
+    description: "İsrail ile Ürdün arasında imzalanan Barış Antlaşması'nın II. Eki, Şeria ve Yermuk nehirlerinin sularının paylaşımı ile ortak tuz giderme ve su depolama projelerini düzenleyen kalıcı bir rejim getirdi.",
   },
-  "Mekong River Commission Agreement": {
+  "mekong river commission agreement": {
     title: "Mekong Nehri Komisyonu Anlaşması",
-    description: "Kamboçya, Laos, Tayland ve Vietnam, Aşağı Mekong Havzası'nın Sürdürülebilir Kalkınması İçin İşbirliği Anlaşması'nı imzalayarak Mekong Nehri Komisyonu'nu (MRC) kurdu. Çin ve Myanmar diyalog ortağı olarak katıldı ancak tam üye olmadı.",
+    description: "Kamboçya, Laos, Tayland ve Vietnam, Aşağı Mekong Havzası'nın sürdürülebilir kalkınması için Chiang Rai Anlaşması'nı imzalayarak Mekong Nehri Komisyonu'nu (MRC) oluşturdu; ancak yukarı kıyıdaşlar Çin ve Myanmar tam üye olmadı.",
   },
-  "China Begins Manwan Dam on Mekong (Lancang)": {
-    title: "Çin Lancang (Mekong) Üzerinde Manwan Barajı'nı Başlattı",
-    description: "Çin, Yukarı Mekong (Lancang) nehri ana kolu üzerinde 1.500 MW kapasiteli Manwan Barajı'nı ticari işletmeye aldı. Bu baraj, aşağı havza ülkelerine danışılmadan inşa edilen devasa hidroelektrik baraj kademesinin ilk halkası oldu.",
+  "china begins manwan dam on mekong (lancang)": {
+    title: "Çin Mekong (Lancang) Üzerinde Manwan Barajını İnşa Etti",
+    description: "Çin, Yukarı Mekong (Lancang) üzerindeki ilk büyük hidroelektrik barajı olan Manwan'ı işletmeye aldı; bu durum aşağı havza ülkelerinde akış rejiminin bozulacağı ve tortu akışının kesileceği endişelerini başlattı.",
   },
-  "India-Bangladesh Ganges Water Sharing Treaty": {
+  "india-bangladesh ganges water sharing treaty": {
     title: "Hindistan-Bangladeş Ganj Suları Paylaşım Antlaşması",
-    description: "Hindistan ve Bangladeş, 1 Ocak ile 31 Mayıs arasındaki kurak mevsimde Farakka Barajı'ndaki su paylaşımını belirleyen 30 yıllık tarihi bir antlaşma imzalayarak 20 yıllık ikili su krizine kapsamlı bir formül getirdi.",
+    description: "Hindistan ve Bangladeş, Farakka Bendi'nde 30 yıllık bağlayıcı bir su paylaşım formülü belirleyen tarihi Ganj Antlaşması'nı imzalayarak yarım asırlık uyuşmazlığı kurumsal bir çözüme kavuşturdu.",
   },
-  "Iraq Calls for Tigris-Euphrates Sharing Agreement": {
-    title: "Irak'tan Dicle-Fırat Paylaşım Anlaşması Çağrısı",
-    description: "Irak, Türkiye'nin Güneydoğu Anadolu Projesi (GAP) barajları inşaatının hızlanması üzerine BM'ye ve Arap Birliği'ne başvurarak Dicle ve Fırat nehirleri için bağlayıcı bir üçlü su paylaşım kotası belirlenmesini talep etti.",
+  "iraq calls for tigris-euphrates sharing agreement": {
+    title: "Irak Dicle ve Fırat İçin Nihai Su Paylaşım Anlaşması Çağrısı Yaptı",
+    description: "Irak, Türkiye'nin GAP projeleri ve Suriye barajları nedeniyle debilerin azaldığını belirterek üç kıyıdaş devlet arasında bağlayıcı ve nihai bir su tahsis anlaşması imzalanması çağrısında bulundu.",
   },
-  "Danube River Protection Convention Enters Force": {
+  "danube river protection convention enters force": {
     title: "Tuna Nehri Koruma Sözleşmesi Yürürlüğe Girdi",
-    description: "Tuna Nehri Koruma Sözleşmesi (DRPC) yürürlüğe girerek Tuna Havzası'nda sürdürülebilir su yönetimi, kirlilik kontrolü ve ekolojik restorasyon için Uluslararası Tuna Koruma Komisyonu'nu (ICPDR) yetkilendirdi.",
+    description: "Tuna Havzası'ndaki 14 ülke ve Avrupa Birliği'nin imzaladığı Sofia Sözleşmesi yürürlüğe girdi ve Tuna Nehri'ni Koruma Uluslararası Komisyonu (ICPDR) resmen çalışmaya başladı.",
   },
-  "Nile Basin Initiative Established": {
+  "nile basin initiative established": {
     title: "Nil Havzası Girişimi (NBI) Kuruldu",
-    description: "Tüm Nil kıyıdaş ülkeleri (Eritre gözlemci olarak) Darüsselam'da Nil Havzası Girişimi'ni kurarak havzanın ortak kalkınması ve kalıcı bir yasal çerçevenin müzakere edilmesi için ortak bir platform oluşturdu.",
+    description: "Nil kıyıdaşı 10 ülke, kaynakları adil paylaşmak, teknik işbirliğini artırmak ve sürdürülebilir kalkınmayı sağlamak üzere Darüsselam'da Nil Havzası Girişimi'ni (NBI) başlattı.",
   },
-  "Cochabamba Water War, Bolivia": {
+  "cochabamba water war, bolivia": {
     title: "Cochabamba Su Savaşı, Bolivya",
-    description: "Bolivya'nın Cochabamba kentinde belediye su sisteminin Bechtel konsorsiyumuna özelleştirilmesinin ve su tarifelerinin fahiş oranda artırılmasının ardından halk ayaklanması çıktı; haftalar süren çatışmaların ardından hükümet sözleşmeyi iptal etti.",
+    description: "Bolivya'nın Cochabamba kentinde içme suyu şebekesinin özelleştirilmesi ve faturaların %300'e varan oranlarda artması üzerine kitlesel halk ayaklanması çıktı; olağanüstü hal ilan edildi ve hükümet özelleştirme sözleşmesini feshetmek zorunda kaldı.",
   },
-  "India's Baglihar Dam Dispute with Pakistan": {
-    title: "Hindistan'ın Baglihar Barajı Üzerine Pakistan ile İhtilafı",
-    description: "Pakistan, Hindistan'ın Chenab Nehri üzerinde inşa ettiği 900 MW'lık Baglihar Hidroelektrik Santrali'nin baraj göleti ve savak tasarımının 1960 İndus Antlaşması'nı ihlal ettiğini ileri sürerek projeye resmen itiraz etti.",
+  "india's baglihar dam dispute with pakistan": {
+    title: "Hindistan-Pakistan Baglihar Barajı İhtilafı",
+    description: "Pakistan, Hindistan'ın Chenab Nehri üzerinde inşa ettiği Baglihar Hidroelektrik Santrali'nin İndus Suları Antlaşması'nın su depolama ve tahliye kriterlerini ihlal ettiğini ileri sürerek uluslararası arabuluculuk sürecini başlattı.",
   },
-  "Iraq War: Water Infrastructure Destruction": {
-    title: "Irak Savaşı: Su Altyapısının Yıkımı",
-    description: "2003 Irak işgali ve sonrasındaki çatışmalar; elektrik şebekesinin, arıtma tesislerinin ve su dağıtım boru hatlarının çökmesine neden oldu. Milyonlarca sivil temiz suya erişimini kaybederek kolera ve tifo salgınlarıyla karşı karşıya kaldı.",
+  "iraq war: water infrastructure destruction": {
+    title: "Irak Savaşı: Su Altyapısının Yıkımı ve Hedef Alınması",
+    description: "ABD liderliğindeki askeri harekat ve sonrasındaki çatışmalarda Irak'ın su arıtma, dağıtım ve kanalizasyon şebekeleri bombalandı, elektrik kesintileriyle hizmet dışı kaldı; milyonlarca sivil temiz sudan mahrum kaldı.",
   },
-  "Zambezi Watercourse Commission Agreement (ZAMCOM)": {
+  "zambezi watercourse commission agreement (zamcom)": {
     title: "Zambezi Su Yolu Komisyonu Anlaşması (ZAMCOM)",
-    description: "Sekiz kıyıdaş Afrika devleti, Güney Afrika'nın en büyük dördüncü nehir havzası olan Zambezi havzasında ortak ve sürdürülebilir su kaynakları yönetimini teşvik etmek üzere ZAMCOM Anlaşması'nı imzaladı.",
+    description: "Sekiz kıyıdaş ülke (Angola, Botsvana, Malavi, Mozambik, Namibya, Tanzanya, Zambiya, Zimbabve), Kasane'de ZAMCOM Anlaşması'nı imzalayarak ortak havza yönetimi için kurumsal temel attı.",
   },
-  "Kazakhstan Kok-Aral Dam Saves North Aral Sea": {
-    title: "Kazakistan Kok-Aral Barajı ile Kuzey Aral'ı Kurtardı",
-    description: "Kazakistan, Dünya Bankası desteğiyle Kok-Aral Barajı'nı tamamlayarak Kuzey Aral Denizi'ni Güney Aral'dan ayırdı. Kuzey Aral'da su seviyesi 8 metre yükseldi, tuzluluk azaldı ve ticari balıkçılık yeniden canlandı.",
+  "kazakhstan kok-aral dam saves north aral sea": {
+    title: "Kazakistan Kök-Aral Barajı ile Kuzey Aral Denizi'ni Kurtardı",
+    description: "Dünya Bankası desteğiyle tamamlanan 13 kilometrelik Kök-Aral Bendi, Seyhun Nehri'nin sularını Kuzey Aral'da toplayarak su seviyesini 38 metreden 42 metreye çıkardı, tuzluluğu yarıya indirdi ve balıkçılığı yeniden canlandırdı.",
   },
-  "Euphrates-Tigris Initiative for Cooperation (ETIC)": {
-    title: "Fırat-Dicle İşbirliği Girişimi (ETIC)",
-    description: "Türkiye, Suriye, Irak ve uluslararası uzmanlar, Fırat-Dicle havzasında teknik işbirliği, veri paylaşımı ve akademik diplomasi yoluyla güven inşa etmek amacıyla ETIC girişimini başlattı.",
+  "euphrates-tigris initiative for cooperation (etic)": {
+    title: "Fırat-Dicle İşbirliği Girişimi (ETIC) Başlatıldı",
+    description: "Türkiye, Suriye ve Irak'tan akademisyenler ve su uzmanları, siyasi kutuplaşmayı aşmak ve havzada teknik veri paylaşımı ile ortak projeler üretmek üzere sivil toplum odaklı ETIC platformunu kurdu.",
   },
-  "World Bank Neutral Expert Rules on Baglihar Dam": {
-    title: "Dünya Bankası Tarafsız Uzmanı Baglihar Barajı Kararını Verdi",
-    description: "İsviçreli profesör Raymond Lafitte, İndus Suları Antlaşması tarihindeki ilk tarafsız uzman tahkiminde Hindistan'ın Baglihar Barajı'ndaki savak yüksekliğini hafifçe düşürmesine hükmetti ancak baraj inşasının devamına onay verdi.",
+  "world bank neutral expert rules on baglihar dam": {
+    title: "Dünya Bankası Tarafsız Uzmanı Baglihar Kararını Verdi",
+    description: "Dünya Bankası tarafından atanan İsviçreli tarafsız uzman Prof. Raymond Lafitte, Hindistan'ın baraj yüksekliğini ve batık savak tasarımını kısmen revize etmesine, ancak projenin ana hatlarıyla devamına onay vererek teknik ihtilafı çözdü.",
   },
-  "Nile CFA Negotiations Stall": {
-    title: "Nil İşbirliği Çerçeve Anlaşması (CFA) Müzakereleri Tıkandı",
-    description: "Nil Havzası Girişimi müzakerelerinde, Mısır ve Sudan'ın 1929 ve 1959 anlaşmalarından doğan 'tarihi haklarının' korunması maddesini şart koşması ve yukarı havza ülkelerinin bunu reddetmesi üzerine görüşmeler kilitlendi.",
+  "nile cfa negotiations stall": {
+    title: "Nil CFA Müzakereleri Tıkandı",
+    description: "Yukarı havza ülkeleri ile aşağı havza ülkeleri (Mısır ve Sudan) arasındaki görüşmeler, 1929 ve 1959 anlaşmalarındaki tarihi su hakları ve ön onay veto hakkı maddesi (Madde 14b) üzerinde uzlaşma sağlanamaması sebebiyle kilitlendi.",
   },
-  "Niger Basin Water Charter Adopted": {
+  "niger basin water charter adopted": {
     title: "Nijer Havzası Su Şartı Kabul Edildi",
-    description: "Dokuz kıyıdaş devletin devlet başkanları, Nijer Havzası'nda adil su tahsisi ilkelerini, çevre korumayı ve sınır aşan ortak projeleri düzenleyen bağlayıcı Nijer Su Şartı'nı kabul etti.",
+    description: "Nijer Havzası Otoritesi üyesi 9 ülkenin devlet başkanları, havzada su tahsisi, ortak baraj yönetimi ve çevresel koruma ilkelerini belirleyen bağlayıcı Su Şartı'nı kabul etti.",
   },
-  "Turkey-Iraq and Turkey-Syria Water MoUs": {
-    title: "Türkiye-Irak ve Türkiye-Suriye Su Mutabakat Zabıtları",
-    description: "Türkiye, Irak ve Suriye ile ikili ilişkilerin zirvesinde su kaynakları, meteorolojik veri paylaşımı, baraj yönetimi ve kuraklıkla mücadele konularında ortak mutabakat zabıtları (MoU) imzaladı.",
+  "turkey-iraq and turkey-syria water mous": {
+    title: "Türkiye-Irak ve Türkiye-Suriye Su Mutabakat Muhtıraları",
+    description: "Türkiye, Irak ve Suriye arasında kurulan Yüksek Düzeyli Stratejik İşbirliği Konseyleri kapsamında su yönetimi, modern sulama teknikleri ve meteorolojik veri paylaşımına ilişkin kapsamlı mutabakat zabıtları imzalandı.",
   },
-  "Mekong Low Water Levels Crisis": {
-    title: "Mekong Düşük Su Seviyesi Krizi",
-    description: "Aşağı Mekong Havzası'nda su seviyelerinin rekor düzeyde düşmesi naviyasyonu ve balıkçılığı felce uğrattı. Aşağı kıyıdaşlar Çin'in yeni faaliyete geçen Xiaowan Barajı'nı su tutmakla suçlarken, Çin krizin şiddetli kuraklıktan kaynaklandığını savundu.",
+  "mekong low water levels crisis": {
+    title: "Mekong Havzasında Tarihi Düşük Su Seviyesi Krizi",
+    description: "Aşağı Mekong'da su seviyeleri 50 yılın en düşük düzeyine geriledi; kıyıdaş topluluklar kuraklık ve Çin'in yukarı havzada inşa ettiği kaskat barajların su tutmasını ana etken olarak suçladı.",
   },
-  "Nile Cooperative Framework Agreement Opened for Signature": {
+  "nile cooperative framework agreement opened for signature": {
     title: "Nil İşbirliği Çerçeve Anlaşması (CFA) İmzaya Açıldı",
-    description: "Etiyopya, Uganda, Ruanda, Tanzanya ve Kenya, Entebbe'de Mısır ve Sudan'ın vetolarını aşarak Nil CFA'yı imzaladı. Anlaşma, sömürge dönemi kotaları yerine adil ve makul kullanım ilkesini getirdi.",
+    description: "Etiyopya, Uganda, Ruanda, Tanzanya ve Kenya, Entebbe'de Mısır ve Sudan'ın boykot ettiği Nil CFA'yı imzalayarak eşitlikçi ve makul kullanım ilkesini benimsedi ve sömürge dönemi anlaşmalarını tanımadıklarını ilan etti.",
   },
-  "Ethiopia Announces Grand Ethiopian Renaissance Dam": {
+  "ethiopia announces grand ethiopian renaissance dam": {
     title: "Etiyopya Büyük Rönesans Barajı'nı (GERD) Duyurdu",
-    description: "Arap Baharı sırasında Mısır'daki siyasi çalkantıdan yararlanan Etiyopya Başbakanı Meles Zenawi, Mavi Nil üzerinde 5.000+ MW kapasiteli ve 74 milyar m³ rezervuarlı Büyük Rönesans Barajı'nın inşasını resmen duyurdu.",
+    description: "Etiyopya, Mavi Nil üzerinde 5 milyar dolarlık ve 74 milyar m³ rezervuar kapasiteli Afrika'nın en büyük hidroelektrik santrali olacak GERD projesini kamuoyuna ilan etti; bu adım Nil jeopolitiğinde tarihi bir kırılma yarattı.",
   },
-  "Xayaburi Dam Controversy, Laos": {
-    title: "Xayaburi Barajı Tartışması, Laos",
-    description: "Laos, Mekong Nehri Komisyonu'nun Ön İstişare sürecinde komşuları Kamboçya ve Vietnam'ın balık göçü ve tortu akışı konusundaki ciddi itirazlarına rağmen 1.285 MW'lık Xayaburi Barajı'nın inşasına tek taraflı olarak başladı.",
+  "xayaburi dam controversy, laos": {
+    title: "Laos Xayaburi Barajı Tartışması, Mekong",
+    description: "Laos, Aşağı Mekong ana kolu üzerindeki ilk hidroelektrik baraj olan 1.285 MW'lık Xayaburi Barajı'nın inşasına başladı; Kamboçya ve Vietnam balık göçü ve alüvyon akışının kesileceğini belirterek sert diplomatik itirazlarda bulundu.",
   },
-  "Ethiopia Ratifies Nile CFA": {
-    title: "Etiyopya Nil CFA'yı Onayladı",
-    description: "Etiyopya Parlamentosu Nil İşbirliği Çerçeve Anlaşması'nı (CFA) oybirliğiyle onaylayarak, Mısır Cumhurbaşkanı Muhammed Mursi'nin baraj inşasını engellemek için 'tüm seçeneklerin masada olduğu' yönündeki açıklamalarına meydan okudu.",
+  "ethiopia ratifies nile cfa": {
+    title: "Etiyopya Nil CFA'sını Mecliste Onayladı",
+    description: "Etiyopya Parlamentosu, 1929 anlaşmasının hükümsüz olduğunu tescil eden Nil İşbirliği Çerçeve Anlaşması'nı oybirliğiyle onayladı; bu adım Mısır'da televizyondan canlı yayınlanan kriz toplantılarına ve savaş tehditlerine yol açtı.",
   },
-  "Ukraine Blocks North Crimean Canal": {
-    title: "Ukrayna Kuzey Kırım Kanalı'nı Kapattı",
-    description: "Rusya'nın Kırım'ı yasadışı ilhakının ardından Ukrayna, yarımadanın tatlı su ihtiyacının %85'ini karşılayan Dinyeper Nehri kaynaklı Kuzey Kırım Kanalı'na set çekerek akışı tamamen kesti.",
+  "ukraine blocks north crimean canal": {
+    title: "Ukrayna Kuzey Kırım Kanalı'nı Kesti",
+    description: "Rusya'nın Kırım'ı ilhakının ardından Ukrayna, yarımadanın tatlı su ihtiyacının %85'ini karşılayan Dinyeper kaynaklı Kuzey Kırım Kanalı'nın akışını bir setle keserek suyu stratejik bir karşı baskı aracı olarak kullandı.",
   },
-  "Egypt-Ethiopia-Sudan Declaration of Principles": {
+  "egypt-ethiopia-sudan declaration of principles": {
     title: "Mısır-Etiyopya-Sudan İlkeler Deklarasyonu",
-    description: "Mısır Cumhurbaşkanı Sisi, Etiyopya Başbakanı Desalegn ve Sudan Devlet Başkanı Beşir, Hartum'da GERD Barajı için zarar vermeme, adil kullanım ve barışçıl uyuşmazlık çözümü ilkelerini içeren 10 maddelik İlkeler Bildirgesi'ni imzaladı.",
+    description: "Üç ülkenin devlet başkanları Hartum'da toplanarak GERD'in ilk dolumu ve işletilmesinde tarafların birbirine 'önemli zarar vermeme' ve 'adil kullanım' ilkelerine bağlı kalacağını belirten 10 maddelik İlkeler Deklarasyonu'nu imzaladı.",
   },
-  "Pakistan Requests Arbitration on Kishanganga and Ratle Dams": {
+  "pakistan requests arbitration on kishanganga and ratle dams": {
     title: "Pakistan Kishanganga ve Ratle Barajları İçin Tahkim İstedi",
-    description: "Pakistan, Hindistan'ın Jhelum ve Chenab kolları üzerinde inşa ettiği Kishanganga (330 MW) ve Ratle (850 MW) hidroelektrik santrallerinin akış kontrolü tasarımını ihlal ettiği gerekçesiyle Lahey Daimi Tahkim Mahkemesi'ne başvurdu.",
+    description: "Pakistan, Hindistan'ın Jhelum kolu Kishanganga ve Chenab üzerindeki Ratle projelerinin İndus Antlaşması tasarım kurallarını aştığını belirterek Lahey Daimi Tahkim Mahkemesi'ne (PCA) başvurdu.",
   },
-  "Mekong Reaches Lowest Level in 100 Years": {
-    title: "Mekong Son 100 Yılın En Düşük Seviyesine Geriledi",
-    description: "Mekong ana kolunda su seviyeleri son yüzyılın en düşük seviyelerine inerek nehir renginin maviye dönmesine ve balık popülasyonlarının çökmesine yol açtı; uydu verileri Çin barajlarının yukarı havzada su tuttuğunu ortaya koydu.",
+  "mekong reaches lowest level in 100 years": {
+    title: "Mekong Son 100 Yılın En Düşük Seviyesine İndi",
+    description: "Aşağı Mekong Nehri'nde eşi görülmemiş kuraklık ve su çekilmesi yaşandı; nehir rengi maviye dönüştü (besin sedimenti yok oldu). Uydu analizleri Çin rezervuarlarının yukarıda milyarlarca metreküp su tuttuğunu ortaya koydu.",
   },
-  "Cauvery Water Dispute: India Inter-State Violence": {
-    title: "Cauvery Su Anlaşmazlığı: Hindistan Eyaletlerarası Çatışma",
-    description: "Hindistan Yüksek Mahkemesi, Karnataka ve Tamil Nadu eyaletleri arasında yüzyıllık Cauvery Nehri su paylaşımı davasında nihai kararını vererek Tamil Nadu'nun payını hafifçe düşürdü; eyaletler arasında kitlesel protestolar ve grevler patlak verdi.",
+  "cauvery water dispute: india inter-state violence": {
+    title: "Cauvery Su İhtilafı: Hindistan Eyaletlerarası Şiddet",
+    description: "Karnataka ve Tamil Nadu eyaletleri arasında Cauvery Nehri su tahsisi konusunda çıkan anlaşmazlık kitlesel protestolara, araç kundaklamalarına ve sokağa çıkma yasaklarına dönüştü; Hindistan Yüksek Mahkemesi tahsis kotalarını zorunlu olarak yeniden belirledi.",
   },
-  "India Threatens to Block Indus Tributaries After Pulwama Attack": {
-    title: "Hindistan Pulwama Saldırısı Sonrası İndus Kollarını Kesmekle Tehdit Etti",
-    description: "Keşmir'de 40 Hint polisinin öldürüldüğü intihar saldırısının ardından Hindistan Su Kaynakları Bakanı Nitin Gadkari, doğu nehirlerinden Pakistan'a akan kullanılmayan saptırma sularının kesilerek Haryana ve Pencap'a aktarılacağını açıkladı.",
+  "india threatens to block indus tributaries after pulwama attack": {
+    title: "Hindistan Pulwama Saldırısı Sonrası İndus Kollarını Kesme Tehdidinde Bulundu",
+    description: "Keşmir'deki Pulwama terör saldırısının ardından Hindistan Su Kaynakları Bakanlığı, Hindistan'a ait doğu nehir sularının Pakistan'a akmasını tamamen durdurup Hint eyaletlerine yönlendirecek projeleri hızlandırdığını açıkladı.",
   },
-  "Ethiopia Second Nile CFA Ratification Fails": {
-    title: "Etiyopya İkinci Nil CFA Onay Çabaları",
-    description: "Etiyopya ve Doğu Afrika müttefikleri, Nil CFA'nın yürürlüğe girmesi için gereken altıncı onayı sağlamak amacıyla Kongo Demokratik Cumhuriyeti ve Güney Sudan nezdinde diplomatik baskıyı artırdı.",
+  "ethiopia second nile cfa ratification fails": {
+    title: "Etiyopya Nil CFA İkinci Tur Müzakereleri",
+    description: "ABD ve Dünya Bankası arabuluculuğunda Washington'da yürütülen GERD dolum müzakereleri, Etiyopya'nın bağlayıcı bir kuraklık protokolünü ulusal egemenliğe aykırı bulması ve nihai taslak toplantısını terk etmesiyle sonuçsuz kaldı.",
   },
-  "Egypt Brings GERD Dispute to UN Security Council": {
+  "egypt brings gerd dispute to un security council": {
     title: "Mısır GERD İhtilafını BM Güvenlik Konseyi'ne Taşıdı",
-    description: "Washington'da ABD ve Dünya Bankası arabuluculuğunda yürütülen üçlü müzakerelerin Etiyopya'nın son tur toplantıya katılmamasıyla çökmesinin ardından Mısır, Etiyopya'nın tek taraflı baraj doldurma girişimini BM Güvenlik Konseyi'ne şikayet etti.",
+    description: "Mısır, Etiyopya'nın tek taraflı baraj doldurma hamlelerinin uluslararası barış ve güvenliği tehdit ettiğini ileri sürerek konuyu Birleşmiş Milletler Güvenlik Konseyi'ne (BMGK) taşıdı ve acil müdahale talep etti.",
   },
-  "Ethiopia Begins First GERD Filling": {
-    title: "Etiyopya İlk GERD Doldurma İşlemini Tamamladı",
-    description: "Etiyopya, Mısır ve Sudan ile bağlayıcı bir doldurma ve işletme anlaşması imzalanmadan, yoğun yağış mevsiminden yararlanarak GERD rezervuarında 4,9 milyar m³ su tuttuğunu resmen açıkladı.",
+  "ethiopia begins first gerd filling": {
+    title: "Etiyopya İlk GERD Dolumunu Gerçekleştirdi",
+    description: "Etiyopya, Mısır ve Sudan ile üçlü bir anlaşmaya varmadan GERD rezervuarının ilk aşama dolumunu (4,9 milyar m³) tamamladığını açıkladı ve bunun yoğun muson yağmurları sayesinde doğal olarak gerçekleştiğini savundu.",
   },
-  "Mexico-US Colorado/Rio Grande Water Debt Tensions": {
-    title: "Meksika-ABD Colorado/Rio Grande Su Borcu Gerilimi",
-    description: "Meksika'nın 1944 Su Antlaşması kapsamındaki beş yıllık su teslimat borcunu ödemek için Chihuahua eyaletindeki La Boquilla Barajı'ndan ABD'ye su salma kararı, binlerce Meksikalı çiftçinin barajı işgal etmesi ve Ulusal Muhafızlarla çatışmasıyla sonuçlandı.",
+  "mexico-us colorado/rio grande water debt tensions": {
+    title: "Meksika-ABD Rio Grande Su Borcu Gerginliği",
+    description: "1944 Su Antlaşması kapsamında ABD'ye su teslimatı yapılmasına karşı çıkan Meksikalı çiftçiler, Chihuahua eyaletindeki La Boquilla Barajı'nı işgal etti; Meksika Ulusal Muhafızları ile çiftçiler arasında çıkan çatışmada can kayıpları yaşandı.",
   },
-  "Kyrgyzstan-Tajikistan Isfara River Armed Clash": {
+  "kyrgyzstan-tajikistan isfara river armed clash": {
     title: "Kırgızistan-Tacikistan İsfara Nehri Silahlı Çatışması",
-    description: "Kırgızistan ve Tacikistan sınır güçleri arasında İsfara Nehri üzerindeki Golovnoy su dağıtım tesisi çevresinde gözetleme kamerası kurulması yüzünden çıkan silahlı çatışmada 50'den fazla kişi hayatını kaybetti, binlerce köylü tahliye edildi.",
+    description: "Ortak Golovnoy su dağıtım noktasına güvenlik kameraları takılması üzerine başlayan sınır uyuşmazlığı, iki ülke orduları arasında havan ve zırhlı araçların kullanıldığı 3 günlük çatışmaya dönüştü; 55'ten fazla kişi hayatını kaybetti.",
   },
-  "Ethiopia Second GERD Filling Proceeds Without Agreement": {
-    title: "Etiyopya İkinci GERD Doldurmasını Anlaşmasız Gerçekleştirdi",
-    description: "Etiyopya, Mısır ve Sudan'ın tüm diplomatik itirazlarına rağmen GERD rezervuarına ilave 13,5 milyar m³ su ekleyerek ikinci aşama doldurmayı tamamladı; Kahire hamleyi uluslararası hukukun açık ihlali ilan etti.",
+  "ethiopia second gerd filling proceeds without agreement": {
+    title: "Etiyopya Anlaşmasız İkinci GERD Dolumunu Yaptı",
+    description: "Etiyopya, aşağı kıyıdaşların itirazlarına rağmen ikinci yıl dolumunu tamamlayarak baraj rezervuarındaki toplam su miktarını 13,5 milyar m³ seviyesine çıkardı.",
   },
-  "Afghanistan Kamal Khan Dam Opens on Helmand": {
-    title: "Afganistan Hilmend Üzerinde Kemal Han Barajı'nı Açtı",
-    description: "Afganistan Devlet Başkanı Eşref Gani, Nimruz vilayetinde Kemal Han Barajı'nı açarak 'İran'a artık bedava su verilmeyeceğini, petrol karşılığında su verileceğini' ilan etti; bu durum Tahran ile diplomatik krizi tırmandırdı.",
+  "afghanistan kamal khan dam opens on helmand": {
+    title: "Afganistan Helmand Üzerindeki Kemal Han Barajı'nı Açtı",
+    description: "Afganistan Devlet Başkanı Eşref Gani, 'Suya karşı petrol' söylemiyle Helmand Nehri üzerindeki Kemal Han Barajı'nı açtı; İran'ın Hamun sulak alanlarına giden suyun kesilmesi Tahran'da büyük tepkiye yol açtı.",
   },
-  "Kyrgyzstan-Tajikistan Large-Scale Clashes": {
+  "kyrgyzstan-tajikistan large-scale clashes": {
     title: "Kırgızistan-Tacikistan Geniş Çaplı Sınır ve Su Çatışmaları",
-    description: "Kırgız-Tacik sınırında su kanalları ve tartışmalı araziler yüzünden tank ve ağır topların kullanıldığı büyük çatışmalar çıktı; 100'den fazla insan hayatını kaybetti ve 130.000'den fazla insan yerinden edildi.",
+    description: "Sınır ve su tesisleri üzerindeki kontrol uyuşmazlığı sebebiyle Kırgızistan ve Tacikistan sınırında topyekün çatışmalar patlak verdi; 100'den fazla insan öldü, 140 bin kişi tahliye edildi ve su pompaları zarar gördü.",
   },
-  "Afghanistan-Iran Helmand Tensions Intensify": {
-    title: "Afganistan-İran Hilmend Gerilimi Tırmandı",
-    description: "Taliban yönetiminin Kemal Han Barajı savaklarını kapalı tutması ve İran'ın Sistan-Belucistan eyaletine su akışını engellemesi üzerine İran Cumhurbaşkanı Reisi, Taliban'ı 1973 anlaşması taahhütlerini ihlal etmekle suçladı ve sert önlemlerle uyardı.",
+  "afghanistan-iran helmand tensions intensify": {
+    title: "Afganistan-İran Helmand Gerilimi Tırmandı",
+    description: "İran Cumhurbaşkanı İbrahim Reisi, Taliban rejimine Helmand Nehri su haklarını teslim etmesi için açık ültimatom verdi; Taliban yetkilileri ise kuraklık sebebiyle rezervuarlarda su bulunmadığını iddia etti.",
   },
-  "Ethiopia Third GERD Filling": {
-    title: "Etiyopya Üçüncü GERD Doldurmasını Gerçekleştirdi",
-    description: "Etiyopya Başbakanı Abiy Ahmed, GERD rezervuarındaki su miktarının 22 milyar m³'e ulaştığını ve ikinci türbinin elektrik üretmeye başladığını duyurarak barajın geri döndürülemez bir gerçeklik olduğunu vurguladı.",
+  "ethiopia third gerd filling": {
+    title: "Etiyopya Üçüncü GERD Dolumunu Tamamladı",
+    description: "Etiyopya, GERD rezervuarına üçüncü aşamada 8 milyar m³ ilave su depolandığını ve ikinci türbinin elektrik üretmeye başladığını duyurdu.",
   },
-  "India-Pakistan PCA Rules on Indus Waters Treaty Jurisdiction": {
-    title: "Lahey Daimi Tahkim Mahkemesi İndus Yetkisini Onayladı",
-    description: "Lahey Daimi Tahkim Mahkemesi (PCA), Hindistan'ın boykotuna ve itirazlarına rağmen Pakistan'ın Kishanganga ve Ratle barajları hakkındaki başvurusunu inceleme konusunda tam yetkili olduğuna hükmetti.",
+  "india-pakistan pca rules on indus waters treaty jurisdiction": {
+    title: "Lahey Daimi Tahkim Mahkemesi İndus Yetkisini Teyit Etti",
+    description: "Lahey Daimi Tahkim Mahkemesi (PCA), Hindistan'ın yargı yetkisi itirazını reddederek Pakistan'ın Kishanganga ve Ratle projelerine ilişkin davasını görmeye tam yetkili olduğuna karar verdi.",
   },
-  "Israel Attacks Gaza Water Infrastructure 250+ Times": {
-    title: "İsrail'in Gazze Su Altyapısına 250'den Fazla Saldırısı",
-    description: "7 Ekim 2023 sonrası başlayan savaşta İsrail elektrik ve su tedarikini kesti; su kuyularını, tuzdan arındırma tesislerini ve kanalizasyon altyapısını bombalayarak Gazze nüfusunun %95'ini güvenli içme suyundan mahrum bıraktı ve insani felakete yol açtı.",
+  "israel attacks gaza water infrastructure 250+ times": {
+    title: "İsrail Gazze Su Altyapısını ve Dağıtımını Vurdu",
+    description: "Ekim 2023'ten itibaren İsrail ordusu Gazze Şeridi'ne giden su boru hatlarını kesti, tuz giderme tesislerini, atık su arıtma ünitelerini ve su kuyularını hedef aldı; BM ve insan hakları örgütleri suyu savaş silahı olarak kullanma suçlamasında bulundu.",
   },
-  "Iran-Afghanistan Helmand Deadly Clashes": {
-    title: "İran-Afganistan Hilmend Ölümcül Çatışmaları",
-    description: "Hilmend Nehri su hakları geriliminin zirveye çıkmasıyla İran sınır muhafızları ile Taliban güçleri arasında sınır kapısında çıkan ağır silahlı çatışmada her iki taraftan askerler hayatını kaybetti.",
+  "iran-afghanistan helmand deadly clashes": {
+    title: "İran-Afganistan Helmand Sınırında Ölümcül Çatışma",
+    description: "Helmand su hakları geriliminin zirveye ulaştığı Mayıs 2023'te İran sınır muhafızları ile Taliban güçleri arasında sınır karakollarında ağır silahlarla çatışma çıktı; sınır muhafızları hayatını kaybetti.",
   },
-  "India Nagarjunasagar Dam Police Clash": {
+  "india nagarjunasagar dam police clash": {
     title: "Hindistan Nagarjunasagar Barajı Polis Çatışması",
-    description: "Krishna Nehri suları üzerinde anlaşmazlık yaşayan Hindistan'ın Andhra Pradeş ve Telangana eyaletleri, yüzlerce silahlı polisi Nagarjunasagar Barajı'na konuşlandırarak baraj kontrolü için fiili çatışmanın eşiğine geldi.",
+    description: "Krishna Nehri üzerindeki kritik Nagarjunasagar Barajı'nın kontrolü ve su boşaltımı sebebiyle komşu Andhra Pradesh ve Telangana eyaletlerinin polis güçleri baraj gövdesinde fiziksel çatışmaya girdi; merkezi hükümet paramiliter birlik sevk etti.",
   },
-  "Kyrgyzstan-Tajikistan Final Border Treaty": {
+  "kyrgyzstan-tajikistan final border treaty": {
     title: "Kırgızistan-Tacikistan Nihai Sınır ve Su Anlaşması",
-    description: "Yıllar süren kanlı çatışmaların ardından Kırgızistan ve Tacikistan heyetleri, ortak su tesislerinin yönetimi ve tartışmalı sınır hatlarının kesin olarak belirlenmesi konusunda tarihi bir nihai protokol üzerinde anlaştı.",
+    description: "Kırgızistan ve Tacikistan hükümetleri, Batken'de sınır hattının %98'ini belirleyen ve kanallar ile Golovnoy su tesisinin ortak yönetim rejimini kuran nihai barış protokolünü parafe etti.",
   },
-  "GERD Inaugurated, Egypt Protests at UN": {
-    title: "GERD Resmi Açılışı Yapıldı, Mısır BM'ye Şikayet Etti",
-    description: "Etiyopya Başbakanı Abiy Ahmed, GERD baraj gövdesinin ve dolusavaklarının tamamlandığını duyurdu. Mısır Dışişleri Bakanı Bedr Abdülati, BM Güvenlik Konseyi'ne resmi mektup yazarak tek taraflı eylemlerin bölgesel güvenliğe tehdit olduğunu bildirdi.",
+  "gerd inaugurated, egypt protests at un": {
+    title: "GERD Resmi Olarak Hizmete Açıldı, Mısır BMGK'ya Başvurdu",
+    description: "Etiyopya Başbakanı Abiy Ahmed, GERD'in 4 türbininin faaliyete geçtiğini ve rezervuar dolumunun son aşamaya geldiğini duyurdu. Mısır Dışişleri Bakanlığı BM Güvenlik Konseyi'ne resmi şikayet mektubu yazarak uluslararası hukukun çiğnendiğini belirtti.",
   },
-  "India Suspends Indus Waters Treaty After Pahalgam Attack": {
-    title: "Hindistan Pahalgam Saldırısı Sonrası İndus Antlaşması'nı Askıya Aldı",
-    description: "Hindistan, Keşmir'deki terör saldırılarının ardından Pakistan'a resmi bildirimde bulunarak 1960 İndus Suları Antlaşması'nın esaslı ihlal gerekçesiyle askıya alındığını ve sınır aşan nehir akışlarının tek taraflı yönetileceğini duyurdu.",
+  "india suspends indus waters treaty after pahalgam attack": {
+    title: "Hindistan Terör Saldırısı Sonrası İndus Antlaşmasını Askıya Aldı",
+    description: "Keşmir Pahalgam'da yaşanan ölümcül terör saldırısının ardından Hindistan hükümeti, Pakistan'a resmi nota vererek 1960 İndus Suları Antlaşması'nı 'terör tehdidi ve köklü koşul değişiklikleri' gerekçesiyle tek taraflı olarak askıya aldığını bildirdi.",
   },
-  "US-Canada Columbia River Treaty Renegotiation Stalls": {
+  "us-canada columbia river treaty renegotiation stalls": {
     title: "ABD-Kanada Kolombiya Nehri Antlaşması Revizyonu Tıkandı",
-    description: "Kolombiya Nehri Antlaşması'nın 60 yıllık sel kontrolü ve 'Kanada Yetkisi' enerji paylaşımı hükümlerinin modern iklim ve yerli halk haklarına göre güncellenmesi müzakereleri tarafların tazminat anlaşmazlığı sebebiyle kilitlendi.",
+    description: "60 yıllık antlaşmanın modernizasyonu için 2024'te varılan ilke anlaşması, somon balığı göçü ve Kanada'ya ödenecek taşkın koruma bedelleri konusundaki anlaşmazlıklar sebebiyle yürürlüğe girmekte güçlük yaşadı.",
   },
-  "Kyrgyzstan-Tajikistan-Uzbekistan Summit on Water": {
-    title: "Kırgızistan-Tacikistan-Özbekistan Su Zirvesi",
-    description: "Üç Orta Asya cumhuriyetinin liderleri Fergana Vadisi'nde toplanarak Kambarata-1 Hidroelektrik Santrali'nin ortak inşası ve yaz sulama sezonu için garantili su salımları konusunda mutabakata vardı.",
+  "kyrgyzstan-tajikistan-uzbekistan summit on water": {
+    title: "Orta Asya Su-Enerji Zirvesi ve Konsorsiyum Kararı",
+    description: "Kazakistan, Kırgızistan ve Özbekistan devlet başkanları Bişkek'te bir araya gelerek Kambarata-1 HES'in inşasını finanse edecek ve Seyhun akış rejimini güvenceye alacak Devletlerarası Su-Enerji Konsorsiyumu'nu onayladı.",
   },
-  "Colorado River Compact Signed": {
+  "colorado river compact signed": {
     title: "Kolorado Nehri Sözleşmesi İmzalandı",
-    description: "Herbert Hoover başkanlığında yedi ABD eyaleti (Wyoming, Colorado, Utah, New Mexico, Nevada, Arizona, California), yıllık 15 milyon akre-feet Kolorado Nehri suyunu Yukarı ve Aşağı Havza arasında eşit paylaştıran tarihi sözleşmeyi imzaladı.",
+    description: "ABD'nin yedi havza eyaleti, Santa Fe'de Kolorado Nehri sularını Yukarı ve Aşağı Havza arasında yıllık 7,5 milyon akre-feet (9,25 milyar m³) şeklinde eşit paylaştıran tarihi sözleşmeyi imzaladı.",
   },
-  "US-Mexico Treaty on Rio Grande and Colorado River": {
+  "us-mexico treaty on rio grande and colorado river": {
     title: "ABD-Meksika Rio Grande ve Kolorado Nehri Antlaşması",
-    description: "Amerika Birleşik Devletleri ve Meksika, Rio Grande, Kolorado ve Tijuana nehirlerinin sularını paylaştıran ve ikili sınır suları komisyonunu (IBWC) kuran kapsamlı sınır aşan su antlaşmasını imzaladı.",
+    description: "ABD ve Meksika, Rio Grande, Kolorado ve Tijuana nehirlerinin sularını karşılıklı garanti kotalarıyla tahsis eden ve Uluslararası Sınır ve Su Komisyonu'nu (IBWC) kuran kapsamlı sınır su antlaşmasını imzaladı.",
   },
-  "Israel National Water Carrier Operational": {
+  "israel national water carrier operational": {
     title: "İsrail Ulusal Su Taşıyıcısı İşletmeye Alındı",
-    description: "İsrail, Taberiye Gölü'nden güneydeki Necef Çölü'ne devasa boru hatlarıyla yılda yüz milyonlarca metreküp su aktaran Ulusal Su Taşıyıcısı projesini devreye aldı; Arap devletleri projeyi şiddetle kınadı.",
+    description: "İsrail, Taberiye Gölü sularını boru hatları ve kanallarla kıyı ovalarına ve Necef Çölü'ne taşıyan Ulusal Su Taşıyıcısı'nı tam kapasite devreye aldı; komşu Arap devletleri suyun izinsiz çalındığını ilan etti.",
   },
-  "Rhine Chemical Pollution Crisis": {
+  "rhine chemical pollution crisis": {
     title: "Ren Nehri Kimyasal Kirlilik Krizi",
-    description: "Ren Nehri'ne karışan böcek ilacı Endosulfan, Almanya ve Hollanda boyunca 20 milyondan fazla balığın ölümüne yol açarak Ren Nehri'ni 'Avrupa'nın kanalizasyonu' haline getirdi ve acil çevre koruma yasalarını tetikledi.",
+    description: "Endosülfan böcek ilacının Ren Nehri'ne karışması sonucu Almanya ve Hollanda boyunca milyonlarca balık öldü; içme suyu alımları durduruldu ve bu facia Avrupa'da nehir koruma hukuku reformunu tetikledi.",
   },
-  "Sandoz Chemical Spill Poisons Rhine": {
-    title: "Sandoz Kimyasal Faciası Ren Nehri'ni Zehirledi",
-    description: "İsviçre'nin Basel kentindeki Sandoz kimya deposunda çıkan yangın sonrası tonlarca zehirli tarım ilacı ve cıva Ren Nehri'ne karıştı; yüzlerce kilometre boyunca nehir yaşamı yok oldu ve kıyıdaş ülkelerin içme suyu alımı durduruldu.",
+  "sandoz chemical spill poisons rhine": {
+    title: "Sandoz Kimyasal Faciası Ren Nehrini Zehirledi",
+    description: "Basel yakınlarındaki Sandoz kimya deposunda çıkan yangını söndürmek için sıkılan tonlarca böcek ilaçlı su Ren'e aktı; yüzlerce kilometre boyunca nehir ekosistemi yok oldu ve acil alarm sistemleri kuruldu.",
   },
-  "Rhine Action Programme Achieves Salmon Return": {
-    title: "Ren Eylem Programı ile Somon Balığı Geri Döndü",
-    description: "Uluslararası Ren Koruma Komisyonu'nun (ICPR) kararlı arıtma ve balık geçidi yatırımları sayesinde kirlilik %90 oranında azaldı ve 50 yıl aradan sonra somon balıkları yeniden Ren Nehri'nde üremeye başladı.",
+  "rhine action programme achieves salmon return": {
+    title: "Ren Eylem Programı 'Somon 2000' Başarısı",
+    description: "Uluslararası Ren Komisyonu'nun su kalitesi ve balık geçitleri restorasyon projeleri sayesinde, kirlilikten nesli tükenen Atlantik somonu yarım asır sonra ilk kez Ren Nehri'nde doğal olarak yumurtladı.",
   },
-  "Soviet Union Aral Sea Diversion Decision": {
-    title: "Sovyetler Birliği Aral Denizi Nehirlerini Pamuğa Yönlendirdi",
-    description: "Sovyet merkezi planlaması, Aral Denizi'ni besleyen Seyhun ve Ceyhun nehirlerinin sularını Özbekistan ve Türkmenistan'ın uçsuz bucaksız pamuk tarlalarını sulamak için Karakum Kanalı'na aktarma kararı alarak tarihin en büyük çevre felaketini başlattı.",
+  "soviet union aral sea diversion decision": {
+    title: "Sovyetler Birliği Aral Denizi Su Yönlendirme Kararı",
+    description: "Sovyet planlamacılar pamuk monokültürünü beslemek amacıyla Seyhun ve Ceyhun nehirlerinin akışını devasa sulama kanallarına (Karakum Kanalı dahil) yönlendirdi; bu karar Aral Denizi'nin kuruma felaketini başlattı.",
   },
-  "Aral Sea Splits into North and South": {
+  "aral sea splits into north and south": {
     title: "Aral Denizi Kuzey ve Güney Olarak İkiye Bölündü",
-    description: "Su seviyesinin dramatik şekilde düşmesiyle dünyanın en büyük dördüncü gölü olan Aral Denizi iki ayrı su kütlesine bölündü; suların çekildiği alanlar zehirli tuz ve toz fırtınaları üreten Aralkum Çölü'ne dönüştü.",
+    description: "Suların aşırı çekilmesi neticesinde Aral Denizi yüzölçümünün %50'sinden fazlasını kaybetti ve su hacmi bölünerek Kuzey (Küçük) Aral ve Güney (Büyük) Aral olarak iki ayrı su kütlesine ayrıldı.",
   },
-  "India-Bangladesh Joint Rivers Commission": {
+  "india-bangladesh joint rivers commission": {
     title: "Hindistan-Bangladeş Ortak Nehirler Komisyonu (JRC)",
-    description: "Bangladeş'in bağımsızlığının hemen ardından iki ülke, 54 ortak sınır aşan akarsuyun hidrolojik verilerini paylaşmak ve ortak sel tahminleri üretmek amacıyla Ortak Nehirler Komisyonu'nu kurdu.",
+    description: "Bangladeş'in bağımsızlığının ardından iki ülke, 54 sınır aşan nehrin hidrolojik verilerini paylaşmak ve ortak taşkın erken uyarı sistemleri kurmak üzere Ortak Nehirler Komisyonu'nu kurdu.",
   },
-  "India-Bangladesh Farakka Barrage Declaration": {
-    title: "Hindistan-Bangladeş Farakka Barajı Ortak Bildirisi",
-    description: "Başbakanlar İndira Gandi ve Şeyh Mucibur Rahman, Farakka Barajı tam kapasiteye geçmeden önce Bangladeş'e kurak mevsimde yeterli su bırakılmasını teminat altına alan ortak bir bildiri yayımladı.",
+  "india-bangladesh farakka barrage declaration": {
+    title: "Hindistan-Bangladeş Farakka Deklarasyonu",
+    description: "Başbakanlar İndira Gandi ve Şeyh Mucibur Rahman, Farakka Bendi'nin besleme kanalının Bangladeş'e zarar vermeyecek kontrollü deneme debileriyle işletilmesi konusunda geçici bir bildiriye imza attı.",
   },
-  "Danube Cyanide Spill from Romania Gold Mine": {
-    title: "Tuna Nehri Romanya Altın Madeni Siyanür Felaketi",
-    description: "Romanya'nın Baia Mare kentindeki bir altın madeninin atık barajının çökmesi sonucu 100.000 m³ siyanürlü ve ağır metalli su Somes, Tisa ve Tuna nehirlerine aktı; Macaristan ve Sırbistan'da tüm sucul ekosistem çöktü.",
+  "danube cyanide spill from romania gold mine": {
+    title: "Tuna Siyanür Faciası (Baia Mare, Romanya)",
+    description: "Romanya'daki bir altın madeninin atık barajının patlaması sonucu 100 bin m³ siyanürlü ve ağır metalli su Somes, Tisza ve nihayet Tuna Nehri'ne karıştı; Macaristan ve Sırbistan'da tüm su canlıları zehirlendi.",
   },
-  "Mauritania-Senegal Border Water Conflict": {
-    title: "Moritanya-Senegal Sınır ve Su Savaşı",
-    description: "Senegal Nehri taşkın yatağındaki verimli tarım ve otlatma arazilerinin kontrolü yüzünden iki ülke arasında çıkan etnik ve askeri çatışmalarda yüzlerce insan öldü, on binlerce vatandaş karşılıklı olarak sınır dışı edildi.",
+  "mauritania-senegal border water conflict": {
+    title: "Moritanya-Senegal Sınır Su Çatışması",
+    description: "Senegal Nehri taşkın yatağındaki otlatma ve su hakları sebebiyle Moritanyalı çobanlar ile Senegalli çiftçiler arasında başlayan sürtüşme etnik şiddete ve iki ülke arasında savaşa ramak kalan bir krize dönüştü.",
   },
-  "ZACPLAN Zambezi River System Action Plan": {
-    title: "Zambezi Nehri Sistemi Eylem Planı (ZACPLAN)",
-    description: "Zambezi kıyıdaş devletleri, BM Çevre Programı (UNEP) öncülüğünde nehir havzasının entegre yönetimi, ekolojik dengesi ve hidrolojik bilgi sistemlerinin kurulması için ZACPLAN'ı başlattı.",
+  "zacplan zambezi river system action plan": {
+    title: "Zambezi Nehri Havzası Eylem Planı (ZACPLAN)",
+    description: "Güney Afrika Kalkınma Topluluğu (SADC) ve UNEP işbirliğiyle Zambezi havzasında çevre odaklı su kaynakları yönetimi ve veri entegrasyonunu amaçlayan ZACPLAN başlatıldı.",
   },
-  "Anglo-Egyptian Nile Waters Agreement": {
+  "anglo-egyptian nile waters agreement": {
     title: "İngiliz-Mısır Nil Suları Anlaşması",
-    description: "İngiltere ve Mısır arasında teati edilen notalarla Mısır'a yıllık 48 milyar m³ su tahsis edildi ve Mısır'a yukarı Nil havzasındaki her türlü su yapısı üzerinde mutlak veto yetkisi tanındı.",
+    description: "İngiltere ile Mısır arasında yapılan nota teatisiyle Mısır'a yıllık 48 milyar m³, Sudan'a 4 milyar m³ su hakkı tanındı; Mısır'a yukarı Nil havzasındaki baraj ve sulama projeleri üzerinde mutlak veto yetkisi verildi.",
   },
-  "Israel Declares Independence: Arab States Threaten Jordan Water": {
-    title: "İsrail'in Bağımsızlığı: Arap Devletlerinin Su Tehditleri",
-    description: "İsrail Devleti'nin kuruluşu ve 1948 Arap-İsrail Savaşı sonrasında Şeria Nehri ve kolları askeri temas hatlarının merkezinde kalarak bölgesel su çatışmalarının ana zeminini oluşturdu.",
+  "israel declares independence: arab states threaten jordan water": {
+    title: "İsrail'in Bağımsızlığı ve Şeria Havzası Tehditleri",
+    description: "İsrail'in kurulmasının hemen ardından komşu Arap devletleri Şeria Nehri kollarını yönlendirme ve İsrail'in su alımlarını engelleme stratejilerini ilk kez bölgesel gündeme taşıdı.",
   },
-  "Israel Captures West Bank Water Resources": {
-    title: "İsrail Batı Şeria Yeraltı Su Kaynaklarını Ele Geçirdi",
-    description: "1967 savaşının ardından İsrail Askeri İdaresi, 92 ve 158 sayılı askeri emirlerle Batı Şeria'daki tüm su kaynaklarının kontrolünü orduya devretti; Filistinlilerin yeni kuyu açması yasaklandı ve kotalar getirildi.",
+  "israel captures west bank water resources": {
+    title: "İsrail Batı Şeria Su Kaynaklarını Kontrol Altına Aldı",
+    description: "1967 savaşı sonrası İsrail, Batı Şeria'daki dağ akiferlerini ve yeraltı kuyularını askeri emirlerle doğrudan İsrail Su İdaresi'ne (Mekorot) bağladı; Filistinlilerin kuyu açmasını ve su çekmesini kısıtladı.",
   },
-  "Oslo II Accords West Bank Water Provisions": {
+  "oslo ii accords west bank water provisions": {
     title: "Oslo II Anlaşması Batı Şeria Su Hükümleri",
-    description: "İsrail-Filistin Geçici Anlaşması (Oslo II) Madde 40, Filistin su haklarını ilk kez prensipte tanıdı ve Ortak Su Komitesi'ni (JWC) kurdu, ancak Batı Şeria dağ akiferlerinin %80'inden fazlasının kontrolünü İsrail'e bıraktı.",
+    description: "İsrail ile Filistin Kurtuluş Örgütü arasında imzalanan geçici anlaşmanın 40. maddesiyle Ortak Su Komitesi (JWC) kuruldu; Filistin tarafına belirli su kotaları tahsis edildi ancak nihai su hakları ertelendi.",
   },
-  "Lauca River Diversion: Chile-Bolivia Ongoing Dispute": {
-    title: "Lauca Nehri Saptırması: Şili-Bolivya Süregiden İhtilafı",
-    description: "Şili'nin sınır aşan Lauca Nehri sularını Azapa Vadisi tarımına yönlendirmesi, denize çıkışı olmayan Bolivya'nın sert protestolarına yol açtı ve iki ülke arasındaki diplomatik ilişkilerin kesilmesinin başlıca nedenlerinden biri oldu.",
+  "lauca river diversion: chile-bolivia ongoing dispute": {
+    title: "Lauca Nehri İhtilafı: Şili-Bolivya",
+    description: "Şili'nin Lauca Nehri sularını Azapa Vadisi'ne aktarması üzerine Bolivya ile yaşanan yarım asırlık diplomatik sürtüşme, And dağları havzasında su egemenliği ve denize çıkış tartışmalarıyla alevlendi.",
   },
-  "Lake Chad Basin Commission Established": {
+  "lake chad basin commission established": {
     title: "Çad Gölü Havzası Komisyonu (LCBC) Kuruldu",
-    description: "Kamerun, Çad, Nijer ve Nijerya, Afrika'nın en hayati sulak alanlarından biri olan Çad Gölü havzasını sürdürülebilir yönetmek ve balıkçılık ile tarımı koordine etmek amacıyla LCBC'yi kurdu.",
+    description: "Kamerun, Çad, Nijer ve Nijerya liderleri, Sahel bölgesinin can damarı olan Çad Gölü'nü korumak ve su kaynaklarını entegre yönetmek üzere Fort Lamy'de LCBC'yi oluşturdu.",
   },
-  "Lake Chad Near Collapse Triggers Regional Crisis": {
-    title: "Çad Gölü'nün Çöküşü Bölgesel İnsani Krizi Tetikledi",
-    description: "Aşırı sulama ve iklim değişikliği yüzünden Çad Gölü yüzey alanının %90'dan fazlasını kaybederek 2.500 km²'nin altına düştü; 30 milyon insan geçim kaynağını yitirerek Boko Haram gibi çatışma dinamiklerine açık hale geldi.",
+  "lake chad near collapse triggers regional crisis": {
+    title: "Çad Gölü'nün Yok Olma Noktasına Gelmesi",
+    description: "Aşırı sulama ve şiddetli iklim kuraklığı nedeniyle Çad Gölü orijinal yüzölçümünün %90'ından fazlasını kaybetti; milyonlarca balıkçı ve çiftçi göç etmek zorunda kalarak Boko Haram gibi çatışma dinamiklerine zemin hazırladı.",
   },
-  "Gulf War: Iraqi Forces Discharge Oil into Gulf Waterways": {
-    title: "Körfez Savaşı: Irak Güçlerinin Körfez Sularına Petrol Akıtması",
-    description: "Irak ordusu Kuveyt'ten çekilirken yüz milyonlarca galon ham petrolü Basra Körfezi'ne boşalttı; 600 mil uzunluğundaki petrol tabakası Suudi Arabistan ve Körfez ülkelerinin deniz suyu arıtma tesislerini tehdit etti.",
+  "gulf war: iraqi forces discharge oil into gulf waterways": {
+    title: "Körfez Savaşı: Basra Körfezi'ne Petrol Boşaltımı",
+    description: "Irak birlikleri Kuveyt'ten çekilirken petrol vanalarını denize açarak su arıtma ve deniz suyu tuz giderme tesislerini hedef aldı; su güvenliği tarihin en büyük çevre terörizmi eylemiyle silah haline getirildi.",
   },
-  "Lesotho Highlands Water Project: South Africa-Lesotho": {
-    title: "Lesotho Yaylaları Su Projesi (LHWP): Güney Afrika-Lesotho",
-    description: "Lesotho ve Güney Afrika, Senqu/Orange Nehri sularını tünellerle Johannesburg sanayi bölgesine aktaran ve Lesotho'ya elektrik ile telif geliri sağlayan milyarlarca dolarlık LHWP 1. Aşamasını tamamladı.",
+  "lesotho highlands water project: south africa-lesotho": {
+    title: "Lesotho Yaylaları Su Projesi (LHWP)",
+    description: "Lesotho ve Güney Afrika arasındaki ortak dev baraj ve tünel sistemi devreye girerek Maloti dağlarındaki temiz suyu Gauteng sanayi bölgesine taşırken Lesotho'ya elektrik ve telif geliri sağladı.",
   },
-  "India Builds Farakka Barrage Permanently Operational": {
-    title: "Hindistan Farakka Barajı'nı Kalıcı Olarak İşletmeye Aldı",
-    description: "1977 geçici anlaşmasının ardından Hindistan, Farakka Barajı saptırma kanallarını kalıcı altyapıya dönüştürdü; Bangladeş barajın Padma Nehri deltasında tuzlanma ve çölleşmeye yol açtığını uluslararası platformlara taşıdı.",
+  "india builds farakka barrage permanently operational": {
+    title: "Farakka Bendi Kalıcı Olarak Devreye Girdi",
+    description: "Hindistan Farakka Bendi'ni tam operasyonel hale getirdi; Bangladeş hükümeti Padma kolundaki kuraklık, nehir içi navigasyonun çökmesi ve güney bölgelerindeki tuzlu su istilası nedeniyle BM'ye resmi şikayette bulundu.",
   },
-  "India Suspends Permanent Indus Commission Talks": {
+  "india suspends permanent indus commission talks": {
     title: "Hindistan Daimi İndus Komisyonu Görüşmelerini Askıya Aldı",
-    description: "Uri askeri üssüne yapılan saldırının ardından Hindistan Başbakanı Narendra Modi 'Kan ve su birlikte akamaz' diyerek Daimi İndus Komisyonu'nun rutin toplantılarını dondurdu.",
+    description: "Uri askeri üssüne yapılan saldırının ardından Hindistan Başbakanı Narendra Modi, 'Kan ve su aynı anda akamaz' diyerek Daimi İndus Komisyonu'nun rutin toplantılarını dondurdu.",
   },
-  "Colorado River Reaches Sea for First Time in Decades": {
+  "colorado river reaches sea for first time in decades": {
     title: "Kolorado Nehri On Yıllar Sonra İlk Kez Denize Ulaştı",
-    description: "ABD ve Meksika'nın imzaladığı Tarihi 319 Sayılı Karar (Minute 319) kapsamında barajlardan çevreye bırakılan 'nabız akışı' sayesinde Kolorado Nehri, on yıllar sonra ilk kez Meksika'daki Cortez Denizi'ne ulaştı.",
+    description: "ABD ve Meksika arasındaki IBWC 319 Sayılı Karar kapsamında rezervuarlardan 'darbe akışı' (pulse flow) bırakılarak Kolorado Deltası'ndaki sulak alan ekosistemine tarihi bir can suyu verildi.",
   },
-  "Mekong Committee Suspended During Vietnam War": {
+  "mekong committee suspended during vietnam war": {
     title: "Mekong Komitesi Vietnam Savaşı Sırasında Askıya Alındı",
-    description: "Saygon'un düşüşü ve Kamboçya'da Kızıl Kmerler'in iktidara gelmesiyle Mekong Komitesi fiilen felç oldu; bölgesel jeopolitik düşmanlıklar su diplomasisini yıllarca durma noktasına getirdi.",
+    description: "Saygon'un düşüşü ve Kamboçya ile Laos'taki rejim değişiklikleri sebebiyle dört kıyıdaş arasındaki siyasi bağlar koptu; Mekong Komitesi çalışmaları geçici olarak durduruldu.",
   },
-  "Bangladesh Liberation War: India Diverts Brahmaputra Flows": {
+  "bangladesh liberation war: india diverts brahmaputra flows": {
     title: "Bangladeş Kurtuluş Savaşı ve Brahmaputra Suları",
-    description: "Doğu Pakistan'daki savaş ve mülteci krizi döneminde sınır sularının stratejik ve lojistik kullanımı Hindistan ile Pakistan arasındaki çatışmanın merkezinde yer aldı.",
+    description: "Doğu Pakistan'daki savaş ve mülteci krizi döneminde su kaynaklarının kontrolü ve sel yönetimi stratejik bir unsur haline geldi; Hindistan ile sınır aşan nehir istişareleri kilitlendi.",
   },
-  "Guinea Joins OMVS Senegal River Basin Authority": {
-    title: "Gine OMVS Senegal Nehri Havzası Otoritesine Katıldı",
-    description: "Senegal Nehri'nin doğduğu kaynak ülke olan Gine, OMVS'ye dördüncü tam üye olarak katılarak havzanın tüm su kaynaklarının ortak mülkiyet ve entegre yönetim altına girmesini sağladı.",
+  "guinea joins omvs senegal river basin authority": {
+    title: "Gine OMVS Senegal Nehri Örgütü'ne Katıldı",
+    description: "Senegal Nehri'nin kaynak ülkesi olan Gine, OMVS'ye tam üye olarak katıldı ve Fouta Djallon yaylalarındaki nehir kaynaklarının ortak koruma rejimine dahil olmasını sağladı.",
   },
-  "Aswan High Dam Sediment Deprivation Dispute": {
-    title: "Asvan Yüksek Barajı Alüvyon Yoksunluğu Tartışması",
-    description: "Nil boyunca yapılan bilimsel araştırmalar, Asvan Barajı'nın yıllık 130 milyon ton verimli alüvyonu tutması yüzünden Nil Deltası'nın Akdeniz dalgalarıyla hızla aşındığını ve Mısır tarımının kimyasal gübreye bağımlı kaldığını belgeledi.",
+  "aswan high dam sediment deprivation dispute": {
+    title: "Asvan Barajı Alüvyon Yoksunluğu ve Delta Erozyonu İhtilafı",
+    description: "Asvan Barajı'nın tortu tutması sebebiyle Nil Deltası kıyılarının aşınması ve Akdeniz tuzlu suyunun delta akiferlerine sızması, Mısır ile yukarı kıyıdaşlar arasındaki baraj planlama tartışmalarında kritik bir tartışma başlığı oldu.",
   },
-  "Burundi Signs Nile CFA": {
-    title: "Burundi Nil CFA'yı İmzaladı",
-    description: "Burundi, Nil İşbirliği Çerçeve Anlaşması'nı (CFA) imzalayan altıncı yukarı havza ülkesi olarak anlaşmanın yürürlüğe girmesi için gereken kritik onay eşiğine kapı araladı.",
+  "burundi signs nile cfa": {
+    title: "Burundi Nil CFA'sını İmzaladı",
+    description: "Burundi, Nil İşbirliği Çerçeve Anlaşması'nı imzalayan altıncı yukarı havza ülkesi olarak anlaşmanın yürürlüğe girmesi için gereken eşiğin aşılmasına kritik bir katkı sağladı.",
   },
-  "Taliban Takeover Threatens Helmand Treaty Compliance": {
-    title: "Taliban'ın İktidarı Ele Geçirmesi ve Hilmend Antlaşması",
-    description: "Kabil'in düşmesiyle iktidara gelen Taliban geçici hükümeti, İran'ın Hilmend su hakkı talepleri karşısında su akışının yetersizliğini kuraklığa bağlayarak Tahran ile tansiyonu yükseltti.",
+  "taliban takeover threatens helmand treaty compliance": {
+    title: "Taliban'ın Kabil'i Ele Geçirmesi ve Helmand Antlaşması",
+    description: "Taliban'ın yönetimi yeniden ele geçirmesinin ardından Kemal Han Barajı savaklarının açılmaması ve İran'a su verilmemesi Tahran ile Kabil arasında askeri sınır gerginliğini tırmandırdı.",
   },
-  "China Opens Mekong Water Releases During Drought": {
-    title: "Çin Kuraklık Sırasında Mekong Su Salımlarını Açıkladı",
-    description: "Güneydoğu Asya ülkelerinin ve ABD destekli Mekong Gözlem Projesi'nin yoğun uydu verisi baskısı üzerine Çin, kuraklıkla mücadele için Jinghong Barajı'ndan acil su salımı yaptığını duyurdu.",
+  "china opens mekong water releases during drought": {
+    title: "Çin Aşağı Mekong Kuraklığında Acil Su Salımı Yaptı",
+    description: "Aşağı kıyıdaş ülkelerin yoğun diplomatik baskısı ve uydu raporlarının ardından Çin, kuraklığı hafifletmek üzere Lancang barajlarından acil hidrolojik su tahliyesi başlattı.",
   },
-  "Uzbekistan 2024 Water Emergency Regime": {
-    title: "Özbekistan 2024 Su Olağanüstü Hali İlan Etti",
-    description: "Ceyhun ve Seyhun nehirlerindeki tarihi su kayıpları ve kuraklık nedeniyle Özbekistan Cumhurbaşkanı Şevket Mirziyoyev, tarımda su israfını önlemek için ülke çapında olağanüstü su tasarrufu rejimi ilan etti.",
+  "uzbekistan 2024 water emergency regime": {
+    title: "Özbekistan 2024 Acil Su Tasarrufu Rejimi İlan Etti",
+    description: "Aral Denizi havzasındaki amansız su kaybı ve kuraklık karşısında Özbekistan Cumhurbaşkanı Şevket Mirziyoyev, tarımda su israfını önlemek için ülke çapında olağanüstü acil tasarruf seferberliği başlattı.",
   },
-  "Rhine Convention for Protection Enters Force": {
-    title: "Ren Koruma Sözleşmesi Yürürlüğe Girdi",
-    description: "Bern'de imzalanan yeni Ren Koruma Sözleşmesi yürürlüğe girerek kıyıdaş devletler arasında ekolojik hedefleri, sel korunmasını ve sürdürülebilir taşkın yatağı restorasyonunu yasal zorunluluk haline getirdi.",
+  "rhine convention for protection enters force": {
+    title: "Ren Nehri Atık ve Seyrüsefer Sözleşmesi Yürürlüğe Girdi",
+    description: "Ren boyunca seyreden gemilerin yağlı atık, sintine suyu ve çöplerini nehre dökmesini yasaklayan ve kıyı arıtma tesislerine teslimini zorunlu kılan uluslararası sözleşme yürürlüğe girdi.",
   },
-  "India-Nepal Mahakali Treaty Disputes": {
+  "india-nepal mahakali treaty disputes": {
     title: "Hindistan-Nepal Mahakali Antlaşması Anlaşmazlıkları",
-    description: "1996 Mahakali Antlaşması'nın öngördüğü Pancheshwar Çok Amaçlı Baraj Projesi, güç paylaşımı, su hakları ve sınır tespiti konusundaki siyasi kutuplaşmalar sebebiyle Nepal parlamentosunda kilitlendi.",
+    description: "1996 tarihli Mahakali Antlaşması kapsamında planlanan Pancheshwar Çok Amaçlı Baraj Projesi, elektrik paylaşımı ve su hakları konusundaki fikir ayrılıkları nedeniyle çıkmaza girdi.",
   },
-  "China Lancang-Mekong Cooperation Mechanism Proposed": {
-    title: "Çin Lancang-Mekong İşbirliği (LMC) Mekanizmasını Başlattı",
-    description: "Çin, Batı destekli Mekong Nehri Komisyonu'na alternatif olarak altı kıyıdaş ülkenin tamamını kapsayan ve Pekin tarafından finanse edilen Lancang-Mekong İşbirliği Mekanizması'nı kurdu.",
+  "china lancang-mekong cooperation mechanism proposed": {
+    title: "Çin Lancang-Mekong İşbirliği (LMC) Mekanizmasını Kurdu",
+    description: "Çin, Mekong Nehri Komisyonu'nun (MRC) dışındaki bir formatta 6 kıyıdaş ülkeyi bir araya getiren ve Çin finansmanıyla desteklenen alternatif Lancang-Mekong İşbirliği Platformu'nu kurdu.",
   },
-  "Sudan Splits from Egypt on GERD Negotiations": {
-    title: "Sudan GERD Müzakerelerinde Mısır'dan Ayrıştı",
-    description: "Sudan hükümeti, GERD Barajı'nın Mavi Nil taşkınlarını önleme ve ucuz hidroelektrik sağlama faydalarını görerek Etiyopya ile ortak pozisyon almaya başladı ve Mısır'ın mutlak muhalefet cephesinden koptu.",
+  "sudan splits from egypt on gerd negotiations": {
+    title: "Sudan GERD Konusunda Mısır'dan Ayrıştı",
+    description: "Sudan, GERD'in taşkınları önleme, alüvyonu tutma ve ucuz elektrik sağlama avantajlarını görerek Mısır'ın katı muhalefetinden ayrıştı ve Etiyopya projesine yapıcı destek vermeye başladı.",
   },
-  "Uganda Ratifies Nile CFA": {
-    title: "Uganda Nil CFA'yı Onayladı",
-    description: "Uganda Parlamentosu, Nil Havzası İşbirliği Çerçeve Anlaşması'nı (CFA) onaylayarak Nil Havzası Komisyonu'nun resmen kurulmasına bir adım daha yaklaştırdı.",
+  "uganda ratifies nile cfa": {
+    title: "Uganda Nil CFA Anlaşmasını Onayladı",
+    description: "Uganda Parlamentosu Nil Havzası İşbirliği Çerçeve Anlaşması'nı resmen onaylayarak onay belgesini Afrika Birliği'ne tevdi etti.",
   },
-  "Israel-Palestine West Bank Water Access Denied": {
-    title: "İsrail-Filistin Batı Şeria Suya Erişim Engelleri",
-    description: "Uluslararası insan hakları raporları, İsrailli yerleşimcilerin Batı Şeria'da kişi başına günlük 300 litre su kullanırken, kırsal Filistin topluluklarının Dünya Sağlık Örgütü asgari standardı olan 100 litrenin çok altında (20-70 litre) suya erişebildiğini belgeledi.",
+  "israel-palestine west bank water access denied": {
+    title: "Batı Şeria'da Filistinlilerin Suya Erişiminin Engellenmesi",
+    description: "İsrail askeri yetkililerinin Filistin köylerindeki ruhsatsız su depolarını ve boru hatlarını yıkması, su kotalarını düşürmesi uluslararası insan hakları raporlarında su ayrımcılığı olarak belgelendi.",
   },
-  "South Sudan Accedes to Nile CFA": {
-    title: "Güney Sudan Nil CFA'ya Katılım Sürecini Başlattı",
-    description: "Güney Sudan Geçici Ulusal Yasama Meclisi, Nil İşbirliği Çerçeve Anlaşması'na (CFA) katılım tasarısını onaylayarak anlaşmanın uluslararası hukuken yürürlüğe girmesi için gereken son onayı sağlama yoluna girdi.",
+  "south sudan accedes to nile cfa": {
+    title: "Güney Sudan Nil CFA Anlaşmasına Katıldı",
+    description: "Güney Sudan Ulusal Meclisi Nil CFA'sını onayladı; bu adım anlaşmanın yürürlüğe girmesi için zorunlu olan 6 onay şartının tamamlanmasını sağladı.",
   },
-  "Sudan Nile White Nile Water Dispute": {
-    title: "Sudan Beyaz Nil Su Paylaşımı Anlaşmazlığı",
-    description: "Güney Sudan'ın bağımsızlık referandumu öncesinde, Beyaz Nil ve Bahr el-Gazal havzalarındaki su kaynaklarının ve Sudd bataklıklarındaki Jonglei Kanalı projesinin geleceği Hartum ile Cuba arasında tartışma konusu oldu.",
+  "sudan nile white nile water dispute": {
+    title: "Sudan Beyaz Nil Su Paylaşımı Sürtüşmesi",
+    description: "Güney Sudan'ın bağımsızlık referandumu öncesinde Beyaz Nil ve Sudd sulak alanlarındaki su kaynaklarının mülkiyeti ve Jonglei Kanalı projesinin geleceği Hartum ile Cuba arasında uyuşmazlık yarattı.",
   },
-  "Inter-American Water Rights: US-Mexico Colorado River Salinity": {
-    title: "Amerikanlararası Su Hakları: ABD-Meksika Kolorado Tuzluluk Anlaşması",
-    description: "ABD ve Meksika, ABD'nin Wellton-Mohawk sulama bölgesinden Meksika'ya boşalttığı aşırı tuzlu suların arıtılmasını zorunlu kılan 242 Sayılı Tarihi Kararı (Minute 242) imzaladı.",
+  "inter-american water rights: us-mexico colorado river salinity": {
+    title: "IBWC 242 Sayılı Karar: Kolorado Nehri Tuzluluk Çözümü",
+    description: "ABD ve Meksika, ABD'den Meksika'ya teslim edilen Kolorado suyunun tuzluluk oranını sınırlandıran ve Yuma Tuz Giderme Tesisi'nin kurulmasını öngören bağlayıcı 242 Sayılı Kararı kabul etti.",
   },
-  "Mosul and Haditha Dams Built on Tigris-Euphrates": {
-    title: "Dicle ve Fırat Üzerinde Musul ve Hadise Barajları İnşa Edildi",
-    description: "Irak, Türkiye ve Suriye'nin baraj projelerine karşı su depolama kapasitesini güvenceye almak amacıyla Dicle üzerinde Musul (Saddam) Barajı'nı ve Fırat üzerinde Hadise (Kadisiyye) Barajı'nı tamamladı.",
+  "mosul and haditha dams built on tigris-euphrates": {
+    title: "Dicle-Fırat Üzerinde Musul ve Hadise Barajları İnşa Edildi",
+    description: "Irak, yukarı havzadaki Türk ve Suriye barajlarına karşı su depolama kapasitesini artırmak için Dicle üzerinde Musul (Saddam) ve Fırat üzerinde Hadise Barajlarını tamamladı.",
   },
-  "GERD Geological Survey Begins": {
-    title: "GERD Barajı Jeolojik Etütleri Başlatıldı",
-    description: "Etiyopya Elektrik Enerjisi Şirketi ve İtalyan müteahhit Salini Impregilo (Webuild), Mavi Nil vadisinde gizlilik içinde GERD Barajı'nın temel sondaj ve yerinde jeolojik etüt çalışmalarına başladı.",
+  "gerd geological survey begins": {
+    title: "Etiyopya Mavi Nil Üzerinde Gizli GERD Sondajlarını Başlattı",
+    description: "Etiyopya hükümeti ve İtalyan Salini firması, Guba bölgesinde gelecekteki Rönesans Barajı'nın temelini oluşturacak gizli jeolojik ve topoğrafik saha etütlerini yürüttü.",
   },
-  "Lancang-Mekong Dam Cascade Alarms Downstream": {
-    title: "Lancang-Mekong Baraj Kademeleri Aşağı Havzayı Alarma Geçirdi",
-    description: "Çin'in Dachaoshan Barajı'nı tamamlaması ve dev Xiaowan ile Nuozhadu mega barajlarının inşaatına hız vermesi, Tayland, Kamboçya ve Vietnam'da nehir akış rejiminin tek taraflı kontrol edilmesine yönelik derin endişeler yarattı.",
+  "lancang-mekong dam cascade alarms downstream": {
+    title: "Lancang Baraj Kaskadı Aşağı Havzada Alarm Yarattı",
+    description: "Çin'in Dachaoshan Barajı'nı tamamlayıp Xiaowan Barajı'nın inşasına başlaması, Kamboçya'daki Tonle Sap Gölü'nün taşkın döngüsünün bozulacağı endişelerini uluslararası zirvelere taşıdı.",
   },
-  "Nile CFA Enters into Force with 5 Ratifications": {
-    title: "Nil CFA Anlaşması 6 Ülkenin Onayıyla Yürürlüğe Girdi",
-    description: "Güney Sudan'ın onay belgelerini teslim etmesiyle Nil İşbirliği Çerçeve Anlaşması (CFA) 60 gün sonra yürürlüğe girdi; bu gelişmeyle tarihte ilk kez Mısır ve Sudan'ın vetosu olmaksızın Nil Havzası Komisyonu hukuken faaliyete geçti.",
+  "nile cfa enters into force with 5 ratifications": {
+    title: "Nil CFA Anlaşması 5 Onayla Resmen Yürürlüğe Girdi",
+    description: "Güney Sudan'ın onay belgesini tevdi etmesiyle Nil İşbirliği Çerçeve Anlaşması (CFA) 13 Ekim 2024'te resmen yürürlüğe girdi ve Mısır ile Sudan'ın veto yetkisi tarihe karışarak Nil Nehri Havzası Komisyonu (NRBC) kuruldu.",
   },
-  "Uzbekistan Expands Irrigated Land Amid Aral Crisis": {
+  "uzbekistan expands irrigated land amid aral crisis": {
     title: "Özbekistan Aral Krizi Ortasında Sulanan Alanları Genişletti",
-    description: "Aral Denizi kuruma felaketine rağmen Özbekistan ve komşu bölgelerde su yoğun tarım ve yeni baraj projeleri devam ederken, Türkmenistan'ın Karakum Gölü projesi ve Afganistan'ın Kuş Tepe Kanalı Amuderya akışını daha da tehdit eder hale geldi.",
+    description: "Aral Denizi'ne dökülen Ceyhun akışının rekor düşüşüne rağmen Özbekistan'ın tarım arazilerini genişletmesi ve Afganistan'ın Kuş Tepe Kanalı inşası, bölgedeki hidrolojik kırılganlığı tehlikeli boyuta ulaştırdı.",
   },
-  "Kazakhstan-Uzbekistan Northern Aral Sea Restoration Treaty": {
-    title: "Kazakistan-Özbekistan Kuzey Aral Denizi Restorasyon Antlaşması",
-    description: "Kazakistan ve Özbekistan, Kuzey Aral Denizi'ne garanti ekolojik su akışını, tuz-toz fırtınalarının önlenmesini ve Kokaral Barajı yükseltme projesini içeren tarihi sınır aşan su antlaşmasını imzaladı.",
+  "kazakhstan-uzbekistan northern aral sea restoration treaty": {
+    title: "Kuzey Aral Denizi Restorasyonu Devletlerarası Antlaşması",
+    description: "Kazakistan ve Özbekistan, Kuzey Aral Denizi'nin su hacmini büyütmek, Seyhun deltası sulak alanlarını canlandırmak ve Kök-Aral Bendi'ni yükseltmek amacıyla bağlayıcı restorasyon antlaşması imzaladı.",
   },
-  "Turkey-Iraq Operational Drought Protocol Signed": {
-    title: "Türkiye-Irak Kuraklık Dönemi Operasyonel Su Protokolü İmzalandı",
-    description: "Türkiye ve Irak, 2024 Çerçeve Anlaşması uyarınca meteorolojik kuraklık dönemlerinde dinamik su bırakma kotalarını ve telemetrik doğrulamayı içeren operasyonel protokolü imzaladı.",
+  "turkey-iraq operational drought protocol signed": {
+    title: "Türkiye-Irak Aşırı Kuraklık Operasyonel Su Protokolü",
+    description: "Türkiye ve Irak, Fırat ve Dicle havzalarında iklim değişikliği kaynaklı şiddetli kuraklık dönemlerinde baraj kapaklarından bırakılacak asgari garantili akışları belirleyen dinamik protokolü yürürlüğe koydu.",
   },
-  "Mekong Commission Enacts Mainstream Dam Cascading Rules": {
-    title: "Mekong Komisyonu Ana Kol Baraj Kademeleri Kurallarını Yürürlüğe Koydu",
-    description: "Mekong Nehri Komisyonu (MRC), kuraklık dönemlerinde Tonle Sap ters akışını korumak ve tortu geçişini sağlamak üzere ana kol barajlarına bağlayıcı kademeli su bırakma kuralları getirdi.",
+  "mekong commission enacts mainstream dam cascading rules": {
+    title: "Mekong Komisyonu Ana Kol Kaskat Hidroelektrik Kuralları",
+    description: "Mekong Nehri Komisyonu (MRC), ana kol üzerindeki tüm kademeli hidroelektrik barajların su tutma ve bırakma operasyonlarını dijital ikiz modellemesiyle anlık koordine eden bağlayıcı kuralları ilan etti.",
   },
 };
 
-/**
- * Resolves Turkish translation for a water conflict event.
- */
-export function getConflictTranslation(idOrTitle: string, index?: number): ConflictTr | undefined {
-  if (!idOrTitle && index === undefined) return undefined;
-  if (idOrTitle && conflictsTrById[idOrTitle]) return conflictsTrById[idOrTitle];
-  if (idOrTitle && conflictsTrByTitle[idOrTitle]) return conflictsTrByTitle[idOrTitle];
-  if (index !== undefined && conflictsTrById[`conflict-${index}`]) return conflictsTrById[`conflict-${index}`];
-  return undefined;
+export function getConflictTranslation(key: string): ConflictTr | undefined {
+  if (!key) return undefined;
+  if (conflictsTrById[key]) return conflictsTrById[key];
+  const normalized = key.toLowerCase().trim();
+  return conflictsTrByTitle[normalized];
 }

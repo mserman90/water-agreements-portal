@@ -7,12 +7,13 @@
 [![React 19](https://img.shields.io/badge/React-19.2-61dafb?logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-3178c6?logo=typescript)](https://www.typescriptlang.org/)
 [![ERA5 Reanalysis](https://img.shields.io/badge/Climate_Data-ECMWF_ERA5-orange)](https://www.ecmwf.int/en/forecasts/dataset/ecmwf-reanalysis-v5)
+[![Pacific Institute](https://img.shields.io/badge/Conflict_Chronology-Pacific_Institute-red)](https://worldwater.org/conflict/refs.html)
 
 ---
 
 ## 📌 Özet / Abstract
 
-**[TR]** Bu araştırma portalı, 1820 yılından günümüze kadar dünya genelindeki sınır-aşan tatlı su havzalarında imzalanmış 3.000'i aşkın uluslararası su anlaşmasını, Oregon State Üniversitesi **Transboundary Freshwater Dispute Database (TFDD)** ve **Basins at Risk (BAR)** uyuşmazlık-işbirliği veri setlerini, Birleşmiş Milletler (BM) anlaşma metinlerini ve **Copernicus ECMWF ERA5** iklim yeniden analiz verilerini (1940–günümüz) tek bir etkileşimli jeo-uzamsal çatı altında birleştiren açık kaynaklı bir akademik araştırma platformudur. Portal; uluslararası su hukuku, hidropolitik, hidro-hegemonya ve iklim değişikliğinin sınır-aşan su güvenliği üzerindeki etkilerini inceleyen araştırmacılar, diplomatlar ve akademisyenler için tasarlanmıştır.
+**[TR]** Bu araştırma portalı, 1820 yılından günümüze kadar dünya genelindeki sınır-aşan tatlı su havzalarında imzalanmış 3.000'i aşkın uluslararası su anlaşmasını, Oregon State Üniversitesi **Transboundary Freshwater Dispute Database (TFDD)**, **Basins at Risk (BAR)** uyuşmazlık-işbirliği veri setlerini, **Pacific Institute Water Conflict Chronology** (Dr. Peter Gleick, [worldwater.org/conflict/refs.html](https://worldwater.org/conflict/refs.html)) taksonomisini, Birleşmiş Milletler (BM) anlaşma metinlerini ve **Copernicus ECMWF ERA5** iklim yeniden analiz verilerini (1940–günümüz) tek bir etkileşimli jeo-uzamsal çatı altında birleştiren açık kaynaklı bir akademik araştırma platformudur. Portal; uluslararası su hukuku, hidropolitik, hidro-hegemonya ve iklim değişikliğinin sınır-aşan su güvenliği üzerindeki etkilerini inceleyen araştırmacılar, diplomatlar ve akademisyenler için tasarlanmıştır.
 
 **[EN]** This research portal is an open-access scholarly platform synthesizing over 3,000 international transboundary freshwater treaties from 1820 to the present. By integrating Oregon State University’s **Transboundary Freshwater Dispute Database (TFDD)** and **Basins at Risk (BAR)** conflict-cooperation event set with United Nations treaty archives and **Copernicus ECMWF ERA5** historical reanalysis data (1940–present), the portal provides a unified spatio-temporal framework for investigating the hydro-diplomacy, hydro-hegemony, and climate-conflict nexus across international river basins.
 
