@@ -328,7 +328,8 @@ Birleşmiş Milletler Avrupa Ekonomik Komisyonu (**UNECE**) bünyesinde akdedile
 - **Resmi BM Belgesi:** *Convention on the Protection and Use of Transboundary Watercourses and International Lakes as amended, along with decision VI/3 clarifying the accession procedure* (ECE/MP.WAT/41)
 - **Yayıncı & Yıl:** United Nations, New York & Geneva (2014) | **ISBN:** 92-1-117077-8 | **Belge Kodu:** ECE/MP.WAT/41
 - **Doğrudan UNECE Resmi Bağlantısı:** [https://unece.org/sites/default/files/2021-04/ECE_MP.WAT_41.pdf](https://unece.org/sites/default/files/2021-04/ECE_MP.WAT_41.pdf)
-- **Orijinal Onaylı BM Arşiv Metni:** [client/public/docs/unece-water-1992.pdf](client/public/docs/unece-water-1992.pdf) (86 Sayfa, UNTS Cilt 1936, No. 33207)
+- **Orijinal Onaylı BM Arşiv Metni (CTC):** [client/public/docs/unece-water-1992.pdf](client/public/docs/unece-water-1992.pdf) veya [client/public/docs/Ch_XXVII_05p.pdf](client/public/docs/Ch_XXVII_05p.pdf) (86 Sayfa, UNTS Cilt 1936, No. 33207, 3,57 MB)
+- **Doğrudan BM Antlaşmalar Serisi (UNTS) Resmi Arşiv URL:** `https://treaties.un.org/doc/Treaties/1992/03/19920317%2005-46%20AM/Ch_XXVII_05p.pdf` (Birleşmiş Milletler Hukuk İşleri Ofisi tarafından yayımlanmış onaylı orijinal metin ve ıslak imzalı tutanaklar)
 
 #### 5.3.1. 2003 Değişiklikleri ve Küreselleşme Süreci
 - **Helsinki Kabulü (1992) & Yürürlük (1996):** Sözleşme ilk olarak Pan-Avrupa bölgesinde sınır-aşan nehir, göl ve yeraltı sularının korunması amacıyla kabul edildi.

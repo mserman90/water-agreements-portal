@@ -95,7 +95,7 @@ Dış bağlantıların zamanla kaybolması (*link rot*) riskini bertaraf etmek v
 - **1994 İsrail - Ürdün Barış Antlaşması (Madde 6: Su Düzenlemesi)**
 - **1995 Mekong Havzası Sürdürülebilir Kalkınma İşbirliği Anlaşması** — Kamboçya, Laos, Tayland, Vietnam
 - **1997 Birleşmiş Milletler Uluslararası Su Yolları Sözleşmesi (A/RES/51/229)**
-- **1992 UNECE Helsinki Sınır Aşan Su Yolları ve Uluslararası Göller Sözleşmesi**
+- **1992 UNECE Helsinki Sınır Aşan Su Yolları ve Uluslararası Göller Sözleşmesi (Ch_XXVII_05p.pdf / unece-water-1992.pdf)** — BM Hukuk İşleri Ofisi Onaylı Orijinal Metin (86 Sayfa, UNTS Cilt 1936)
 - **1944 Colorado, Tijuana ve Rio Grande Antlaşması** — ABD & Meksika
 - **1909 Sınır Suları Antlaşması** — ABD & Kanada (International Joint Commission)
 - **1978 Amazon İşbirliği Antlaşması (OTCA / ACTO)** — 8 Amazon havzası ülkesi
