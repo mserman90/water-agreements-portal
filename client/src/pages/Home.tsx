@@ -4,9 +4,8 @@ import { basinCoords } from '@/data/basinCoords';
 import { findTreatyLink, findGithubDoc } from '@/data/treatyLinks';
 import MapViewer from '@/components/MapViewer';
 import LeftPanel from '@/components/LeftPanel';
-import TimelineOverlay from '@/components/TimelineOverlay';
 import type { Agreement, WaterConflict } from '@/components/MapViewer';
-import type { TimelineMode } from '@/components/TimelineOverlay';
+import type { TimelineMode } from '@/components/TimelineClimatePanel';
 import type { LayerConfig } from '@/components/LayerControl';
 import { smartSearch, isSmartQuery } from '@/lib/smartSearch';
 
@@ -183,11 +182,6 @@ export default function Home() {
     return agreements.find((a) => a.id === selectedId);
   }, [agreements, conflicts, selectedId]);
 
-  const selectedAgreementForTimeline = useMemo(() => {
-    if (!selectedId || selectedId.startsWith('conflict-')) return undefined;
-    return agreements.find((a) => a.id === selectedId);
-  }, [agreements, selectedId]);
-
   const processJSON = useCallback((text: string): Agreement[] => {
     const raw = JSON.parse(text.replace(/[\x00-\x1f\x7f]/g, ''));
     let data: unknown[];
@@ -291,7 +285,7 @@ export default function Home() {
 
   return (
     <>
-      {/* Unified Left Panel (Agreements, Conflicts, Layers, AI Chat, Guide) */}
+      {/* Unified Left Panel (Agreements, Timeline & Climate, Layers, AI Chat, Guide) */}
       <LeftPanel
         layers={layers}
         onLayerToggle={handleLayerToggle}
@@ -306,6 +300,17 @@ export default function Home() {
         aiMode={aiMode}
         onToggleAiMode={() => setAiMode((v) => !v)}
         onUploadFile={handleFileUpload}
+        currentYear={currentYear}
+        setCurrentYear={setCurrentYear}
+        timelineMode={timelineMode}
+        setTimelineMode={setTimelineMode}
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
+        bins={bins}
+        totalCount={totalCount}
+        coopCount={coopCount}
+        conflictCount={conflictCount}
+        mixedCount={mixedCount}
       />
 
       {/* Map with Dual Clustering (Agreements + Conflicts) */}
@@ -316,23 +321,6 @@ export default function Home() {
         onMarkerClick={setSelectedId}
         currentYear={currentYear}
         layers={layers}
-      />
-
-      {/* Timeline overlay */}
-      <TimelineOverlay
-        currentYear={currentYear}
-        setCurrentYear={setCurrentYear}
-        mode={timelineMode}
-        setMode={setTimelineMode}
-        isPlaying={isPlaying}
-        setIsPlaying={setIsPlaying}
-        bins={bins}
-        agreements={agreements}
-        totalCount={totalCount}
-        coopCount={coopCount}
-        conflictCount={conflictCount}
-        mixedCount={mixedCount}
-        selectedAgreement={selectedAgreementForTimeline}
       />
 
       {isLoading && (

@@ -1,8 +1,9 @@
 import { useState, useRef } from 'react';
-import { FileText, Layers, MessageSquare, Info, ChevronLeft, ChevronRight, Upload, Zap } from 'lucide-react';
+import { FileText, Layers, MessageSquare, Info, ChevronLeft, ChevronRight, Upload, Zap, Calendar } from 'lucide-react';
 import LayerControl, { LayerConfig } from './LayerControl';
 import AiChat from './AiChat';
 import AgreementSidebar from './AgreementSidebar';
+import TimelineClimatePanel, { type TimelineMode } from './TimelineClimatePanel';
 import type { Agreement, WaterConflict } from './MapViewer';
 import { useLanguage } from '@/i18n/LanguageContext';
 
@@ -20,9 +21,21 @@ interface Props {
   aiMode: boolean;
   onToggleAiMode: () => void;
   onUploadFile: (file: File) => void;
+  // Timeline & Climate props
+  currentYear?: number;
+  setCurrentYear?: (y: number) => void;
+  timelineMode?: TimelineMode;
+  setTimelineMode?: (m: TimelineMode) => void;
+  isPlaying?: boolean;
+  setIsPlaying?: (p: boolean) => void;
+  bins?: { start: number; end: number }[];
+  totalCount?: number;
+  coopCount?: number;
+  conflictCount?: number;
+  mixedCount?: number;
 }
 
-type Tab = 'agreements' | 'layers' | 'ai' | 'info';
+type Tab = 'agreements' | 'timeline' | 'layers' | 'ai' | 'info';
 
 export default function LeftPanel({
   layers,
@@ -38,6 +51,17 @@ export default function LeftPanel({
   aiMode,
   onToggleAiMode,
   onUploadFile,
+  currentYear = 2024,
+  setCurrentYear = () => {},
+  timelineMode = 'cumulative',
+  setTimelineMode = () => {},
+  isPlaying = false,
+  setIsPlaying = () => {},
+  bins = [],
+  totalCount = 0,
+  coopCount = 0,
+  conflictCount = 0,
+  mixedCount = 0,
 }: Props) {
   const { lang, setLang } = useLanguage();
   const [activeTab, setActiveTab] = useState<Tab>('agreements');
@@ -46,6 +70,7 @@ export default function LeftPanel({
 
   const tabs: { id: Tab; label: string; icon: React.ReactNode }[] = [
     { id: 'agreements', label: lang === 'tr' ? 'Veritabanı' : 'Database', icon: <FileText size={16} /> },
+    { id: 'timeline', label: lang === 'tr' ? 'Zaman & İklim' : 'Timeline & Climate', icon: <Calendar size={16} /> },
     { id: 'layers', label: lang === 'tr' ? 'Katmanlar' : 'Layers', icon: <Layers size={16} /> },
     { id: 'ai', label: lang === 'tr' ? 'AI Sorgu' : 'AI Assistant', icon: <MessageSquare size={16} /> },
     { id: 'info', label: lang === 'tr' ? 'Kılavuz' : 'Guide', icon: <Info size={16} /> },
@@ -220,6 +245,26 @@ export default function LeftPanel({
               aiMode={aiMode}
               onToggleAiMode={onToggleAiMode}
               onUploadFile={onUploadFile}
+            />
+          )}
+
+          {/* Tab 2: Timeline & Climate Analysis */}
+          {activeTab === 'timeline' && (
+            <TimelineClimatePanel
+              currentYear={currentYear}
+              setCurrentYear={setCurrentYear}
+              mode={timelineMode}
+              setMode={setTimelineMode}
+              isPlaying={isPlaying}
+              setIsPlaying={setIsPlaying}
+              bins={bins}
+              agreements={allAgreements}
+              totalCount={totalCount}
+              coopCount={coopCount}
+              conflictCount={conflictCount}
+              mixedCount={mixedCount}
+              selectedAgreement={selectedAgreement}
+              onSelectAgreement={onSelect}
             />
           )}
 
